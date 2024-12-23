@@ -2,11 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
-import 'package:go_router/go_router.dart';
 import 'package:je_t_aime/Modules/Login/widgets/user_status_row.dart';
 import 'package:je_t_aime/core/Language/locales.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
-import '../../../Utilities/shared_preferences.dart';
 import '../../../Utilities/text_style_helper.dart';
 import '../../../Utilities/theme_helper.dart';
 import '../../../Utilities/validate.dart';
@@ -164,7 +162,8 @@ class _LoginScreenState extends StateMVC<LoginScreen> {
                           children: [
                              Expanded(
                               child: Divider(
-                                color:ThemeClass.of(context).labelColor,                              thickness: 1.0,
+                                color:ThemeClass.of(context).labelColor,
+                                thickness: 1.w,
                               ),
                             ),
                             Gap(8.w),
@@ -176,7 +175,7 @@ class _LoginScreenState extends StateMVC<LoginScreen> {
                              Expanded(
                               child: Divider(
                                 color:ThemeClass.of(context).labelColor,
-                                thickness: 1.0,
+                                thickness: 1.w,
                               ),
                             ),
                           ],

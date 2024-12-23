@@ -53,6 +53,7 @@ class Strings {
   static const String viewAll = "view_all";
   static const String popularProduct = "popular_product";
   static const String egp = "egp";
+  static const String sendCode = "sendCode";
   static const String seeMore = "seeMore";
   static const String productDes = "productDes";
   static const String addToCart = "addToCart";
@@ -121,6 +122,7 @@ class Strings {
   static const String enterYourAddress  ="enterYourAddress";
   static const String enterYourPhone  ="enterYourPhone";
   static const String confirmSaveData  ="confirmSaveData";
+  static const String enterEmailFirst  ="enterEmailFirst";
   static const String loyaltyPoints  ="loyaltyPoints";
   static const String seeYourPoints  ="seeYourPoints";
   static const String cardSignUp  ="cardSignUp";

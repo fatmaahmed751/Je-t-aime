@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
+import 'package:je_t_aime/Modules/ForgetPassword/forget_password_screen.dart';
 import '../../../../Utilities/text_style_helper.dart';
 import '../../../../Utilities/theme_helper.dart';
 import '../../../Models/on_boarding_model.dart';
@@ -23,7 +24,7 @@ class OnBoardingWidget extends StatelessWidget {
             alignment: Alignment.topRight,
             child: TextButton(
                 onPressed: () {
-                GoRouter.of(context).goNamed(LoginScreen.routeName);
+                GoRouter.of(context).goNamed(ForgetPasswordScreen.routeName);
                 },
                 child: Text(
                   model.skipText,

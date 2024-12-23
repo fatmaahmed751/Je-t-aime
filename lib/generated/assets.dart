@@ -11,6 +11,7 @@ class Assets {
   static const String i18nAr = 'i18n/ar.json';
   static const String i18nEn = 'i18n/en.json';
   static const String imagesAppleIcon = 'assets/images/appleIcon.svg';
+  static const String imagesArrowBack = 'assets/images/arrowBack.svg';
   static const String imagesEmailIcon = 'assets/images/emailIcon.svg';
   static const String imagesForgetPassword = 'assets/images/forgetPassword.png';
   static const String imagesGoogleIcon = 'assets/images/googleIcon.svg';

@@ -65,7 +65,7 @@ class CustomButtonWidget extends StatelessWidget {
   BoxDecoration getDecoration(BuildContext context) {
     final primaryDecoration = BoxDecoration(
       color: backgroundColor ?? ThemeClass.of(context).primaryColor,
-      borderRadius: BorderRadius.circular(radius ?? _radius),
+      borderRadius: BorderRadius.circular(30.r ?? _radius),
     );
     final secondaryDecoration = BoxDecoration(
       color:
@@ -105,7 +105,7 @@ class CustomButtonWidget extends StatelessWidget {
       onTap: onTap,
       child: Container(
         width: width ?? 390.w,
-        height: height ?? 62.h,
+        height: height ?? 54.h,
         alignment: Alignment.center,
         decoration: getDecoration(context),
         child: child ??
