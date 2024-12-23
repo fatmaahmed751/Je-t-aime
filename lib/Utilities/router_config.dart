@@ -1,13 +1,23 @@
 
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:je_t_aime/Modules/Orders/orders_screen.dart';
+import 'package:je_t_aime/Modules/Orders/orders_screen.dart';
+import 'package:je_t_aime/Modules/Orders/orders_screen.dart';
 import 'package:je_t_aime/Modules/Register/register_screen.dart';
+import 'package:je_t_aime/Modules/Support/support_screen.dart';
+import 'package:je_t_aime/Modules/Support/support_screen.dart';
+import 'package:je_t_aime/Modules/Support/support_screen.dart';
 import '../Modules/ForgetPassword/forget_password_screen.dart';
 import '../Modules/Login/login_screen.dart';
 import '../Modules/OTP/verification_otp_screen.dart';
 import '../Modules/OnBoarding/onboarding_screen.dart';
+import '../Modules/PersonalData/personal_data_screen.dart';
+import '../Modules/Policies/policies_screen.dart';
 import '../Modules/ResetPassword/reset_password_screen.dart';
+import '../Modules/Rewards/LoginRewardsScreen/login_rewards_screen.dart';
 import '../Modules/Splash/splash_screen.dart';
+import '../Modules/UserProfile/user_profile_screen.dart';
 
 BuildContext? get currentContext_ => GoRouterConfig.router.routerDelegate.navigatorKey.currentContext;
 class GoRouterConfig{
@@ -45,6 +55,72 @@ class GoRouterConfig{
           return getCustomTransitionPage(
             state: state,
             child: const OnBoardingScreen(),
+          );
+        },
+        routes: const <RouteBase>[],
+      ),
+      GoRoute(
+        name: UserProfileScreen.routeName,
+        path: "/${UserProfileScreen.routeName}",
+        pageBuilder: (_, GoRouterState state) {
+          return getCustomTransitionPage(
+            state: state,
+            child: const UserProfileScreen(),
+          );
+        },
+        routes: const <RouteBase>[],
+      ),
+      GoRoute(
+        name: LoginRewardsScreen.routeName,
+        path: "/${LoginRewardsScreen.routeName}",
+        pageBuilder: (_, GoRouterState state) {
+          return getCustomTransitionPage(
+            state: state,
+            child: const LoginRewardsScreen(),
+          );
+        },
+        routes: const <RouteBase>[],
+      ),
+      GoRoute(
+        name: PersonalDataScreen.routeName,
+        path: "/${PersonalDataScreen.routeName}",
+        pageBuilder: (_, GoRouterState state) {
+          return getCustomTransitionPage(
+            state: state,
+            child: const PersonalDataScreen(),
+          );
+        },
+        routes: const <RouteBase>[],
+      ),
+      GoRoute(
+        name: OrdersScreen.routeName,
+        path: "/${OrdersScreen.routeName}",
+        pageBuilder: (_, GoRouterState state) {
+          return getCustomTransitionPage(
+            state: state,
+            child: const OrdersScreen(),
+          );
+        },
+        routes: const <RouteBase>[],
+      ),
+      GoRoute(
+        name: SupportScreen.routeName,
+        path: "/${SupportScreen.routeName}",
+        pageBuilder: (_, GoRouterState state) {
+          return getCustomTransitionPage(
+            state: state,
+            child: const SupportScreen(),
+          );
+        },
+        routes: const <RouteBase>[],
+      ),
+      GoRoute(
+        name: PoliciesScreen.routeName,
+        path: "/${PoliciesScreen.routeName}",
+        pageBuilder: (_, GoRouterState state) {
+          return getCustomTransitionPage(
+            state: state,
+            child: const PoliciesScreen(),
           );
         },
         routes: const <RouteBase>[],

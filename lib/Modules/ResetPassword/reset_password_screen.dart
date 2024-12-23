@@ -60,7 +60,7 @@ class _ResetPasswordScreenState extends StateMVC<ResetPasswordScreen> {
         child: SafeArea(
           child: Padding(
             padding:
-                EdgeInsetsDirectional.symmetric(horizontal: 23.w, vertical: 30),
+                EdgeInsetsDirectional.symmetric(horizontal: 23.w, vertical: 30.h),
             child: ListView(
               physics: const NeverScrollableScrollPhysics(),
               children: [
@@ -82,7 +82,7 @@ class _ResetPasswordScreenState extends StateMVC<ResetPasswordScreen> {
                   hint: Strings.enterPassword.tr,
                   backGroundColor: ThemeClass.of(context).secondary,
                   hintStyle:
-                      TextStyle(color: ThemeClass.of(context).labelColor),
+                      TextStyle(color: ThemeClass.of(context).secondary),
                   prefixIcon: SvgPicture.asset(Assets.imagesLockIcon),
                   suffixIcon: con.isPassword
                       ? SvgPicture.asset(Assets.imagesObsecureIcon)
@@ -104,7 +104,7 @@ class _ResetPasswordScreenState extends StateMVC<ResetPasswordScreen> {
                   focusedBorderColor: ThemeClass.of(context).primaryColor,
                   hint: Strings.enterPassword.tr,
                   hintStyle:
-                      TextStyle(color: ThemeClass.of(context).labelColor),
+                      TextStyle(color: ThemeClass.of(context).secondary),
                   prefixIcon: SvgPicture.asset(Assets.imagesLockIcon),
                   suffixIcon: con.repeatPassword
                       ? SvgPicture.asset(Assets.imagesObsecureIcon)

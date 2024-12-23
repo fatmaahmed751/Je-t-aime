@@ -1,0 +1,64 @@
+import 'package:flutter/cupertino.dart';
+import 'package:mvc_pattern/mvc_pattern.dart';
+
+class BrowseProductsController extends ControllerMVC {
+  // singleton
+  factory BrowseProductsController() {
+    _this ??= BrowseProductsController._();
+    return _this!;
+  }
+  static BrowseProductsController? _this;
+  BrowseProductsController._();
+  bool loading=false,autoValidate = false;
+  bool isClick = false;
+  bool isSearch= false;
+  late TextEditingController searchController;
+  // List<BannerModel> products=[];
+  // GenericPaginationModel<BannerModel> productsPagination = GenericPaginationModel<BannerModel>();
+  // RefreshController productsRefreshController= RefreshController(initialRefresh: false);
+  // @override
+  // void initState() {
+  //   searchController=TextEditingController();
+  //   getProducts();
+  //   super.initState();
+  // }
+  // @override
+  // void dispose() {
+  //   searchController.dispose();
+  //   super.dispose();
+  // }
+  // init(){
+  //   productsPagination = GenericPaginationModel<BannerModel>();
+  //   productsRefreshController= RefreshController(initialRefresh: false);
+  //   getProducts();
+  // }
+  // Future getProducts({bool refresh=false}) async {
+  //   if(refresh)productsPagination = GenericPaginationModel<BannerModel>();
+  //   if(productsPagination.data.isEmpty){
+  //     loading=true;
+  //     setState(() { });
+  //   }
+  //   final result = await PopularProductsDataHandler.getProducts(oldPagination:productsPagination);
+  //   result.fold((l) => null, (r) {
+  //     final oldItems = productsPagination.data;
+  //     productsPagination = r;
+  //     if(!refresh)productsPagination.data.insertAll(0, oldItems);
+  //   });
+  //   if (!productsPagination.hasNextPge) {
+  //     productsRefreshController.loadNoData();
+  //   } else {
+  //     productsRefreshController.loadComplete();
+  //   }
+  //   if(refresh)productsRefreshController.refreshCompleted();
+  //   setState(() {loading=false;});
+  // }
+  // Future getProducts() async {
+  //   loading=true;
+  //   setState(() { });
+  //   final result = await PopularProductsDataHandler.getProducts();
+  //   result.fold((l) =>ToastHelper.showError(message: l.toString()),(r) {
+  //     products=r;
+  //   });
+  //   setState(() {loading=false;});
+  // }
+}

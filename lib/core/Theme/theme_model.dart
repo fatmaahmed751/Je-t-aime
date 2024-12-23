@@ -19,7 +19,7 @@ class ThemeModel extends ThemeExtension<ThemeModel>{
   final Color mainBlack;
   final Color secondaryBlackColor;
   final Color labelColor;
-
+  final Color containerColor;
   final Color success;
   final Color waiting;
   final Color cancel;
@@ -38,6 +38,7 @@ class ThemeModel extends ThemeExtension<ThemeModel>{
     required this.secondary,
     required this.mainBlack,
     required this.secondaryBlackColor,
+    required this.containerColor,
 });
 
   @override
@@ -65,6 +66,7 @@ class ThemeModel extends ThemeExtension<ThemeModel>{
     Color? mainBlack,
     Color? bodyColor,
     Color? tabBarColor,
+    Color? containerColor
 }) {
     return ThemeModel(
       isDark: isDark??this.isDark,
@@ -78,6 +80,7 @@ class ThemeModel extends ThemeExtension<ThemeModel>{
       secondary: informative??this.secondary,
       mainBlack: mainBlack??this.mainBlack,
       secondaryBlackColor: bodyColor??this.secondaryBlackColor,
+        containerColor:containerColor??this.containerColor
     );
   }
 
@@ -93,6 +96,7 @@ class ThemeModel extends ThemeExtension<ThemeModel>{
     secondary: Color(json["informative"]),
     mainBlack: Color(json["mainBlack"]),
     secondaryBlackColor: Color(json["bodyColor"]),
+    containerColor: Color(json["containerColor"]),
   );
 
   Map<String, dynamic> toJson() => {
@@ -107,6 +111,7 @@ class ThemeModel extends ThemeExtension<ThemeModel>{
     "informative": secondary.value,
     "mainBlack": mainBlack.value,
     "bodyColor": secondaryBlackColor.value,
+    "containerColor":containerColor.value
   };
 
 

@@ -22,6 +22,7 @@ class UserProfileController extends ControllerMVC {
   bool loading = false, autoValidate = false;
   bool isEnglishSelected = true;
   bool status = false;
+  bool isLogin=true;
   String? selectedValue=Strings.setLocation.tr;
 
 

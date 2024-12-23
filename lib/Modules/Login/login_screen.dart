@@ -87,7 +87,7 @@ class _LoginScreenState extends StateMVC<LoginScreen> {
                         CustomTextFieldWidget(
                           hint: Strings.enterEmail.tr,
                           hintStyle:
-                              TextStyle(color: ThemeClass.of(context).labelColor),
+                              TextStyle(color: ThemeClass.of(context).secondary),
                           prefixIcon: SvgPicture.asset(Assets.imagesEmailIcon),
                           isDense: true,
                           insidePadding: EdgeInsets.symmetric(vertical: 10.h),
@@ -103,7 +103,7 @@ class _LoginScreenState extends StateMVC<LoginScreen> {
                           focusedBorderColor:ThemeClass.of(context).primaryColor ,
                           hint: Strings.enterPassword.tr,
                           hintStyle:
-                              TextStyle(color: ThemeClass.of(context).labelColor),
+                              TextStyle(color: ThemeClass.of(context).secondary),
                           prefixIcon: SvgPicture.asset(Assets.imagesLockIcon),
                           suffixIcon:con.isPassword? SvgPicture.asset(Assets.imagesObsecureIcon)
                           :SvgPicture.asset(Assets.imagesLockIcon),

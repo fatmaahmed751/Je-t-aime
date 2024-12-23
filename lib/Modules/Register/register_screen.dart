@@ -89,7 +89,7 @@ class _RegisterScreenState extends StateMVC<RegisterScreen> {
                           focusedBorderColor:
                               ThemeClass.of(context).primaryColor,
                           hintStyle: TextStyle(
-                              color: ThemeClass.of(context).labelColor),
+                              color: ThemeClass.of(context).secondary),
                           prefixIcon: SvgPicture.asset(Assets.imagesEmailIcon),
                           isDense: true,
                           insidePadding: EdgeInsets.symmetric(vertical: 10.h),
@@ -106,7 +106,7 @@ class _RegisterScreenState extends StateMVC<RegisterScreen> {
                               ThemeClass.of(context).primaryColor,
                           backGroundColor: ThemeClass.of(context).secondary,
                           hintStyle: TextStyle(
-                              color: ThemeClass.of(context).labelColor),
+                              color: ThemeClass.of(context).secondary),
                           prefixIcon: SvgPicture.asset(Assets.imagesLockIcon),
                           suffixIcon: con.isPassword
                               ? SvgPicture.asset(Assets.imagesObsecureIcon)
@@ -127,7 +127,7 @@ class _RegisterScreenState extends StateMVC<RegisterScreen> {
                         CustomTextFieldWidget(
                           hint: Strings.enterPassword.tr,
                           hintStyle: TextStyle(
-                              color: ThemeClass.of(context).labelColor),
+                              color: ThemeClass.of(context).secondary),
                           prefixIcon: SvgPicture.asset(Assets.imagesLockIcon),
                           suffixIcon: con.isConfirmPassword
                               ? SvgPicture.asset(Assets.imagesObsecureIcon)

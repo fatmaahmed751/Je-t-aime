@@ -4,11 +4,13 @@ class Strings {
   static const String systemMode = "systemMode";
   static const String light = "light";
   static const String dark = "dark";
+  static const String update = "update";
   static const String mainColor = "mainColor";
   static const String secondaryColor = "secondaryColor";
   static const String selectColor = "selectColor";
   static const String cancel = "cancel";
   static const String ok = "ok";
+  static const String hello = "hello";
   static const String verify = "verify";
   static const String cash = "cash";
   static const String payNow = "payNow";

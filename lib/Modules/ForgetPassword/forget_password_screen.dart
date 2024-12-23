@@ -85,7 +85,7 @@ class _ForgetPasswordScreenState extends StateMVC<ForgetPasswordScreen> {
                       focusedBorderColor: ThemeClass.of(context).primaryColor,
                       hint:Strings.enterEmail.tr,
                       hintStyle:
-                      TextStyle(color: ThemeClass.of(context).labelColor),
+                      TextStyle(color: ThemeClass.of(context).secondary),
                       prefixIcon: SvgPicture.asset(Assets.imagesEmailIcon),
                       isDense: true,
                       insidePadding: EdgeInsets.symmetric(vertical: 10.h),
