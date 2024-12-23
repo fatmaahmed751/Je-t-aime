@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 
 import '../../Utilities/shared_preferences.dart';
 
-enum FontFamilyTypes {tajawal,cairo,poppins}
+enum FontFamilyTypes {outfit,cairo,poppins}
 
 class FontProvider extends ChangeNotifier {
 
   static const maxScaleSize = 3;
   static const minScaleSize = 0.3;
   static const double _defaultFontScaleSize = 1;
-  static const FontFamilyTypes _defaultFontFamily = FontFamilyTypes.tajawal;
+  static const FontFamilyTypes _defaultFontFamily = FontFamilyTypes.outfit;
 
   double _fontSizeScale = 1.0;
   double get fontSizeScale => _fontSizeScale;

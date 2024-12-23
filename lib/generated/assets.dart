@@ -10,15 +10,20 @@ class Assets {
   static const String fontsOutfitSemiBold = 'assets/fonts/Outfit-SemiBold.ttf';
   static const String i18nAr = 'i18n/ar.json';
   static const String i18nEn = 'i18n/en.json';
-  static const String imagesForgetPassword = 'assets/images/images/forgetPassword.png';
-  static const String imagesLoginImage = 'assets/images/images/loginImage.png';
-  static const String imagesLogoIcon = 'assets/images/images/logoIcon.png';
-  static const String imagesNewPassword = 'assets/images/images/newPassword.png';
-  static const String imagesOnBoardingOne = 'assets/images/images/onBoardingOne.png';
-  static const String imagesOnBoardingThree = 'assets/images/images/onBoardingThree.png';
-  static const String imagesOnBoardingTwo = 'assets/images/images/onBoardingTwo.png';
-  static const String imagesOtpImage = 'assets/images/images/otpImage.png';
-  static const String imagesSignUp = 'assets/images/images/signUp.png';
-  static const String imagesSplash = 'assets/images/images/splash.png';
+  static const String imagesAppleIcon = 'assets/images/appleIcon.svg';
+  static const String imagesEmailIcon = 'assets/images/emailIcon.svg';
+  static const String imagesForgetPassword = 'assets/images/forgetPassword.png';
+  static const String imagesGoogleIcon = 'assets/images/googleIcon.svg';
+  static const String imagesLockIcon = 'assets/images/lockIcon.svg';
+  static const String imagesLoginImage = 'assets/images/loginImage.png';
+  static const String imagesLogoIcon = 'assets/images/logoIcon.png';
+  static const String imagesNewPassword = 'assets/images/newPassword.png';
+  static const String imagesObsecureIcon = 'assets/images/obsecureIcon.svg';
+  static const String imagesOnBoardingOne = 'assets/images/onBoardingOne.png';
+  static const String imagesOnBoardingThree = 'assets/images/onBoardingThree.png';
+  static const String imagesOnBoardingTwo = 'assets/images/onBoardingTwo.png';
+  static const String imagesOtpImage = 'assets/images/otpImage.png';
+  static const String imagesSignUp = 'assets/images/signUp.png';
+  static const String imagesSplash = 'assets/images/splash.png';
 
 }

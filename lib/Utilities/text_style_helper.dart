@@ -17,7 +17,7 @@ class TextStyleHelper{
 
   _fontFamily(){
     switch(_fF){
-      case FontFamilyTypes.tajawal: return GoogleFonts.tajawal;
+      case FontFamilyTypes.outfit: return GoogleFonts.outfit;
       case FontFamilyTypes.cairo: return GoogleFonts.cairo;
       case FontFamilyTypes.poppins: return GoogleFonts.poppins;
     }

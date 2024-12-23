@@ -8,6 +8,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'Utilities/git_it.dart';
 import 'Utilities/router_config.dart';
+import 'Utilities/theme_helper.dart';
 import 'core/Font/font_provider.dart';
 import 'core/Language/app_languages.dart';
 import 'core/Language/locales.dart';
@@ -59,9 +60,11 @@ class EntryPoint extends StatelessWidget {
         scrollBehavior: MyCustomScrollBehavior(),
         routerConfig: GoRouterConfig.router,
         debugShowCheckedModeBanner: false,
-        title: 'Je t\'aime',
+        title: '"templete"',
         locale: Locale(appLan.appLang.name),
-        theme: appTheme.appThemeMode,
+        theme: appTheme.appThemeMode?.copyWith(
+            scaffoldBackgroundColor: ThemeClass.of(context).background
+        ),
         supportedLocales: Languages.values.map((e) => Locale(e.name)).toList(),
         localizationsDelegates: const [
           AppLocalizations.delegate,

@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:go_router/go_router.dart';
-import 'package:je_t_aime/Modules/Splash/splash_data_handler.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 import '../../Utilities/shared_preferences.dart';
+import '../OnBoarding/onboarding_screen.dart';
 
 class SplashController extends ControllerMVC {
   // singleton
@@ -16,14 +16,14 @@ class SplashController extends ControllerMVC {
 
 
   Future init(BuildContext context)async{
-    await SplashDataHandler.getCurrentUser();
-    await Future.delayed(const Duration(seconds: 2));
+    //await SplashDataHandler.getCurrentUser();
+    await Future.delayed(const Duration(seconds: 3));
     if(context.mounted) {
-      // GoRouter.of(context).go(HomeScreen.routeName);
+      GoRouter.of(context).goNamed(OnBoardingScreen.routeName);
       if(SharedPref.isLogin()){
-        // GoRouter.of(context).goNamed(HomeScreen.routeName);
+
       }else{
-        // GoRouter.of(context).go(LoginScreen.routeName);
+
       }
     }
   }
