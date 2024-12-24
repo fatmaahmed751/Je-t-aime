@@ -20,14 +20,17 @@ class ThemeClass extends ThemeModel{
     super.background = const Color(0xffFFFFFF),
     super.primaryColor = const Color(0xff7A4343),
     super.mainSecondary = const Color(0xffE3CBCB),
-    super.secondary = const Color(0xffE8E8E8),
-    super.labelColor = const Color(0xffBBBBBB),
+    super.secondary = const Color.fromRGBO(142, 142, 142, 1),
+    super.labelColor = const Color.fromRGBO(232, 232, 232, 1),
     super.mainBlack = const Color(0xff1F1F1F),
     super.containerColor = const Color(0xffF9F5F5),
     super.secondaryBlackColor = const Color(0xff606060),
     super.waiting = const Color(0xffF68524),
     super.cancel = const Color(0xffEA3829),
     super.success = const Color(0xff00B060),
+    super.descTextColor = const Color(0xff635D59),
+    super.sideText = const Color(0xff1F1B17),
+
 
   });
 
@@ -44,6 +47,10 @@ class ThemeClass extends ThemeModel{
     super.containerColor = const Color(0xffF9F5F5),
     super.cancel = const Color(0xffEA3829),
     super.success = const Color(0xff00B060),
+    super.sideText = const Color(0xff1F1B17),
+    super.descTextColor = const Color(0xff635D59)
+
+
   });
 }
 class BackGroundClass {

@@ -5,6 +5,8 @@ import 'package:mvc_pattern/mvc_pattern.dart';
 import 'package:provider/provider.dart';
 import '../../../Utilities/strings.dart';
 import '../../../core/Language/app_languages.dart';
+import '../../Utilities/router_config.dart';
+import 'Widget/change_languages_widget.dart';
 class UserProfileController extends ControllerMVC {
   // singleton
   factory UserProfileController() {
@@ -34,7 +36,7 @@ class UserProfileController extends ControllerMVC {
 
   }
  init()async{
- // loadCurrentLanguage(currentContext_!);
+  loadCurrentLanguage(currentContext_!);
   //updateNotifications(currentContext_!);
   // getCities();
   // getUserCityName().then((_) {
@@ -163,12 +165,12 @@ class UserProfileController extends ControllerMVC {
   //   });
   // }
   //
-  // changeLanguageOfApp(BuildContext ctx) async {
-  //   await loadCurrentLanguage(ctx);
-  //   showDialog(
-  //       context: ctx,
-  //       builder: (context) => const ChangeLanguage());
-  // }
+  changeLanguageOfApp(BuildContext ctx) async {
+    await loadCurrentLanguage(ctx);
+    showDialog(
+        context: ctx,
+        builder: (context) => const ChangeLanguage());
+  }
 
   Future<void> loadCurrentLanguage(BuildContext ctx) async {
     await Provider.of<AppLanguage>(ctx, listen: false).fetchLocale(ctx);

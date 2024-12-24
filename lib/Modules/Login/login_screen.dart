@@ -53,20 +53,19 @@ class _LoginScreenState extends StateMVC<LoginScreen> {
                     height: 216.h,),
                 ),
                 Gap(20.h),
-                Container(
-                  decoration: BoxDecoration(
-                    border: Border(
-                      top: BorderSide(
-                        color:const Color.fromRGBO(51,51,51,0.15),
-                        //ThemeClass.of(context).labelColor.withOpacity(0.14),
-                        width: .5.w,
-                      ),
-                      ),
-                    borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(20.r),
-                      topRight:  Radius.circular(20.r),
-                    )
-                  ),
+            Container(
+            decoration: BoxDecoration(
+              color: Colors.white, // Background color of the container
+              boxShadow: [
+                BoxShadow(
+                  color: const Color(0xff33333326).withOpacity(0.15),// Shadow color
+                  spreadRadius: 0, // Spread radius
+                  // blurRadius:1, // Blur radius for a soft shadow
+                  offset: const Offset(0, -1), // Negative offset to place shadow on top
+                ),
+              ],
+              borderRadius: BorderRadius.circular(30.r),
+            ),
                   child: Padding(
                     padding:EdgeInsetsDirectional.symmetric(horizontal:24.w),
                     child: Column(

@@ -17,10 +17,11 @@ import 'verification_otp_controller.dart';
 
 class VerificationOtpScreen extends StatefulWidget {
   static const routeName = "otpScreen";
- //final String email;
+  //final String email;
 
-  const VerificationOtpScreen({Key? key,
-  // required this.email
+  const VerificationOtpScreen({
+    Key? key,
+    // required this.email
   }) : super(key: key);
 
   @override
@@ -31,14 +32,13 @@ class _VerificationOtpScreenState extends StateMVC<VerificationOtpScreen> {
   _VerificationOtpScreenState() : super(VerificationOtpController()) {
     con = VerificationOtpController();
   }
-  late  VerificationOtpController con;
-  final GlobalKey<FormState> formKey= GlobalKey<FormState>();
+  late VerificationOtpController con;
+  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
   @override
   void initState() {
     super.initState();
-   //con.email =  widget.email;
-
+    //con.email =  widget.email;
   }
 
   @override
@@ -48,17 +48,16 @@ class _VerificationOtpScreenState extends StateMVC<VerificationOtpScreen> {
 
   @override
   Widget build(BuildContext context) {
-   // Color focusedBorderColor = ThemeClass.of(context).secondary;
+    // Color focusedBorderColor = ThemeClass.of(context).secondary;
     //Color fillColor = ThemeClass.of(context).secondary;
     Color borderColor = ThemeClass.of(context).secondary;
 
     final defaultPinTheme = PinTheme(
       width: 56,
       height: 56,
-      textStyle:  TextStyle(
+      textStyle: TextStyle(
         fontSize: 22,
-        color:
-        ThemeClass.of(context).mainBlack,
+        color: ThemeClass.of(context).mainBlack,
       ),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(19),
@@ -67,123 +66,149 @@ class _VerificationOtpScreenState extends StateMVC<VerificationOtpScreen> {
     );
 
     return Scaffold(
-      body: LoadingScreen(
-     loading: con.loading,
-     child: Form(
+        body: LoadingScreen(
+      loading: con.loading,
+      child: Form(
         key: formKey,
-       autovalidateMode: con.autoValidate
-           ? AutovalidateMode.always
-           : AutovalidateMode.disabled,
+        autovalidateMode: con.autoValidate
+            ? AutovalidateMode.always
+            : AutovalidateMode.disabled,
         child: SafeArea(
-          child: Padding(
-            padding: EdgeInsetsDirectional.symmetric(horizontal: 23.w),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
+          child: ListView(
+            // mainAxisAlignment: MainAxisAlignment.center,
+            children: [
               Gap(50.h),
-                Image.asset(Assets.imagesOtpImage),
-                Gap(60.h),
-                Text(Strings.verificationCode.tr,
-                textAlign: TextAlign.center,
-                style:  TextStyleHelper.of(context).h_24),
-                Gap(20.h),
-                SizedBox(
-                  width: 382.w,
-                height: 48.h,
-                child: Text(Strings.verifyCode.tr,
-                  textAlign: TextAlign.start,
-                  style:  TextStyleHelper.of(context).b_16.copyWith(
-                      color:ThemeClass.of(context).secondary)),
+              Padding(
+                padding: EdgeInsetsDirectional.symmetric(horizontal: 23.w),
+                child: Image.asset(Assets.imagesOtpImage),
+              ),
+              Gap(60.h),
+              Container(
+                decoration: BoxDecoration(
+                  color: Colors.white, // Background color of the container
+                  boxShadow: [
+                    BoxShadow(
+                      color: const Color(0xff33333326)
+                          .withOpacity(0.15), // Shadow color
+                      spreadRadius: 0, // Spread radius
+                      // blurRadius:1, // Blur radius for a soft shadow
+                      offset: const Offset(
+                          0, -1), // Negative offset to place shadow on top
+                    ),
+                  ],
+                  borderRadius: BorderRadius.circular(30.r),
                 ),
-
-                Gap(20.h),
-                Directionality(
-                  textDirection: TextDirection.ltr,
-                  child: Pinput(
-                    smsRetriever: con.smsRetriever,
-                    controller: con.pinController,
-                    focusNode:con.focusNode,
-                    defaultPinTheme:PinTheme(
-                      width: 53.w,
-                      height: 48.h,
-                      decoration: BoxDecoration(
-                        color:ThemeClass.of(context).secondary,
-                        borderRadius: BorderRadius.circular(30.r),
-                       // border: Border.all(color: ),
+                child: Padding(
+                  padding: EdgeInsetsDirectional.symmetric(horizontal: 23.w),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Gap(50.h),
+                      Text(Strings.verificationCode.tr,
+                          textAlign: TextAlign.center,
+                          style: TextStyleHelper.of(context).h_24),
+                      Gap(20.h),
+                      SizedBox(
+                        width: 382.w,
+                        height: 48.h,
+                        child: Text(Strings.verifyCode.tr,
+                            textAlign: TextAlign.start,
+                            style: TextStyleHelper.of(context).b_16.copyWith(
+                                color: ThemeClass.of(context).labelColor)),
                       ),
-                      textStyle: TextStyleHelper.of(context).b_16.copyWith(
-                          color:ThemeClass.of(context).secondaryBlackColor
+                      Gap(20.h),
+                      Directionality(
+                        textDirection: TextDirection.ltr,
+                        child: Pinput(
+                          smsRetriever: con.smsRetriever,
+                          controller: con.pinController,
+                          focusNode: con.focusNode,
+                          defaultPinTheme: PinTheme(
+                            width: 53.w,
+                            height: 48.h,
+                            decoration: BoxDecoration(
+                              color: ThemeClass.of(context).secondary,
+                              borderRadius: BorderRadius.circular(30.r),
+                              // border: Border.all(color: ),
+                            ),
+                            textStyle: TextStyleHelper.of(context)
+                                .b_16
+                                .copyWith(
+                                    color: ThemeClass.of(context)
+                                        .secondaryBlackColor),
+                          ),
+                          separatorBuilder: (index) => const SizedBox(width: 8),
+                          validator: (value) {
+                            return value == con.pinController.text
+                                ? null
+                                : 'Pin is incorrect';
+                          },
+                          hapticFeedbackType: HapticFeedbackType.lightImpact,
+                          onCompleted: (pin) {
+                            debugPrint('onCompleted: $pin');
+                          },
+                          onChanged: (value) {
+                            debugPrint('onChanged: $value');
+                            con.verifyCode(value, con.pinController.text);
+                          },
+                          focusedPinTheme: defaultPinTheme.copyWith(
+                            decoration: defaultPinTheme.decoration!.copyWith(
+                              borderRadius: BorderRadius.circular(30.r),
+                              border: Border.all(
+                                color: ThemeClass.of(context).primaryColor,
+                              ),
+                            ),
+                          ),
+                          errorPinTheme: defaultPinTheme.copyBorderWith(
+                            border: Border.all(color: Colors.redAccent),
+                          ),
+                        ),
                       ),
-
+                      Gap(20.h),
+                      CustomButtonWidget.primary(
+                          radius: 30.r,
+                          height: 54.h,
+                          title: Strings.continu.tr,
+                          onTap: () {
+                            context.pushNamed(ResetPasswordScreen.routeName);
+                            // if (formKey.currentState?.validate() ?? false) {
+                            //  // con.verifyCodeToResetPassword();
+                            // } else {
+                            //   setState(() {
+                            //   con.autoValidate = true;
+                            //   });
+                            // }
+                          }),
+                      Gap(30.h),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          GestureDetector(
+                            onTap: () {},
+                            child: Text(
+                              Strings.resendCode.tr,
+                              textAlign: TextAlign.left,
+                              style: TextStyleHelper.of(context).b_16.copyWith(
+                                  color: ThemeClass.of(context).labelColor),
+                            ),
+                          ),
+                          Text(
+                            Strings.timeCount.tr,
+                            textAlign: TextAlign.left,
+                            style: TextStyleHelper.of(context).b_16.copyWith(
+                                color: ThemeClass.of(context).primaryColor),
+                          ),
+                        ],
                       ),
-
-                    separatorBuilder: (index) => const SizedBox(width: 8),
-                    validator: (value) {
-                      return value == con.pinController.text ? null : 'Pin is incorrect';
-                    },
-                    hapticFeedbackType: HapticFeedbackType.lightImpact,
-                    onCompleted: (pin) {
-                      debugPrint('onCompleted: $pin');
-                    },
-                    onChanged: (value) {
-                      debugPrint('onChanged: $value');
-                     con.verifyCode(value,con.pinController.text);
-                    },
-                    focusedPinTheme: defaultPinTheme.copyWith(
-                      decoration: defaultPinTheme.decoration!.copyWith(
-                        borderRadius: BorderRadius.circular(30.r),
-                        border: Border.all(color:  ThemeClass.of(context).primaryColor,),
-                      ),
-                    ),
-                    errorPinTheme: defaultPinTheme.copyBorderWith(
-                      border: Border.all(color: Colors.redAccent),
-                    ),
+                    ],
                   ),
                 ),
-                Gap(20.h),
-                CustomButtonWidget.primary(
-                  radius: 30.r,
-                    height: 54.h,
-                    title: Strings.continu.tr,
-                    onTap: () {
-                      context.pushNamed(ResetPasswordScreen.routeName);
-                      // if (formKey.currentState?.validate() ?? false) {
-                      //  // con.verifyCodeToResetPassword();
-                      // } else {
-                      //   setState(() {
-                      //   con.autoValidate = true;
-                      //   });
-                      // }
-                    }
-                    ),
-                Gap(30.h),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                GestureDetector(
-                  onTap: (){},
-                  child: Text(
-                    Strings.resendCode.tr,
-                    textAlign: TextAlign.left,
-                    style: TextStyleHelper.of(context).b_16.copyWith(
-                        color: ThemeClass.of(context).labelColor),
-                  ),
-                ),
-                Text(
-                  Strings.timeCount.tr,
-                  textAlign: TextAlign.left,
-                  style: TextStyleHelper.of(context).b_16.copyWith(
-                      color: ThemeClass.of(context).primaryColor),
-                ),
-              ],
-            ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ),
-      )
-    );
+    ));
   }
 }
 

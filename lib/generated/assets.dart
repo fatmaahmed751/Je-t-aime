@@ -16,7 +16,9 @@ class Assets {
   static const String imagesDeleteAccount = 'assets/images/deleteAccount.svg';
   static const String imagesEmailIcon = 'assets/images/emailIcon.svg';
   static const String imagesEyeOpen = 'assets/images/eyeOpen.svg';
+  static const String imagesFace = 'assets/images/face.png';
   static const String imagesForgetPassword = 'assets/images/forgetPassword.png';
+  static const String imagesGlobe = 'assets/images/globe.svg';
   static const String imagesGoogleIcon = 'assets/images/googleIcon.svg';
   static const String imagesIconApp = 'assets/images/iconApp.png';
   static const String imagesLocation = 'assets/images/location.svg';
@@ -25,6 +27,7 @@ class Assets {
   static const String imagesLogoIcon = 'assets/images/logoIcon.png';
   static const String imagesLogout = 'assets/images/logout.svg';
   static const String imagesNewPassword = 'assets/images/newPassword.png';
+  static const String imagesNoPersonalData = 'assets/images/noPersonalData.svg';
   static const String imagesObsecureIcon = 'assets/images/obsecureIcon.svg';
   static const String imagesOnBoardingOne = 'assets/images/onBoardingOne.png';
   static const String imagesOnBoardingThree = 'assets/images/onBoardingThree.png';
@@ -42,5 +45,6 @@ class Assets {
   static const String imagesSmillingFace = 'assets/images/smillingFace.svg';
   static const String imagesSplash = 'assets/images/splash.png';
   static const String imagesSupport = 'assets/images/support.svg';
+  static const String imagesUser = 'assets/images/user.svg';
 
 }

@@ -20,11 +20,12 @@ class ThemeModel extends ThemeExtension<ThemeModel>{
   final Color secondaryBlackColor;
   final Color labelColor;
   final Color containerColor;
+  final Color descTextColor;
   final Color success;
   final Color waiting;
   final Color cancel;
   final Color secondary;
-
+  final Color sideText;
 
   ThemeModel({
     this.isDark = false,
@@ -39,6 +40,8 @@ class ThemeModel extends ThemeExtension<ThemeModel>{
     required this.mainBlack,
     required this.secondaryBlackColor,
     required this.containerColor,
+    required this.descTextColor,
+    required this.sideText,
 });
 
   @override
@@ -66,7 +69,9 @@ class ThemeModel extends ThemeExtension<ThemeModel>{
     Color? mainBlack,
     Color? bodyColor,
     Color? tabBarColor,
-    Color? containerColor
+    Color? containerColor,
+    Color?descTextColor,
+    Color?sideText
 }) {
     return ThemeModel(
       isDark: isDark??this.isDark,
@@ -80,7 +85,9 @@ class ThemeModel extends ThemeExtension<ThemeModel>{
       secondary: informative??this.secondary,
       mainBlack: mainBlack??this.mainBlack,
       secondaryBlackColor: bodyColor??this.secondaryBlackColor,
-        containerColor:containerColor??this.containerColor
+        containerColor:containerColor??this.containerColor,
+        descTextColor:descTextColor??this.descTextColor,
+        sideText:sideText??this.sideText
     );
   }
 
@@ -97,6 +104,8 @@ class ThemeModel extends ThemeExtension<ThemeModel>{
     mainBlack: Color(json["mainBlack"]),
     secondaryBlackColor: Color(json["bodyColor"]),
     containerColor: Color(json["containerColor"]),
+      descTextColor:Color(json["descTextColor"]),
+      sideText:Color(json["sideText"])
   );
 
   Map<String, dynamic> toJson() => {
@@ -111,7 +120,9 @@ class ThemeModel extends ThemeExtension<ThemeModel>{
     "informative": secondary.value,
     "mainBlack": mainBlack.value,
     "bodyColor": secondaryBlackColor.value,
-    "containerColor":containerColor.value
+    "containerColor":containerColor.value,
+    "descTextColor":descTextColor.value,
+    "sideText":sideText.value
   };
 
 

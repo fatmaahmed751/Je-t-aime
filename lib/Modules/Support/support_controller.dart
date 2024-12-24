@@ -15,15 +15,18 @@ class SupportController extends ControllerMVC {
   SupportController._();
   bool loading=false;
   bool autoValidate = false;
-  late TextEditingController problemController = TextEditingController();
-  late TextEditingController emailController = TextEditingController();
-  late TextEditingController phoneController = TextEditingController();
+  late TextEditingController problemController,
+  emailController,
+   phoneController ,
+  nameController;
+
 
   @override
   void initState() {
     problemController = TextEditingController();
     emailController = TextEditingController();
     phoneController = TextEditingController();
+    nameController = TextEditingController();
     super.initState();
   }
 
@@ -32,6 +35,7 @@ class SupportController extends ControllerMVC {
     emailController.dispose();
     phoneController.dispose();
     problemController.dispose();
+    nameController.dispose();
     super.dispose();
   }
   // submitProblemSuccessfully() async {

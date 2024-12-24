@@ -21,16 +21,35 @@ class UserProfileContainerWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 60.h,
+      height: 52.h,
       width: 382.w,
       decoration: BoxDecoration(
-          color: ThemeClass.of(context).containerColor,
-          borderRadius: BorderRadius.circular(30.r)),
+          color: ThemeClass.of(context).background,
+
+        // border: Border(
+        //   bottom: BorderSide(
+        //   color:ThemeClass.of(context).secondary,
+        //   width: 1.w,
+        // ),
+        // )
+      ),
       child: Padding(
         padding:  EdgeInsetsDirectional.symmetric(horizontal: 15.w),
         child: Row(
           children: [
-            SvgPicture.asset(image),
+            Container(
+              width: 40.w,
+                height: 40.h,
+                decoration: BoxDecoration(
+                    color: ThemeClass.of(context).containerColor,
+                    borderRadius: BorderRadius.circular(30.r)),
+                child: Padding(
+                  padding: EdgeInsetsDirectional.symmetric(
+                      horizontal: 6.w,
+                  vertical: 6.h),
+                  child: SvgPicture.asset(image,
+                 ),
+                )),
             Gap(10.w),
             Text(
               text,

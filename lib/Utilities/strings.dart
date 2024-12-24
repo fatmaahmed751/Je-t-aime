@@ -10,7 +10,15 @@ class Strings {
   static const String selectColor = "selectColor";
   static const String cancel = "cancel";
   static const String ok = "ok";
+  static const String shippingPolicy = "shippingPolicy";
+  static const String customerSupport = "customerSupport";
+  static const String privacyPolicy = "privacyPolicy";
+  static const String shippingPolicyDes = "shippingPolicyDes";
+  static const String customerSupportDesc = "customerSupportDesc";
+  static const String privacyPolicyDesc = "privacyPolicyDesc";
+
   static const String hello = "hello";
+  static const String languages = "languages";
   static const String verify = "verify";
   static const String cash = "cash";
   static const String payNow = "payNow";
@@ -45,8 +53,10 @@ class Strings {
   static const String validEmail = "email_valid";
   static const String emailError = "email_error";
   static const String home = "home";
+  static const String changePasswordTitle = "changePasswordTitle";
   static const String cart = "cart";
   static const String address = "address";
+  static const String  validAddress ="validAddress";
   static const String addressField = "addressField";
   static const String favorite = "_favorite";
   static const String account = "account";
@@ -55,6 +65,7 @@ class Strings {
   static const String viewAll = "view_all";
   static const String popularProduct = "popular_product";
   static const String egp = "egp";
+  static const String writeYourProblem = "writeYourProblem";
   static const String sendCode = "sendCode";
   static const String seeMore = "seeMore";
   static const String productDes = "productDes";

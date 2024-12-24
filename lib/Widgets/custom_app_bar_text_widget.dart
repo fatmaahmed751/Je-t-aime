@@ -14,7 +14,7 @@ class CustomAppBarMainTextWidget extends StatelessWidget{
         text,
         style: TextStyleHelper.of(context)
             .h_24
-            .copyWith(color: Colors.white),
+            .copyWith(color: ThemeClass.of(context).background),
 
     );
   }

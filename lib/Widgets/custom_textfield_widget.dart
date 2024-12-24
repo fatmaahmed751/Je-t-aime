@@ -250,12 +250,19 @@ class CustomTextFieldWidgetState extends State<CustomTextFieldWidget> {
         textInputAction: widget.textInputAction,
         onTap: widget.onTap,
         onFieldSubmitted: widget.onSave,
-        inputFormatters: widget.formatter,
+        inputFormatters: widget.formatter?? [],
         expands: widget.expands ?? false,
         onChanged: widget.onchange,
         textAlignVertical: TextAlignVertical.center,
         validator: widget.validator,
         decoration: InputDecoration(
+         errorBorder:  OutlineInputBorder(
+            borderRadius: BorderRadius.circular(30.r),
+            borderSide: BorderSide(
+              color:ThemeClass.of(context).primaryColor, // Border color when there's an error
+              width:1,
+            ),
+          ),
           //textCapitalization: TextCapitalization.words,
           enabledBorder: getBorder(
             radius: widget.borderRadiusValue,

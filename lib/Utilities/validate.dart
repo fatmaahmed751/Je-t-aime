@@ -33,18 +33,18 @@ class Validate {
 
     return null; // Password is valid
   }
-  // static String?  validatePhone(String? phone) {
-  //   var phoneRegExp = RegExp(r'^(0[0-9]{10})$');
-  //   var textIsArabic = RegExp(r'^[\0621-\064A0-9 ]+$');
-  //   if (phone!.trim().isEmpty) {
-  //     return Strings.validPhone.tr;
-  //   }  else if(!textIsArabic.hasMatch(phone)){
-  //     return Strings.phoneError.tr;
-  //   } else if (!phoneRegExp.hasMatch(phone)) {
-  //     return Strings.phoneError.tr;
-  //   }
-  //   return null;
-  // }
+  static String?  validatePhone(String? phone) {
+    var phoneRegExp = RegExp(r'^(0[0-9]{10})$');
+    var textIsArabic = RegExp(r'^[\0621-\064A0-9 ]+$');
+    if (phone!.trim().isEmpty) {
+      return Strings.validPhone.tr;
+    }  else if(!textIsArabic.hasMatch(phone)){
+      return Strings.phoneError.tr;
+    } else if (!phoneRegExp.hasMatch(phone)) {
+      return Strings.phoneError.tr;
+    }
+    return null;
+  }
   // static String? validatePhone(String? phone) {
   //   if (phone!.trim().isEmpty) {
   //     return Strings.validPhone.tr;
@@ -66,7 +66,7 @@ class Validate {
   }
 
   static String? validateNormalAddress(String? text) {
-    if (text?.isEmpty ?? true) return Strings.address.tr;
+    if (text?.isEmpty ?? true) return Strings.validAddress.tr;
     return null;
   }
   static String? validateNormalString(String? text) {
@@ -144,18 +144,7 @@ class Validate {
     if (phone!.trim().isEmpty) return null;
     //return validatePhone(phone);
   }
-  static String?  validatePhone(String? phone) {
-    var phoneRegExp = RegExp(r'^(0[0-9]{10})$');
-    var textIsArabic = RegExp(r'^[\0621-\064A0-9 ]+$');
-    if (phone!.trim().isEmpty) {
-      return Strings.validPhone.tr;
-    }  else if(!textIsArabic.hasMatch(phone)){
-      return Strings.phoneError.tr;
-    } else if (!phoneRegExp.hasMatch(phone)) {
-      return Strings.phoneError.tr;
-    }
-    return null;
-  }
+
   static validateFullName(String? name) {
     if (name == null) return Strings.validName.tr;
     if (name.trim().isEmpty) {

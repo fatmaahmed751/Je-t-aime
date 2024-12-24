@@ -10,6 +10,7 @@ import '../Utilities/strings.dart';
 import '../Utilities/theme_helper.dart';
 import '../generated/assets.dart';
 import 'custom_app_bar_text_widget.dart';
+import 'custom_details_app_bar_text_widget.dart';
 
 enum _AppBarType { main, mainDetails, details,secondary,secondaryGradient }
 
@@ -115,7 +116,7 @@ class CustomAppBarWidget extends StatelessWidget
 
 //
   @override
-  Size get preferredSize => Size.fromHeight(kToolbarHeight + 1.h);
+  Size get preferredSize => Size.fromHeight(kToolbarHeight +30.h);
 // }
 }
 
@@ -144,12 +145,12 @@ class MainAppBarWidget extends StatelessWidget {
             decoration: BoxDecoration(
               gradient: LinearGradient(
                 colors: ThemeClass.backgroundGradiant,
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
+                begin: Alignment.centerLeft,
+                end: Alignment.centerRight,
               ),
               borderRadius: BorderRadius.only(
-                bottomLeft: Radius.circular(50.r),
-                bottomRight: Radius.circular(50.r),
+                bottomLeft: Radius.circular(30.r),
+                bottomRight: Radius.circular(30.r),
               ),
             ),
           ),
@@ -159,7 +160,7 @@ class MainAppBarWidget extends StatelessWidget {
             right: 0,
             child: Padding(
               padding: EdgeInsetsDirectional.only(
-                  start: 10.w, top: 50.h, end: 10.w),
+                  start: 16.w, top: 60.h, end: 16.w),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
@@ -167,7 +168,46 @@ class MainAppBarWidget extends StatelessWidget {
 
                   CustomAppBarMainTextWidget(
                       text: Strings.hello.tr),
+                  Gap(8.w),
+                 Image.asset(Assets.imagesFace,
+                   width: 24.w,
+                  ),
                   const Spacer(),
+                  GestureDetector(
+                    onTap: () {},
+                    child:Container(
+                        width: 32.w,
+                        height: 32.h,
+                        decoration: BoxDecoration(
+                            color: ThemeClass.of(context).background,
+                            borderRadius: BorderRadius.circular(30.r)
+                        ),
+                        child: Padding(
+                          padding: EdgeInsetsDirectional.symmetric(
+                              horizontal: 6.w,
+                              vertical: 6.h),
+                          child: SvgPicture.asset(Assets.imagesRewards,
+                          ),
+                        )),
+                  ),
+                  Gap(8.w),
+                  GestureDetector(
+                    onTap: () {},
+                    child:Container(
+                        width: 32.w,
+                        height: 32.h,
+                        decoration: BoxDecoration(
+                            color: ThemeClass.of(context).background,
+                            borderRadius: BorderRadius.circular(30.r)
+                        ),
+                        child: Padding(
+                          padding: EdgeInsetsDirectional.symmetric(
+                              horizontal: 6.w,
+                              vertical: 6.h),
+                          child: SvgPicture.asset(Assets.imagesShop,
+                          ),
+                        )),
+                  ),
 
                 ],
               ),
@@ -176,6 +216,19 @@ class MainAppBarWidget extends StatelessWidget {
 
         ],
       ),
+      // child: Row(
+      //   mainAxisAlignment: MainAxisAlignment.start,
+      //   children: [
+      //     //const SizedBox(width: 15,),
+      //
+      //     CustomAppBarMainTextWidget(
+      //         text: Strings.hello.tr),
+      //     SvgPicture.asset(Assets.imagesSmillingFace),
+      //     const Spacer(),
+      //
+      //
+      //   ],
+      // ),
     );
   }
 }
@@ -196,22 +249,25 @@ class MainDetailsAppBarWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsetsDirectional.only(start: 10.w, top: 50.h),
+      padding: EdgeInsetsDirectional.only( top: 20.h),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          // IconButton(
-          //     icon: SvgPicture.asset(Assets.imagesMenu), onPressed: onPressed),
-       // Gap(50.w),
-       //   Center(child: CustomAppBarMainTextWidget(text: title)),
-         // Gap(50.w),
-         const Spacer(),
-          IconButton(
-              icon: SvgPicture.asset(icon!),
-              onPressed: () {
+        mainAxisAlignment: MainAxisAlignment.start,
 
-              }),
+        children: [
+          IconButton(
+              icon: SvgPicture.asset(Assets.imagesArrowBack), onPressed: (){
+                context.pop();
+          }
+          ),
+     Gap(16.w),
+      Center(child: CustomAppBarDetailsTextWidget(text: title)),
+         // Gap(50.w),
+         //const Spacer(),
+          // IconButton(
+          //     icon: SvgPicture.asset(icon!),
+          //     onPressed: () {
+          //
+          //     }),
          // const Spacer()
 
         ],

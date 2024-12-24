@@ -1,6 +1,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:je_t_aime/Modules/ChangePassword/change_password_screen.dart';
+import 'package:je_t_aime/Modules/ChangePassword/change_password_screen.dart';
+import 'package:je_t_aime/Modules/ChangePassword/change_password_screen.dart';
 import 'package:je_t_aime/Modules/Orders/orders_screen.dart';
 import 'package:je_t_aime/Modules/Orders/orders_screen.dart';
 import 'package:je_t_aime/Modules/Orders/orders_screen.dart';
@@ -200,7 +203,17 @@ class GoRouterConfig{
         },
         routes: const <RouteBase>[],
       ),
-
+      GoRoute(
+        name: ChangePasswordScreen.routeName,
+        path: "/${ChangePasswordScreen.routeName}",
+        pageBuilder: (_, GoRouterState state) {
+          return getCustomTransitionPage(
+            state: state,
+            child: const ChangePasswordScreen(),
+          );
+        },
+        routes: const <RouteBase>[],
+      ),
     ],
     // redirect: (BuildContext context, GoRouterState state) {
     //   if(!SharedPref.isLogin()) return LoginScreen.routeName;
