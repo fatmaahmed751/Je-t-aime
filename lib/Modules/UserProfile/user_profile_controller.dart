@@ -1,11 +1,16 @@
 
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
+import 'package:je_t_aime/Modules/Login/login_screen.dart';
 import 'package:je_t_aime/core/Language/locales.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 import 'package:provider/provider.dart';
 import '../../../Utilities/strings.dart';
 import '../../../core/Language/app_languages.dart';
 import '../../Utilities/router_config.dart';
+import '../../Widgets/alert_dialoge_widget.dart';
+import '../../Widgets/custom_bottom_sheet_widget.dart';
 import 'Widget/change_languages_widget.dart';
 class UserProfileController extends ControllerMVC {
   // singleton
@@ -107,25 +112,25 @@ class UserProfileController extends ControllerMVC {
   //       dismiss: false);
   // }
   //
-  // userLogOutPop(BuildContext ctx){
-  //   DialogHelper.custom(context: ctx).customDialog(
-  //       dialogWidget: AlertWarningWidget(
-  //         des: Strings.confirmLogout.tr,
-  //         onButtonAccept: ()async {
-  //           ctx.pop();
-  //           await isUserLogOut();
-  //           setState(() {});
-  //           GoRouter.of(currentContext_!).pushNamed(RegisterScreen.routeName);
-  //         },
-  //         onButtonReject: () {
-  //           ctx.pop();
-  //         },
-  //         titleButtonAccept: Strings.yes.tr,
-  //         titleButtonReject: Strings.cancel.tr,
-  //       ),
-  //       dismiss: false);
-  // }
-  //
+  userLogOutPop(BuildContext context){
+    return showModalBottomSheet(
+      context: context,
+      // isScrollControlled: true,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(30.r)),
+      ),
+      builder:(context)=> AlertWarningWidget(
+        des:Strings.confirmLogout.tr,
+        mainText: Strings.deleteLogOutSide.tr,
+        onButtonReject:
+        currentContext_!.pop,
+        onButtonAccept: (){
+          GoRouter.of(context).pushNamed(LoginScreen.routeName);
+        },
+      ),
+    );
+  }
+
   // deleteAccountSuccessfully() async {
   //   setState(() {
   //     loading = true;
@@ -146,32 +151,34 @@ class UserProfileController extends ControllerMVC {
   //
   // }
   //
-  // isUserLogOut() async {
-  //   setState(() {
-  //     loading = true;
-  //   });
-  //   final result = await UserProfileDataHandler.userLogOut();
-  //   result.fold((l) {
-  //    // ToastHelper.showError(message: l.errorModel.statusMessage);
-  //     print("Logout error: ${l.errorModel.statusMessage}");
-  //   }, (r)async {
-  //     await SharedPref.logout();
-  //     SharedPref.saveCurrentUser(user:UserModel());
-  //
-  //   });
-  //   await Future.delayed(const Duration(seconds: 2));
-  //   setState(() {
-  //     loading = false;
-  //   });
-  // }
-  //
-  changeLanguageOfApp(BuildContext ctx) async {
-    await loadCurrentLanguage(ctx);
-    showDialog(
-        context: ctx,
+  Future deleteUserAccountPop(BuildContext context) {
+    return showModalBottomSheet(
+      context: context,
+   // isScrollControlled: true,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(30.r)),
+      ),
+      builder:(context)=> AlertWarningWidget(
+       des:Strings.confirmDeleteAccount.tr,
+        mainText: Strings.deleteAccountSide.tr,
+        onButtonReject:
+          currentContext_!.pop,
+        onButtonAccept: (){
+         GoRouter.of(context).pushNamed(LoginScreen.routeName);
+        },
+      ),
+    );
+  }
+  changeLanguageOfApp(BuildContext context) async {
+    await loadCurrentLanguage(context);
+    showModalBottomSheet(
+        context: context,
+        // isScrollControlled: true,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(top: Radius.circular(30.r)),
+        ),
         builder: (context) => const ChangeLanguage());
   }
-
   Future<void> loadCurrentLanguage(BuildContext ctx) async {
     await Provider.of<AppLanguage>(ctx, listen: false).fetchLocale(ctx);
 

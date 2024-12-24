@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
+import 'package:je_t_aime/core/Language/locales.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 import 'package:provider/provider.dart';
 import '../../../../Utilities/strings.dart';
@@ -25,86 +26,149 @@ class _ChangeLanguageState extends StateMVC<ChangeLanguage> {
   }
 
   late UserProfileController con;
+  int selectedIndex = -1;
   @override
   void initState() {
     super.initState();
     con.loadCurrentLanguage(context);
   }
+
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Container(
-        width: 382.w,
-        height: 200.h,
-        decoration: BoxDecoration(
-          color: ThemeClass.of(context).background,
-          borderRadius: BorderRadius.circular(20),
-        ),
-        child: Padding(
-          padding: EdgeInsetsDirectional.symmetric(horizontal: 15.w),
-          child: Card(
-            elevation: 0.0,
-            color: ThemeClass.of(context).background,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
+    return Container(
+      // width: 382.w,
+      // height: 200.h,
+      decoration: BoxDecoration(
+        color: ThemeClass.of(context).background,
+        borderRadius: BorderRadius.vertical(top: Radius.circular(30.r)),
+      ),
+      child: Padding(
+        padding:
+            EdgeInsetsDirectional.symmetric( vertical: 35.h),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Padding(
+              padding: EdgeInsetsDirectional.symmetric( horizontal: 15.w),
+              child: Text(Strings.languages.tr ?? '',
+                  style: TextStyleHelper.of(context).h_20.copyWith(
+                      color: ThemeClass.of(context).mainBlack,
+                      fontWeight: FontWeight.w500)),
+            ),
+            Gap(10.h),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                Gap(15.h),
-                // Row(
-                //   children: [
-                //     IconButton(
-                //       icon: con.selectedLanguage == 1
-                //           ? SvgPicture.asset(Assets.imagesFilledRadioIcon)
-                //           : SvgPicture.asset(Assets.imagesLightRadioIcon),
-                //       onPressed: () {
-                //         // setState(
-                //           () {
-                //             con.selectLanguage(1);
-                //             Provider.of<AppLanguage>(context, listen: false)
-                //                 .changeLanguage(language: Languages.en);
-                //             context.pop();
-                //           },
-                //         );
-                //       },
-                //     ),
-                //     Text(
-                //       Strings.english.tr,
-                //       style: TextStyleHelper.of(context)
-                //           .b_16
-                //           .copyWith(color: ThemeClass.of(context).mainBlack),
-                //     ),
-                //   ],
-                // ),
-                // Gap(10.h),
-                // Row(
-                //   children: [
-                //     IconButton(
-                //       icon: con.selectedLanguage == 2
-                //           ? SvgPicture.asset(Assets.imagesFilledRadioIcon)
-                //           : SvgPicture.asset(Assets.imagesLightRadioIcon),
-                //       onPressed: () {
-                //         setState(
-                //           () {
-                //             con.selectLanguage(2);
-                //             Provider.of<AppLanguage>(context, listen: false)
-                //                 .changeLanguage(language: Languages.ar);
-                //             context.pop();
-                //           },
-                //         );
-                //       },
-                //     ),
-                //     Text(
-                //       Strings.arabic.tr,
-                //       style: TextStyleHelper.of(context)
-                //           .b_16
-                //           .copyWith(color: ThemeClass.of(context).mainBlack),
-                //     ),
-                //   ],
-                // ),
+                IconButton(
+                  icon: con.selectedLanguage == 1
+                      ? SvgPicture.asset(Assets.imagesSelectedIcon)
+                      : SvgPicture.asset(Assets.imagesUnSelectedIcon),
+                  onPressed: () {
+                    setState(() {
+                        con.selectLanguage(1);
+                      },
+                    );
+                  },
+                ),
+                Text(
+                  Strings.english.tr,
+                  style: TextStyleHelper.of(context)
+                      .b_16
+                      .copyWith(color: ThemeClass.of(context).mainBlack),
+                ),
               ],
             ),
-          ),
+            Row(
+              children: [
+                IconButton(
+                  icon: con.selectedLanguage == 2
+                      ? SvgPicture.asset(Assets.imagesSelectedIcon)
+                      : SvgPicture.asset(Assets.imagesUnSelectedIcon),
+                  onPressed: () {
+                    setState(() {
+                        con.selectLanguage(2);
+                      },
+                    );
+                  },
+                ),
+                Text(
+                  Strings.arabic.tr,
+                  style: TextStyleHelper.of(context)
+                      .b_16
+                      .copyWith(color: ThemeClass.of(context).mainBlack),
+                ),
+              ],
+            ),
+            Padding(
+              padding: EdgeInsetsDirectional.symmetric( horizontal: 15.w),
+              child: Row(
+                //mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  GestureDetector(
+                    onTap: () {
+                      context.pop();
+                    },
+                    child: Container(
+                      width: 165.w,
+                      height: 48.h,
+                      decoration: BoxDecoration(
+                          border:
+                              Border.all(color: ThemeClass.of(context).secondary),
+                          borderRadius: BorderRadius.circular(30.r),
+                          color: ThemeClass.of(context).secondary
+                          // ThemeClass.of(context).background.withOpacity(0.20)
+                          ),
+                      //  backgroundColor: ThemeClass.of(context).primaryColor,
+                      child: Center(
+                        child: Text(
+                          Strings.cancel.tr,
+                          style: TextStyleHelper.of(context).h_16.copyWith(
+                              color: ThemeClass.of(context).secondaryBlackColor),
+                        ),
+                      ),
+                    ),
+                  ),
+                  Gap(16.w),
+                  GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        if (con.selectedLanguage == 1) {
+                          Provider.of<AppLanguage>(context, listen: false)
+                              .changeLanguage(language: Languages.en);
+                        } else {
+                          con.selectLanguage(2);
+                          Provider.of<AppLanguage>(context, listen: false)
+                              .changeLanguage(language: Languages.ar);
+                        }
+                      });
+                      context.pop();
+                    },
+                    child: Container(
+                      width: 165.w,
+                      height: 48.h,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(30.r),
+                          color: ThemeClass.of(context).primaryColor),
+                      child: Center(
+                        child: Text(
+                          Strings.change.tr,
+                          style: TextStyleHelper.of(context).h_16.copyWith(
+                            color: ThemeClass.of(context).background,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+
+                ],
+              ),
+            ),
+          ],
         ),
       ),
     );
   }
 }
+

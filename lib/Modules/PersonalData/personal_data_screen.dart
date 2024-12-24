@@ -7,7 +7,6 @@ import 'package:je_t_aime/Modules/PersonalData/personal_data_controller.dart';
 import 'package:je_t_aime/Widgets/custom_side_text_widget.dart';
 import 'package:je_t_aime/core/Language/locales.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
-import '../../../Utilities/shared_preferences.dart';
 import '../../../Utilities/text_style_helper.dart';
 import '../../../Utilities/theme_helper.dart';
 import '../../../Utilities/validate.dart';

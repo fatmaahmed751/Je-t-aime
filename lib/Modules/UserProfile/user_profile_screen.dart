@@ -161,7 +161,7 @@ class _UserProfileScreenState extends StateMVC<UserProfileScreen> {
                           ),
                           GestureDetector(
                             onTap: () {
-                              //   con.deleteUserAccountPop(context);
+                             con.deleteUserAccountPop(context);
                             },
                             child: UserProfileContainerWidget(
                               image: (Assets.imagesDeleteAccount),
@@ -176,7 +176,7 @@ class _UserProfileScreenState extends StateMVC<UserProfileScreen> {
                           ),
                           GestureDetector(
                             onTap: () {
-                              // con.userLogOutPop(context);
+                              con.userLogOutPop(context);
                             },
                             child: UserProfileContainerWidget(
                               image: (Assets.imagesLogout),

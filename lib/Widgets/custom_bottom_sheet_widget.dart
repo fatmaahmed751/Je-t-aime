@@ -26,7 +26,9 @@ class CustomBottomSheetWidget extends StatelessWidget{
            borderRadius: BorderRadius.vertical(top: Radius.circular(30.r)),
          ),
          child: Padding(
-           padding: const EdgeInsets.all(16.0),
+           padding:  EdgeInsetsDirectional.symmetric(
+               horizontal: 16.w,
+           vertical: 16.h),
            child: Column(
              mainAxisSize: MainAxisSize.min,
              children: [

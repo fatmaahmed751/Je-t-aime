@@ -10,6 +10,8 @@ class Strings {
   static const String selectColor = "selectColor";
   static const String cancel = "cancel";
   static const String ok = "ok";
+  static const String orderState = "orderState";
+  static const String delivered = "delivered";
   static const String shippingPolicy = "shippingPolicy";
   static const String customerSupport = "customerSupport";
   static const String privacyPolicy = "privacyPolicy";
@@ -115,6 +117,9 @@ class Strings {
   static const String personalData  ="personalData";
   static const String logOut  ="logOut";
   static const String deleteAccount  ="deleteAccount";
+  static const String deleteAccountSide  ="deleteAccountSide";
+  static const String deleteLogOutSide  ="deleteLogOutSide";
+  static const String change  ="change";
   static const String orders  ="orders";
   static const String securityInformation ="securityInformation";
   static const String confirmDeleteAccount  ="confirmDeleteAccount";

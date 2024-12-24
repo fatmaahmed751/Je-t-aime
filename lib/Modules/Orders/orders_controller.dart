@@ -12,6 +12,7 @@ class OrdersController extends ControllerMVC {
   OrdersController._();
 
   bool loading = false;
+  bool isLogin = false;
  // List<OrderInfoModel> orders=[];
 
 

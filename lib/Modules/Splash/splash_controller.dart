@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:go_router/go_router.dart';
 import 'package:je_t_aime/Modules/ChangePassword/change_password_screen.dart';
 import 'package:je_t_aime/Modules/OTP/verification_otp_screen.dart';
+import 'package:je_t_aime/Modules/Orders/orders_screen.dart';
 import 'package:je_t_aime/Modules/Register/register_screen.dart';
 import 'package:je_t_aime/Modules/UserProfile/user_profile_screen.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
@@ -25,7 +26,7 @@ class SplashController extends ControllerMVC {
     //await SplashDataHandler.getCurrentUser();
     await Future.delayed(const Duration(seconds: 3));
     if(context.mounted) {
-      GoRouter.of(context).goNamed(ChangePasswordScreen.routeName);
+      GoRouter.of(context).goNamed(OrdersScreen.routeName);
       if(SharedPref.isLogin()){
 
       }else{

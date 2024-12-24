@@ -26,7 +26,7 @@ class ThemeClass extends ThemeModel{
     super.containerColor = const Color(0xffF9F5F5),
     super.secondaryBlackColor = const Color(0xff606060),
     super.waiting = const Color(0xffF68524),
-    super.cancel = const Color(0xffEA3829),
+    super.cancel = const Color(0xffA50311),
     super.success = const Color(0xff00B060),
     super.descTextColor = const Color(0xff635D59),
     super.sideText = const Color(0xff1F1B17),
@@ -45,7 +45,7 @@ class ThemeClass extends ThemeModel{
     super.secondaryBlackColor = const Color(0xff606060),
     super.waiting = const Color(0xffF68524),
     super.containerColor = const Color(0xffF9F5F5),
-    super.cancel = const Color(0xffEA3829),
+    super.cancel = const Color(0xffA50311),
     super.success = const Color(0xff00B060),
     super.sideText = const Color(0xff1F1B17),
     super.descTextColor = const Color(0xff635D59)

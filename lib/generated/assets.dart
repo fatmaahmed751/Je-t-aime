@@ -27,6 +27,7 @@ class Assets {
   static const String imagesLogoIcon = 'assets/images/logoIcon.png';
   static const String imagesLogout = 'assets/images/logout.svg';
   static const String imagesNewPassword = 'assets/images/newPassword.png';
+  static const String imagesNoOrdersImage = 'assets/images/noOrdersImage.svg';
   static const String imagesNoPersonalData = 'assets/images/noPersonalData.svg';
   static const String imagesObsecureIcon = 'assets/images/obsecureIcon.svg';
   static const String imagesOnBoardingOne = 'assets/images/onBoardingOne.png';
@@ -40,11 +41,15 @@ class Assets {
   static const String imagesPolicies = 'assets/images/policies.svg';
   static const String imagesProfileIcon = 'assets/images/profileIcon.svg';
   static const String imagesRewards = 'assets/images/rewards.svg';
+  static const String imagesSelectedIcon = 'assets/images/selectedIcon.svg';
   static const String imagesShop = 'assets/images/shop.svg';
   static const String imagesSignUp = 'assets/images/signUp.png';
   static const String imagesSmillingFace = 'assets/images/smillingFace.svg';
   static const String imagesSplash = 'assets/images/splash.png';
+  static const String imagesSubmit = 'assets/images/submit.png';
+  static const String imagesSubmitProblem = 'assets/images/submitProblem.svg';
   static const String imagesSupport = 'assets/images/support.svg';
+  static const String imagesUnSelectedIcon = 'assets/images/unSelectedIcon.svg';
   static const String imagesUser = 'assets/images/user.svg';
 
 }
