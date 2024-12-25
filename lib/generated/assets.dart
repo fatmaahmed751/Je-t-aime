@@ -15,8 +15,10 @@ class Assets {
   static const String imagesArrowForward = 'assets/images/arrowForward.svg';
   static const String imagesDeleteAccount = 'assets/images/deleteAccount.svg';
   static const String imagesEmailIcon = 'assets/images/emailIcon.svg';
+  static const String imagesEmptyOrders = 'assets/images/emptyOrders.png';
   static const String imagesEyeOpen = 'assets/images/eyeOpen.svg';
   static const String imagesFace = 'assets/images/face.png';
+  static const String imagesFavoriteIcon = 'assets/images/favoriteIcon.svg';
   static const String imagesForgetPassword = 'assets/images/forgetPassword.png';
   static const String imagesGlobe = 'assets/images/globe.svg';
   static const String imagesGoogleIcon = 'assets/images/googleIcon.svg';
@@ -27,8 +29,12 @@ class Assets {
   static const String imagesLogoIcon = 'assets/images/logoIcon.png';
   static const String imagesLogout = 'assets/images/logout.svg';
   static const String imagesNewPassword = 'assets/images/newPassword.png';
+  static const String imagesNoFavorite = 'assets/images/noFavorite.svg';
+  static const String imagesNoNotification = 'assets/images/noNotification.svg';
   static const String imagesNoOrdersImage = 'assets/images/noOrdersImage.svg';
   static const String imagesNoPersonalData = 'assets/images/noPersonalData.svg';
+  static const String imagesNoRewards = 'assets/images/noRewards.svg';
+  static const String imagesNotificationIcon = 'assets/images/notificationIcon.svg';
   static const String imagesObsecureIcon = 'assets/images/obsecureIcon.svg';
   static const String imagesOnBoardingOne = 'assets/images/onBoardingOne.png';
   static const String imagesOnBoardingThree = 'assets/images/onBoardingThree.png';
@@ -39,8 +45,11 @@ class Assets {
   static const String imagesPersonalData = 'assets/images/personalData.png';
   static const String imagesPhone = 'assets/images/phone.svg';
   static const String imagesPolicies = 'assets/images/policies.svg';
+  static const String imagesProduct = 'assets/images/product.png';
+  static const String imagesProductImage = 'assets/images/productImage.svg';
   static const String imagesProfileIcon = 'assets/images/profileIcon.svg';
   static const String imagesRewards = 'assets/images/rewards.svg';
+  static const String imagesSearch = 'assets/images/search.svg';
   static const String imagesSelectedIcon = 'assets/images/selectedIcon.svg';
   static const String imagesShop = 'assets/images/shop.svg';
   static const String imagesSignUp = 'assets/images/signUp.png';

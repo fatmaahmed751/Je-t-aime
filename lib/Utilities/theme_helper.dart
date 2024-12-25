@@ -30,6 +30,7 @@ class ThemeClass extends ThemeModel{
     super.success = const Color(0xff00B060),
     super.descTextColor = const Color(0xff635D59),
     super.sideText = const Color(0xff1F1B17),
+  super.pinkColor =   const Color(0xffF9F5F5),
 
 
   });
@@ -48,7 +49,9 @@ class ThemeClass extends ThemeModel{
     super.cancel = const Color(0xffA50311),
     super.success = const Color(0xff00B060),
     super.sideText = const Color(0xff1F1B17),
-    super.descTextColor = const Color(0xff635D59)
+    super.descTextColor = const Color(0xff635D59),
+    super.pinkColor =   const Color(0xffF9F5F5),
+
 
 
   });

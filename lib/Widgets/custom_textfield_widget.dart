@@ -234,6 +234,7 @@ class CustomTextFieldWidgetState extends State<CustomTextFieldWidget> {
   Widget build(BuildContext context) {
     return SizedBox(
       width: widget.width,
+      height: 48.h,
       child: TextFormField(
         focusNode: _focusNode,
         controller: widget.controller,

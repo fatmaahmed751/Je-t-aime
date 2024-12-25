@@ -10,9 +10,13 @@ class Strings {
   static const String selectColor = "selectColor";
   static const String cancel = "cancel";
   static const String ok = "ok";
+  static const String noFavorites = "noFavorites";
+  static const String noFavoritesDesc = "noFavoritesDesc";
+  static const String searchHere = "searchHere";
   static const String orderState = "orderState";
   static const String delivered = "delivered";
   static const String shippingPolicy = "shippingPolicy";
+  static const String notificationText = "notificationText";
   static const String customerSupport = "customerSupport";
   static const String privacyPolicy = "privacyPolicy";
   static const String shippingPolicyDes = "shippingPolicyDes";

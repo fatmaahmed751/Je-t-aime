@@ -4,13 +4,14 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:je_t_aime/core/Language/locales.dart';
-
-import '../Utilities/shared_preferences.dart';
 import '../Utilities/strings.dart';
+import '../Utilities/text_style_helper.dart';
 import '../Utilities/theme_helper.dart';
+import '../Utilities/validate.dart';
 import '../generated/assets.dart';
 import 'custom_app_bar_text_widget.dart';
 import 'custom_details_app_bar_text_widget.dart';
+import 'custom_textfield_widget.dart';
 
 enum _AppBarType { main, mainDetails, details,secondary,secondaryGradient }
 
@@ -22,6 +23,7 @@ class CustomAppBarWidget extends StatelessWidget
   final List<Widget>? actions;
   final String title;
   final String icon;
+  final TextEditingController? controller;
   final void Function()? onPressed;
 //
   const CustomAppBarWidget.mainScreen(
@@ -31,7 +33,8 @@ class CustomAppBarWidget extends StatelessWidget
       this.onPressed,
       required this.title,
       required this.icon,
-      this.actions})
+      this.actions,
+      this.controller})
       : _appBarType = _AppBarType.main,
         screenName = title,
         //actions = const [],
@@ -43,6 +46,7 @@ class CustomAppBarWidget extends StatelessWidget
     required this.icon,
     this.actions,
     this.onPressed,
+    this.controller
   })  : _appBarType = _AppBarType.mainDetails,
         screenName = title,
         super(key: key);
@@ -51,6 +55,7 @@ class CustomAppBarWidget extends StatelessWidget
     Key? key,
     required this.title,
     this.onPressed, required this.icon,
+    this.controller
   })  : _appBarType = _AppBarType.secondaryGradient,
         screenName = title,
         actions = const [],
@@ -61,6 +66,7 @@ class CustomAppBarWidget extends StatelessWidget
     required this.title,
     required this.icon,
     this.onPressed,
+    this.controller
   })  : _appBarType = _AppBarType.details,
         screenName = title,
         actions = const [],
@@ -70,6 +76,7 @@ class CustomAppBarWidget extends StatelessWidget
     Key? key,
     required this.title,
     required this.icon,
+    this.controller,
 
     this.onPressed, this.actions,
   })  : _appBarType = _AppBarType.secondary,
@@ -108,6 +115,7 @@ class CustomAppBarWidget extends StatelessWidget
         return SecondaryAppBarWidget(
           title: screenName,
           icon: icon,
+          controller:controller??TextEditingController() ,
         );
       default:
         return Container();
@@ -136,7 +144,7 @@ class MainAppBarWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return  SizedBox(
-      height: 390.h,
+    height: 390.h,
       child: Stack(
         children: [
           Container(
@@ -261,14 +269,6 @@ class MainDetailsAppBarWidget extends StatelessWidget {
           ),
      Gap(16.w),
       Center(child: CustomAppBarDetailsTextWidget(text: title)),
-         // Gap(50.w),
-         //const Spacer(),
-          // IconButton(
-          //     icon: SvgPicture.asset(icon!),
-          //     onPressed: () {
-          //
-          //     }),
-         // const Spacer()
 
         ],
       ),
@@ -279,11 +279,13 @@ class MainDetailsAppBarWidget extends StatelessWidget {
 class SecondaryAppBarWidget extends StatefulWidget {
   final String title;
   final String? icon;
+  final TextEditingController controller;
  // final VoidCallback? onDeleteIconToggle;
-  const SecondaryAppBarWidget({
+   const SecondaryAppBarWidget({
     Key? key,
     required this.title,
     this.icon,
+    required this.controller
     //this.onDeleteIconToggle
 
   }) : super(key: key);
@@ -293,58 +295,107 @@ class SecondaryAppBarWidget extends StatefulWidget {
 }
 
 class SecondaryAppBarWidgetState extends State<SecondaryAppBarWidget> {
-  // SecondaryAppBarWidgetState ():super(MediaController()){
-  //   con = MediaController();
-  // }
-  //
-  // late MediaController con;
+
+
   // bool isPressed = false;
 
   @override
   Widget build(BuildContext context) {
     print('SecondaryAppBarWidget rebuild with icon: ${widget.icon}');
-    return Padding(
-      padding: EdgeInsetsDirectional.only(start: 10.w, top: 50.h),
-      child: Container(
-       // color: Colors.red,
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            Gap(5.w),
-            InkWell(
-              onTap: () {
-                Navigator.of(context).pop();
-              },
-              child: CircleAvatar(
-                radius: 18.r,
-                backgroundColor:
-                    ThemeClass.of(context).background.withOpacity(0.20),
-                child: Transform.flip(
-                  flipX: SharedPref.getCurrentLanguage() == "ar" ? true : false,
-                  child: SvgPicture.asset(
-                    Assets.imagesArrowBack,
-                  ),
-                ),
+    return SizedBox(
+      child: Stack(
+        children: [
+          Container(
+           // height:500.h,
+            width: double.infinity,
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                colors: ThemeClass.backgroundGradiant,
+                begin: Alignment.centerLeft,
+                end: Alignment.centerRight,
+              ),
+              borderRadius: BorderRadius.only(
+                bottomLeft: Radius.circular(30.r),
+                bottomRight: Radius.circular(30.r),
               ),
             ),
-            Gap(90.w),
-            // Center(child: CustomAppBarMainTextWidget(text: widget.title),
-            // ),
-            Spacer(),
-            if (widget.icon != null && widget.icon!.isNotEmpty)
-            Padding(
-              padding:  EdgeInsetsDirectional.symmetric(horizontal:12.w),
-              child: IconButton(
-                  icon: SvgPicture.asset(widget.icon!),
-                  onPressed: () {
-                    print('hhhhhhhhhhhhh;');
-                 //  con.toggleDeleteIcon();
-                  }),
-            ),
+          ),
+          Positioned(
+            top: 0,
+            left: 0,
+            right: 0,
+            child: Padding(
+              padding: EdgeInsetsDirectional.only(
+                  start: 24.w, top: 60.h, end: 24.w),
+              child: Column(
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      //const SizedBox(width: 15,),
 
-          ],
-        ),
+                      CustomAppBarMainTextWidget(text: Strings.hello.tr),
+                      Gap(8.w),
+                      Image.asset(
+                        Assets.imagesFace,
+                        width: 24.w,
+                      ),
+                      const Spacer(),
+                      GestureDetector(
+                        onTap: () {},
+                        child: Container(
+                            width: 32.w,
+                            height: 32.h,
+                            decoration: BoxDecoration(
+                                color: ThemeClass.of(context).background,
+                                borderRadius: BorderRadius.circular(30.r)),
+                            child: Padding(
+                              padding: EdgeInsetsDirectional.symmetric(
+                                  horizontal: 6.w, vertical: 6.h),
+                              child: SvgPicture.asset(
+                                Assets.imagesRewards,
+                              ),
+                            )),
+                      ),
+                      Gap(8.w),
+                      GestureDetector(
+                        onTap: () {},
+                        child: Container(
+                            width: 32.w,
+                            height: 32.h,
+                            decoration: BoxDecoration(
+                                color: ThemeClass.of(context).background,
+                                borderRadius: BorderRadius.circular(30.r)),
+                            child: Padding(
+                              padding: EdgeInsetsDirectional.symmetric(
+                                  horizontal: 6.w, vertical: 6.h),
+                              child: SvgPicture.asset(
+                                Assets.imagesShop,
+                              ),
+                            )),
+                      ),
+                    ],
+                  ),
+                  Gap(30.h),
+                  CustomTextFieldWidget(
+                    height: 45.h,
+                    insidePadding: EdgeInsets.symmetric(vertical: 10.h),
+                    borderRadiusValue: 30.r,
+                    isDense: true,
+                    prefixIcon: SvgPicture.asset(Assets.imagesSearch),
+                    hint: Strings.searchHere.tr,
+                    backGroundColor: ThemeClass.of(context).background,
+                  controller:widget.controller,
+                    hintStyle: TextStyleHelper.of(context)
+                        .b_16
+                        .copyWith(color: ThemeClass.of(context).labelColor),
+                    validator: (v) => Validate.validateEmail(v),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }

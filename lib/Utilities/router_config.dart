@@ -2,14 +2,10 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:je_t_aime/Modules/ChangePassword/change_password_screen.dart';
-import 'package:je_t_aime/Modules/ChangePassword/change_password_screen.dart';
-import 'package:je_t_aime/Modules/ChangePassword/change_password_screen.dart';
-import 'package:je_t_aime/Modules/Orders/orders_screen.dart';
-import 'package:je_t_aime/Modules/Orders/orders_screen.dart';
+import 'package:je_t_aime/Modules/Favorite/favorite_screen.dart';
+import 'package:je_t_aime/Modules/Notifications/notifications_screen.dart';
 import 'package:je_t_aime/Modules/Orders/orders_screen.dart';
 import 'package:je_t_aime/Modules/Register/register_screen.dart';
-import 'package:je_t_aime/Modules/Support/support_screen.dart';
-import 'package:je_t_aime/Modules/Support/support_screen.dart';
 import 'package:je_t_aime/Modules/Support/support_screen.dart';
 import '../Modules/ForgetPassword/forget_password_screen.dart';
 import '../Modules/Login/login_screen.dart';
@@ -58,6 +54,17 @@ class GoRouterConfig{
           return getCustomTransitionPage(
             state: state,
             child: const OnBoardingScreen(),
+          );
+        },
+        routes: const <RouteBase>[],
+      ),
+      GoRoute(
+        name: FavoriteScreen.routeName,
+        path: "/${FavoriteScreen.routeName}",
+        pageBuilder: (_, GoRouterState state) {
+          return getCustomTransitionPage(
+            state: state,
+            child: const FavoriteScreen(),
           );
         },
         routes: const <RouteBase>[],
@@ -180,18 +187,17 @@ class GoRouterConfig{
         },
         routes: const <RouteBase>[],
       ),
-      // GoRoute(
-      //   name: VerifiedAccountUserScreen.routeName,
-      //   path: "/${VerifiedAccountUserScreen.routeName}",
-      //   pageBuilder: (_, GoRouterState state) {
-      //     final email = state.extra as String;
-      //     return getCustomTransitionPage(
-      //       state: state,
-      //       child:  VerifiedAccountUserScreen(email:email,),
-      //     );
-      //   },
-      //   routes: const <RouteBase>[],
-      // ),
+      GoRoute(
+        name: NotificationsScreen.routeName,
+        path: "/${NotificationsScreen.routeName}",
+        pageBuilder: (_, GoRouterState state) {
+          return getCustomTransitionPage(
+            state: state,
+            child:  const NotificationsScreen(),
+          );
+        },
+        routes: const <RouteBase>[],
+      ),
       GoRoute(
         name: LoginScreen.routeName,
         path: "/${LoginScreen.routeName}",

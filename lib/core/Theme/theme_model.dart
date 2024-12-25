@@ -17,6 +17,7 @@ class ThemeModel extends ThemeExtension<ThemeModel>{
   final Color primaryColor;
   final Color mainSecondary;
   final Color mainBlack;
+  final Color pinkColor;
   final Color secondaryBlackColor;
   final Color labelColor;
   final Color containerColor;
@@ -42,6 +43,7 @@ class ThemeModel extends ThemeExtension<ThemeModel>{
     required this.containerColor,
     required this.descTextColor,
     required this.sideText,
+    required this.pinkColor
 });
 
   @override
@@ -71,7 +73,8 @@ class ThemeModel extends ThemeExtension<ThemeModel>{
     Color? tabBarColor,
     Color? containerColor,
     Color?descTextColor,
-    Color?sideText
+    Color?sideText,
+    Color?pinkColor
 }) {
     return ThemeModel(
       isDark: isDark??this.isDark,
@@ -87,7 +90,8 @@ class ThemeModel extends ThemeExtension<ThemeModel>{
       secondaryBlackColor: bodyColor??this.secondaryBlackColor,
         containerColor:containerColor??this.containerColor,
         descTextColor:descTextColor??this.descTextColor,
-        sideText:sideText??this.sideText
+        sideText:sideText??this.sideText,
+        pinkColor:pinkColor??this.pinkColor
     );
   }
 
@@ -105,7 +109,8 @@ class ThemeModel extends ThemeExtension<ThemeModel>{
     secondaryBlackColor: Color(json["bodyColor"]),
     containerColor: Color(json["containerColor"]),
       descTextColor:Color(json["descTextColor"]),
-      sideText:Color(json["sideText"])
+      sideText:Color(json["sideText"]),
+      pinkColor:Color(json["pinkColor"]),
   );
 
   Map<String, dynamic> toJson() => {
@@ -122,7 +127,8 @@ class ThemeModel extends ThemeExtension<ThemeModel>{
     "bodyColor": secondaryBlackColor.value,
     "containerColor":containerColor.value,
     "descTextColor":descTextColor.value,
-    "sideText":sideText.value
+    "sideText":sideText.value,
+    "pinkColor":pinkColor.value
   };
 
 
