@@ -13,6 +13,7 @@ class Assets {
   static const String imagesAppleIcon = 'assets/images/appleIcon.svg';
   static const String imagesArrowBack = 'assets/images/arrowBack.svg';
   static const String imagesArrowForward = 'assets/images/arrowForward.svg';
+  static const String imagesContainer = 'assets/images/rewardsContainer.svg';
   static const String imagesDeleteAccount = 'assets/images/deleteAccount.svg';
   static const String imagesEmailIcon = 'assets/images/emailIcon.svg';
   static const String imagesEmptyOrders = 'assets/images/emptyOrders.png';

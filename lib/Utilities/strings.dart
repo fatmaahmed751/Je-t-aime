@@ -10,6 +10,8 @@ class Strings {
   static const String selectColor = "selectColor";
   static const String cancel = "cancel";
   static const String ok = "ok";
+  static const String noRewards = "noRewards";
+  static const String noRewardsDesc = "noRewardsDesc";
   static const String noFavorites = "noFavorites";
   static const String noFavoritesDesc = "noFavoritesDesc";
   static const String searchHere = "searchHere";
@@ -169,7 +171,8 @@ class Strings {
   static const String inProgress ="inProgress";
   static const String delivery ="delivery";
   static const String exploreProducts ="exploreProducts";
-  static const String userExploreProducts = "userExploreProducts";
+  static const String exploreProduct = "exploreProduct";
+  static const String noTransactionYet ="noTransactionYet";
   static const String send ="send";
   static const String rateProduct ="rateProduct";
   static const String thanksForReview ="thanksForReview";

@@ -66,7 +66,7 @@ class _OrdersScreenState extends StateMVC<OrdersScreen> {
                           width: 155.w,
                           radius: 30.r,
                           title: con.isLogin
-                              ? Strings.userExploreProducts.tr
+                              ? Strings.exploreProduct.tr
                               : Strings.joinUs.tr,
                           onTap: () {
                             // SharedPref.getCurrentUser()!

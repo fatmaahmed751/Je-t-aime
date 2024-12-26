@@ -12,6 +12,7 @@ import '../../Utilities/shared_preferences.dart';
 import '../ForgetPassword/forget_password_screen.dart';
 import '../OnBoarding/onboarding_screen.dart';
 import '../ResetPassword/reset_password_screen.dart';
+import '../Rewards/LoginRewardsScreen/login_rewards_screen.dart';
 
 class SplashController extends ControllerMVC {
   // singleton
@@ -28,7 +29,7 @@ class SplashController extends ControllerMVC {
     //await SplashDataHandler.getCurrentUser();
     await Future.delayed(const Duration(seconds: 3));
     if(context.mounted) {
-      GoRouter.of(context).goNamed(NotificationsScreen.routeName);
+      GoRouter.of(context).goNamed(UserProfileScreen.routeName);
       if(SharedPref.isLogin()){
 
       }else{

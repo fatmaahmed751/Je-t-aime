@@ -2,6 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 import '../../Utilities/strings.dart';
+import '../../Widgets/custom_bottom_sheet_widget.dart';
+import '../../generated/assets.dart';
 
 class SupportController extends ControllerMVC {
   // singleton
@@ -37,6 +39,20 @@ class SupportController extends ControllerMVC {
     problemController.dispose();
     nameController.dispose();
     super.dispose();
+  }
+
+  Future displayBottomSheet(BuildContext context) {
+    return showModalBottomSheet(
+      context: context,
+      // isScrollControlled: true,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(30.r)),
+      ),
+      builder:(context)=>const CustomBottomSheetWidget(
+        image:Assets.imagesSubmit,
+        text: "hhhhhhhh",
+      ),
+    );
   }
   // submitProblemSuccessfully() async {
   //   setState(() {

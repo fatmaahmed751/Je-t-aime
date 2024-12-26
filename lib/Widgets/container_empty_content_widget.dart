@@ -23,7 +23,7 @@ class ContainerEmptyContentWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsetsDirectional.only(
-        start: 20.0.w,
+        start: 20.w,
         end: 20.w,
       ),
       child: Column(

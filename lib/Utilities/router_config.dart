@@ -59,6 +59,17 @@ class GoRouterConfig{
         routes: const <RouteBase>[],
       ),
       GoRoute(
+        name: LoginRewardsScreen.routeName,
+        path: "/${LoginRewardsScreen.routeName}",
+        pageBuilder: (_, GoRouterState state) {
+          return getCustomTransitionPage(
+            state: state,
+            child: const LoginRewardsScreen(),
+          );
+        },
+        routes: const <RouteBase>[],
+      ),
+      GoRoute(
         name: FavoriteScreen.routeName,
         path: "/${FavoriteScreen.routeName}",
         pageBuilder: (_, GoRouterState state) {
@@ -76,17 +87,6 @@ class GoRouterConfig{
           return getCustomTransitionPage(
             state: state,
             child: const UserProfileScreen(),
-          );
-        },
-        routes: const <RouteBase>[],
-      ),
-      GoRoute(
-        name: LoginRewardsScreen.routeName,
-        path: "/${LoginRewardsScreen.routeName}",
-        pageBuilder: (_, GoRouterState state) {
-          return getCustomTransitionPage(
-            state: state,
-            child: const LoginRewardsScreen(),
           );
         },
         routes: const <RouteBase>[],
