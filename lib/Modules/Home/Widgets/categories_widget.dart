@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
-
+import 'package:je_t_aime/Modules/Home/Widgets/packages_widget.dart';
+import 'package:je_t_aime/Utilities/text_style_helper.dart';
+import 'package:je_t_aime/Utilities/theme_helper.dart';
 import '../../../Models/category_model.dart';
-import '../../../Widgets/custom_side_text_widget.dart';
+import '../../../Widgets/custom_home_details_text_widget.dart';
 
 class CategoriesWidget extends StatelessWidget{
   final CategoryModel categoryModel;
@@ -22,10 +24,14 @@ class CategoriesWidget extends StatelessWidget{
             NetworkImage(
                 categoryModel.imageName ),),
           Gap(6.h),
-          CustomSideTextWidget(text:categoryModel.mainText )
+          CustomHomeDetailsTextWidget(text:categoryModel.mainText,
+            style: TextStyleHelper.of(context).b_16.copyWith(
+              color: ThemeClass.of(context).mainBlack,
+              fontWeight: FontWeight.w600
+            ),
+          )
         ],
       ),
     );
   }
-
 }

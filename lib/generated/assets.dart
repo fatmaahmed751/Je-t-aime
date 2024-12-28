@@ -24,6 +24,7 @@ class Assets {
   static const String imagesForgetPassword = 'assets/images/forgetPassword.png';
   static const String imagesGlobe = 'assets/images/globe.svg';
   static const String imagesGoogleIcon = 'assets/images/googleIcon.svg';
+  static const String imagesHeartBroken = 'assets/images/heartBroken.svg';
   static const String imagesIconApp = 'assets/images/iconApp.png';
   static const String imagesLocation = 'assets/images/location.svg';
   static const String imagesLockIcon = 'assets/images/lockIcon.svg';
@@ -43,6 +44,8 @@ class Assets {
   static const String imagesOnBoardingTwo = 'assets/images/onBoardingTwo.png';
   static const String imagesOrders = 'assets/images/orders.svg';
   static const String imagesOtpImage = 'assets/images/otpImage.png';
+  static const String imagesPackageContainer = 'assets/images/packageContainer.png';
+  static const String imagesPackages = 'assets/images/packages.svg';
   static const String imagesPersonal = 'assets/images/personal.svg';
   static const String imagesPersonalData = 'assets/images/personalData.png';
   static const String imagesPhone = 'assets/images/phone.svg';

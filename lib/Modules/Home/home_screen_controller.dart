@@ -2,16 +2,16 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:je_t_aime/Models/category_model.dart';
+import 'package:je_t_aime/Widgets/custom_product_container_widget.dart';
 import 'package:je_t_aime/core/Language/locales.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
+import '../../Models/packages_model.dart';
 import '../../Models/user_model.dart';
 import '../../Utilities/dialog_helper.dart';
 import '../../Utilities/router_config.dart';
 import '../../Utilities/shared_preferences.dart';
 import '../../Utilities/strings.dart';
-
-
-
+import '../../generated/assets.dart';
 
 class HomeController extends ControllerMVC {
   // singleton
@@ -22,50 +22,60 @@ class HomeController extends ControllerMVC {
 
   static HomeController? _this;
 
-HomeController._();
+  HomeController._();
   bool loading = false;
-  int activeIndex=0;
-  bool isSearch=false;
-  late TextEditingController searchController ;
-  List imageUrl=[
+  int activeIndex = 0;
+  bool isSearch = false;
+  late TextEditingController searchController;
+  List imageUrl = [
     // "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTDKErC39UCJ75tiSVi9KyKLpF921rkFpP1Zg&s",
     // "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTDKErC39UCJ75tiSVi9KyKLpF921rkFpP1Zg&s",
     // "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTDKErC39UCJ75tiSVi9KyKLpF921rkFpP1Zg&s",
   ];
-
+  List<PackagesModel> packagesModel = [
+  PackagesModel(
+  imageName:"https://s3-alpha-sig.figma.com/img/00fa/97ec/01ce87e19b91f93352006ed31975a494?Expires=1736121600&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=m2rUDkqU0~nrN-5VaDKYDFY5kdA-TXxnnNV-L6jnt9tjbL0cDr~UcsSx38dE4K8mrBnFuJqiKFMOA2Ey-2gJO2pacpy7g6cXgu7HDDpaYgzLBxPBy6WFzcHbuIA7jMMYZpNPmxkfB04nD-pNXJ~HpxuqJn4VbKBQr1frCyP0wsZkvbxWiftSRZkQH9pMeirkiIEetm0rdhfaCrggxi9Un9c6n89FjBKhayS3DSvK8--oQ~g7h~FRPW65XuF4n-GttMOJWntLycrxci9Xcct-OkHj-sdNeb5C1vdGoC0Q6pgeHA4VKrPC44JfRt2oSWnY1U61MlIJAQ0M5AVmChjTXg__"),
+  PackagesModel(
+  imageName:"https://s3-alpha-sig.figma.com/img/5568/cd9b/88e28790561337fbf7d739185f736f2b?Expires=1736121600&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=mHBprdsEPFDJTDym~H13uz6h98JqATqXmZmM~4rk1M3~W25vsbAncMCuvDPP6V3LIu7ttYUoH2bG4tXiwFp8wAbMZgr0cjW85smN6vQjo~SdM7dqnOXDHnLCuZUT51Lz3LPEEzKZ6VZdFrmQy0ao6nGfGFeBm-3DqgxTT3w6pqhWNN87tbZW1jgJONgYY9F5abqurBTPhqskxHT5pC1q1ZmlpqOv3LfAvqqqg~y3QSdct9C4R4EUvTVaxqkSFCuTiQPESgNnyDhBd0iTpHFzwzawTaqmkGiAcbHv6GrBK7~CmmZzQ2Jdz6MfVilz8ceVa3JzFrDYeQPl0fETgtHEDQ__"),
+    PackagesModel(
+        imageName:"https://s3-alpha-sig.figma.com/img/00fa/97ec/01ce87e19b91f93352006ed31975a494?Expires=1736121600&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=m2rUDkqU0~nrN-5VaDKYDFY5kdA-TXxnnNV-L6jnt9tjbL0cDr~UcsSx38dE4K8mrBnFuJqiKFMOA2Ey-2gJO2pacpy7g6cXgu7HDDpaYgzLBxPBy6WFzcHbuIA7jMMYZpNPmxkfB04nD-pNXJ~HpxuqJn4VbKBQr1frCyP0wsZkvbxWiftSRZkQH9pMeirkiIEetm0rdhfaCrggxi9Un9c6n89FjBKhayS3DSvK8--oQ~g7h~FRPW65XuF4n-GttMOJWntLycrxci9Xcct-OkHj-sdNeb5C1vdGoC0Q6pgeHA4VKrPC44JfRt2oSWnY1U61MlIJAQ0M5AVmChjTXg__"),
+    PackagesModel(
+        imageName:"https://s3-alpha-sig.figma.com/img/5568/cd9b/88e28790561337fbf7d739185f736f2b?Expires=1736121600&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=mHBprdsEPFDJTDym~H13uz6h98JqATqXmZmM~4rk1M3~W25vsbAncMCuvDPP6V3LIu7ttYUoH2bG4tXiwFp8wAbMZgr0cjW85smN6vQjo~SdM7dqnOXDHnLCuZUT51Lz3LPEEzKZ6VZdFrmQy0ao6nGfGFeBm-3DqgxTT3w6pqhWNN87tbZW1jgJONgYY9F5abqurBTPhqskxHT5pC1q1ZmlpqOv3LfAvqqqg~y3QSdct9C4R4EUvTVaxqkSFCuTiQPESgNnyDhBd0iTpHFzwzawTaqmkGiAcbHv6GrBK7~CmmZzQ2Jdz6MfVilz8ceVa3JzFrDYeQPl0fETgtHEDQ__"),
+  ];
+  List<CustomProductContainerWidget> products=[
+    const CustomProductContainerWidget(),
+    const CustomProductContainerWidget(),
+  ];
   List<CategoryModel> categoryModel = [
     CategoryModel(
-      imageName:"https://s3-alpha-sig.figma.com/img/d3a6/c1b1/e0bc0c5cc245b28432588e0de183ed49?Expires=1736121600&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=mT7voEctd6CpKiPSHWC-QRC5YE7AQ6z~hAGZovIMQ8mcjKS8~YyTtg7pBgSRH~gZXgvFxwIRmWghAsTnefbueycoJkVFxHr2dRogX78wvtWXQo1jsw6FF7paqOa2DoSP0d45z4njD1rZ08F5b4z2zExexUMNatSTYwXh3TMaINuH3RJnUXDKRbqwG-1mLDvkp-cHqo-SEVXYalyANHMEjnH22~FW22gPOkS1hCJi852i~Vi-ugIiM-Sy5sbcBb8LVCYcQ555l8OPfSUAfInRq4-C-keZ~tiaQoSlAjCnwHMd-L9PHt8MnNaC7NrfwCEyWi4Bp04k73nwB~AfRWrUHw__",
+      imageName:
+          "https://s3-alpha-sig.figma.com/img/d3a6/c1b1/e0bc0c5cc245b28432588e0de183ed49?Expires=1736121600&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=mT7voEctd6CpKiPSHWC-QRC5YE7AQ6z~hAGZovIMQ8mcjKS8~YyTtg7pBgSRH~gZXgvFxwIRmWghAsTnefbueycoJkVFxHr2dRogX78wvtWXQo1jsw6FF7paqOa2DoSP0d45z4njD1rZ08F5b4z2zExexUMNatSTYwXh3TMaINuH3RJnUXDKRbqwG-1mLDvkp-cHqo-SEVXYalyANHMEjnH22~FW22gPOkS1hCJi852i~Vi-ugIiM-Sy5sbcBb8LVCYcQ555l8OPfSUAfInRq4-C-keZ~tiaQoSlAjCnwHMd-L9PHt8MnNaC7NrfwCEyWi4Bp04k73nwB~AfRWrUHw__",
       mainText: Strings.faceCare.tr,
-
     ),
     CategoryModel(
-
-      imageName:"https://s3-alpha-sig.figma.com/img/301c/ce15/6a7a56d86823e093a9d5b4bde2d360d7?Expires=1736121600&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=p2yudF7nY4l~yx5U5pCZJamUrcT5e~Ylahk2npC9DbOOagsZlKHOBC9dtEFsSY-QdAbYCURAOksPLX7WrbXjvBTKOOvRfu4iI2uYMovt31NzAmvHehkQK3ZnZhWBgL7nJfqzNTUJlfgLl0VpcCVRwgwI9j5lAhkjPLIJooCtI8Ar2EcHplrC3RyUJxkhhtneMYGzFxVZjeNKoofy9T3vhndWE1qMaZ4D0zic8HP5Q51VlzsqfnubYgL6lujNasNggloN6HQh0grbNkvRdPVfa8vpgRiOXzKALUT3HX1UnKZRsmx6AnqFoNeS-LFIhXlSlD1Y4GAN8CmPruJcBacLBA__",
+      imageName:
+          "https://s3-alpha-sig.figma.com/img/301c/ce15/6a7a56d86823e093a9d5b4bde2d360d7?Expires=1736121600&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=p2yudF7nY4l~yx5U5pCZJamUrcT5e~Ylahk2npC9DbOOagsZlKHOBC9dtEFsSY-QdAbYCURAOksPLX7WrbXjvBTKOOvRfu4iI2uYMovt31NzAmvHehkQK3ZnZhWBgL7nJfqzNTUJlfgLl0VpcCVRwgwI9j5lAhkjPLIJooCtI8Ar2EcHplrC3RyUJxkhhtneMYGzFxVZjeNKoofy9T3vhndWE1qMaZ4D0zic8HP5Q51VlzsqfnubYgL6lujNasNggloN6HQh0grbNkvRdPVfa8vpgRiOXzKALUT3HX1UnKZRsmx6AnqFoNeS-LFIhXlSlD1Y4GAN8CmPruJcBacLBA__",
       mainText: Strings.bodyCare.tr,
-
     ),
     CategoryModel(
-
-
-      imageName:"https://s3-alpha-sig.figma.com/img/cc6d/6eb2/78f794ca3c533274d4c1ed7c190803ce?Expires=1736121600&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=oa7Eh2KlIzXhUh3zjnezr2qxqgWLtY2BSBpEd5zdejlS19IanoLx1bxNC7D14D5Y0eiPAQi2lfW7MnehedQxADE8Ex7Sk2WWqGPNqA-E3P~P3SenyjzlHPJfJlsMrR4isy~PoL3Am6gdbmnh5tMKR2pT-q8lDibos0bNq~-8fLIP-HdKc2bTMjiuBdWRV3ne6oehGsI28E8BiyJyESSwu1ueWNg1~QXL~JwTPasyFa1af3k4dbWqBUh6Yw1fg5JRV9CIPR6s7jElwjKC-fGhC2CCILc2W-2waRSzWv5GQCxR4Hm1vbDTFSi56wDBYLvXw3BKRidEOh7KM5AsnFKuyg__",
+      imageName:
+          "https://s3-alpha-sig.figma.com/img/cc6d/6eb2/78f794ca3c533274d4c1ed7c190803ce?Expires=1736121600&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=oa7Eh2KlIzXhUh3zjnezr2qxqgWLtY2BSBpEd5zdejlS19IanoLx1bxNC7D14D5Y0eiPAQi2lfW7MnehedQxADE8Ex7Sk2WWqGPNqA-E3P~P3SenyjzlHPJfJlsMrR4isy~PoL3Am6gdbmnh5tMKR2pT-q8lDibos0bNq~-8fLIP-HdKc2bTMjiuBdWRV3ne6oehGsI28E8BiyJyESSwu1ueWNg1~QXL~JwTPasyFa1af3k4dbWqBUh6Yw1fg5JRV9CIPR6s7jElwjKC-fGhC2CCILc2W-2waRSzWv5GQCxR4Hm1vbDTFSi56wDBYLvXw3BKRidEOh7KM5AsnFKuyg__",
       mainText: Strings.hairCare.tr,
-
     ),
     CategoryModel(
-
-      imageName:"https://s3-alpha-sig.figma.com/img/acac/7430/d783b531835eeea6d1040a1047cca690?Expires=1736121600&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=B~TJH06KK~2-nKTbHUgS-5QWzs3PohCbBOv~O7f-n5TAq2yEYvBxPj5Q5FKxEcCmW1-KvTE5ynDCp~Ig6H2XSjAVTnHcuuBPZCVR51SauF3fLF8~fd3LcqY~MxHEYkVctmXpjWWVYRmqqJgn8jjKIYLiZHwIBLn3wwnXaFJxlxkzO6S~AcN5waLElnezjLtGk6gkdJjlSZwqssPQBqNHGjIJAMqJcEyCvCMxvu5aZ0MswbDzUT9eWEXAW~jd7iozuVwny67GPigYItISDdZ~LLcm9QXQnYDY2ARMXp2vpADNu7Kt5vNod0nNvJ5MRzDxt1Q1MHc-Q~ZOIXhuJj0Vtw__",
+      imageName:
+          "https://s3-alpha-sig.figma.com/img/acac/7430/d783b531835eeea6d1040a1047cca690?Expires=1736121600&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=B~TJH06KK~2-nKTbHUgS-5QWzs3PohCbBOv~O7f-n5TAq2yEYvBxPj5Q5FKxEcCmW1-KvTE5ynDCp~Ig6H2XSjAVTnHcuuBPZCVR51SauF3fLF8~fd3LcqY~MxHEYkVctmXpjWWVYRmqqJgn8jjKIYLiZHwIBLn3wwnXaFJxlxkzO6S~AcN5waLElnezjLtGk6gkdJjlSZwqssPQBqNHGjIJAMqJcEyCvCMxvu5aZ0MswbDzUT9eWEXAW~jd7iozuVwny67GPigYItISDdZ~LLcm9QXQnYDY2ARMXp2vpADNu7Kt5vNod0nNvJ5MRzDxt1Q1MHc-Q~ZOIXhuJj0Vtw__",
       mainText: Strings.nailCare.tr,
-
     ),
   ];
-  bool isLiked=false;
+  bool isLiked = false;
   int bottomNavCurrentIndex = 0;
 
   void changeBottomNav(int index) {
     bottomNavCurrentIndex = index;
-   setState((){});
+    setState(() {});
   }
+
   @override
   void initState() {
     searchController = TextEditingController();
@@ -77,12 +87,13 @@ HomeController._();
     searchController.dispose();
     super.dispose();
   }
-  onPageChange(int index)
-  {
-    setState(() {activeIndex=index; });
-    activeIndex=index;
-  }
 
+  onPageChange(int index) {
+    setState(() {
+      activeIndex = index;
+    });
+    activeIndex = index;
+  }
 
   // Future<void> _handlePermissionPermanentlyDenied() async {
   //   onPermanentDenied();
@@ -254,6 +265,4 @@ HomeController._();
   //     loading = false;
   //   });
   // }
-
-
 }

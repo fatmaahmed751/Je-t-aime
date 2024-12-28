@@ -73,8 +73,10 @@ class Strings {
   static const String searchHome = "search_home";
   static const String categories = "categories";
   static const String faceCare = "faceCare";
-  static const String viewAll = "view_all";
-  static const String popularProduct = "popular_product";
+  static const String addToFavoriteSuccess = "addToFavoriteSuccess";
+  static const String addToCartSuccess = "addToCartSuccess";
+  static const String viewAll = "viewAll";
+  static const String popularProduct = "popularProduct";
   static const String egp = "egp";
   static const String writeYourProblem = "writeYourProblem";
   static const String sendCode = "sendCode";
