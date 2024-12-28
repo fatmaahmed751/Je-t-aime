@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:je_t_aime/core/Language/locales.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 import '../../Utilities/strings.dart';
 import '../../Widgets/custom_bottom_sheet_widget.dart';
@@ -48,9 +50,9 @@ class SupportController extends ControllerMVC {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(30.r)),
       ),
-      builder:(context)=>const CustomBottomSheetWidget(
-        image:Assets.imagesSubmit,
-        text: "hhhhhhhh",
+      builder:(context)=> CustomBottomSheetWidget(
+        image:Assets.imagesSubmitProblem,
+        text: Strings.thanksForTrust.tr,
       ),
     );
   }

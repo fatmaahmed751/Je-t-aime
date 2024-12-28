@@ -118,12 +118,12 @@ class _SupportScreenState extends StateMVC<SupportScreen> {
                                   Validate.validateNormalString(v),
                             ),
                           ),
-                      Gap(60.h),
+                        Gap(170.h),
 
                           CustomButtonWidget.primary(
                               title: Strings.send.tr,
                               onTap: () {
-                          // con.submitProblemSuccessfully();
+                          con.displayBottomSheet(context);
                               }),
                         ],
                       ),

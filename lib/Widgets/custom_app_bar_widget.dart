@@ -3,7 +3,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
+import 'package:je_t_aime/Modules/Home/SearchSccreen/search_screen.dart';
 import 'package:je_t_aime/core/Language/locales.dart';
+import '../Modules/Home/Widgets/search_widget.dart';
 import '../Utilities/strings.dart';
 import '../Utilities/text_style_helper.dart';
 import '../Utilities/theme_helper.dart';
@@ -23,7 +25,7 @@ class CustomAppBarWidget extends StatelessWidget
   final List<Widget>? actions;
   final String title;
   final String icon;
-  final TextEditingController? controller;
+ // final TextEditingController? controller;
   final void Function()? onPressed;
 //
   const CustomAppBarWidget.mainScreen(
@@ -34,7 +36,8 @@ class CustomAppBarWidget extends StatelessWidget
       required this.title,
       required this.icon,
       this.actions,
-      this.controller})
+     // this.controller
+      })
       : _appBarType = _AppBarType.main,
         screenName = title,
         //actions = const [],
@@ -46,7 +49,7 @@ class CustomAppBarWidget extends StatelessWidget
     required this.icon,
     this.actions,
     this.onPressed,
-    this.controller
+  //  this.controller
   })  : _appBarType = _AppBarType.mainDetails,
         screenName = title,
         super(key: key);
@@ -55,7 +58,7 @@ class CustomAppBarWidget extends StatelessWidget
     Key? key,
     required this.title,
     this.onPressed, required this.icon,
-    this.controller
+  //  this.controller
   })  : _appBarType = _AppBarType.secondaryGradient,
         screenName = title,
         actions = const [],
@@ -66,7 +69,7 @@ class CustomAppBarWidget extends StatelessWidget
     required this.title,
     required this.icon,
     this.onPressed,
-    this.controller
+  //  this.controller
   })  : _appBarType = _AppBarType.details,
         screenName = title,
         actions = const [],
@@ -76,7 +79,7 @@ class CustomAppBarWidget extends StatelessWidget
     Key? key,
     required this.title,
     required this.icon,
-    this.controller,
+   // this.controller,
 
     this.onPressed, this.actions,
   })  : _appBarType = _AppBarType.secondary,
@@ -115,7 +118,7 @@ class CustomAppBarWidget extends StatelessWidget
         return SecondaryAppBarWidget(
           title: screenName,
           icon: icon,
-          controller:controller??TextEditingController() ,
+        //  controller:controller??TextEditingController(),
         );
       default:
         return Container();
@@ -279,13 +282,13 @@ class MainDetailsAppBarWidget extends StatelessWidget {
 class SecondaryAppBarWidget extends StatefulWidget {
   final String title;
   final String? icon;
-  final TextEditingController controller;
+ // final TextEditingController controller;
  // final VoidCallback? onDeleteIconToggle;
    const SecondaryAppBarWidget({
     Key? key,
     required this.title,
     this.icon,
-    required this.controller
+   // required this.controller
     //this.onDeleteIconToggle
 
   }) : super(key: key);
@@ -377,20 +380,29 @@ class SecondaryAppBarWidgetState extends State<SecondaryAppBarWidget> {
                     ],
                   ),
                   Gap(30.h),
-                  CustomTextFieldWidget(
-                    height: 45.h,
-                    insidePadding: EdgeInsets.symmetric(vertical: 10.h),
-                    borderRadiusValue: 30.r,
-                    isDense: true,
-                    prefixIcon: SvgPicture.asset(Assets.imagesSearch),
-                    hint: Strings.searchHere.tr,
-                    backGroundColor: ThemeClass.of(context).background,
-                  controller:widget.controller,
-                    hintStyle: TextStyleHelper.of(context)
-                        .b_16
-                        .copyWith(color: ThemeClass.of(context).labelColor),
-                    validator: (v) => Validate.validateEmail(v),
+                  SearchWidget(onSearch: (String? text) {
+                    context.pushNamed(SearchScreen.routeName);
+                  },
+                    isSearch: true,
+                    controller:TextEditingController() ,
+                    onRemove: () { },
+                    onChange: (String?value ) {  },
+
                   ),
+                  // CustomTextFieldWidget(
+                  //   height: 45.h,
+                  //   insidePadding: EdgeInsets.symmetric(vertical: 10.h),
+                  //   borderRadiusValue: 30.r,
+                  //   isDense: true,
+                  //   prefixIcon: SvgPicture.asset(Assets.imagesSearch),
+                  //   hint: Strings.searchHere.tr,
+                  //   backGroundColor: ThemeClass.of(context).background,
+                  // controller:widget.controller,
+                  //   hintStyle: TextStyleHelper.of(context)
+                  //       .b_16
+                  //       .copyWith(color: ThemeClass.of(context).labelColor),
+                  //   validator: (v) => Validate.validateEmail(v),
+                  // ),
                 ],
               ),
             ),

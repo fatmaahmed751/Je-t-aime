@@ -27,26 +27,29 @@ class CustomBottomSheetWidget extends StatelessWidget{
          ),
          child: Padding(
            padding:  EdgeInsetsDirectional.symmetric(
-               horizontal: 16.w,
+               horizontal: 24.w,
            vertical: 16.h),
            child: Column(
              mainAxisSize: MainAxisSize.min,
              children: [
                Container(
-                 height: 197.h,
+                 height: 210.h,
+                 width: double.infinity,
                  decoration: BoxDecoration(
-                   borderRadius: BorderRadius.circular(2),
+                   borderRadius: BorderRadius.circular(2.r),
                  ),
-                 child: SvgPicture.asset(image),
+                 child: SvgPicture.asset(image,
+                 fit: BoxFit.cover,),
                ),
                Gap(16.h),
                Text(
+                 textAlign: TextAlign.center,
                   text,
                    style:TextStyleHelper.of(context).b_16.copyWith(
-                       color: ThemeClass.of(context).labelColor
+                       color: ThemeClass.of(context).secondaryBlackColor
                    )
                ),
-               Gap(10.h),
+               Gap(20.h),
                CustomButtonWidget.primary(
                    title: Strings.backToHome.tr,
                    onTap: () {

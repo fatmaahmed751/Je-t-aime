@@ -39,7 +39,8 @@ class _FavoriteScreenState extends StateMVC<FavoriteScreen> {
     appBar:con.isUserHaveFavorites?
     PreferredSize(preferredSize: Size(double.infinity,180.h),
         child: CustomAppBarWidget.secondaryAppBar(title: "", icon: "",
-     controller: con.searchController,)):
+     //controller: con.searchController,
+        )):
     const CustomAppBarWidget.mainScreen(title: "", icon: "",),
       body:  LoadingScreen(
     loading: con.loading,

@@ -24,13 +24,15 @@ class Strings {
   static const String shippingPolicyDes = "shippingPolicyDes";
   static const String customerSupportDesc = "customerSupportDesc";
   static const String privacyPolicyDesc = "privacyPolicyDesc";
-
   static const String hello = "hello";
   static const String languages = "languages";
   static const String verify = "verify";
   static const String cash = "cash";
   static const String payNow = "payNow";
-  static const String flatValid = "flat_valid";
+  static const String flatValid = "flatValid";
+  static const String bodyCare = "bodyCare";
+  static const String nailCare = "nailCare";
+  static const String hairCare = "hairCare";
   static const String continu = "continu";
   static const String filterNumError ="filter_num_error";
   static const String filterNumEnd ="filter_num_end";
@@ -69,7 +71,8 @@ class Strings {
   static const String favorite = "_favorite";
   static const String account = "account";
   static const String searchHome = "search_home";
-  static const String categories = "categories_";
+  static const String categories = "categories";
+  static const String faceCare = "faceCare";
   static const String viewAll = "view_all";
   static const String popularProduct = "popular_product";
   static const String egp = "egp";
@@ -95,7 +98,7 @@ class Strings {
   static const String locationHint = "location_hint";
   static const String phoneHint = "phone_hint";
   static const String payment = "payment";
-  static const String backToHome = "back_home";
+  static const String backToHome = "backToHome";
   static const String paymentSuccess = "payment_success";
   static const String paySuccessText = "pay_success_text";
   static const String createAccount = "create_account";
@@ -171,6 +174,7 @@ class Strings {
   static const String inProgress ="inProgress";
   static const String delivery ="delivery";
   static const String exploreProducts ="exploreProducts";
+  static const String doneChangePassword = "doneChangePassword";
   static const String exploreProduct = "exploreProduct";
   static const String noTransactionYet ="noTransactionYet";
   static const String send ="send";

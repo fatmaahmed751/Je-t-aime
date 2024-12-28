@@ -53,9 +53,9 @@ class ChangePasswordController extends ControllerMVC {
        shape: RoundedRectangleBorder(
          borderRadius: BorderRadius.vertical(top: Radius.circular(30.r)),
        ),
-       builder:(context)=>const CustomBottomSheetWidget(
+       builder:(context)=> CustomBottomSheetWidget(
          image:Assets.imagesSubmit,
-         text: "hhhhhhhh",
+         text: Strings.doneChangePassword.tr,
        ),
      );
    }

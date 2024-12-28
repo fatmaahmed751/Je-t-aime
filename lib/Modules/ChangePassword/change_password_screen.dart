@@ -165,8 +165,8 @@ class _ChangePasswordScreenState extends StateMVC<ChangePasswordScreen> {
                             });
                           },
                         ),
-                        Gap(40.h),
-                                      CustomButtonWidget.primary(
+                        Gap(60.h),
+                        CustomButtonWidget.primary(
                         title: Strings.changePasswordTitle.tr,
                         onTap: () {
                           con.displayBottomSheet(context);

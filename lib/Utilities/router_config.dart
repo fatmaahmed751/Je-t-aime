@@ -8,6 +8,8 @@ import 'package:je_t_aime/Modules/Orders/orders_screen.dart';
 import 'package:je_t_aime/Modules/Register/register_screen.dart';
 import 'package:je_t_aime/Modules/Support/support_screen.dart';
 import '../Modules/ForgetPassword/forget_password_screen.dart';
+import '../Modules/Home/SearchSccreen/search_screen.dart';
+import '../Modules/Home/home_screen.dart';
 import '../Modules/Login/login_screen.dart';
 import '../Modules/OTP/verification_otp_screen.dart';
 import '../Modules/OnBoarding/onboarding_screen.dart';
@@ -35,18 +37,28 @@ class GoRouterConfig{
         routes: const <RouteBase>[],
       ),
 
-      // GoRoute(
-      //   name: HomeScreen.routeName,
-      //   path: "/${HomeScreen.routeName}",
-      //   pageBuilder: (_, GoRouterState state) {
-      //     return getCustomTransitionPage(
-      //       state: state,
-      //       child:  const HomeScreen(),
-      //     );
-      //   },
-      //   routes: const <RouteBase>[],
-      // ),
-      //
+      GoRoute(
+        name: HomeScreen.routeName,
+        path: "/${HomeScreen.routeName}",
+        pageBuilder: (_, GoRouterState state) {
+          return getCustomTransitionPage(
+            state: state,
+            child:  const HomeScreen(),
+          );
+        },
+        routes: const <RouteBase>[],
+      ),
+      GoRoute(
+        name: SearchScreen.routeName,
+        path: "/${SearchScreen.routeName}",
+        pageBuilder: (_, GoRouterState state) {
+          return getCustomTransitionPage(
+            state: state,
+            child:  const SearchScreen(search: '',),
+          );
+        },
+        routes: const <RouteBase>[],
+      ),
       GoRoute(
         name: OnBoardingScreen.routeName,
         path: "/${OnBoardingScreen.routeName}",

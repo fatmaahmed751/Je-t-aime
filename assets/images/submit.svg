@@ -1,0 +1,24 @@
+<svg width="484" height="484" viewBox="0 0 484 484" fill="none" xmlns="http://www.w3.org/2000/svg">
+<circle cx="242" cy="242" r="102.5" fill="#E3CBCB" stroke="white" stroke-width="5"/>
+<mask id="mask0_134_2737" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="143" y="143" width="198" height="198">
+<circle cx="241.754" cy="241.754" r="98.7543" fill="white"/>
+</mask>
+<g mask="url(#mask0_134_2737)">
+<path d="M229.777 288.233C228.258 288.233 226.761 287.876 225.402 287.192C224.044 286.507 222.863 285.514 221.952 284.289L197.959 252.058C197.188 251.023 196.626 249.844 196.307 248.59C195.988 247.336 195.917 246.031 196.098 244.749C196.28 243.467 196.71 242.234 197.365 241.12C198.019 240.006 198.885 239.033 199.913 238.256C200.941 237.479 202.111 236.914 203.356 236.593C204.601 236.272 205.896 236.201 207.168 236.384C208.441 236.568 209.664 237.002 210.77 237.662C211.875 238.322 212.841 239.195 213.611 240.231L229.308 261.316L269.623 200.389C270.336 199.312 271.252 198.387 272.32 197.667C273.387 196.947 274.585 196.445 275.845 196.191C277.104 195.938 278.401 195.936 279.662 196.187C280.922 196.439 282.121 196.937 283.19 197.655C284.259 198.373 285.177 199.296 285.892 200.372C286.606 201.447 287.104 202.654 287.356 203.923C287.608 205.193 287.609 206.499 287.36 207.769C287.111 209.039 286.616 210.247 285.903 211.324L237.918 283.843C237.05 285.155 235.882 286.238 234.513 287.001C233.144 287.764 231.613 288.185 230.049 288.229C229.959 288.231 229.868 288.233 229.777 288.233Z" fill="url(#paint0_linear_134_2737)"/>
+</g>
+<g filter="url(#filter0_f_134_2737)">
+<circle cx="242" cy="242" r="91.7269" fill="#E3CBCB" fill-opacity="0.2"/>
+</g>
+<defs>
+<filter id="filter0_f_134_2737" x="0.272949" y="0.273193" width="483.454" height="483.454" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
+<feGaussianBlur stdDeviation="75" result="effect1_foregroundBlur_134_2737"/>
+</filter>
+<linearGradient id="paint0_linear_134_2737" x1="212.555" y1="204.284" x2="336.284" y2="253.21" gradientUnits="userSpaceOnUse">
+<stop stop-color="#7A4343"/>
+<stop offset="0.42992" stop-color="#D88F8F"/>
+<stop offset="0.902909" stop-color="#CBE3E3"/>
+</linearGradient>
+</defs>
+</svg>
