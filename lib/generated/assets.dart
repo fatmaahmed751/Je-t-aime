@@ -16,6 +16,7 @@ class Assets {
   static const String imagesClose = 'assets/images/close.svg';
   static const String imagesContainer = 'assets/images/Container.svg';
   static const String imagesDeleteAccount = 'assets/images/deleteAccount.svg';
+  static const String imagesDiscountShape = 'assets/images/discountShape.svg';
   static const String imagesEdit = 'assets/images/edit.svg';
   static const String imagesEmailIcon = 'assets/images/emailIcon.svg';
   static const String imagesEmptyCart  = 'assets/images/emptyCart .svg';

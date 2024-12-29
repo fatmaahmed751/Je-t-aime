@@ -5,6 +5,7 @@ import 'package:je_t_aime/Modules/ChangePassword/change_password_screen.dart';
 import 'package:je_t_aime/Modules/Favorite/favorite_screen.dart';
 import 'package:je_t_aime/Modules/Notifications/notifications_screen.dart';
 import 'package:je_t_aime/Modules/Orders/orders_screen.dart';
+import 'package:je_t_aime/Modules/Payment/payment_screen.dart';
 import 'package:je_t_aime/Modules/Register/register_screen.dart';
 import 'package:je_t_aime/Modules/Support/support_screen.dart';
 import '../Modules/Cart/cart_screen.dart';
@@ -91,6 +92,17 @@ class GoRouterConfig{
           return getCustomTransitionPage(
             state: state,
             child:  ShippingScreen(),
+          );
+        },
+        routes: const <RouteBase>[],
+      ),
+      GoRoute(
+        name: PaymentScreen.routeName,
+        path: "/${PaymentScreen.routeName}",
+        pageBuilder: (_, GoRouterState state) {
+          return getCustomTransitionPage(
+            state: state,
+            child:  const PaymentScreen(),
           );
         },
         routes: const <RouteBase>[],
@@ -190,7 +202,7 @@ class GoRouterConfig{
           //final String email = state.extra as String;
           return getCustomTransitionPage(
             state: state,
-            child:  VerificationOtpScreen(
+            child:  const VerificationOtpScreen(
             //    email:email
             ),
           );
@@ -227,7 +239,7 @@ class GoRouterConfig{
         //  final args = state.extra as Map<String, String?>;
           return getCustomTransitionPage(
             state: state,
-            child: ResetPasswordScreen(
+            child: const ResetPasswordScreen(
               //email: args['email'] ?? '', // Handle null case by providing a default value
              // code: args['code'] ?? '',   // Handle null case
             ),

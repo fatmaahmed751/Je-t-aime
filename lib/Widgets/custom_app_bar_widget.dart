@@ -147,11 +147,11 @@ class MainAppBarWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return  SizedBox(
-    height: 390.h,
+    height: 320.h,
       child: Stack(
         children: [
           Container(
-            height: 280.h,
+            height: 290.h,
             width: double.infinity,
             decoration: BoxDecoration(
               gradient: LinearGradient(
@@ -171,7 +171,7 @@ class MainAppBarWidget extends StatelessWidget {
             right: 0,
             child: Padding(
               padding: EdgeInsetsDirectional.only(
-                  start: 16.w, top: 60.h, end: 16.w),
+                  start: 16.w, top: 65.h, end: 16.w),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
@@ -260,20 +260,23 @@ class MainDetailsAppBarWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsetsDirectional.only( top: 20.h),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.start,
+      padding: EdgeInsetsDirectional.only( top:20.h),
+      child: Container(
+      // color: Colors.red,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
 
-        children: [
-          IconButton(
-              icon: SvgPicture.asset(Assets.imagesArrowBack), onPressed: (){
-                context.pop();
-          }
-          ),
-     Gap(16.w),
-      Center(child: CustomAppBarDetailsTextWidget(text: title)),
+          children: [
+            IconButton(
+                icon: SvgPicture.asset(Assets.imagesArrowBack), onPressed: (){
+                  context.pop();
+            }
+            ),
+             Gap(16.w),
+        Center(child: CustomAppBarDetailsTextWidget(text: title)),
 
-        ],
+          ],
+        ),
       ),
     );
   }

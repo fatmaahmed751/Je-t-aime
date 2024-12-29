@@ -1,7 +1,9 @@
 import 'package:flutter/cupertino.dart';
-import 'package:go_router/go_router.dart';
-
+import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:je_t_aime/Modules/Shipping/widget/use_point_widget.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
+
 class ShippingController extends ControllerMVC {
   // singleton
   factory ShippingController() {
@@ -32,5 +34,15 @@ class ShippingController extends ControllerMVC {
     nameController.clear();
     addressController.clear();
     phoneController.clear();
+  }
+
+  usePointsAlert(BuildContext context) async {
+    showModalBottomSheet(
+        context: context,
+        // isScrollControlled: true,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(top: Radius.circular(30.r)),
+        ),
+        builder: (context) => const UsePointWidget());
   }
 }

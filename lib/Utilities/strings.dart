@@ -10,6 +10,8 @@ class Strings {
   static const String selectColor = "selectColor";
   static const String cancel = "cancel";
   static const String ok = "ok";
+  static const String youHave = "youHave";
+  static const String wantToUsePoint = "wantToUsePoint";
   static const String noRewards = "noRewards";
   static const String noRewardsDesc = "noRewardsDesc";
   static const String noFavorites = "noFavorites";
@@ -212,7 +214,22 @@ class Strings {
   static const String lowerCase ="lowerCase";
   static const String specialCharacter ="specialCharacter";
   static const String oneNumber ="oneNumber";
+  static const String successCash ="successCash";
+  static const String successVisa ="successVisa";
+  static const String cashText ="cashText";
   static const String confirmPassword ="confirmPassword";
   static const String notEmptyField ="notEmptyField";
-
+  static const String cardName ="cardName";
+  static const String visa ="visa";
+  static const String writtenOnCard ="writtenOnCard";
+  static const String writeCardName ="writeCardName";
+  static const String cardNumber ="cardNumber";
+  static const String digitNumber ="digitNumber";
+  static const String writeCardNumber ="writeCardNumber";
+  static const String expirationDate ="expirationDate";
+  static const String monthAndYear ="monthAndYear";
+  static const String writeExpirationDate ="writeExpirationDate";
+  static const String cvv ="cvv";
+  static const String backNumberCard ="backNumberCard";
+  static const String writeCvvNumber ="writeCvvNumber";
 }
