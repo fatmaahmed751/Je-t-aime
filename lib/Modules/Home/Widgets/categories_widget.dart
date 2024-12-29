@@ -18,11 +18,14 @@ class CategoriesWidget extends StatelessWidget{
       height: 136.h,
       child: Column(
         children: [
-          CircleAvatar(
-            radius:50.r,
-            backgroundImage:
-            NetworkImage(
-                categoryModel.imageName ),),
+          GestureDetector(
+            onTap: (){},
+            child: CircleAvatar(
+              radius:50.r,
+              backgroundImage:
+              NetworkImage(
+                  categoryModel.imageName ),),
+          ),
           Gap(6.h),
           CustomHomeDetailsTextWidget(text:categoryModel.mainText,
             style: TextStyleHelper.of(context).b_16.copyWith(

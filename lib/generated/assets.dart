@@ -13,6 +13,7 @@ class Assets {
   static const String imagesAppleIcon = 'assets/images/appleIcon.svg';
   static const String imagesArrowBack = 'assets/images/arrowBack.svg';
   static const String imagesArrowForward = 'assets/images/arrowForward.svg';
+  static const String imagesClose = 'assets/images/close.svg';
   static const String imagesContainer = 'assets/images/Container.svg';
   static const String imagesDeleteAccount = 'assets/images/deleteAccount.svg';
   static const String imagesEdit = 'assets/images/edit.svg';
@@ -21,6 +22,7 @@ class Assets {
   static const String imagesEyeOpen = 'assets/images/eyeOpen.svg';
   static const String imagesFace = 'assets/images/face.png';
   static const String imagesFavoriteIcon = 'assets/images/favoriteIcon.svg';
+  static const String imagesFilterIcon = 'assets/images/filterIcon.svg';
   static const String imagesForgetPassword = 'assets/images/forgetPassword.png';
   static const String imagesGlobe = 'assets/images/globe.svg';
   static const String imagesGoogleIcon = 'assets/images/googleIcon.svg';

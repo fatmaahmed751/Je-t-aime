@@ -76,6 +76,17 @@ class Strings {
   static const String addToFavoriteSuccess = "addToFavoriteSuccess";
   static const String addToCartSuccess = "addToCartSuccess";
   static const String viewAll = "viewAll";
+  static const String rate = "rate";
+  static const String price = "price";
+  static const String from = "from";
+  static const String total = "total";
+  static const String jod = "jod";
+  static const String productDesc = "productDesc";
+  static const String to = "to";
+  static const String browseProducts = "browseProducts";
+  static const String yourCartEmpty = "yourCartEmpty";
+  static const String nothingInCart = "nothingInCart";
+  static const String apply = "apply";
   static const String popularProduct = "popularProduct";
   static const String egp = "egp";
   static const String writeYourProblem = "writeYourProblem";
@@ -92,7 +103,7 @@ class Strings {
   static const String yourProblem = "yourProblem";
   static const String shopNow = "shop_now";
   static const String calGr = "cal_gr";
-  static const String checkOut = "check_out";
+  static const String checkOut = "checkOut";
   static const String name = "name";
   static const String location = "location";
   static const String phone = "phone";

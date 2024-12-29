@@ -1,10 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:je_t_aime/core/Language/locales.dart';
 import '../../Utilities/text_style_helper.dart';
 import '../../Utilities/theme_helper.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
+import '../Utilities/strings.dart';
 import '../generated/assets.dart';
 
 class CustomProductsWidget extends StatelessWidget{
@@ -67,7 +69,7 @@ class CustomProductsWidget extends StatelessWidget{
               ),
             ),
             Text(
-                "Strawberry Body Butter",
+                Strings.productDesc.tr,
                 style: TextStyleHelper.of(context).b_14.copyWith(
                     color: ThemeClass.of(context).mainBlack
                 )

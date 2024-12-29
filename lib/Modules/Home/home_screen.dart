@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
+import 'package:je_t_aime/Modules/PopularProducts/popular_product_screen.dart';
 import 'package:je_t_aime/core/Language/locales.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 import '../../Utilities/strings.dart';
@@ -59,7 +60,7 @@ class _HomeScreenState extends StateMVC<HomeScreen> {
     return Scaffold(
       appBar: PreferredSize(
           preferredSize: Size(double.infinity, 180.h),
-          child: CustomAppBarWidget.secondaryAppBar(
+          child: const CustomAppBarWidget.secondaryAppBar(
             title: "",
             icon: "",
           )),
@@ -119,7 +120,7 @@ class _HomeScreenState extends StateMVC<HomeScreen> {
                     CustomDetailsSideTextWidget(
                         text: Strings.popularProduct.tr,),
                       InkWell(
-                        onTap: () => context.pushNamed(""),
+                        onTap: () => context.pushNamed(PopularProductsScreen.routeName),
                         child: Text(
                           Strings.viewAll.tr,
                           style: TextStyleHelper.of(context).b_16.copyWith(

@@ -7,6 +7,7 @@ import 'package:je_t_aime/Modules/Notifications/notifications_screen.dart';
 import 'package:je_t_aime/Modules/Orders/orders_screen.dart';
 import 'package:je_t_aime/Modules/Register/register_screen.dart';
 import 'package:je_t_aime/Modules/Support/support_screen.dart';
+import '../Modules/Cart/cart_screen.dart';
 import '../Modules/ForgetPassword/forget_password_screen.dart';
 import '../Modules/Home/SearchSccreen/search_screen.dart';
 import '../Modules/Home/home_screen.dart';
@@ -15,6 +16,7 @@ import '../Modules/OTP/verification_otp_screen.dart';
 import '../Modules/OnBoarding/onboarding_screen.dart';
 import '../Modules/PersonalData/personal_data_screen.dart';
 import '../Modules/Policies/policies_screen.dart';
+import '../Modules/PopularProducts/popular_product_screen.dart';
 import '../Modules/ResetPassword/reset_password_screen.dart';
 import '../Modules/Rewards/LoginRewardsScreen/login_rewards_screen.dart';
 import '../Modules/Splash/splash_screen.dart';
@@ -55,6 +57,28 @@ class GoRouterConfig{
           return getCustomTransitionPage(
             state: state,
             child:  const SearchScreen(search: '',),
+          );
+        },
+        routes: const <RouteBase>[],
+      ),
+      GoRoute(
+        name: PopularProductsScreen.routeName,
+        path: "/${PopularProductsScreen.routeName}",
+        pageBuilder: (_, GoRouterState state) {
+          return getCustomTransitionPage(
+            state: state,
+            child:  const PopularProductsScreen(),
+          );
+        },
+        routes: const <RouteBase>[],
+      ),
+      GoRoute(
+        name: CartScreen.routeName,
+        path: "/${CartScreen.routeName}",
+        pageBuilder: (_, GoRouterState state) {
+          return getCustomTransitionPage(
+            state: state,
+            child:  const CartScreen(),
           );
         },
         routes: const <RouteBase>[],

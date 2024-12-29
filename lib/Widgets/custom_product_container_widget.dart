@@ -72,7 +72,7 @@ class CustomProductContainerWidget extends StatelessWidget{
             ),
           ),
           Text(
-              "Strawberry Body Butter",
+              Strings.productDesc.tr,
               style: TextStyleHelper.of(context).b_14.copyWith(
                   color: ThemeClass.of(context).mainBlack
               )
@@ -83,7 +83,7 @@ class CustomProductContainerWidget extends StatelessWidget{
                   horizontal: 16.w) ,
               child: Row(
                 children: [
-                  Text("350 JOD" ,
+                  Text("350 ${Strings.jod.tr}" ,
                     style: TextStyleHelper.of(context).h_16.copyWith(
                         color: ThemeClass.of(context).primaryColor
                     ),),
