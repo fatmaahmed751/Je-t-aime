@@ -19,6 +19,7 @@ import '../Modules/Policies/policies_screen.dart';
 import '../Modules/PopularProducts/popular_product_screen.dart';
 import '../Modules/ResetPassword/reset_password_screen.dart';
 import '../Modules/Rewards/LoginRewardsScreen/login_rewards_screen.dart';
+import '../Modules/Shipping/shipping_screen.dart';
 import '../Modules/Splash/splash_screen.dart';
 import '../Modules/UserProfile/user_profile_screen.dart';
 
@@ -79,6 +80,17 @@ class GoRouterConfig{
           return getCustomTransitionPage(
             state: state,
             child:  const CartScreen(),
+          );
+        },
+        routes: const <RouteBase>[],
+      ),
+      GoRoute(
+        name: ShippingScreen.routeName,
+        path: "/${ShippingScreen.routeName}",
+        pageBuilder: (_, GoRouterState state) {
+          return getCustomTransitionPage(
+            state: state,
+            child:  ShippingScreen(),
           );
         },
         routes: const <RouteBase>[],

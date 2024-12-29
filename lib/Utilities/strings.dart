@@ -89,6 +89,10 @@ class Strings {
   static const String apply = "apply";
   static const String popularProduct = "popularProduct";
   static const String egp = "egp";
+  static const String subTotal = "subTotal";
+  static const String usePoint = "usePoint";
+  static const String shippingCost = "shippingCost";
+  static const String shippingDetails = "shippingDetails";
   static const String writeYourProblem = "writeYourProblem";
   static const String sendCode = "sendCode";
   static const String seeMore = "seeMore";

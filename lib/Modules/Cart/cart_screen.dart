@@ -40,8 +40,6 @@ class _CartScreenState extends StateMVC<CartScreen> {
         title: Strings.cart.tr,
         icon: "",
       ),
-
-
       body:
       LoadingScreen(
         loading: con.loading,
