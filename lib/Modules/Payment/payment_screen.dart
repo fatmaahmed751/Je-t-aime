@@ -7,9 +7,13 @@ import 'package:je_t_aime/core/Language/locales.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 import '../../Utilities/strings.dart';
 import '../../Widgets/custom_app_bar_widget.dart';
-import '../../Widgets/custom_button_widget.dart';
 import '../../Widgets/loading_screen.dart';
 import '../../generated/assets.dart';
+import 'Widgets/cash_payment_method_widget.dart';
+import 'Widgets/visa_payment_method_widget.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import '../../../Utilities/text_style_helper.dart';
+import '../../../Utilities/theme_helper.dart';
 
 class PaymentScreen extends StatefulWidget {
   static const routeName = "PaymentScreen";
@@ -25,7 +29,6 @@ class PaymentScreenState extends StateMVC<PaymentScreen> {
   }
 
   late PaymentController con;
-  final GlobalKey<FormState> _formKey = GlobalKey();
 
   @override
   Widget build(BuildContext context) {
@@ -36,30 +39,99 @@ class PaymentScreenState extends StateMVC<PaymentScreen> {
       ),
       body: LoadingScreen(
         loading: con.loading,
-        child: Form(
-    key: _formKey,
-    autovalidateMode: con.autoValidate
-    ? AutovalidateMode.always
-        : AutovalidateMode.disabled,
-          child: SafeArea(
-            child: Padding(
-              padding: EdgeInsetsDirectional.only(top: 30.h, bottom: 30.h,start: 10.w),
-              // horizontal: 20.w, vertical: 30.h),
-              child: ListView(
-                children: [
-
-                  const Spacer(),
-                  CustomButtonWidget.primary(
-                      title: Strings.payNow.tr,
-                      onTap: () {
-                        con.onPaymentSuccess(context);
-                      }),
-                ],
+        child: SafeArea(
+          child: Column(
+            children: [
+              Padding(
+                padding: EdgeInsetsDirectional.symmetric(horizontal:  20.w),
+                child:  togglePaymentsMethodsWidget(),
               ),
-            ),
+              con.isClick
+                  ? const Expanded(child
+                  : VisaPaymentMethodWidget())
+                  : const Expanded(child
+                  : CashPaymentMethodWidget()),
+            ],
           ),
         ),
       ),
     );
   }
+  Widget togglePaymentsMethodsWidget()=>Row(
+    mainAxisAlignment: MainAxisAlignment.center,
+    children: [
+      GestureDetector(
+        onTap: () {
+          setState(() {
+           con.isClick = ! con.isClick ;
+          });
+        },
+        child: Container(
+          padding: EdgeInsetsDirectional.symmetric(
+              vertical: 20.h, horizontal: 16.w),
+          width: 170.w,
+          height: 56.h,
+          decoration: BoxDecoration(
+              color:  con.isClick
+                  ? ThemeClass.of(context).primaryColor
+                  : Colors.transparent,
+              border: Border.all(
+                color:  con.isClick
+                    ? Colors.transparent
+                    : ThemeClass.of(context)
+                    .secondaryBlackColor
+                    .withOpacity(0.6),
+              ),
+              borderRadius: BorderRadius.circular(30.r)),
+          clipBehavior: Clip.hardEdge,
+          child: SvgPicture.asset(
+            Assets.imagesVisalogo,
+            color:  con.isClick
+                ? ThemeClass.of(context).background
+                : ThemeClass.of(context).secondaryBlackColor.withOpacity(0.6),
+          ),
+        ),
+      ),
+      Gap(10.w),
+      GestureDetector(
+        onTap: () {
+          setState(() {
+            con.isClick  = ! con.isClick ;
+          });
+        },
+        child: Container(
+          padding: EdgeInsetsDirectional.symmetric(
+              horizontal: 16.w, vertical: 15.h),
+          width: 170.w,
+          height: 56.h,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(30.r),
+            color: ! con.isClick
+                ? ThemeClass.of(context).primaryColor
+                : ThemeClass.of(context).background,
+            border: Border.all(
+              color: ! con.isClick
+                  ? Colors.transparent
+                  : ThemeClass.of(context)
+                  .secondaryBlackColor
+                  .withOpacity(0.6),
+            ),
+          ),
+          clipBehavior: Clip.hardEdge,
+          child: Text(
+            Strings.cash.tr,
+            textAlign: TextAlign.center,
+            style: TextStyleHelper.of(context).h_16.copyWith(
+                fontWeight: FontWeight.w600,
+                color: ! con.isClick
+                    ? ThemeClass.of(context).background
+                    : ThemeClass.of(context)
+                    .secondaryBlackColor
+                    .withOpacity(0.6),
+                decoration: TextDecoration.none),
+          ),
+        ),
+      ),
+    ],
+  );
 }

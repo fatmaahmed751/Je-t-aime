@@ -122,11 +122,15 @@ class Strings {
   static const String paySuccessText = "pay_success_text";
   static const String createAccount = "create_account";
   static const String skip = "skip";
+  static const String backHome = "backHome";
   static const String signUp = "signUp";
+  static const String deleteItem = "deleteItem";
+  static const String confirmDeleteItem = "confirmDeleteItem";
   static const String forgetPassword = "forgetPassword";
   static const String onBoardingMainTextOne = "onBoardingMainTextOne";
   static const String onBoardingDescTextOne = "onBoardingDescTextOne";
   static const String next = "next";
+  static const String delete = "delete";
   static const String onBoardingMainTextTwo = "onBoardingMainTextTwo";
   static const String onBoardingDescTextTwo = "onBoardingDescTextTwo";
   static const String onBoardingMainTextThree ="onBoardingMainTextThree";

@@ -1,11 +1,16 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
+import 'package:je_t_aime/core/Language/locales.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 import '../../Models/user_model.dart';
 import '../../Utilities/dialog_helper.dart';
+import '../../Utilities/router_config.dart';
 import '../../Utilities/shared_preferences.dart';
 import '../../Utilities/strings.dart';
+import '../../Widgets/alert_dialoge_widget.dart';
+import 'alert_delete_item_widget.dart';
 
 class CartController extends ControllerMVC {
   // singleton
@@ -40,7 +45,23 @@ bool isLike = true;
     couponController.dispose();
     super.dispose();
   }
-
+  Future deleteItemFromCart(BuildContext context) {
+    return showModalBottomSheet(
+      context: context,
+      // isScrollControlled: true,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(30.r)),
+      ),
+      builder:(context)=> AlertDeleteItemWidget(
+        des:Strings.confirmDeleteItem.tr,
+        mainText: Strings.deleteItem.tr,
+        onButtonReject:
+        currentContext_!.pop,
+        onButtonAccept:
+          currentContext_!.pop,
+      ),
+    );
+  }
   void incrementCounter({required int counter}) {
     setState(() {
       counter++;

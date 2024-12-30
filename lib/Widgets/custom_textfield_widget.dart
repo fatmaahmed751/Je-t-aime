@@ -292,7 +292,7 @@ class CustomTextFieldWidgetState extends State<CustomTextFieldWidget> {
               //         child: widget.prefixIcon,
               //       )
               : null,
-           prefixIconConstraints:BoxConstraints( minWidth: widget.prefixIcon == null ? 0 : 48.w, maxHeight: 48.w),
+           prefixIconConstraints:BoxConstraints( minWidth: widget.prefixIcon == null ? 0.w : 48.w, maxHeight: 48.w),
     //BoxConstraints(
           //   minWidth: 24.w,
           //   minHeight: 24.h,
