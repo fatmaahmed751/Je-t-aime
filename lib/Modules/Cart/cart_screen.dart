@@ -58,6 +58,7 @@ class _CartScreenState extends StateMVC<CartScreen> {
                   //color: Colors.red,
                   height: 450.h,
                   child: ListView.separated(
+                    physics: const BouncingScrollPhysics(),
                     itemBuilder: (context, index) {
                       return ProductItem(
                         onRemoveWarning: (context) {
@@ -75,55 +76,53 @@ class _CartScreenState extends StateMVC<CartScreen> {
                   ),
                 ),
                 Gap(170.h),
-                Expanded(
-                  child: Row(
-                    children: [
-                      Container(
-                        width: 90.w,
-                        height: 54.h,
-                        decoration: BoxDecoration(
-                            color: ThemeClass.of(context).mainSecondary,
-                            borderRadius: BorderRadius.circular(30.r)),
-                        child: Center(
-                          child: Text(
-                            "${Strings.total.tr}1150",
-                            style: TextStyleHelper.of(context).b_14.copyWith(
-                                color: ThemeClass.of(context).mainBlack),
-                          ),
+                Row(
+                  children: [
+                    Container(
+                      width: 90.w,
+                      height: 54.h,
+                      decoration: BoxDecoration(
+                          color: ThemeClass.of(context).mainSecondary,
+                          borderRadius: BorderRadius.circular(30.r)),
+                      child: Center(
+                        child: Text(
+                          "${Strings.total.tr}1150",
+                          style: TextStyleHelper.of(context).b_14.copyWith(
+                              color: ThemeClass.of(context).mainBlack),
                         ),
                       ),
-                      Gap(6.w),
-                      InkWell(
-                        onTap: () {
-                          // // SharedPref.saveObjectList(list: []);
-                          //  SharedPref.saveObjectList(list: con.fromShared??[]);
-                          //  context.pushNamed(
-                          //    ShippingScreen.routeName,
-                          //      extra: {
-                          //        'subtotal': con.subtotal,
-                          //        'products':con.fromShared,
+                    ),
+                    Gap(6.w),
+                    InkWell(
+                      onTap: () {
+                        // // SharedPref.saveObjectList(list: []);
+                        //  SharedPref.saveObjectList(list: con.fromShared??[]);
+                        //  context.pushNamed(
+                        //    ShippingScreen.routeName,
+                        //      extra: {
+                        //        'subtotal': con.subtotal,
+                        //        'products':con.fromShared,
 
-                          // queryParameters: {
-                          //   "subtotal":con.subtotal .toString(),
-                          //   "products":con.fromShared as List<BannerModel>
-                          // },
-                          // );
-                          //ShippingScreen.routeName,extra: con.subtotal
+                        // queryParameters: {
+                        //   "subtotal":con.subtotal .toString(),
+                        //   "products":con.fromShared as List<BannerModel>
+                        // },
+                        // );
+                        //ShippingScreen.routeName,extra: con.subtotal
+                      },
+                      child: CustomButtonWidget.primary(
+                        onTap: (){
+                          context.pushNamed(ShippingScreen.routeName);
                         },
-                        child: CustomButtonWidget.primary(
-                          onTap: (){
-                            context.pushNamed(ShippingScreen.routeName);
-                          },
-                          width: 248.w,
-                          height: 54.h,
-                          title: Strings.checkOut.tr,
-                          textStyle: TextStyleHelper.of(context).h_20.copyWith(
-                                color: ThemeClass.of(context).background,
-                              ),
-                        ),
+                        width: 248.w,
+                        height: 54.h,
+                        title: Strings.checkOut.tr,
+                        textStyle: TextStyleHelper.of(context).h_20.copyWith(
+                              color: ThemeClass.of(context).background,
+                            ),
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
               ],
             ),

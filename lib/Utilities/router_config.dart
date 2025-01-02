@@ -18,6 +18,7 @@ import '../Modules/OnBoarding/onboarding_screen.dart';
 import '../Modules/PersonalData/personal_data_screen.dart';
 import '../Modules/Policies/policies_screen.dart';
 import '../Modules/PopularProducts/popular_product_screen.dart';
+import '../Modules/ProductDetails/product_details_screen.dart';
 import '../Modules/ResetPassword/reset_password_screen.dart';
 import '../Modules/Rewards/LoginRewardsScreen/login_rewards_screen.dart';
 import '../Modules/Shipping/shipping_screen.dart';
@@ -92,6 +93,17 @@ class GoRouterConfig{
           return getCustomTransitionPage(
             state: state,
             child:  ShippingScreen(),
+          );
+        },
+        routes: const <RouteBase>[],
+      ),
+      GoRoute(
+        name: ProductDetailsScreen.routeName,
+        path: "/${ProductDetailsScreen.routeName}",
+        pageBuilder: (_, GoRouterState state) {
+          return getCustomTransitionPage(
+            state: state,
+            child:  const ProductDetailsScreen(),
           );
         },
         routes: const <RouteBase>[],

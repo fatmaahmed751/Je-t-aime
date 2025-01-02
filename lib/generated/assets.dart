@@ -25,6 +25,7 @@ class Assets {
   static const String imagesEyeOpen = 'assets/images/eyeOpen.svg';
   static const String imagesFace = 'assets/images/face.png';
   static const String imagesFavoriteIcon = 'assets/images/favoriteIcon.svg';
+  static const String imagesFilledStar = 'assets/images/filledStar.svg';
   static const String imagesFilterIcon = 'assets/images/filterIcon.svg';
   static const String imagesForgetPassword = 'assets/images/forgetPassword.png';
   static const String imagesGlobe = 'assets/images/globe.svg';
@@ -56,7 +57,6 @@ class Assets {
   static const String imagesPhone = 'assets/images/phone.svg';
   static const String imagesPolicies = 'assets/images/policies.svg';
   static const String imagesProduct = 'assets/images/product.png';
-  static const String imagesProductImage = 'assets/images/productImage.svg';
   static const String imagesProfileIcon = 'assets/images/profileIcon.svg';
   static const String imagesRewards = 'assets/images/rewards.svg';
   static const String imagesRewardsContainer = 'assets/images/rewardsContainer.svg';
@@ -70,6 +70,7 @@ class Assets {
   static const String imagesSubmit = 'assets/images/submit.svg';
   static const String imagesSubmitProblem = 'assets/images/submitProblem.svg';
   static const String imagesSupport = 'assets/images/support.svg';
+  static const String imagesUnColoredStar = 'assets/images/unColoredStar.svg';
   static const String imagesUnSelectedIcon = 'assets/images/unSelectedIcon.svg';
   static const String imagesUser = 'assets/images/user.svg';
   static const String imagesVisaImage = 'assets/images/visaImage.svg';

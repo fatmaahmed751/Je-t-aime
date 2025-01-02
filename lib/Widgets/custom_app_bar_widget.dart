@@ -6,6 +6,7 @@ import 'package:go_router/go_router.dart';
 import 'package:je_t_aime/Modules/Home/SearchSccreen/search_screen.dart';
 import 'package:je_t_aime/core/Language/locales.dart';
 import '../Modules/Home/Widgets/search_widget.dart';
+import '../Utilities/shared_preferences.dart';
 import '../Utilities/strings.dart';
 import '../Utilities/text_style_helper.dart';
 import '../Utilities/theme_helper.dart';
@@ -268,7 +269,8 @@ class MainDetailsAppBarWidget extends StatelessWidget {
 
           children: [
             IconButton(
-                icon: SvgPicture.asset(Assets.imagesArrowBack), onPressed: (){
+                icon: Transform.flip(
+        flipX: SharedPref.getCurrentLanguage() == "ar" ? true : false,child: SvgPicture.asset(Assets.imagesArrowBack)), onPressed: (){
                   context.pop();
             }
             ),
