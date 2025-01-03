@@ -6,7 +6,6 @@ import '../../../../Utilities/strings.dart';
 import '../../../../Utilities/theme_helper.dart';
 import '../../../../Widgets/custom_textfield_widget.dart';
 import '../../../../generated/assets.dart';
-import '../../../Utilities/text_style_helper.dart';
 import '../../../Utilities/validate.dart';
 
 
@@ -15,8 +14,10 @@ class SearchWidget extends StatefulWidget {
   final Function(String?) onSearch;
   final Function(String?) onChange;
   final Function() onRemove;
+  final Color backGroundColor;
+  final double width;
   final TextEditingController controller;
-   const SearchWidget({super.key,required this.onSearch, required this.isSearch, required this.controller, required this.onRemove, required this.onChange});
+   const SearchWidget({super.key,required this.onSearch, required this.isSearch, required this.controller, required this.onRemove, required this.onChange, required this.backGroundColor, required this.width});
 
   @override
   State<SearchWidget> createState() => _SearchWidgetState();
@@ -28,15 +29,15 @@ class _SearchWidgetState extends State<SearchWidget> {
     return  CustomTextFieldWidget(
       onSave:widget.onSearch,
      controller:widget.controller,
-      width: 300.w,
+      width: widget.width,
       height: 45.h,
       insidePadding: EdgeInsets.symmetric(vertical: 10.h),
       borderRadiusValue: 30.r,
       isDense: true,
       prefixIcon: SvgPicture.asset(Assets.imagesSearch),
       hint: Strings.searchHere.tr,
-      backGroundColor:
-      ThemeClass.of(context).secondary.withOpacity(1),
+      backGroundColor:widget.backGroundColor,
+     // ThemeClass.of(context).secondary.withOpacity(1),
       onchange:widget.onChange,
       hintStyle: TextStyle(
           color: ThemeClass.of(context)

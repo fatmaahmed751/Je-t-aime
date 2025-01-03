@@ -10,8 +10,8 @@ import '../../../../Widgets/loading_screen.dart';
 import '../../../Utilities/strings.dart';
 import '../../../generated/assets.dart';
 import '../../Utilities/shared_preferences.dart';
+import '../../Widgets/bottom_navbar_widget.dart';
 import '../../Widgets/custom_app_bar_widget.dart';
-import '../Login/login_screen.dart';
 import '../Orders/orders_screen.dart';
 import '../PersonalData/personal_data_screen.dart';
 import '../Policies/policies_screen.dart';
@@ -51,6 +51,9 @@ class _UserProfileScreenState extends StateMVC<UserProfileScreen> {
       appBar: const CustomAppBarWidget.mainScreen(
         title: "",
         icon: "",
+      ),
+      bottomNavigationBar: const BottomNavBarWidget(
+        selected: SelectedBottomNavBar.account,
       ),
       body: LoadingScreen(
         loading: con.loading,

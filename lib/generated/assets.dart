@@ -25,6 +25,7 @@ class Assets {
   static const String imagesEmptyCart  = 'assets/images/emptyCart .svg';
   static const String imagesEyeOpen = 'assets/images/eyeOpen.svg';
   static const String imagesFace = 'assets/images/face.png';
+  static const String imagesFavNav = 'assets/images/favNav.svg';
   static const String imagesFavoriteIcon = 'assets/images/favoriteIcon.svg';
   static const String imagesFilledStar = 'assets/images/filledStar.svg';
   static const String imagesFilterIcon = 'assets/images/filterIcon.svg';
@@ -32,6 +33,7 @@ class Assets {
   static const String imagesGlobe = 'assets/images/globe.svg';
   static const String imagesGoogleIcon = 'assets/images/googleIcon.svg';
   static const String imagesHeartBroken = 'assets/images/heartBroken.svg';
+  static const String imagesHome = 'assets/images/home.svg';
   static const String imagesIconApp = 'assets/images/iconApp.png';
   static const String imagesLocation = 'assets/images/location.svg';
   static const String imagesLockIcon = 'assets/images/lockIcon.svg';
@@ -44,6 +46,7 @@ class Assets {
   static const String imagesNoOrdersImage = 'assets/images/noOrdersImage.svg';
   static const String imagesNoPersonalData = 'assets/images/noPersonalData.svg';
   static const String imagesNoRewards = 'assets/images/noRewards.svg';
+  static const String imagesNotNav = 'assets/images/notNav.svg';
   static const String imagesNotificationIcon = 'assets/images/notificationIcon.svg';
   static const String imagesObsecureIcon = 'assets/images/obsecureIcon.svg';
   static const String imagesOnBoardingOne = 'assets/images/onBoardingOne.png';
@@ -59,6 +62,7 @@ class Assets {
   static const String imagesPolicies = 'assets/images/policies.svg';
   static const String imagesProduct = 'assets/images/product.png';
   static const String imagesProfileIcon = 'assets/images/profileIcon.svg';
+  static const String imagesProfileNav = 'assets/images/profileNav.svg';
   static const String imagesRewards = 'assets/images/rewards.svg';
   static const String imagesRewardsContainer = 'assets/images/rewardsContainer.svg';
   static const String imagesSearch = 'assets/images/search.svg';

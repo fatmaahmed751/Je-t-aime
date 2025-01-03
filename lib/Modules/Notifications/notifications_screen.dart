@@ -5,6 +5,7 @@ import 'package:je_t_aime/core/Language/locales.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 import '../../../Widgets/loading_screen.dart';
 import '../../Utilities/strings.dart';
+import '../../Widgets/bottom_navbar_widget.dart';
 import '../../Widgets/container_empty_content_widget.dart';
 import '../../Widgets/custom_app_bar_widget.dart';
 import '../../generated/assets.dart';
@@ -39,17 +40,20 @@ class _NotificationsScreenState extends StateMVC<NotificationsScreen> {
       appBar: const CustomAppBarWidget.mainScreen(
           title:"",
       icon: "",),
+        bottomNavigationBar: const BottomNavBarWidget(
+          selected: SelectedBottomNavBar.notification,
+        ),
       body: LoadingScreen(
         loading: con.loading,
         child: SafeArea(
          child: Padding(
-           padding: EdgeInsetsDirectional.symmetric(horizontal: 19.w,vertical: 25.h),
+           padding: EdgeInsetsDirectional.symmetric(horizontal: 20.w,vertical: 10.h),
             child:con.isLogin?
             ListView.separated(
                 itemBuilder:(context,index) =>
                   const ShowNotificationItem(
                   ),
-                separatorBuilder:(context,index)=> Gap(10.h),
+                separatorBuilder:(context,index)=> Gap(8.h),
                 itemCount:6 ):
             ContainerEmptyContentWidget(
               image:Assets.imagesNoNotification ,

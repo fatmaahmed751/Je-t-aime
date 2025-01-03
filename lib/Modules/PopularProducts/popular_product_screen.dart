@@ -7,6 +7,7 @@ import 'package:je_t_aime/Modules/PopularProducts/popular_products_controller.da
 import 'package:je_t_aime/core/Language/locales.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 import '../../Utilities/strings.dart';
+import '../../Utilities/theme_helper.dart';
 import '../../Widgets/custom_app_bar_widget.dart';
 import '../../Widgets/custom_product_container_widget.dart';
 import '../../Widgets/loading_screen.dart';
@@ -51,6 +52,8 @@ class PopularProductsScreenState extends StateMVC<PopularProductsScreen> {
               Row(
                 children: [
                   SearchWidget(
+                    width: 300.w,
+                      backGroundColor: ThemeClass.of(context).secondary.withOpacity(1),
                       onSearch: (String? text) {},
                       isSearch: true,
                       controller: con.searchController,

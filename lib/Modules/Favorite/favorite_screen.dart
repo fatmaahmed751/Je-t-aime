@@ -4,6 +4,7 @@ import 'package:je_t_aime/Widgets/custom_app_bar_widget.dart';
 import 'package:je_t_aime/core/Language/locales.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 import '../../Utilities/strings.dart';
+import '../../Widgets/bottom_navbar_widget.dart';
 import '../../Widgets/container_empty_content_widget.dart';
 import '../../Widgets/custom_button_widget.dart';
 import '../../Widgets/custom_products_widget.dart';
@@ -42,6 +43,9 @@ class _FavoriteScreenState extends StateMVC<FavoriteScreen> {
      //controller: con.searchController,
         )):
     const CustomAppBarWidget.mainScreen(title: "", icon: "",),
+        bottomNavigationBar: const BottomNavBarWidget(
+          selected: SelectedBottomNavBar.favorite,
+        ),
       body:  LoadingScreen(
     loading: con.loading,
         child: SafeArea(

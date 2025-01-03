@@ -63,7 +63,10 @@ class _SearchScreenState extends StateMVC<SearchScreen> {
                   ),
                   Gap(8.w),
                   Expanded(child:
-                  SearchWidget(onSearch:(search){
+                  SearchWidget(
+                    width: 382.w,
+                      backGroundColor:  ThemeClass.of(context).background,
+                      onSearch:(search){
                     setState((){
                       if(search!=null){
                         con.isSearch=true;

@@ -12,8 +12,8 @@ class PackagesWidget extends StatelessWidget{
   Widget build(BuildContext context) {
    return  Container(
 
-   height:188.h,
-   width:325.w,
+   height:192.h,
+   width:328.w,
      decoration:  BoxDecoration(
          color: Colors.red,
        borderRadius: BorderRadius.circular(30.r),

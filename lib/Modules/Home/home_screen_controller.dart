@@ -1,17 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:je_t_aime/Models/category_model.dart';
 import 'package:je_t_aime/Widgets/custom_product_container_widget.dart';
 import 'package:je_t_aime/core/Language/locales.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 import '../../Models/packages_model.dart';
-import '../../Models/user_model.dart';
-import '../../Utilities/dialog_helper.dart';
-import '../../Utilities/router_config.dart';
-import '../../Utilities/shared_preferences.dart';
 import '../../Utilities/strings.dart';
-import '../../generated/assets.dart';
 
 class HomeController extends ControllerMVC {
   // singleton
@@ -32,6 +26,11 @@ class HomeController extends ControllerMVC {
     // "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTDKErC39UCJ75tiSVi9KyKLpF921rkFpP1Zg&s",
     // "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTDKErC39UCJ75tiSVi9KyKLpF921rkFpP1Zg&s",
   ];
+  int bottomNavCurrentIndex = 0;
+  void changeBottomNav(int index) {
+    bottomNavCurrentIndex = index;
+    setState((){});
+  }
   List<PackagesModel> packagesModel = [
   PackagesModel(
   imageName:"https://s3-alpha-sig.figma.com/img/00fa/97ec/01ce87e19b91f93352006ed31975a494?Expires=1736121600&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=m2rUDkqU0~nrN-5VaDKYDFY5kdA-TXxnnNV-L6jnt9tjbL0cDr~UcsSx38dE4K8mrBnFuJqiKFMOA2Ey-2gJO2pacpy7g6cXgu7HDDpaYgzLBxPBy6WFzcHbuIA7jMMYZpNPmxkfB04nD-pNXJ~HpxuqJn4VbKBQr1frCyP0wsZkvbxWiftSRZkQH9pMeirkiIEetm0rdhfaCrggxi9Un9c6n89FjBKhayS3DSvK8--oQ~g7h~FRPW65XuF4n-GttMOJWntLycrxci9Xcct-OkHj-sdNeb5C1vdGoC0Q6pgeHA4VKrPC44JfRt2oSWnY1U61MlIJAQ0M5AVmChjTXg__"),
@@ -69,12 +68,7 @@ class HomeController extends ControllerMVC {
     ),
   ];
   bool isLiked = false;
-  int bottomNavCurrentIndex = 0;
 
-  void changeBottomNav(int index) {
-    bottomNavCurrentIndex = index;
-    setState(() {});
-  }
 
   @override
   void initState() {

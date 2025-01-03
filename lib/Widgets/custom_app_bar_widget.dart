@@ -3,18 +3,16 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
-import 'package:je_t_aime/Modules/Home/SearchSccreen/search_screen.dart';
+import 'package:je_t_aime/Modules/Rewards/LoginRewardsScreen/login_rewards_screen.dart';
 import 'package:je_t_aime/core/Language/locales.dart';
+import '../Modules/Cart/cart_screen.dart';
 import '../Modules/Home/Widgets/search_widget.dart';
 import '../Utilities/shared_preferences.dart';
 import '../Utilities/strings.dart';
-import '../Utilities/text_style_helper.dart';
 import '../Utilities/theme_helper.dart';
-import '../Utilities/validate.dart';
 import '../generated/assets.dart';
 import 'custom_app_bar_text_widget.dart';
 import 'custom_details_app_bar_text_widget.dart';
-import 'custom_textfield_widget.dart';
 
 enum _AppBarType { main, mainDetails, details,secondary,secondaryGradient }
 
@@ -119,7 +117,8 @@ class CustomAppBarWidget extends StatelessWidget
         return SecondaryAppBarWidget(
           title: screenName,
           icon: icon,
-        //  controller:controller??TextEditingController(),
+          function: onPressed,
+          controller:TextEditingController(),
         );
       default:
         return Container();
@@ -186,7 +185,9 @@ class MainAppBarWidget extends StatelessWidget {
                   ),
                   const Spacer(),
                   GestureDetector(
-                    onTap: () {},
+                    onTap: () {
+                      GoRouter.of(context).pushNamed(LoginRewardsScreen.routeName);
+                    },
                     child:Container(
                         width: 32.w,
                         height: 32.h,
@@ -204,7 +205,9 @@ class MainAppBarWidget extends StatelessWidget {
                   ),
                   Gap(8.w),
                   GestureDetector(
-                    onTap: () {},
+                    onTap: () {
+                      GoRouter.of(context).pushNamed(CartScreen.routeName);
+                    },
                     child:Container(
                         width: 32.w,
                         height: 32.h,
@@ -287,12 +290,13 @@ class MainDetailsAppBarWidget extends StatelessWidget {
 class SecondaryAppBarWidget extends StatefulWidget {
   final String title;
   final String? icon;
- // final TextEditingController controller;
- // final VoidCallback? onDeleteIconToggle;
+  final TextEditingController controller;
+   final void Function()? function;
+
    const SecondaryAppBarWidget({
     Key? key,
     required this.title,
-    this.icon,
+    this.icon, required this.controller, this.function,
    // required this.controller
     //this.onDeleteIconToggle
 
@@ -350,7 +354,9 @@ class SecondaryAppBarWidgetState extends State<SecondaryAppBarWidget> {
                       ),
                       const Spacer(),
                       GestureDetector(
-                        onTap: () {},
+                        onTap: () {
+                          GoRouter.of(context).pushNamed(LoginRewardsScreen.routeName);
+                        },
                         child: Container(
                             width: 32.w,
                             height: 32.h,
@@ -367,7 +373,9 @@ class SecondaryAppBarWidgetState extends State<SecondaryAppBarWidget> {
                       ),
                       Gap(8.w),
                       GestureDetector(
-                        onTap: () {},
+                        onTap: (){
+                          GoRouter.of(context).pushNamed(CartScreen.routeName);
+                        },
                         child: Container(
                             width: 32.w,
                             height: 32.h,
@@ -385,15 +393,17 @@ class SecondaryAppBarWidgetState extends State<SecondaryAppBarWidget> {
                     ],
                   ),
                   Gap(30.h),
-                  SearchWidget(onSearch: (String? text) {
-                    context.pushNamed(SearchScreen.routeName);
-                  },
-                    isSearch: true,
-                    controller:TextEditingController() ,
-                    onRemove: () { },
-                    onChange: (String?value ) {  },
+              SearchWidget(
+                  width: 382.w,
+                  backGroundColor: ThemeClass.of(context).background,
+                  onSearch: (String? text) {
 
-                  ),
+                  },
+                  isSearch: true,
+                  controller: widget.controller,
+                  onRemove: () {},
+                  onChange: (String? value) {}),
+
                   // CustomTextFieldWidget(
                   //   height: 45.h,
                   //   insidePadding: EdgeInsets.symmetric(vertical: 10.h),

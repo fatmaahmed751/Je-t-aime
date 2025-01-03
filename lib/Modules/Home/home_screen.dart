@@ -8,13 +8,13 @@ import 'package:mvc_pattern/mvc_pattern.dart';
 import '../../Utilities/strings.dart';
 import '../../Utilities/text_style_helper.dart';
 import '../../Utilities/theme_helper.dart';
+import '../../Widgets/bottom_navbar_widget.dart';
 import '../../Widgets/custom_app_bar_widget.dart';
 import '../../Widgets/custom_details_side_text.dart';
 import '../../Widgets/custom_product_container_widget.dart';
 import '../../Widgets/loading_screen.dart';
 import '../../Widgets/toast_helper.dart';
 import 'Widgets/categories_widget.dart';
-import 'Widgets/horizontal_list_widget.dart';
 import 'Widgets/packages_widget.dart';
 import 'home_screen_controller.dart';
 
@@ -60,12 +60,14 @@ class _HomeScreenState extends StateMVC<HomeScreen> {
     return Scaffold(
       appBar: PreferredSize(
           preferredSize: Size(double.infinity, 180.h),
-          child: const CustomAppBarWidget.secondaryAppBar(
+          child:  const CustomAppBarWidget.secondaryAppBar(
             title: "",
             icon: "",
-          )),
-      // bottomNavigationBar: BottomNavBarWidget(
-      //   selected: SelectedBottomNavBar.home,
+          )
+      ),
+      bottomNavigationBar: const BottomNavBarWidget(
+        selected: SelectedBottomNavBar.home,
+      ),
       body: RefreshIndicator(
         onRefresh: () async {
           // con.init();
@@ -107,13 +109,13 @@ class _HomeScreenState extends StateMVC<HomeScreen> {
                       itemBuilder: (context, index) => PackagesWidget(
                             packagesModel: con.packagesModel[index],
                           ),
-                      separatorBuilder: (context, index) => Gap(6.w),
+                      separatorBuilder: (context, index) => Gap(14.w),
                       itemCount: con.packagesModel.length),
                 ),
               ),
               Gap(16.h),
               Padding(
-                padding: EdgeInsets.symmetric(horizontal: 18.w),
+                padding: EdgeInsetsDirectional.symmetric(horizontal: 18.w),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
