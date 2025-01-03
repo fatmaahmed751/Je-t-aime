@@ -37,7 +37,6 @@ class _AllCategoriesScreenState extends StateMVC<AllCategoriesScreen> {
     ),
       body:LoadingScreen(
         loading: con.loading,
-        color: Colors.transparent,
         child: Padding(
           padding:EdgeInsets.symmetric(horizontal: 24.w,vertical: 24.h),
           child: Wrap(

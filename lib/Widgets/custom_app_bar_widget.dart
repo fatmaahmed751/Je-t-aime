@@ -274,7 +274,7 @@ class MainDetailsAppBarWidget extends StatelessWidget {
                   context.pop();
             }
             ),
-             Gap(16.w),
+             Gap(10.w),
         Center(child: CustomAppBarDetailsTextWidget(text: title)),
 
           ],

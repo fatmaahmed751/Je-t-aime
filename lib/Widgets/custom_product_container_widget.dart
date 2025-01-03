@@ -30,9 +30,9 @@ class CustomProductContainerWidget extends StatelessWidget{
           ),
           boxShadow: [
             BoxShadow(
-                color: ThemeClass.of(context).secondaryBlackColor.withOpacity(0.15),
-                blurRadius:1,
-                spreadRadius: 0.5
+                color: ThemeClass.of(context).secondaryBlackColor.withOpacity(0.16),
+                blurRadius:2,
+                spreadRadius: 1
             ),
           ],
         ),

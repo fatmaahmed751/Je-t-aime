@@ -16,7 +16,7 @@ class SearchWidget extends StatefulWidget {
   final Function(String?) onChange;
   final Function() onRemove;
   final TextEditingController controller;
-   SearchWidget({super.key,required this.onSearch, required this.isSearch, required this.controller, required this.onRemove, required this.onChange});
+   const SearchWidget({super.key,required this.onSearch, required this.isSearch, required this.controller, required this.onRemove, required this.onChange});
 
   @override
   State<SearchWidget> createState() => _SearchWidgetState();
@@ -28,17 +28,20 @@ class _SearchWidgetState extends State<SearchWidget> {
     return  CustomTextFieldWidget(
       onSave:widget.onSearch,
      controller:widget.controller,
+      width: 300.w,
       height: 45.h,
       insidePadding: EdgeInsets.symmetric(vertical: 10.h),
       borderRadiusValue: 30.r,
       isDense: true,
       prefixIcon: SvgPicture.asset(Assets.imagesSearch),
       hint: Strings.searchHere.tr,
-      backGroundColor: ThemeClass.of(context).background,
+      backGroundColor:
+      ThemeClass.of(context).secondary.withOpacity(1),
       onchange:widget.onChange,
-      hintStyle: TextStyleHelper.of(context)
-          .b_16
-          .copyWith(color: ThemeClass.of(context).secondaryBlackColor),
+      hintStyle: TextStyle(
+          color: ThemeClass.of(context)
+              .secondaryBlackColor
+              .withOpacity(0.7)),
       validator: (v) => Validate.validateNormalString(v),
       // suffixIcon:
       // widget.isSearch||widget.controller.text.trim().isNotEmpty?

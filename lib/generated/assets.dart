@@ -15,6 +15,7 @@ class Assets {
   static const String imagesArrowForward = 'assets/images/arrowForward.svg';
   static const String imagesCantRate = 'assets/images/cantRate.svg';
   static const String imagesCashImage = 'assets/images/cashImage.svg';
+  static const String imagesCheckBox = 'assets/images/checkBox.svg';
   static const String imagesClose = 'assets/images/close.svg';
   static const String imagesContainer = 'assets/images/Container.svg';
   static const String imagesDeleteAccount = 'assets/images/deleteAccount.svg';

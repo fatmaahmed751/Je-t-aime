@@ -1,20 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:gap/gap.dart';
-import 'package:go_router/go_router.dart';
-import 'package:je_t_aime/Utilities/text_style_helper.dart';
 import 'package:je_t_aime/Widgets/custom_bottom_sheet_widget.dart';
 import 'package:je_t_aime/core/Language/locales.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
-
-import '../../../Utilities/router_config.dart';
 import '../../Utilities/strings.dart';
-import '../../Utilities/theme_helper.dart';
-import '../../Widgets/custom_button_widget.dart';
 import '../../generated/assets.dart';
-import '../PersonalData/personal_data_screen.dart';
-import 'change_password_data_handler.dart';
 
 class ChangePasswordController extends ControllerMVC {
   // singleton

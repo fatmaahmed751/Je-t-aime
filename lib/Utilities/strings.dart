@@ -84,6 +84,7 @@ class Strings {
   static const String yourRate = "yourRate";
   static const String writeYourComment = "writeYourComment";
   static const String rate = "rate";
+  static const String rateFilter = "rateFilter";
   static const String price = "price";
   static const String from = "from";
   static const String total = "total";
@@ -245,4 +246,8 @@ class Strings {
   static const String cvv ="cvv";
   static const String backNumberCard ="backNumberCard";
   static const String writeCvvNumber ="writeCvvNumber";
+  static const String additionToCart ="additionToCart";
+  static const String selectWhatWant ="selectWhatWant";
+  static const String goToCart ="goToCart";
+  static const String continueShop ="continueShop";
 }

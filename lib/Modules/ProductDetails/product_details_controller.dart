@@ -2,11 +2,15 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
+import 'package:je_t_aime/core/Language/locales.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 import '../../Utilities/dialog_helper.dart';
 import '../../Utilities/router_config.dart';
 import '../../Utilities/strings.dart';
+import '../../Widgets/custom_bottom_sheet_widget.dart';
+import '../../generated/assets.dart';
 import '../RateProducts/rate_product_screen.dart';
+import 'Widgets/add_to_cart_bottom_sheet.dart';
 
 class ProductDetailsController extends ControllerMVC {
   // singleton
@@ -63,7 +67,7 @@ class ProductDetailsController extends ControllerMVC {
     });
   }
 
-  Future addToCartSheet(BuildContext context) {
+  Future writeRateForProduct(BuildContext context) {
     return showModalBottomSheet(
       context: context,
       // isScrollControlled: true,
@@ -71,6 +75,16 @@ class ProductDetailsController extends ControllerMVC {
         borderRadius: BorderRadius.vertical(top: Radius.circular(30.r)),
       ),
       builder:(context)=> const RateProductScreen(),
+    );
+  }
+  Future addToCartSheet(BuildContext context) {
+    return showModalBottomSheet(
+      context: context,
+      // isScrollControlled: true,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(30.r)),
+      ),
+      builder:(context)=>   const AddToCartBottomSheetWidget(),
     );
   }
   // Future addFavorite({required int productId}) async {

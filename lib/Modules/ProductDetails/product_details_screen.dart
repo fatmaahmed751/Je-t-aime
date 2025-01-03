@@ -142,7 +142,7 @@ class _ProductDetailsScreenState extends StateMVC<ProductDetailsScreen> {
                   ),
                   GestureDetector(
                     onTap: () {
-                      con.addToCartSheet(context);
+                      con.writeRateForProduct(context);
                     },
                     child: SvgPicture.asset(Assets.imagesEdit),
                   ),
@@ -176,7 +176,7 @@ class _ProductDetailsScreenState extends StateMVC<ProductDetailsScreen> {
           padding: EdgeInsetsDirectional.symmetric(horizontal: 24.w,vertical: 20.h),
           child: CustomButtonWidget.primary(
             onTap: (){
-              context.pushNamed(CartScreen.routeName);
+          con.addToCartSheet(context);
             },
             width: 382.w,
             height: 54.h,
