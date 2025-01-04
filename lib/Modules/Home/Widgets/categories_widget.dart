@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
-import 'package:je_t_aime/Modules/Home/Widgets/packages_widget.dart';
+import 'package:go_router/go_router.dart';
+import 'package:je_t_aime/Modules/AllCategories/all_categories_screen.dart';
 import 'package:je_t_aime/Utilities/text_style_helper.dart';
 import 'package:je_t_aime/Utilities/theme_helper.dart';
 import '../../../Models/category_model.dart';
@@ -19,7 +20,9 @@ class CategoriesWidget extends StatelessWidget{
       child: Column(
         children: [
           GestureDetector(
-            onTap: (){},
+            onTap: (){
+              context.pushNamed(AllCategoriesScreen.routeName);
+            },
             child: CircleAvatar(
               radius:50.r,
               backgroundImage:

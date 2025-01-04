@@ -17,8 +17,7 @@ import '../../Widgets/custom_button_widget.dart';
 import '../../Widgets/custom_details_side_text.dart';
 import '../../Widgets/custom_product_container_widget.dart';
 import '../../generated/assets.dart';
-import '../Cart/cart_screen.dart';
-import 'Widgets/product_carousel_widget.dart';
+import '../Reviews/reviews_screen.dart';
 import 'Widgets/product_details_widget.dart';
 
 class ProductDetailsScreen extends StatefulWidget {
@@ -116,7 +115,7 @@ class _ProductDetailsScreenState extends StateMVC<ProductDetailsScreen> {
                   ),
                   GestureDetector(
                     onTap: () {
-                      //   context.pushNamed(ReviewsForProductScreen.routeName,extra: widget.product);
+                        context.pushNamed(ReviewsForProductScreen.routeName);
                     },
                     child: Text(
                       Strings.viewAll.tr,

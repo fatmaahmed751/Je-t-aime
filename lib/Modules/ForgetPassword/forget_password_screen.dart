@@ -99,9 +99,11 @@ class _ForgetPasswordScreenState extends StateMVC<ForgetPasswordScreen> {
                                 child: Text(Strings.forgetPasswordDes.tr,
                                   textAlign: TextAlign.start,
                                   style:  TextStyleHelper.of(context).b_16.copyWith(
-                                      color:ThemeClass.of(context).labelColor
+                                    color:  ThemeClass.of(context)
+                                          .secondaryBlackColor
+                                          .withOpacity(0.7)),
                                   ),),
-                              ),
+
 
                               Gap(15.h),
                               CustomSideTextWidget(text:Strings.email.tr),
@@ -109,12 +111,14 @@ class _ForgetPasswordScreenState extends StateMVC<ForgetPasswordScreen> {
                               CustomTextFieldWidget(
                                 focusedBorderColor: ThemeClass.of(context).primaryColor,
                                 hint:Strings.enterEmail.tr,
-                                hintStyle:
-                                TextStyle(color: ThemeClass.of(context).labelColor),
+                                hintStyle: TextStyle(
+                                    color: ThemeClass.of(context)
+                                        .secondaryBlackColor
+                                        .withOpacity(0.7)),
+                                backGroundColor:  ThemeClass.of(context).secondary.withOpacity(1),
                                 prefixIcon: SvgPicture.asset(Assets.imagesEmailIcon),
                                 isDense: true,
                                 insidePadding: EdgeInsets.symmetric(vertical: 10.h),
-                                backGroundColor: ThemeClass.of(context).secondary,
                                 controller: con.emailController,
                                 validator: (v) => Validate.validateEmail(v),
                               ),

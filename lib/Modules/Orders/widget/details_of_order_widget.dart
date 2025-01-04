@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
-import 'package:go_router/go_router.dart';
 import 'package:je_t_aime/core/Language/locales.dart';
 
 import '../../../Utilities/format_date_helper.dart';
@@ -38,20 +37,20 @@ class DetailsOfOrder extends StatelessWidget {
           ],
         ),
         child: Padding(
-          padding: EdgeInsetsDirectional.only(top: 15.h),
+          padding: EdgeInsetsDirectional.only(top: 20.h),
           child:
               Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
             Row(
               children: [
                 Text(Strings.orderNumber.tr,
                     style: TextStyleHelper.of(context)
-                        .h_16
+                        .b_16
                         .copyWith(color: ThemeClass.of(context).mainBlack)),
                 const Spacer(),
                 Text(
                   "#11111",
                   style: TextStyleHelper.of(context)
-                      .b_16
+                      .h_16
                       .copyWith(color: ThemeClass.of(context).mainBlack),
                 ),
               ],
@@ -69,7 +68,7 @@ class DetailsOfOrder extends StatelessWidget {
                 Text(
                   "Visa",
                   style: TextStyleHelper.of(context)
-                      .b_16
+                      .h_16
                       .copyWith(color: ThemeClass.of(context).mainBlack),
                 ),
               ],
@@ -79,14 +78,14 @@ class DetailsOfOrder extends StatelessWidget {
               Text(
                 Strings.orderDate.tr,
                 style: TextStyleHelper.of(context)
-                    .h_16
+                    .b_16
                     .copyWith(color: ThemeClass.of(context).mainBlack),
               ),
               const Spacer(),
               Text(
                 FormatDateHelper.formatWalletDate.format(DateTime.now()),
                 style: TextStyleHelper.of(context)
-                    .b_16
+                    .h_16
                     .copyWith(color: ThemeClass.of(context).mainBlack),
               ),
             ]),
@@ -95,14 +94,14 @@ class DetailsOfOrder extends StatelessWidget {
               Text(
                 Strings.orderState.tr,
                 style: TextStyleHelper.of(context)
-                    .h_16
+                    .b_16
                     .copyWith(color: ThemeClass.of(context).mainBlack),
               ),
               const Spacer(),
               Text(
                 Strings.delivered.tr,
                 style: TextStyleHelper.of(context)
-                    .b_16
+                    .h_16
                     .copyWith(color: ThemeClass.of(context).mainBlack),
               ),
             ]),

@@ -76,6 +76,7 @@ class _HomeScreenState extends StateMVC<HomeScreen> {
           loading: con.loading,
           color: Colors.transparent,
           child: ListView(
+            physics: const BouncingScrollPhysics(),
             children: [
               Gap(16.h),
               Padding(

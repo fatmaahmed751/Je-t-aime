@@ -40,9 +40,12 @@ class _CartScreenState extends StateMVC<CartScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBarWidget.detailsScreen(
-        title: Strings.cart.tr,
-        icon: "",
+      appBar: PreferredSize(
+        preferredSize: Size(0,75.h),
+        child: CustomAppBarWidget.detailsScreen(
+          title: Strings.cart.tr,
+          icon: "",
+        ),
       ),
       body: LoadingScreen(
         loading: con.loading,
@@ -51,78 +54,85 @@ class _CartScreenState extends StateMVC<CartScreen> {
           visible: con.isLike,
           child: Padding(
             padding: EdgeInsetsDirectional.symmetric(horizontal: 24.w),
-            child: ListView(
-              // alignment: Alignment.bottomCenter,
+            child: Stack(
+              alignment: Alignment.bottomCenter,
               children: [
-                SizedBox(
-                  //color: Colors.red,
-                  height: 450.h,
-                  child: ListView.separated(
-                    physics: const BouncingScrollPhysics(),
-                    itemBuilder: (context, index) {
-                      return ProductItem(
-                        onRemoveWarning: (context) {
-                          con.deleteItemFromCart(context);
-                        },
-                        decrementCounter: () {
-                          con.decrementCounter(counter: 1);
-                        },
-                        incrementCounter: () async {},
-                        counter: 1,
-                      );
-                    },
-                    separatorBuilder: (context, index) => Gap(10.h),
-                    itemCount: 5,
-                  ),
-                ),
-                Gap(170.h),
-                Row(
+                ListView(
+                  physics: const BouncingScrollPhysics(),
+                  // alignment: Alignment.bottomCenter,
                   children: [
-                    Container(
-                      width: 90.w,
-                      height: 54.h,
-                      decoration: BoxDecoration(
-                          color: ThemeClass.of(context).mainSecondary,
-                          borderRadius: BorderRadius.circular(30.r)),
-                      child: Center(
-                        child: Text(
-                          "${Strings.total.tr}1150",
-                          style: TextStyleHelper.of(context).b_14.copyWith(
-                              color: ThemeClass.of(context).mainBlack),
+                    ListView.separated(
+                      shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
+                      itemBuilder: (context, index) {
+                        return ProductItem(
+                          onRemoveWarning: (context) {
+                            con.deleteItemFromCart(context);
+                          },
+                          decrementCounter: () {
+                            con.decrementCounter(counter: 1);
+                          },
+                          incrementCounter: () async {},
+                          counter: 1,
+                        );
+                      },
+                      separatorBuilder: (context, index) => Gap(10.h),
+                      itemCount: 5,
+                    ),
+                    Gap(150.h),
+
+                  ],
+                ),
+                Padding(
+                  padding: EdgeInsetsDirectional.symmetric(vertical: 20.h),
+                  child: Row(
+                    children: [
+                      Container(
+                        width: 90.w,
+                        height: 54.h,
+                        decoration: BoxDecoration(
+                            color: ThemeClass.of(context).mainSecondary,
+                            borderRadius: BorderRadius.circular(30.r)),
+                        child: Center(
+                          child: Text(
+                            "${Strings.total.tr}1150",
+                            style: TextStyleHelper.of(context).b_14.copyWith(
+                                color: ThemeClass.of(context).mainBlack),
+                          ),
                         ),
                       ),
-                    ),
-                    Gap(6.w),
-                    InkWell(
-                      onTap: () {
-                        // // SharedPref.saveObjectList(list: []);
-                        //  SharedPref.saveObjectList(list: con.fromShared??[]);
-                        //  context.pushNamed(
-                        //    ShippingScreen.routeName,
-                        //      extra: {
-                        //        'subtotal': con.subtotal,
-                        //        'products':con.fromShared,
+                      Gap(6.w),
+                      InkWell(
+                        onTap: () {
+                          // // SharedPref.saveObjectList(list: []);
+                          //  SharedPref.saveObjectList(list: con.fromShared??[]);
+                          //  context.pushNamed(
+                          //    ShippingScreen.routeName,
+                          //      extra: {
+                          //        'subtotal': con.subtotal,
+                          //        'products':con.fromShared,
 
-                        // queryParameters: {
-                        //   "subtotal":con.subtotal .toString(),
-                        //   "products":con.fromShared as List<BannerModel>
-                        // },
-                        // );
-                        //ShippingScreen.routeName,extra: con.subtotal
-                      },
-                      child: CustomButtonWidget.primary(
-                        onTap: (){
-                          context.pushNamed(ShippingScreen.routeName);
+                          // queryParameters: {
+                          //   "subtotal":con.subtotal .toString(),
+                          //   "products":con.fromShared as List<BannerModel>
+                          // },
+                          // );
+                          //ShippingScreen.routeName,extra: con.subtotal
                         },
-                        width: 248.w,
-                        height: 54.h,
-                        title: Strings.checkOut.tr,
-                        textStyle: TextStyleHelper.of(context).h_20.copyWith(
-                              color: ThemeClass.of(context).background,
-                            ),
+                        child: CustomButtonWidget.primary(
+                          onTap: (){
+                            context.pushNamed(ShippingScreen.routeName);
+                          },
+                          width: 248.w,
+                          height: 54.h,
+                          title: Strings.checkOut.tr,
+                          textStyle: TextStyleHelper.of(context).h_20.copyWith(
+                            color: ThemeClass.of(context).background,
+                          ),
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ],
             ),

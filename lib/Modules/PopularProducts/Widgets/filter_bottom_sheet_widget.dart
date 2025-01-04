@@ -143,7 +143,7 @@ class _FilterBottomSheetWidgetState extends State<FilterBottomSheetWidget> {
                       ),
                     ),
                     Padding(
-                      padding: EdgeInsetsDirectional.symmetric(horizontal:18.w),
+                      padding: EdgeInsetsDirectional.symmetric(horizontal:6.w),
                       child: Row(
                         //mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -162,7 +162,7 @@ class _FilterBottomSheetWidgetState extends State<FilterBottomSheetWidget> {
                     )
                   ],
                 ),
-                Gap(10.h),
+                Gap(15.h),
                 Row(
                   children: [
                     GestureDetector(

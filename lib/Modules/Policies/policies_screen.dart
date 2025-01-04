@@ -3,7 +3,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:je_t_aime/Modules/Policies/policies_controller.dart';
 import 'package:je_t_aime/Utilities/theme_helper.dart';
-import 'package:je_t_aime/Widgets/custom_side_text_widget.dart';
 import 'package:je_t_aime/core/Language/locales.dart';
 
 import 'package:mvc_pattern/mvc_pattern.dart';
@@ -45,8 +44,11 @@ class _PoliciesScreenState extends StateMVC<PoliciesScreen> {
     //     'UI has no data'}");
     return Scaffold(
       appBar:
-    CustomAppBarWidget.detailsScreen(title: Strings.policy.tr,
-    icon: "",),
+      PreferredSize(
+        preferredSize: Size(0,75.h),
+      child: CustomAppBarWidget.detailsScreen(title: Strings.policy.tr,
+      icon: "",),
+    ),
       body: LoadingScreen(
         loading: con.loading,
         child: SafeArea(

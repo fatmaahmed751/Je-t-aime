@@ -13,7 +13,6 @@ import '../../Utilities/theme_helper.dart';
 import '../../Utilities/validate.dart';
 import '../../Widgets/custom_app_bar_widget.dart';
 import '../../Widgets/custom_button_widget.dart';
-import '../../Widgets/custom_details_side_text.dart';
 import '../../Widgets/custom_home_details_text_widget.dart';
 import '../../Widgets/custom_side_text_widget.dart';
 import '../../Widgets/custom_textfield_widget.dart';
@@ -92,7 +91,7 @@ class _ShippingScreenState extends StateMVC<ShippingScreen> {
                     backGroundColor:
                     ThemeClass.of(context).secondary.withOpacity(1),
                     controller: con.nameController,
-                    validator: (v) => Validate.validateNormalString(v),
+                    validator: (v) => Validate.validateFullName(v),
                   ),
                   Gap(10.h),
                   CustomSideTextWidget(text: Strings.address.tr),
@@ -109,7 +108,7 @@ class _ShippingScreenState extends StateMVC<ShippingScreen> {
                     backGroundColor:
                     ThemeClass.of(context).secondary.withOpacity(1),
                     controller: con.addressController,
-                    validator: (v) => Validate.validateNormalString(v),
+                    validator: (v) => Validate.validateNormalAddress(v),
                   ),
                   Gap(10.h),
                   CustomSideTextWidget(text: Strings.phone.tr),

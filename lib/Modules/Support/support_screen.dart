@@ -5,7 +5,6 @@ import 'package:gap/gap.dart';
 import 'package:je_t_aime/Modules/Support/support_controller.dart';
 import 'package:je_t_aime/core/Language/locales.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
-import '../../../Utilities/text_style_helper.dart';
 import '../../../Utilities/theme_helper.dart';
 import '../../../Utilities/validate.dart';
 import '../../../Widgets/custom_button_widget.dart';
@@ -35,9 +34,12 @@ class _SupportScreenState extends StateMVC<SupportScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBarWidget.detailsScreen(
-        title: Strings.support.tr,
-        icon: "",),
+      appBar:PreferredSize(
+        preferredSize: Size(0,75.h),
+        child: CustomAppBarWidget.detailsScreen(
+          title: Strings.support.tr,
+          icon: "",),
+      ),
         body: LoadingScreen(
             loading: con.loading,
             child: Form(
@@ -58,11 +60,13 @@ class _SupportScreenState extends StateMVC<SupportScreen> {
                         CustomTextFieldWidget(
                           hint: Strings.enterEmail.tr,
                           hintStyle: TextStyle(
-                              color: ThemeClass.of(context).labelColor),
+                              color: ThemeClass.of(context)
+                                  .secondaryBlackColor
+                                  .withOpacity(0.7)),
+                          backGroundColor:  ThemeClass.of(context).secondary.withOpacity(1),
                           prefixIcon: SvgPicture.asset(Assets.imagesEmailIcon),
                           isDense: true,
                           insidePadding: EdgeInsets.symmetric(vertical: 10.h),
-                          backGroundColor: ThemeClass.of(context).secondary,
                           controller: con.emailController,
                           validator: (v) => Validate.validateEmail(v),
                         ),
@@ -72,11 +76,13 @@ class _SupportScreenState extends StateMVC<SupportScreen> {
                         CustomTextFieldWidget(
                           hint: Strings.enterYourName.tr,
                           hintStyle: TextStyle(
-                              color: ThemeClass.of(context).labelColor),
+                              color: ThemeClass.of(context)
+                                  .secondaryBlackColor
+                                  .withOpacity(0.7)),
+                          backGroundColor:  ThemeClass.of(context).secondary.withOpacity(1),
                           prefixIcon: SvgPicture.asset(Assets.imagesProfileIcon),
                           isDense: true,
                           insidePadding: EdgeInsets.symmetric(vertical: 10.h),
-                          backGroundColor: ThemeClass.of(context).secondary,
                           controller: con.nameController,
                           validator: (v) => Validate.validateNormalString(v),
                         ),
@@ -87,11 +93,13 @@ class _SupportScreenState extends StateMVC<SupportScreen> {
                           textInputType: TextInputType.phone,
                           hint: Strings.enterYourPhone.tr,
                           hintStyle: TextStyle(
-                              color: ThemeClass.of(context).labelColor),
+                              color: ThemeClass.of(context)
+                                  .secondaryBlackColor
+                                  .withOpacity(0.7)),
+                          backGroundColor:  ThemeClass.of(context).secondary.withOpacity(1),
                           prefixIcon: SvgPicture.asset(Assets.imagesPhone),
                           isDense: true,
                           insidePadding: EdgeInsets.symmetric(vertical: 10.h),
-                          backGroundColor: ThemeClass.of(context).secondary,
                           controller: con.phoneController,
                           validator: (v) => Validate.validatePhone(v),
                         ),
@@ -111,7 +119,10 @@ class _SupportScreenState extends StateMVC<SupportScreen> {
                               hint: Strings.descProblem.tr,
                               borderColor: Colors.transparent,
                               hintStyle: TextStyle(
-                                  color: ThemeClass.of(context).labelColor),
+                                  color: ThemeClass.of(context)
+                                      .secondaryBlackColor
+                                      .withOpacity(0.7)),
+                              backGroundColor:  ThemeClass.of(context).secondary.withOpacity(1),
                               focusedBorderColor: Colors.transparent,
                               disableBorder: false,
                               validator: (v) =>

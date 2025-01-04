@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
+import 'package:go_router/go_router.dart';
 import 'package:je_t_aime/Modules/Login/widgets/user_status_row.dart';
 import 'package:je_t_aime/core/Language/locales.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
@@ -14,6 +15,7 @@ import '../../Widgets/custom_side_text_widget.dart';
 import '../../Widgets/custom_textfield_widget.dart';
 import '../../Widgets/loading_screen.dart';
 import '../../generated/assets.dart';
+import '../Register/register_screen.dart';
 import 'login_controller.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -85,12 +87,14 @@ class _LoginScreenState extends StateMVC<LoginScreen> {
                         Gap(12.h),
                         CustomTextFieldWidget(
                           hint: Strings.enterEmail.tr,
-                          hintStyle:
-                              TextStyle(color: ThemeClass.of(context).secondary),
+                          hintStyle: TextStyle(
+                              color: ThemeClass.of(context)
+                                  .secondaryBlackColor
+                                  .withOpacity(0.7)),
+                          backGroundColor:  ThemeClass.of(context).secondary.withOpacity(1),
                           prefixIcon: SvgPicture.asset(Assets.imagesEmailIcon),
-                          isDense: true,
+                         // isDense: true,
                           insidePadding: EdgeInsets.symmetric(vertical: 10.h),
-                        backGroundColor: ThemeClass.of(context).secondary,
                           controller: con.emailController,
                           validator: (v) => Validate.validateEmail(v),
                         ),
@@ -98,11 +102,14 @@ class _LoginScreenState extends StateMVC<LoginScreen> {
                         CustomSideTextWidget(text:Strings.password.tr),
                         Gap(12.h),
                         CustomTextFieldWidget(
+                          hintStyle: TextStyle(
+                              color: ThemeClass.of(context)
+                                  .secondaryBlackColor
+                                  .withOpacity(0.7)),
+                          backGroundColor:  ThemeClass.of(context).secondary.withOpacity(1),
                           obscure: con.isPassword,
                           focusedBorderColor:ThemeClass.of(context).primaryColor ,
                           hint: Strings.enterPassword.tr,
-                          hintStyle:
-                              TextStyle(color: ThemeClass.of(context).secondary),
                           prefixIcon: SvgPicture.asset(Assets.imagesLockIcon),
                           suffixIcon:con.isPassword? SvgPicture.asset(Assets.imagesObsecureIcon)
                           :SvgPicture.asset(Assets.imagesLockIcon),
@@ -111,9 +118,8 @@ class _LoginScreenState extends StateMVC<LoginScreen> {
                              con.isPassword = !con.isPassword;
                             });
                           } ,
-                          isDense: true,
+                        //  isDense: true,
                           insidePadding: EdgeInsets.symmetric(vertical: 10.h),
-                        backGroundColor: ThemeClass.of(context).secondary,
                           controller: con.passwordController,
                           validator: (v) => Validate.validatePassword(v),
                         ),
@@ -154,7 +160,7 @@ class _LoginScreenState extends StateMVC<LoginScreen> {
                           text: Strings.noHavenAccount.tr,
                           nextText: Strings.signUp.tr,
                           onNextTextTap: () {
-                           // (context).pushNamed(RegisterScreen.routeName);
+                          context.pushNamed(RegisterScreen.routeName);
                           },
                         ),
                         Row(

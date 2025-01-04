@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
+import 'package:go_router/go_router.dart';
 import 'package:je_t_aime/Widgets/custom_side_text_widget.dart';
 import 'package:je_t_aime/core/Language/locales.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
@@ -14,6 +15,7 @@ import '../../../../Widgets/custom_textfield_widget.dart';
 import '../../../../Widgets/loading_screen.dart';
 import '../../Widgets/circle_avatar_widget.dart';
 import '../../generated/assets.dart';
+import '../ForgetPassword/forget_password_screen.dart';
 import 'change_password_controller.dart';
 
 class ChangePasswordScreen extends StatefulWidget {
@@ -118,7 +120,7 @@ class _ChangePasswordScreenState extends StateMVC<ChangePasswordScreen> {
                           children: [
                             GestureDetector(
                               onTap: () {
-                                //context.pushNamed(ForgetPasswordScreen.routeName);
+                                context.pushNamed(ForgetPasswordScreen.routeName);
                               },
                               child: Text(
                                 Strings.forgetPassword.tr,
@@ -209,7 +211,11 @@ class _ChangePasswordScreenState extends StateMVC<ChangePasswordScreen> {
         CustomTextFieldWidget(
           obscure: isPassword,
           hint: hint,
-          hintStyle:  TextStyle(color: ThemeClass.of(context).labelColor),
+          hintStyle: TextStyle(
+              color: ThemeClass.of(context)
+                  .secondaryBlackColor
+                  .withOpacity(0.7)),
+          backGroundColor:  ThemeClass.of(context).secondary.withOpacity(1),
           prefixIcon: SvgPicture.asset(Assets.imagesLockIcon),
           isDense: true,
           suffixIcon:suffixIcon,
@@ -220,7 +226,6 @@ class _ChangePasswordScreenState extends StateMVC<ChangePasswordScreen> {
           //   });
           // },
           insidePadding: EdgeInsets.symmetric(vertical: 10.h),
-          backGroundColor: ThemeClass.of(context).secondary,
           controller: controller,
           validator: validator,
         ),

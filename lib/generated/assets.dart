@@ -17,6 +17,7 @@ class Assets {
   static const String imagesCashImage = 'assets/images/cashImage.svg';
   static const String imagesCheckBox = 'assets/images/checkBox.svg';
   static const String imagesClose = 'assets/images/close.svg';
+  static const String imagesColoredCheck = 'assets/images/coloredCheck.svg';
   static const String imagesContainer = 'assets/images/Container.svg';
   static const String imagesDeleteAccount = 'assets/images/deleteAccount.svg';
   static const String imagesDiscountShape = 'assets/images/discountShape.svg';
@@ -35,6 +36,7 @@ class Assets {
   static const String imagesHeartBroken = 'assets/images/heartBroken.svg';
   static const String imagesHome = 'assets/images/home.svg';
   static const String imagesIconApp = 'assets/images/iconApp.png';
+  static const String imagesJeTaimeLogo = 'assets/images/jeTaimeLogo.png';
   static const String imagesLocation = 'assets/images/location.svg';
   static const String imagesLockIcon = 'assets/images/lockIcon.svg';
   static const String imagesLoginImage = 'assets/images/loginImage.png';

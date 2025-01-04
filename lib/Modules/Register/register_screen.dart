@@ -85,15 +85,17 @@ class _RegisterScreenState extends StateMVC<RegisterScreen> {
                         CustomSideTextWidget(text: Strings.email.tr),
                         Gap(8.h),
                         CustomTextFieldWidget(
+                          hintStyle: TextStyle(
+                              color: ThemeClass.of(context)
+                                  .secondaryBlackColor
+                                  .withOpacity(0.7)),
+                          backGroundColor:  ThemeClass.of(context).secondary.withOpacity(1),
                           hint: Strings.enterEmail.tr,
                           focusedBorderColor:
                               ThemeClass.of(context).primaryColor,
-                          hintStyle: TextStyle(
-                              color: ThemeClass.of(context).secondary),
                           prefixIcon: SvgPicture.asset(Assets.imagesEmailIcon),
-                          isDense: true,
+                         // isDense: true,
                           insidePadding: EdgeInsets.symmetric(vertical: 10.h),
-                          backGroundColor: ThemeClass.of(context).secondary,
                           controller: con.emailController,
                           validator: (v) => Validate.validateEmail(v),
                         ),
@@ -101,17 +103,20 @@ class _RegisterScreenState extends StateMVC<RegisterScreen> {
                         CustomSideTextWidget(text: Strings.password.tr),
                         Gap(8.h),
                         CustomTextFieldWidget(
+                          hintStyle: TextStyle(
+                              color: ThemeClass.of(context)
+                                  .secondaryBlackColor
+                                  .withOpacity(0.7)),
+                          backGroundColor:  ThemeClass.of(context).secondary.withOpacity(1),
                           hint: Strings.enterPassword.tr,
                           focusedBorderColor:
                               ThemeClass.of(context).primaryColor,
-                          backGroundColor: ThemeClass.of(context).secondary,
-                          hintStyle: TextStyle(
-                              color: ThemeClass.of(context).secondary),
+
                           prefixIcon: SvgPicture.asset(Assets.imagesLockIcon),
                           suffixIcon: con.isPassword
                               ? SvgPicture.asset(Assets.imagesObsecureIcon)
                               : SvgPicture.asset(Assets.imagesObsecureIcon),
-                          isDense: true,
+                        //  isDense: true,
                           onSuffixTap: () {
                             setState(() {
                               con.isPassword = !con.isPassword;
@@ -127,12 +132,15 @@ class _RegisterScreenState extends StateMVC<RegisterScreen> {
                         CustomTextFieldWidget(
                           hint: Strings.enterPassword.tr,
                           hintStyle: TextStyle(
-                              color: ThemeClass.of(context).secondary),
+                              color: ThemeClass.of(context)
+                                  .secondaryBlackColor
+                                  .withOpacity(0.7)),
+                          backGroundColor:  ThemeClass.of(context).secondary.withOpacity(1),
                           prefixIcon: SvgPicture.asset(Assets.imagesLockIcon),
                           suffixIcon: con.isConfirmPassword
                               ? SvgPicture.asset(Assets.imagesObsecureIcon)
                               : SvgPicture.asset(Assets.imagesObsecureIcon),
-                          isDense: true,
+                         // isDense: true,
                           onSuffixTap: () {
                             setState(() {
                               con.isConfirmPassword = !con.isConfirmPassword;
@@ -141,7 +149,6 @@ class _RegisterScreenState extends StateMVC<RegisterScreen> {
                           insidePadding: EdgeInsets.symmetric(vertical: 10.h),
                           focusedBorderColor:
                               ThemeClass.of(context).primaryColor,
-                          backGroundColor: ThemeClass.of(context).secondary,
                           controller: con.confirmPasswordController,
                           validator: (v) => Validate.validateConfPassword(
                               confPassword: con.passwordController.text,

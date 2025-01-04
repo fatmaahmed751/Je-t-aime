@@ -67,7 +67,8 @@ class CustomProductContainerWidget extends StatelessWidget{
                         onTap: (){
                           ToastHelper.showSuccess(
                             message: Strings.addToFavoriteSuccess.tr,
-                            icon:SvgPicture.asset(Assets.imagesSubmit,),
+                         icon:SvgPicture.asset(Assets.imagesSubmit,
+                         width: 10.w,),
                             backgroundColor: ThemeClass.of(context).primaryColor,
                           );
                         },

@@ -43,9 +43,12 @@ class _PersonalDataScreenState extends StateMVC<PersonalDataScreen> {
   Widget build(BuildContext context) {
 
     return Scaffold(
-      appBar: CustomAppBarWidget.detailsScreen(
-          title: Strings.personalData.tr,
-      icon: "",),
+      appBar: PreferredSize(
+        preferredSize: Size(0,75.h),
+        child: CustomAppBarWidget.detailsScreen(
+            title: Strings.personalData.tr,
+        icon: "",),
+      ),
       body: LoadingScreen(
         loading: con.loading,
         child: Form(
@@ -68,13 +71,16 @@ class _PersonalDataScreenState extends StateMVC<PersonalDataScreen> {
                     CustomSideTextWidget(text: Strings.email.tr),
                     Gap(10.h),
                     CustomTextFieldWidget(
+                      height:48.h,
                       hint: Strings.enterEmail.tr,
                       hintStyle: TextStyle(
-                          color: ThemeClass.of(context).labelColor),
+                          color: ThemeClass.of(context)
+                              .secondaryBlackColor
+                              .withOpacity(0.6)),
                       prefixIcon: SvgPicture.asset(Assets.imagesEmailIcon),
-                      isDense: true,
+                    //  isDense: true,
                       insidePadding: EdgeInsets.symmetric(vertical: 10.h),
-                      backGroundColor: ThemeClass.of(context).secondary,
+                      backGroundColor:  ThemeClass.of(context).secondary.withOpacity(1),
                       controller: con.emailController,
                       validator: (v) => Validate.validateEmail(v),
                     ),
@@ -82,28 +88,35 @@ class _PersonalDataScreenState extends StateMVC<PersonalDataScreen> {
                     CustomSideTextWidget(text: Strings.name.tr),
                     Gap(10.h),
                     CustomTextFieldWidget(
+                      height:48.h,
                       hint: Strings.enterYourName.tr,
                       hintStyle: TextStyle(
-                          color: ThemeClass.of(context).labelColor),
+                          color: ThemeClass.of(context)
+                              .secondaryBlackColor
+                              .withOpacity(0.6)),
                       prefixIcon: SvgPicture.asset(Assets.imagesProfileIcon),
-                      isDense: true,
+                     // isDense: true,
                       insidePadding: EdgeInsets.symmetric(vertical: 10.h),
-                      backGroundColor: ThemeClass.of(context).secondary,
+                      backGroundColor:  ThemeClass.of(context).secondary.withOpacity(1),
                       controller: con.nameController,
-                      validator: (v) => Validate.validateNormalString(v),
+                      validator: (v) => Validate.validateFullName(v),
                     ),
                     Gap(10.h),
                     CustomSideTextWidget(text: Strings.phone.tr),
                     Gap(10.h),
                     CustomTextFieldWidget(
+                      borderRadiusValue: 30.r,
+                      height:48.h,
                       textInputType: TextInputType.phone,
                       hint: Strings.enterYourPhone.tr,
                       hintStyle: TextStyle(
-                          color: ThemeClass.of(context).labelColor),
+                          color: ThemeClass.of(context)
+                              .secondaryBlackColor
+                              .withOpacity(0.6)),
                       prefixIcon: SvgPicture.asset(Assets.imagesPhone),
                       isDense: true,
                       insidePadding: EdgeInsets.symmetric(vertical: 10.h),
-                      backGroundColor: ThemeClass.of(context).secondary,
+                      backGroundColor:  ThemeClass.of(context).secondary.withOpacity(1),
                       controller: con.phoneController,
                       validator: (v) => Validate.validatePhone(v),
                     ),
@@ -111,15 +124,20 @@ class _PersonalDataScreenState extends StateMVC<PersonalDataScreen> {
                     CustomSideTextWidget(text: Strings.address.tr),
                     Gap(10.h),
                     CustomTextFieldWidget(
+                      borderRadiusValue: 30.r,
+                      focusedBorderColor:ThemeClass.of(context).primaryColor ,
+                      height:48.h,
                       hint: Strings.enterYourAddress.tr,
-                      hintStyle: TextStyle(
-                          color: ThemeClass.of(context).labelColor),
                       prefixIcon: SvgPicture.asset(Assets.imagesLocation),
                       isDense: true,
                       insidePadding: EdgeInsets.symmetric(vertical: 10.h),
-                      backGroundColor: ThemeClass.of(context).secondary,
+                      hintStyle: TextStyle(
+                          color: ThemeClass.of(context)
+                              .secondaryBlackColor
+                              .withOpacity(0.6)),
+                      backGroundColor:  ThemeClass.of(context).secondary.withOpacity(1),
                       controller: con.addressController,
-                      validator: (v) => Validate.validateNormalString(v),
+                      validator: (v) => Validate.validateNormalAddress(v),
                     ),
                     Gap(10.h),
                     Row(

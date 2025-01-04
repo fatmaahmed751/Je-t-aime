@@ -80,16 +80,18 @@ class _ResetPasswordScreenState extends StateMVC<ResetPasswordScreen> {
                 ),
                 Gap(15.h),
                 CustomTextFieldWidget(
+                  hintStyle: TextStyle(
+                      color: ThemeClass.of(context)
+                          .secondaryBlackColor
+                          .withOpacity(0.7)),
+                  backGroundColor:  ThemeClass.of(context).secondary.withOpacity(1),
                   focusedBorderColor: ThemeClass.of(context).primaryColor,
                   hint: Strings.enterPassword.tr,
-                  backGroundColor: ThemeClass.of(context).secondary,
-                  hintStyle:
-                      TextStyle(color: ThemeClass.of(context).secondary),
                   prefixIcon: SvgPicture.asset(Assets.imagesLockIcon),
                   suffixIcon: con.isPassword
                       ? SvgPicture.asset(Assets.imagesObsecureIcon)
                       : SvgPicture.asset(Assets.imagesEmailIcon),
-                  isDense: true,
+                //  isDense: true,
                   onSuffixTap: () {
                     setState(() {
                       con.isPassword = !con.isPassword;
@@ -103,22 +105,24 @@ class _ResetPasswordScreenState extends StateMVC<ResetPasswordScreen> {
                 CustomSideTextWidget(text: Strings.repeatPassword.tr),
                 Gap(15.h),
                 CustomTextFieldWidget(
+                  hintStyle: TextStyle(
+                      color: ThemeClass.of(context)
+                          .secondaryBlackColor
+                          .withOpacity(0.7)),
+                  backGroundColor:  ThemeClass.of(context).secondary.withOpacity(1),
                   focusedBorderColor: ThemeClass.of(context).primaryColor,
                   hint: Strings.enterPassword.tr,
-                  hintStyle:
-                      TextStyle(color: ThemeClass.of(context).secondary),
                   prefixIcon: SvgPicture.asset(Assets.imagesLockIcon),
                   suffixIcon: con.repeatPassword
                       ? SvgPicture.asset(Assets.imagesObsecureIcon)
                       : SvgPicture.asset(Assets.imagesEmailIcon),
-                  isDense: true,
+                 // isDense: true,
                   onSuffixTap: () {
                     setState(() {
                       con.repeatPassword = !con.repeatPassword;
                     });
                   },
                   insidePadding: EdgeInsets.symmetric(vertical: 10.h),
-                  backGroundColor: ThemeClass.of(context).secondary,
                   controller: con.confirmNewPasswordController,
                   validator: (v) => Validate.validateConfPassword(
                       newPassword: v!,

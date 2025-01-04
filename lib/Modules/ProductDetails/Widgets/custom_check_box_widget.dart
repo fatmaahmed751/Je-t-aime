@@ -42,7 +42,7 @@ class CustomCheckBoxWidgetState extends State<CustomCheckBoxWidget> {
                   //  _isChecked
                     _isCheckedList[0]
                         ? Assets.imagesCheckBox// Checked SVG
-                        : Assets.imagesCheckBox,
+                        : Assets.imagesColoredCheck,
                     height: 18.h,
                     width: 18.w,// Unchecked SVG
                   ),
@@ -68,7 +68,7 @@ class CustomCheckBoxWidgetState extends State<CustomCheckBoxWidget> {
                 child: SvgPicture.asset(
                   _isCheckedList[1]
                       ? Assets.imagesCheckBox// Checked SVG
-                      : Assets.imagesCheckBox,
+                      : Assets.imagesColoredCheck,
                   height: 18.h,
                   width: 18.w,// Unchecked SVG
                 ),
@@ -92,7 +92,7 @@ class CustomCheckBoxWidgetState extends State<CustomCheckBoxWidget> {
                 child: SvgPicture.asset(
                   _isCheckedList[2]
                       ? Assets.imagesCheckBox// Checked SVG
-                      : Assets.imagesCheckBox,
+                      : Assets.imagesColoredCheck,
                   height: 18.h,
                   width: 18.w,// Unchecked SVG
                 ),

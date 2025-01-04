@@ -222,19 +222,17 @@ class CustomTextFieldWidgetState extends State<CustomTextFieldWidget> {
   InputBorder? getBorder({double? radius, Color? color}) {
     if (widget.disableBorder) return null;
     return OutlineInputBorder(
-      borderRadius: BorderRadius.circular(radius ?? 28.r),
-      borderSide: BorderSide(
-        color: color ?? Theme.of(context).dividerColor,
-        width: 1.w,
-      ),
+      borderRadius: BorderRadius.circular(28.r),
+      borderSide: BorderSide(color: color ?? ThemeClass.of(context).secondary,width: 1.w),
     );
   }
 
   @override
   Widget build(BuildContext context) {
+
     return SizedBox(
       width: widget.width,
-      height: 48.h,
+      //height: 48.h,
       child: TextFormField(
         focusNode: _focusNode,
         controller: widget.controller,
@@ -257,6 +255,8 @@ class CustomTextFieldWidgetState extends State<CustomTextFieldWidget> {
         textAlignVertical: TextAlignVertical.center,
         validator: widget.validator,
         decoration: InputDecoration(
+          disabledBorder: getBorder(radius: 30.r,color: Colors.transparent),
+          errorStyle:  TextStyle(height:1.h,color: ThemeClass.of(context).primaryColor),
          errorBorder:  OutlineInputBorder(
             borderRadius: BorderRadius.circular(30.r),
             borderSide: BorderSide(
@@ -266,11 +266,15 @@ class CustomTextFieldWidgetState extends State<CustomTextFieldWidget> {
           ),
           //textCapitalization: TextCapitalization.words,
           enabledBorder: getBorder(
-            radius: widget.borderRadiusValue,
+            radius: 30.r,
             color: widget.borderColor,
           ),
+          focusedErrorBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(28.r),
+            borderSide: BorderSide(color:  ThemeClass.of(context).primaryColor, width: 1.0),
+          ),
           focusedBorder: getBorder(
-            radius: widget.borderRadiusValue,
+            radius:28.r,
             color: widget.focusedBorderColor ??
                 ThemeClass.of(context).primaryColor,
           ),
@@ -286,18 +290,8 @@ class CustomTextFieldWidgetState extends State<CustomTextFieldWidget> {
                       horizontal: 12.w), // Adjust padding if needed
                   child: widget.prefixIcon,
                 )
-              // SizedBox(
-              //         width: 24.w, // Adjust width here
-              //         height: 24.h, // Adjust height here
-              //         child: widget.prefixIcon,
-              //       )
               : null,
            prefixIconConstraints:BoxConstraints( minWidth: widget.prefixIcon == null ? 0.w : 48.w, maxHeight: 48.w),
-    //BoxConstraints(
-          //   minWidth: 24.w,
-          //   minHeight: 24.h,
-          //   maxHeight: 24.h,
-          // ),
           suffixIconConstraints: BoxConstraints(
            minWidth: widget.suffixIcon == null ? 0 : 48.w, maxHeight:24.h),
             suffixIcon:widget.suffixIcon != null

@@ -8,6 +8,7 @@ import 'package:je_t_aime/Modules/Orders/orders_screen.dart';
 import 'package:je_t_aime/Modules/Payment/payment_screen.dart';
 import 'package:je_t_aime/Modules/Register/register_screen.dart';
 import 'package:je_t_aime/Modules/Support/support_screen.dart';
+import '../Modules/AllCategories/all_categories_screen.dart';
 import '../Modules/Cart/cart_screen.dart';
 import '../Modules/ForgetPassword/forget_password_screen.dart';
 import '../Modules/Home/SearchSccreen/search_screen.dart';
@@ -20,6 +21,7 @@ import '../Modules/Policies/policies_screen.dart';
 import '../Modules/PopularProducts/popular_product_screen.dart';
 import '../Modules/ProductDetails/product_details_screen.dart';
 import '../Modules/ResetPassword/reset_password_screen.dart';
+import '../Modules/Reviews/reviews_screen.dart';
 import '../Modules/Rewards/LoginRewardsScreen/login_rewards_screen.dart';
 import '../Modules/Shipping/shipping_screen.dart';
 import '../Modules/Splash/splash_screen.dart';
@@ -41,7 +43,28 @@ class GoRouterConfig{
         },
         routes: const <RouteBase>[],
       ),
-
+      GoRoute(
+        name: ReviewsForProductScreen.routeName,
+        path: "/${ReviewsForProductScreen.routeName}",
+        pageBuilder: (_, GoRouterState state) {
+          return getCustomTransitionPage(
+            state: state,
+            child:  const ReviewsForProductScreen(),
+          );
+        },
+        routes: const <RouteBase>[],
+      ),
+      GoRoute(
+        name: AllCategoriesScreen.routeName,
+        path: "/${AllCategoriesScreen.routeName}",
+        pageBuilder: (_, GoRouterState state) {
+          return getCustomTransitionPage(
+            state: state,
+            child:  const AllCategoriesScreen(),
+          );
+        },
+        routes: const <RouteBase>[],
+      ),
       GoRoute(
         name: HomeScreen.routeName,
         path: "/${HomeScreen.routeName}",

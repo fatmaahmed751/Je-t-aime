@@ -23,7 +23,7 @@ class AlertWarningWidget extends StatelessWidget {
       ),
       child: Padding(
         padding: EdgeInsetsDirectional.only(
-      start: 24.w,top: 48.h,end: 24.w,bottom: 48.h),
+      start: 23.w,top: 48.h,end: 23.w,bottom: 48.h),
         child: Column(
           mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -38,7 +38,7 @@ class AlertWarningWidget extends StatelessWidget {
                 width: 337.w,
                // height: 111.h,
                 child: Text(des??'',style: TextStyleHelper.of(context).b_16.copyWith(color:ThemeClass.of(context).secondaryBlackColor,
-                fontWeight: FontWeight.w400),textAlign: TextAlign.center,)),
+                fontWeight: FontWeight.w400),)),
             Gap(30.h),
             Row(
               //mainAxisAlignment: MainAxisAlignment.center,

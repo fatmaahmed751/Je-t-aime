@@ -114,7 +114,7 @@ class _VerificationOtpScreenState extends StateMVC<VerificationOtpScreen> {
                         child: Text(Strings.verifyCode.tr,
                             textAlign: TextAlign.start,
                             style: TextStyleHelper.of(context).b_16.copyWith(
-                                color: ThemeClass.of(context).labelColor)),
+                                color: ThemeClass.of(context).secondaryBlackColor.withOpacity(0.6))),
                       ),
                       Gap(20.h),
                       Directionality(
@@ -189,7 +189,7 @@ class _VerificationOtpScreenState extends StateMVC<VerificationOtpScreen> {
                               Strings.resendCode.tr,
                               textAlign: TextAlign.left,
                               style: TextStyleHelper.of(context).b_16.copyWith(
-                                  color: ThemeClass.of(context).labelColor),
+                                  color: ThemeClass.of(context).secondaryBlackColor.withOpacity(0.6)),
                             ),
                           ),
                           Text(

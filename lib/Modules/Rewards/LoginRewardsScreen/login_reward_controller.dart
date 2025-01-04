@@ -8,7 +8,7 @@ class LoginRewardsController extends ControllerMVC {
   static LoginRewardsController? _this;
   LoginRewardsController._();
   bool loading=false,autoValidate = false;
-  bool isClick = false;
+  bool isClick = true;
 bool isSearch= false;
   @override
   void initState() {
