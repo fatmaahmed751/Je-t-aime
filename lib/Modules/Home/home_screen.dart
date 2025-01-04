@@ -34,7 +34,7 @@ class _HomeScreenState extends StateMVC<HomeScreen> {
   @override
   void initState() {
     super.initState();
-    ToastHelper.init(context);
+
   }
 
 

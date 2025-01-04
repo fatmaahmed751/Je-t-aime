@@ -66,9 +66,12 @@ class CustomProductContainerWidget extends StatelessWidget{
                       child: GestureDetector(
                         onTap: (){
                           ToastHelper.showSuccess(
+                            context: context,
                             message: Strings.addToFavoriteSuccess.tr,
-                         icon:SvgPicture.asset(Assets.imagesSubmit,
-                         width: 10.w,),
+                         icon:SvgPicture.asset(Assets.imagesSubmit,width:60.w,
+                         height:50.h,
+                         fit: BoxFit.cover,),
+
                             backgroundColor: ThemeClass.of(context).primaryColor,
                           );
                         },
@@ -98,8 +101,11 @@ class CustomProductContainerWidget extends StatelessWidget{
                 GestureDetector(
                   onTap: (){
                     ToastHelper.showSuccess(
+                      context: context,
                       message: Strings.addToCartSuccess.tr,
-                      icon:SvgPicture.asset(Assets.imagesSubmit,),
+                      icon:SvgPicture.asset(Assets.imagesSubmit,width:60.w,
+                        height:50.h,
+                        fit: BoxFit.cover,),
                       backgroundColor: ThemeClass.of(context).primaryColor,
                     );
                   },
