@@ -54,8 +54,8 @@ class _ShippingScreenState extends StateMVC<ShippingScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
    //   backgroundColor: Colors.yellow,
-      appBar: PreferredSize(
-        preferredSize: Size(double.infinity,90.h),
+      appBar:PreferredSize(
+        preferredSize: Size(0,80.h),
        // padding: const EdgeInsets.all(8.0),
         child: CustomAppBarWidget.detailsScreen(
           title: Strings.shippingDetails.tr,
@@ -73,6 +73,7 @@ class _ShippingScreenState extends StateMVC<ShippingScreen> {
             child:  Padding(
               padding: EdgeInsetsDirectional.only(start: 23.w,end: 23.w),
               child: ListView(
+                padding: EdgeInsets.zero,
                physics: const BouncingScrollPhysics(),
                 //crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -185,7 +186,7 @@ class _ShippingScreenState extends StateMVC<ShippingScreen> {
                   ),
                   Gap(16.h),
                   Container(
-                    height: 152.h,
+                  //  height: 154.h,
                     padding: EdgeInsetsDirectional.symmetric(horizontal: 24.w),
                     decoration: BoxDecoration(
                       color: ThemeClass.of(context).background,
@@ -202,7 +203,7 @@ class _ShippingScreenState extends StateMVC<ShippingScreen> {
                       ],
                     ),
                     child: Padding(
-                      padding: EdgeInsetsDirectional.only(top: 15.h),
+                      padding: EdgeInsetsDirectional.only(top: 15.h,bottom: 10.h),
                       child:
                       Column(crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -248,7 +249,7 @@ class _ShippingScreenState extends StateMVC<ShippingScreen> {
                               color:ThemeClass.of(context)
                                   .secondaryBlackColor
                                   .withOpacity(0.6)) ,
-                          Gap(5.h),
+                          Gap(8.h),
                           Row(children: [
                             Text(
                               Strings.total.tr,
@@ -290,8 +291,11 @@ class _ShippingScreenState extends StateMVC<ShippingScreen> {
                       //   });
                       // }
                     },
-                    child: CustomButtonWidget.primary(
-                      title: Strings.continu.tr ?? '',
+                    child: Padding(
+                      padding:EdgeInsetsDirectional.symmetric(vertical:15.h),
+                      child: CustomButtonWidget.primary(
+                        title: Strings.continu.tr ?? '',
+                      ),
                     ),
                   ),
 

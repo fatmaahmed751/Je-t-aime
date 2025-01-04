@@ -34,6 +34,7 @@ class _HomeScreenState extends StateMVC<HomeScreen> {
   @override
   void initState() {
     super.initState();
+    con.update();
 
   }
 

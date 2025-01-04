@@ -48,6 +48,7 @@ class _AllCategoriesScreenState extends StateMVC<AllCategoriesScreen> {
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal:15.w),
           child: ListView(
+            physics: const BouncingScrollPhysics(),
               padding: EdgeInsets.zero,
               children: [
           Row(

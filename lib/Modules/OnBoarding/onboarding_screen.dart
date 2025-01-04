@@ -10,6 +10,7 @@ import '../../../Utilities/strings.dart';
 import '../../../Utilities/text_style_helper.dart';
 import '../../Utilities/theme_helper.dart';
 import '../../Widgets/custom_button_widget.dart';
+import '../Login/login_screen.dart';
 import 'onboarding_controller.dart';
 
 class OnBoardingScreen extends StatefulWidget {
@@ -73,7 +74,7 @@ class _OnBoardingScreenState extends StateMVC<OnBoardingScreen> {
                       .copyWith(color: ThemeClass.of(context).background),
                   radius: 30.r,
                   onTap: () {
-                   // GoRouter.of(context).goNamed(LoginScreen.routeName);
+                   GoRouter.of(context).goNamed(LoginScreen.routeName);
                   }),
             ),
           // Gap(10.h),

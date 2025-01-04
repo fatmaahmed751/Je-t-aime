@@ -37,7 +37,7 @@ class CashPaymentMethodWidgetState extends StateMVC<CashPaymentMethodWidget> {
            style: TextStyleHelper.of(context).h_18.copyWith(
                color: ThemeClass.of(context).mainBlack
            ),),
-         const Spacer(),
+         Gap(500.h),
          CustomButtonWidget.primary(
              title: Strings.payNow.tr,
              onTap: () {

@@ -21,7 +21,7 @@ class DetailsOfOrder extends StatelessWidget {
         //  context.pushNamed(TrackOrderScreen.routeName,extra:orderModel);
       },
       child: Container(
-        height: 152.h,
+        //height: 152.h,
         padding: EdgeInsetsDirectional.symmetric(horizontal: 24.w),
         decoration: BoxDecoration(
           color: ThemeClass.of(context).background,
@@ -105,7 +105,9 @@ class DetailsOfOrder extends StatelessWidget {
                     .copyWith(color: ThemeClass.of(context).mainBlack),
               ),
             ]),
-          ]),
+                Gap(8.h)
+          ]
+              ),
         ),
       ),
     );

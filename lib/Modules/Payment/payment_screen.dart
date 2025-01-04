@@ -33,24 +33,26 @@ class PaymentScreenState extends StateMVC<PaymentScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBarWidget.detailsScreen(
-        title: Strings.paymentMethod.tr,
-        icon: "",
+      appBar: PreferredSize(
+        preferredSize: Size(0,80.h),
+        child: CustomAppBarWidget.detailsScreen(
+          title: Strings.paymentMethod.tr,
+          icon: "",
+        ),
       ),
       body: LoadingScreen(
         loading: con.loading,
         child: SafeArea(
-          child: Column(
+          child: ListView(
+            physics: const BouncingScrollPhysics(),
             children: [
               Padding(
                 padding: EdgeInsetsDirectional.symmetric(horizontal:  20.w),
                 child:  togglePaymentsMethodsWidget(),
               ),
               con.isClick
-                  ? const Expanded(child
-                  : VisaPaymentMethodWidget())
-                  : const Expanded(child
-                  : CashPaymentMethodWidget()),
+                  ? VisaPaymentMethodWidget()
+                  : CashPaymentMethodWidget(),
             ],
           ),
         ),

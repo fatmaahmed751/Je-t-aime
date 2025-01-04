@@ -129,7 +129,7 @@ class _SupportScreenState extends StateMVC<SupportScreen> {
                                   Validate.validateNormalString(v),
                             ),
                           ),
-                        Gap(170.h),
+                        Gap(140.h),
 
                           CustomButtonWidget.primary(
                               title: Strings.send.tr,

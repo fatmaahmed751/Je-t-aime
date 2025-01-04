@@ -6,6 +6,7 @@ import 'package:go_router/go_router.dart';
 import 'package:je_t_aime/Modules/Shipping/shipping_screen.dart';
 import 'package:je_t_aime/core/Language/locales.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
+import '../../Utilities/shared_preferences.dart';
 import '../../Utilities/strings.dart';
 import '../../Utilities/text_style_helper.dart';
 import '../../Utilities/theme_helper.dart';
@@ -85,7 +86,7 @@ class _CartScreenState extends StateMVC<CartScreen> {
                 ),
                 Padding(
                   padding: EdgeInsetsDirectional.symmetric(vertical: 20.h),
-                  child: Row(
+                  child:Row(
                     children: [
                       Container(
                         width: 90.w,
@@ -163,7 +164,7 @@ class _ProductItemState extends State<ProductItem> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 140.h,
+     // height: 140.h,
       decoration: BoxDecoration(
         color: ThemeClass.of(context).background,
         borderRadius: BorderRadius.circular(30.r),

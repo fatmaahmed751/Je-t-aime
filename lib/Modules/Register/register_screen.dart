@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
+import 'package:je_t_aime/Modules/Home/home_screen.dart';
 import 'package:je_t_aime/Modules/Register/register_controller.dart';
 import 'package:je_t_aime/Widgets/custom_side_text_widget.dart';
 import 'package:je_t_aime/core/Language/locales.dart';
@@ -48,12 +49,12 @@ class _RegisterScreenState extends StateMVC<RegisterScreen> {
             child: ListView(
               physics: const BouncingScrollPhysics(),
               children: [
-                Gap(70.h),
+                Gap(40.h),
                 Center(
                   child: Image.asset(
                     Assets.imagesSignUp,
-                    width: 154.w,
-                    height:122.h,
+                    width: 170.w,
+                    height:125.h,
                   ),
                 ),
                 Gap(20.h),
@@ -75,13 +76,14 @@ class _RegisterScreenState extends StateMVC<RegisterScreen> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
+                        Gap(15.h),
                         Center(
                           child: Text(
                             Strings.signUp.tr,
                             style: TextStyleHelper.of(context).h_24,
                           ),
                         ),
-                        Gap(20.h),
+                        Gap(15.h),
                         CustomSideTextWidget(text: Strings.email.tr),
                         Gap(8.h),
                         CustomTextFieldWidget(
@@ -154,10 +156,11 @@ class _RegisterScreenState extends StateMVC<RegisterScreen> {
                               confPassword: con.passwordController.text,
                               newPassword: v!),
                         ),
-                        Gap(13.h),
+                        Gap(15.h),
                         CustomButtonWidget.primary(
                             title: Strings.joinUs.tr,
                            onTap: () {
+                              GoRouter.of(context).pushNamed(HomeScreen.routeName);
                             //   if (_formKey.currentState?.validate() ?? false) {
                             //   //  con.onRegister();
                             //   } else {
@@ -166,7 +169,7 @@ class _RegisterScreenState extends StateMVC<RegisterScreen> {
                             //     });
                             //   }
                             }),
-                        Gap(10.h),
+                       // Gap(10.h),
                         UserStatusRow(
                           text: Strings.haveAccount.tr,
                           nextText: Strings.login.tr,
@@ -198,7 +201,7 @@ class _RegisterScreenState extends StateMVC<RegisterScreen> {
                             ),
                           ],
                         ),
-                        Gap(20.h),
+                        //Gap(20.h),
                         Row(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           mainAxisAlignment: MainAxisAlignment.center,

@@ -65,6 +65,7 @@ class _PersonalDataScreenState extends StateMVC<PersonalDataScreen> {
                 padding: EdgeInsetsDirectional.symmetric(
                     horizontal: 20.w),
                 child: ListView(
+                  physics: const BouncingScrollPhysics(),
                   //crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
 
@@ -156,21 +157,25 @@ class _PersonalDataScreenState extends StateMVC<PersonalDataScreen> {
                         ),
                       ],
                     ),
-                  Gap(200.h),
+                  Gap(150.h),
                    // const Spacer(),
-                    CustomButtonWidget.primary(
-                        title: Strings.update.tr,
-                        onTap: () {
-                          if (_formKey.currentState?.validate() ?? false) {
+                    Padding(
+                      padding: EdgeInsetsDirectional.symmetric(vertical: 15.h),
+                      child: CustomButtonWidget.primary(
+                          title: Strings.update.tr,
+                          onTap: () {
+                            if (_formKey.currentState?.validate() ?? false) {
 
-                          } else {
-                            setState(() {
-                              con.autoValidate = true;
-                            });
+                            } else {
+                              setState(() {
+                                con.autoValidate = true;
+                              });
+                            }
                           }
-                        }
-                    ),
+                      ),
 
+                    ),
+                    Gap(30.h)
                   ],
                 ),
               ):

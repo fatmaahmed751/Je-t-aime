@@ -21,7 +21,9 @@ class UserStatusRow extends StatelessWidget {
         Text(
           text,
           style: TextStyleHelper.of(context).b_16.copyWith(
-              color: ThemeClass.of(context).secondary),
+              color:ThemeClass.of(context)
+                  .secondaryBlackColor
+                  .withOpacity(0.7)),
         ),
         TextButton(
           onPressed:onNextTextTap ,

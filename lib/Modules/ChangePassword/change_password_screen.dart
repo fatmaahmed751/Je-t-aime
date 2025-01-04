@@ -98,7 +98,6 @@ class _ChangePasswordScreenState extends StateMVC<ChangePasswordScreen> {
                           ),
                         ),
                         Gap(15.h),
-                        CustomSideTextWidget(text: Strings.oldPassword.tr),
                         _buildPasswordField(
                           context: context,
                           suffixIcon:con.isPassword? SvgPicture.asset(Assets.imagesObsecureIcon)
@@ -167,7 +166,7 @@ class _ChangePasswordScreenState extends StateMVC<ChangePasswordScreen> {
                             });
                           },
                         ),
-                        Gap(60.h),
+                        Gap(40.h),
                         CustomButtonWidget.primary(
                         title: Strings.changePasswordTitle.tr,
                         onTap: () {

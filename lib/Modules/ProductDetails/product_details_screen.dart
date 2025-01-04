@@ -246,14 +246,17 @@ class ReviewsItem extends StatelessWidget {
               ),
             ),
             Gap(16.h),
-            Align(
-              alignment: Alignment.bottomRight,
-              child: Text(
-                FormatDateHelper.formatWalletDate.format(DateTime.now()),
-                style: TextStyleHelper.of(context)
-                    .b_14
-                    .copyWith(color: ThemeClass.of(context).mainBlack),
-              ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+             children: [
+               Text(
+                 FormatDateHelper.formatWalletDate.format(DateTime.now()),
+                 style: TextStyleHelper.of(context)
+                     .b_14
+                     .copyWith(color: ThemeClass.of(context).mainBlack),
+               ),
+             ],
+
             ),
           ],
         ),

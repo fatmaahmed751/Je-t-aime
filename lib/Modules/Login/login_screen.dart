@@ -3,6 +3,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
+import 'package:intl/intl.dart';
+import 'package:je_t_aime/Modules/Home/home_screen.dart';
 import 'package:je_t_aime/Modules/Login/widgets/user_status_row.dart';
 import 'package:je_t_aime/core/Language/locales.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
@@ -73,7 +75,7 @@ class _LoginScreenState extends StateMVC<LoginScreen> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Gap(32.h),
+                        Gap(15.h),
                         Center(
                           child: Text(
                             Strings.login.tr,
@@ -82,7 +84,7 @@ class _LoginScreenState extends StateMVC<LoginScreen> {
                                 fontSize: 25),
                           ),
                         ),
-                        Gap(20.h),
+                        Gap(15.h),
                         CustomSideTextWidget(text:Strings.email.tr),
                         Gap(12.h),
                         CustomTextFieldWidget(
@@ -146,16 +148,17 @@ class _LoginScreenState extends StateMVC<LoginScreen> {
                             radius: 30.r,
                             title: Strings.login.tr,
                             onTap: () {
-                              if (_formKey.currentState?.validate() ?? false) {
-                                //con.onLogin();
-                              } else {
-                                setState(() {
-                                  con.autoValidate = true;
-                                });
-                              }
+                            GoRouter.of(context).pushNamed(HomeScreen.routeName);
+                              // if (_formKey.currentState?.validate() ?? false) {
+                              //   //con.onLogin();
+                              // } else {
+                              //   setState(() {
+                              //     con.autoValidate = true;
+                              //   });
+                              // }
                             }
                             ),
-                        Gap(10.h),
+                        //Gap(10.h),
                         UserStatusRow(
                           text: Strings.noHavenAccount.tr,
                           nextText: Strings.signUp.tr,
@@ -185,7 +188,7 @@ class _LoginScreenState extends StateMVC<LoginScreen> {
                             ),
                           ],
                         ),
-                        Gap(20.h),
+                        Gap(10.h),
                         Row(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           mainAxisAlignment: MainAxisAlignment.center,
