@@ -14,6 +14,11 @@ class ThemeClass extends ThemeModel{
     Color.fromRGBO(216, 143, 143, 1),
     Color.fromRGBO(203, 227, 227, 1),
   ];
+  static List<Color> get anotherBackGround => const [
+    Color.fromRGBO(203, 227, 227, 1),
+    Color.fromRGBO(216, 143, 143, 1),
+    Color.fromRGBO(122, 67, 67, 1),
+  ];
 
   ThemeClass.lightTheme({
     super.isDark = false,

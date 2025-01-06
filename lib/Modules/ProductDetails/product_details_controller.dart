@@ -21,7 +21,7 @@ class ProductDetailsController extends ControllerMVC {
 
   int counter = 1;
   static ProductDetailsController? _this;
-
+  bool isClick = false;
   ProductDetailsController._();
   List list=[1,2,3,4,5];
   List imageUrl=[

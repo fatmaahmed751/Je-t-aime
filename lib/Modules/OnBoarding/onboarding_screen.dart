@@ -50,7 +50,7 @@ class _OnBoardingScreenState extends StateMVC<OnBoardingScreen> {
             ),
           ),
           Padding(
-            padding: EdgeInsetsDirectional.only(bottom: 40.h),
+            padding: EdgeInsetsDirectional.only(bottom:20.h),
             child: SmoothPageIndicator(
               controller: con.controller, // PageController
               count: con.onBoarding.length,

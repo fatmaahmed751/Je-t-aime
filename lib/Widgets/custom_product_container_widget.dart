@@ -37,6 +37,7 @@ class CustomProductContainerWidget extends StatelessWidget{
           ],
         ),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
               padding: EdgeInsetsDirectional.symmetric(
@@ -81,11 +82,14 @@ class CustomProductContainerWidget extends StatelessWidget{
                 ],
               ),
             ),
-            Text(
-                Strings.productDesc.tr,
-                style: TextStyleHelper.of(context).b_14.copyWith(
-                    color: ThemeClass.of(context).mainBlack
-                )
+            Padding(
+              padding:  EdgeInsetsDirectional.only(start: 5.w),
+              child: Text(
+                  Strings.productDesc.tr,
+                  style: TextStyleHelper.of(context).b_14.copyWith(
+                      color: ThemeClass.of(context).mainBlack
+                  )
+              ),
             ),
             Expanded(
               child: Padding(

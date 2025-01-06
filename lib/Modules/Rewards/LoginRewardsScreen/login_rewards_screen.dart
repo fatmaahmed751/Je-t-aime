@@ -67,7 +67,7 @@ class _LoginRewardsScreenState extends StateMVC<LoginRewardsScreen> {
                               text: Strings.loyaltyPoints.tr),
                           Gap(8.h),
                           Text(
-                            "0 ${Strings.points.tr}",
+                            "100 ${Strings.points.tr}",
                             textAlign: TextAlign.left,
                             style: TextStyleHelper.of(context).b_16.copyWith(
                                 color: ThemeClass.of(context).primaryColor),

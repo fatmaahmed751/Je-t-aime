@@ -104,7 +104,7 @@ class _ChangeLanguageState extends StateMVC<ChangeLanguage> {
             Padding(
               padding: EdgeInsetsDirectional.symmetric( horizontal: 15.w),
               child: Row(
-                //mainAxisAlignment: MainAxisAlignment.center,
+               mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   GestureDetector(
                     onTap: () {

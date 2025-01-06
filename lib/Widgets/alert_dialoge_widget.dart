@@ -9,8 +9,9 @@ import '../Utilities/theme_helper.dart';
 
 class AlertWarningWidget extends StatelessWidget {
   final Function()?onButtonAccept,onButtonReject;
+  final String secondButtonText;
   final String? des,titleButtonAccept,titleButtonReject,mainText;
-  const AlertWarningWidget({super.key,this.mainText,  this.onButtonAccept,  this.des,  this.onButtonReject,  this.titleButtonAccept,  this.titleButtonReject});
+  const AlertWarningWidget({super.key,this.mainText,  this.onButtonAccept,  this.des,  this.onButtonReject,  this.titleButtonAccept,  this.titleButtonReject, required this.secondButtonText});
 
   @override
   Widget build(BuildContext context) {
@@ -76,7 +77,7 @@ class AlertWarningWidget extends StatelessWidget {
                       // ThemeClass.of(context).background.withOpacity(0.20)
                     ),
                     //  backgroundColor: ThemeClass.of(context).primaryColor,
-                    child: Center(child: Text(Strings.logOut.tr,
+                    child: Center(child: Text(secondButtonText,
                       style: TextStyleHelper.of(context).h_16.copyWith(
                         color: ThemeClass.of(context).background,
                       ),),

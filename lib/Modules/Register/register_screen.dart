@@ -117,7 +117,7 @@ class _RegisterScreenState extends StateMVC<RegisterScreen> {
                           prefixIcon: SvgPicture.asset(Assets.imagesLockIcon),
                           suffixIcon: con.isPassword
                               ? SvgPicture.asset(Assets.imagesObsecureIcon)
-                              : SvgPicture.asset(Assets.imagesObsecureIcon),
+                              : SvgPicture.asset(Assets.imagesEyeOpen),
                         //  isDense: true,
                           onSuffixTap: () {
                             setState(() {
@@ -132,6 +132,7 @@ class _RegisterScreenState extends StateMVC<RegisterScreen> {
                         CustomSideTextWidget(text: Strings.repeatPassword.tr),
                         Gap(8.h),
                         CustomTextFieldWidget(
+                          obscure: con.isConfirmPassword,
                           hint: Strings.enterPassword.tr,
                           hintStyle: TextStyle(
                               color: ThemeClass.of(context)
@@ -141,8 +142,8 @@ class _RegisterScreenState extends StateMVC<RegisterScreen> {
                           prefixIcon: SvgPicture.asset(Assets.imagesLockIcon),
                           suffixIcon: con.isConfirmPassword
                               ? SvgPicture.asset(Assets.imagesObsecureIcon)
-                              : SvgPicture.asset(Assets.imagesObsecureIcon),
-                         // isDense: true,
+                              : SvgPicture.asset(Assets.imagesEyeOpen),
+                         isDense: true,
                           onSuffixTap: () {
                             setState(() {
                               con.isConfirmPassword = !con.isConfirmPassword;
@@ -156,7 +157,7 @@ class _RegisterScreenState extends StateMVC<RegisterScreen> {
                               confPassword: con.passwordController.text,
                               newPassword: v!),
                         ),
-                        Gap(15.h),
+                        Gap(25.h),
                         CustomButtonWidget.primary(
                             title: Strings.joinUs.tr,
                            onTap: () {
@@ -169,7 +170,7 @@ class _RegisterScreenState extends StateMVC<RegisterScreen> {
                             //     });
                             //   }
                             }),
-                       // Gap(10.h),
+                      Gap(10.h),
                         UserStatusRow(
                           text: Strings.haveAccount.tr,
                           nextText: Strings.login.tr,
@@ -201,7 +202,7 @@ class _RegisterScreenState extends StateMVC<RegisterScreen> {
                             ),
                           ],
                         ),
-                        //Gap(20.h),
+                       Gap(15.h),
                         Row(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           mainAxisAlignment: MainAxisAlignment.center,

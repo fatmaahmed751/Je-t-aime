@@ -17,6 +17,7 @@ import '../../Widgets/custom_side_text_widget.dart';
 import '../../Widgets/custom_textfield_widget.dart';
 import '../../Widgets/loading_screen.dart';
 import '../../generated/assets.dart';
+import '../ForgetPassword/forget_password_screen.dart';
 import '../Register/register_screen.dart';
 import 'login_controller.dart';
 
@@ -62,9 +63,9 @@ class _LoginScreenState extends StateMVC<LoginScreen> {
               color: Colors.white, // Background color of the container
               boxShadow: [
                 BoxShadow(
-                  color: const Color(0xff33333326).withOpacity(0.15),// Shadow color
+                  color: const Color(0xff33333326).withOpacity(0.13),// Shadow color
                   spreadRadius: 0, // Spread radius
-                  // blurRadius:1, // Blur radius for a soft shadow
+                   blurRadius:1, // Blur radius for a soft shadow
                   offset: const Offset(0, -1), // Negative offset to place shadow on top
                 ),
               ],
@@ -114,7 +115,7 @@ class _LoginScreenState extends StateMVC<LoginScreen> {
                           hint: Strings.enterPassword.tr,
                           prefixIcon: SvgPicture.asset(Assets.imagesLockIcon),
                           suffixIcon:con.isPassword? SvgPicture.asset(Assets.imagesObsecureIcon)
-                          :SvgPicture.asset(Assets.imagesLockIcon),
+                          :SvgPicture.asset(Assets.imagesEyeOpen),
                           onSuffixTap:(){
                             setState(() {
                              con.isPassword = !con.isPassword;
@@ -131,7 +132,7 @@ class _LoginScreenState extends StateMVC<LoginScreen> {
                           children: [
                             GestureDetector(
                               onTap: () {
-                                //context.pushNamed(ForgetPasswordScreen.routeName);
+                               context.pushNamed(ForgetPasswordScreen.routeName);
                               },
                               child: Text(
                                 Strings.forgetPassword.tr,
@@ -158,7 +159,7 @@ class _LoginScreenState extends StateMVC<LoginScreen> {
                               // }
                             }
                             ),
-                        //Gap(10.h),
+                        Gap(8.h),
                         UserStatusRow(
                           text: Strings.noHavenAccount.tr,
                           nextText: Strings.signUp.tr,
@@ -166,6 +167,7 @@ class _LoginScreenState extends StateMVC<LoginScreen> {
                           context.pushNamed(RegisterScreen.routeName);
                           },
                         ),
+                        Gap(8.h),
                         Row(
                           children: [
                              Expanded(
@@ -188,7 +190,7 @@ class _LoginScreenState extends StateMVC<LoginScreen> {
                             ),
                           ],
                         ),
-                        Gap(10.h),
+                        Gap(20.h),
                         Row(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           mainAxisAlignment: MainAxisAlignment.center,

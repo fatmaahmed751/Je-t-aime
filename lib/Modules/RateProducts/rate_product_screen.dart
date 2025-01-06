@@ -56,6 +56,7 @@ class _RateProductScreenState extends StateMVC<RateProductScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisSize: MainAxisSize.min,
             children: [
+              Gap(10.h),
               CustomHomeDetailsTextWidget(
                 text:Strings.yourRate.tr,
                 style:TextStyleHelper.of(context).b_20.copyWith(
@@ -82,13 +83,14 @@ class _RateProductScreenState extends StateMVC<RateProductScreen> {
                   });
                 },
               ),
-              Gap(20.h),
+              Gap(17.h),
               CustomHomeDetailsTextWidget(
                 text:Strings.comment.tr,
                 style:TextStyleHelper.of(context).b_20.copyWith(
                     color: ThemeClass.of(context).mainBlack,
                     fontWeight: FontWeight.w500),
               ),
+              Gap(13.h),
               AnimatedContainer(
                 duration: const Duration(milliseconds: 300),
                 constraints: BoxConstraints(
@@ -99,7 +101,7 @@ class _RateProductScreenState extends StateMVC<RateProductScreen> {
                 decoration: BoxDecoration(
                color:
                   ThemeClass.of(context).secondary.withOpacity(1),
-                  borderRadius: BorderRadius.circular(10),
+                  borderRadius: BorderRadius.circular(30.r),
                 ),
                 child: CustomTextFieldWidget(
                   controller: con.commentController,
@@ -120,7 +122,7 @@ class _RateProductScreenState extends StateMVC<RateProductScreen> {
                   },
                 ),
               ),
-              Gap(10.h),
+              Gap(15.h),
               CustomButtonWidget.primary(
                   title: Strings.send.tr,
                   onTap: () {

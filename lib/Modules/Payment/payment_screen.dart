@@ -103,7 +103,7 @@ class PaymentScreenState extends StateMVC<PaymentScreen> {
         },
         child: Container(
           padding: EdgeInsetsDirectional.symmetric(
-              horizontal: 16.w, vertical: 15.h),
+              horizontal: 16.w, vertical: 13.h),
           width: 170.w,
           height: 56.h,
           decoration: BoxDecoration(

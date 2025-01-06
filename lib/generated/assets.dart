@@ -13,6 +13,7 @@ class Assets {
   static const String imagesAppleIcon = 'assets/images/appleIcon.svg';
   static const String imagesArrowBack = 'assets/images/arrowBack.svg';
   static const String imagesArrowForward = 'assets/images/arrowForward.svg';
+  static const String imagesBeauty = 'assets/images/beauty.svg';
   static const String imagesCantRate = 'assets/images/cantRate.svg';
   static const String imagesCashImage = 'assets/images/cashImage.svg';
   static const String imagesCheckBox = 'assets/images/checkBox.svg';
@@ -31,12 +32,16 @@ class Assets {
   static const String imagesFilledStar = 'assets/images/filledStar.svg';
   static const String imagesFilterIcon = 'assets/images/filterIcon.svg';
   static const String imagesForgetPassword = 'assets/images/forgetPassword.png';
+  static const String imagesFullHeart = 'assets/images/fullHeart.svg';
   static const String imagesGlobe = 'assets/images/globe.svg';
   static const String imagesGoogleIcon = 'assets/images/googleIcon.svg';
+  static const String imagesHalfHeart = 'assets/images/halfHeart.svg';
   static const String imagesHeartBroken = 'assets/images/heartBroken.svg';
+  static const String imagesHeartSplash = 'assets/images/heartSplash.svg';
   static const String imagesHome = 'assets/images/home.svg';
   static const String imagesIconApp = 'assets/images/iconApp.png';
   static const String imagesJeTaimeLogo = 'assets/images/jeTaimeLogo.png';
+  static const String imagesLeftHeart = 'assets/images/leftHeart.svg';
   static const String imagesLocation = 'assets/images/location.svg';
   static const String imagesLockIcon = 'assets/images/lockIcon.svg';
   static const String imagesLoginImage = 'assets/images/loginImage.png';
@@ -65,6 +70,8 @@ class Assets {
   static const String imagesProduct = 'assets/images/product.png';
   static const String imagesProfileIcon = 'assets/images/profileIcon.svg';
   static const String imagesProfileNav = 'assets/images/profileNav.svg';
+  static const String imagesRGroup = 'assets/images/rGroup.svg';
+  static const String imagesRImage = 'assets/images/rImage.svg';
   static const String imagesRewards = 'assets/images/rewards.svg';
   static const String imagesRewardsContainer = 'assets/images/rewardsContainer.svg';
   static const String imagesSearch = 'assets/images/search.svg';
@@ -73,6 +80,8 @@ class Assets {
   static const String imagesSignUp = 'assets/images/signUp.png';
   static const String imagesSmillingFace = 'assets/images/smillingFace.svg';
   static const String imagesSplash = 'assets/images/splash.png';
+  static const String imagesSplashOne = 'assets/images/splashOne.svg';
+  static const String imagesSplashThree = 'assets/images/splashThree.svg';
   static const String imagesStar = 'assets/images/star.svg';
   static const String imagesSubmit = 'assets/images/submit.svg';
   static const String imagesSubmitProblem = 'assets/images/submitProblem.svg';
@@ -82,5 +91,6 @@ class Assets {
   static const String imagesUser = 'assets/images/user.svg';
   static const String imagesVisaImage = 'assets/images/visaImage.svg';
   static const String imagesVisalogo = 'assets/images/visalogo.svg';
+  static const String imagesVvv = 'assets/images/vvv.PNG';
 
 }

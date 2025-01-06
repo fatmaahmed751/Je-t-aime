@@ -1,6 +1,10 @@
 {
-"cancel": "Cancel",
-"ok": "Ok",
+  "home": "Home",
+  "profile" :"Profile",
+  "notification": "Notification",
+  "favorite": "Favorite",
+  "cancel": "Cancel",
+  "ok": "Ok",
   "onBoardingMainTextOne": "Welcome to Je t’aime",
   "onBoardingDescTextOne": "Everything you need for your natural beauty in one place, carefully curated to bring out the best version of you.",
   "onBoardingMainTextTwo": "Choose the care that suits you best.",

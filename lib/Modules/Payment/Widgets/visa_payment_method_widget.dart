@@ -146,7 +146,7 @@ class VisaPaymentMethodWidgetState extends StateMVC<VisaPaymentMethodWidget> {
                   controller: con.cvvController,
                   validator: (v) => Validate.validatePhone(v),
                 ),
-               Gap(100.h),
+               Gap(45.h),
 
                 CustomButtonWidget.primary(
                     title: Strings.payNow.tr,

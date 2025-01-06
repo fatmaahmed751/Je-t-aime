@@ -1,7 +1,10 @@
 class Strings {
   Strings._();
-
   static const String systemMode = "systemMode";
+  static const String home = "home";
+  static const String profile = "profile";
+  static const String notification = "notification";
+  static const String favorite = "favorite";
   static const String light = "light";
   static const String dark = "dark";
   static const String update = "update";
@@ -64,13 +67,11 @@ class Strings {
   static const String validName = "name_valid";
   static const String validEmail = "email_valid";
   static const String emailError = "email_error";
-  static const String home = "home";
   static const String changePasswordTitle = "changePasswordTitle";
   static const String cart = "cart";
   static const String address = "address";
   static const String  validAddress ="validAddress";
   static const String addressField = "addressField";
-  static const String favorite = "_favorite";
   static const String account = "account";
   static const String searchHome = "search_home";
   static const String categories = "categories";

@@ -69,12 +69,8 @@ class _ProductDetailsScreenState extends StateMVC<ProductDetailsScreen> {
                     ),
                   ),
                   const Spacer(),
-                  InkWell(
-                    onTap: () {
-                      setState(() {});
-                    },
-                    child: SvgPicture.asset(Assets.imagesHeartBroken),
-                  ),
+                  con.isClick?SvgPicture.asset(Assets.imagesHeartBroken):
+                  SvgPicture.asset(Assets.imagesFavoriteIcon)
                 ],
               ),
               Gap(18.h),

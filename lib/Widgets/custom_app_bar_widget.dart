@@ -155,7 +155,7 @@ class MainAppBarWidget extends StatelessWidget {
             width: double.infinity,
             decoration: BoxDecoration(
               gradient: LinearGradient(
-                colors: ThemeClass.backgroundGradiant,
+                colors:SharedPref.getCurrentLanguage() == "ar" ?ThemeClass.anotherBackGround:ThemeClass.backgroundGradiant,
                 begin: Alignment.centerLeft,
                 end: Alignment.centerRight,
               ),
@@ -322,9 +322,9 @@ class SecondaryAppBarWidgetState extends State<SecondaryAppBarWidget> {
             width: double.infinity,
             decoration: BoxDecoration(
               gradient: LinearGradient(
-                colors: ThemeClass.backgroundGradiant,
-                begin: Alignment.centerLeft,
-                end: Alignment.centerRight,
+                colors:SharedPref.getCurrentLanguage() == "ar" ?ThemeClass.anotherBackGround:ThemeClass.backgroundGradiant,
+              end  :Alignment.centerRight,
+              begin:  Alignment.centerLeft,
               ),
               borderRadius: BorderRadius.only(
                 bottomLeft: Radius.circular(30.r),

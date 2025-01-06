@@ -71,10 +71,12 @@ class _CartScreenState extends StateMVC<CartScreen> {
                             con.deleteItemFromCart(context);
                           },
                           decrementCounter: () {
-                            con.decrementCounter(counter: 1);
+                            con.decrementCounter(counter: con.counterValue);
                           },
-                          incrementCounter: () async {},
-                          counter: 1,
+                          incrementCounter: () async {
+                            con.incrementCounter(counter: con.counterValue);
+                          },
+                          counter:con.counterValue,
                         );
                       },
                       separatorBuilder: (context, index) => Gap(10.h),

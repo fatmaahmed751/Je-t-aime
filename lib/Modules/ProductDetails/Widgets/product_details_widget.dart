@@ -137,7 +137,7 @@ class _ProductDetailsWidgetState extends StateMVC<ProductDetailsWidget> {
               child: Center(
                 child: InkWell(
                     onTap: () {
-                      con.decrementCounter;
+                      con.decrementCounter();
                     },
                     child: Icon(Icons.remove,
                         color: ThemeClass.of(context)
@@ -165,7 +165,7 @@ class _ProductDetailsWidgetState extends StateMVC<ProductDetailsWidget> {
               child: Center(
                 child: InkWell(
                     onTap: () {
-                      con.incrementCounter;
+                      con.incrementCounter();
                     },
                     child: Icon(Icons.add,
                         color: ThemeClass.of(context).background,

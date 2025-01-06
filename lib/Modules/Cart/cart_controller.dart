@@ -31,7 +31,7 @@ bool isLike = true;
   static CartController? _this;
 
   CartController._();
-
+int counterValue =1;
 
   @override
   void initState() {
@@ -64,9 +64,9 @@ bool isLike = true;
   }
   void incrementCounter({required int counter}) {
     setState(() {
-      counter++;
+      counterValue++;
     });
-    print("counter add ${counter}");
+    print("counter add ${counterValue}");
   }
   onFilledPersonalData() async {
     setState(() {
@@ -99,7 +99,7 @@ bool isLike = true;
   void decrementCounter({required int counter}) {
     setState(() {
       if (counter > 1) {
-        counter--;
+        counterValue--;
       }
     });
   }

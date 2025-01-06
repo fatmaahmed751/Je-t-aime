@@ -37,7 +37,7 @@ class DetailsOfOrder extends StatelessWidget {
           ],
         ),
         child: Padding(
-          padding: EdgeInsetsDirectional.only(top: 20.h),
+          padding: EdgeInsetsDirectional.only(top: 20.h,bottom: 10.h),
           child:
               Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
             Row(

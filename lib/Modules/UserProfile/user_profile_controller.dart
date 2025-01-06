@@ -121,6 +121,7 @@ class UserProfileController extends ControllerMVC {
       ),
       builder:(context)=> AlertWarningWidget(
         des:Strings.confirmLogout.tr,
+        secondButtonText: Strings.logOut.tr,
         mainText: Strings.deleteLogOutSide.tr,
         onButtonReject:
         currentContext_!.pop,
@@ -159,6 +160,7 @@ class UserProfileController extends ControllerMVC {
         borderRadius: BorderRadius.vertical(top: Radius.circular(30.r)),
       ),
       builder:(context)=> AlertWarningWidget(
+        secondButtonText: Strings.delete.tr,
        des:Strings.confirmDeleteAccount.tr,
         mainText: Strings.deleteAccountSide.tr,
         onButtonReject:
