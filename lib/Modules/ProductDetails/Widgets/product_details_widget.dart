@@ -180,7 +180,7 @@ class _ProductDetailsWidgetState extends StateMVC<ProductDetailsWidget> {
         ),
         Gap(12.h),
         SizedBox(
-          height:130.h,
+        //  height:130.h,
           width:382.w,
           child: Text(
             Strings.productDetailsDesc.tr,

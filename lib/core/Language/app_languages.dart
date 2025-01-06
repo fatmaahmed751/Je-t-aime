@@ -17,6 +17,8 @@ class AppLanguage extends ChangeNotifier {
 
   Languages get appLang => _appLanguage;
 
+
+
   Future fetchLocale(BuildContext context) async {
     if (SharedPref.getLanguage() == null) {
       _appLanguage = Languages.values.firstWhereOrNull((lang) => View.of(context).platformDispatcher.locale.languageCode.contains(lang.name)) ?? defaultLang;
@@ -42,3 +44,22 @@ class AppLanguage extends ChangeNotifier {
     notifyListeners();
   }
 }
+
+extension AppLanguageExtensions on AppLanguage {
+  String translate(String key) {
+    final currentLanguage = appLang;
+    return translations[key]?[currentLanguage] ??
+        key; // Fallback to the key if no translation is found
+  }
+}
+  final Map<String, Map<Languages, String>> translations = {
+    'home': {
+      Languages.en: 'Home',
+      Languages.ar: 'الرئيسية',
+    },
+    'settings': {
+      Languages.en: 'Settings',
+      Languages.ar: 'الإعدادات',
+    },
+
+  };

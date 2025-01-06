@@ -7,6 +7,7 @@ import 'package:mvc_pattern/mvc_pattern.dart';
 import '../../../../Utilities/text_style_helper.dart';
 import '../../../../Utilities/theme_helper.dart';
 import '../../../../Widgets/loading_screen.dart';
+import '../../../Utilities/shared_preferences.dart';
 import '../../../Utilities/strings.dart';
 import '../../../Widgets/custom_app_bar_widget.dart';
 import '../../../Widgets/custom_details_side_text.dart';
@@ -54,33 +55,43 @@ class _LoginRewardsScreenState extends StateMVC<LoginRewardsScreen> {
                 Stack(
                   alignment: Alignment.centerLeft,
                   children: [
+                    SharedPref.getCurrentLanguage() == "ar"?
+                    SvgPicture.asset(
+                      Assets.imagesArabicContainer,
+                      height: 130.h,
+                    ):
                     SvgPicture.asset(
                       Assets.imagesContainer,
                       height: 130.h,
                     ),
                     Padding(
                       padding: EdgeInsetsDirectional.only(start: 16.w),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          CustomDetailsSideTextWidget(
-                              text: Strings.loyaltyPoints.tr),
-                          Gap(8.h),
-                          Text(
-                            "100 ${Strings.points.tr}",
-                            textAlign: TextAlign.left,
-                            style: TextStyleHelper.of(context).b_16.copyWith(
-                                color: ThemeClass.of(context).primaryColor),
+                        child: Align(
+                          alignment:  SharedPref.getCurrentLanguage() == "ar"?
+                          Alignment.centerRight:  Alignment.centerLeft,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              CustomDetailsSideTextWidget(
+                                  text: Strings.loyaltyPoints.tr),
+                              Gap(8.h),
+                              Text(
+                                "100 ${Strings.points.tr}",
+                                textAlign: TextAlign.left,
+                                style: TextStyleHelper.of(context).b_16.copyWith(
+                                    color: ThemeClass.of(context).primaryColor),
+                              ),
+                            ],
                           ),
-                        ],
+                        ),
                       ),
-                    ),
                   ],
                 ),
                 Gap(24.h),
                 CustomDetailsSideTextWidget(text: Strings.transactions.tr),
                 Gap(16.h),
                     ListView.separated(
+                      padding: EdgeInsets.zero,
                   shrinkWrap: true,
                       physics: const NeverScrollableScrollPhysics(),
                       itemBuilder: (context, index) => const EarnPoints(),

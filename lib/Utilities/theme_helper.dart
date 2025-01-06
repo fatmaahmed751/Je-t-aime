@@ -11,12 +11,13 @@ class ThemeClass extends ThemeModel{
 
   static List<Color> get backgroundGradiant => const [
     Color.fromRGBO(122, 67, 67, 1),
-    Color.fromRGBO(216, 143, 143, 1),
-    Color.fromRGBO(203, 227, 227, 1),
+    Color.fromRGBO(198, 151, 151, 1),
+    // Color.fromRGBO(216, 143, 143, 1),
+    // Color.fromRGBO(203, 227, 227, 1),
   ];
   static List<Color> get anotherBackGround => const [
-    Color.fromRGBO(203, 227, 227, 1),
-    Color.fromRGBO(216, 143, 143, 1),
+    //Color.fromRGBO(203, 227, 227, 1),
+    Color.fromRGBO(198, 151, 151, 1),
     Color.fromRGBO(122, 67, 67, 1),
   ];
 

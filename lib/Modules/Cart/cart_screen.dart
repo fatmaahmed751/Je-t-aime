@@ -6,7 +6,6 @@ import 'package:go_router/go_router.dart';
 import 'package:je_t_aime/Modules/Shipping/shipping_screen.dart';
 import 'package:je_t_aime/core/Language/locales.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
-import '../../Utilities/shared_preferences.dart';
 import '../../Utilities/strings.dart';
 import '../../Utilities/text_style_helper.dart';
 import '../../Utilities/theme_helper.dart';
@@ -178,16 +177,16 @@ class _ProductItemState extends State<ProductItem> {
               color:
                   ThemeClass.of(context).secondaryBlackColor.withOpacity(0.15),
               blurRadius: 1,
-              spreadRadius: 0.5),
+              spreadRadius:0.5),
         ],
       ),
       child: Padding(
-        padding: EdgeInsetsDirectional.only(start: 7.w, top: 4.h, bottom: 8.h),
+        padding: EdgeInsetsDirectional.only(start: 12.w, top:8.h, bottom:8.h,),
         child: Row(
           children: [
             Container(
-              width: 96.w,
-              height: 100.h,
+               width: 96.w,
+               height: 96.h,
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(14.r),
                   color: ThemeClass.of(context).containerColor),
@@ -196,33 +195,37 @@ class _ProductItemState extends State<ProductItem> {
                 child: Image.asset(Assets.imagesProduct),
               ),
             ),
-            Gap(12.w),
+            Gap(8.w),
             Expanded(
               child: Column(
+                mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Row(
-                    children: [
-                      Text(
-                        Strings.productDesc.tr,
-                        style: TextStyleHelper.of(context)
-                            .b_16
-                            .copyWith(color: ThemeClass.of(context).mainBlack),
-                      ),
-                      const Spacer(), // Moves the delete icon to the end of the row
-                      IconButton(
-                        icon: SvgPicture.asset(Assets.imagesClose),
-                        onPressed: () => widget.onRemoveWarning(context),
-                      ),
-                    ],
+                  SizedBox(
+                    height: 38.h,
+                    child: Row(
+                     // mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Text(
+                          Strings.productDesc.tr,
+                          style: TextStyleHelper.of(context)
+                              .b_16
+                              .copyWith(color: ThemeClass.of(context).mainBlack),
+                        ),
+                        const Spacer(), // Moves the delete icon to the end of the row
+                        IconButton(
+                          icon: SvgPicture.asset(Assets.imagesClose),
+                          onPressed: () => widget.onRemoveWarning(context),
+                        ),
+                      ],
+                    ),
                   ),
-                  // Gap(12.h),
                   Text("350 ${Strings.jod.tr}",
                       style: TextStyleHelper.of(context).h_16.copyWith(
                             color: ThemeClass.of(context).primaryColor,
                           )),
-                  Gap(12.h),
+                  Gap(8.h),
                   Row(
                     children: [
                       Container(

@@ -13,7 +13,6 @@ import '../../Widgets/custom_app_bar_widget.dart';
 import '../../Widgets/custom_details_side_text.dart';
 import '../../Widgets/custom_product_container_widget.dart';
 import '../../Widgets/loading_screen.dart';
-import '../../Widgets/toast_helper.dart';
 import 'Widgets/categories_widget.dart';
 import 'Widgets/packages_widget.dart';
 import 'home_screen_controller.dart';
@@ -35,6 +34,7 @@ class _HomeScreenState extends StateMVC<HomeScreen> {
   void initState() {
     super.initState();
     con.update();
+    con.loadCurrentLanguage(context);
 
   }
 
@@ -92,6 +92,7 @@ class _HomeScreenState extends StateMVC<HomeScreen> {
                 child: SizedBox(
                   height: 150.h,
                   child: ListView.separated(
+                      physics: const BouncingScrollPhysics(),
                       scrollDirection: Axis.horizontal,
                       itemBuilder: (context, index) => CategoriesWidget(
                             categoryModel: con.categoryModel[index],
@@ -107,6 +108,7 @@ class _HomeScreenState extends StateMVC<HomeScreen> {
                   height: 200.h,
                   // width: MediaQuery.sizeOf(context).width,
                   child: ListView.separated(
+                    physics: const BouncingScrollPhysics(),
                       scrollDirection: Axis.horizontal,
                       itemBuilder: (context, index) => PackagesWidget(
                             packagesModel: con.packagesModel[index],

@@ -51,7 +51,7 @@ class _ChangeLanguageState extends StateMVC<ChangeLanguage> {
           mainAxisSize: MainAxisSize.min,
           children: [
             Padding(
-              padding: EdgeInsetsDirectional.symmetric( horizontal: 15.w),
+              padding: EdgeInsetsDirectional.symmetric( horizontal: 20.w),
               child: Text(Strings.languages.tr ?? '',
                   style: TextStyleHelper.of(context).h_20.copyWith(
                       color: ThemeClass.of(context).mainBlack,
@@ -102,16 +102,16 @@ class _ChangeLanguageState extends StateMVC<ChangeLanguage> {
               ],
             ),
             Padding(
-              padding: EdgeInsetsDirectional.symmetric( horizontal: 15.w),
+              padding: EdgeInsetsDirectional.symmetric( horizontal: 16.w),
               child: Row(
-               mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   GestureDetector(
                     onTap: () {
                       context.pop();
                     },
                     child: Container(
-                      width: 165.w,
+                      width: 170.w,
                       height: 48.h,
                       decoration: BoxDecoration(
                           border:

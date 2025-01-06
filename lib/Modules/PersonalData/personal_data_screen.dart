@@ -4,6 +4,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:je_t_aime/Modules/PersonalData/personal_data_controller.dart';
+import 'package:je_t_aime/Utilities/shared_preferences.dart';
 import 'package:je_t_aime/Widgets/custom_side_text_widget.dart';
 import 'package:je_t_aime/core/Language/locales.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
@@ -157,7 +158,7 @@ class _PersonalDataScreenState extends StateMVC<PersonalDataScreen> {
                         ),
                       ],
                     ),
-                  Gap(150.h),
+                  Gap(SharedPref.getCurrentLanguage()=="ar"?150.h:220.h),
                    // const Spacer(),
                     Padding(
                       padding: EdgeInsetsDirectional.symmetric(vertical: 15.h),

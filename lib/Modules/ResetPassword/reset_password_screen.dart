@@ -113,7 +113,7 @@ class _ResetPasswordScreenState extends StateMVC<ResetPasswordScreen> {
                         prefixIcon: SvgPicture.asset(Assets.imagesLockIcon),
                         suffixIcon: con.isPassword
                             ? SvgPicture.asset(Assets.imagesObsecureIcon)
-                            : SvgPicture.asset(Assets.imagesEmailIcon),
+                            : SvgPicture.asset(Assets.imagesEyeOpen),
                         //  isDense: true,
                         onSuffixTap: () {
                           setState(() {
@@ -140,7 +140,7 @@ class _ResetPasswordScreenState extends StateMVC<ResetPasswordScreen> {
                         prefixIcon: SvgPicture.asset(Assets.imagesLockIcon),
                         suffixIcon: con.repeatPassword
                             ? SvgPicture.asset(Assets.imagesObsecureIcon)
-                            : SvgPicture.asset(Assets.imagesEmailIcon),
+                            : SvgPicture.asset(Assets.imagesEyeOpen),
                         // isDense: true,
                         onSuffixTap: () {
                           setState(() {

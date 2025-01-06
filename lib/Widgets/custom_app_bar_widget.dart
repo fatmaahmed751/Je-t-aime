@@ -146,6 +146,8 @@ class MainAppBarWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    //final language = Provider.of<AppLanguage>(context, listen: false).fetchLocale(context);
+    SharedPref.getCurrentLanguage();
     return  SizedBox(
     height: 320.h,
       child: Stack(
@@ -180,7 +182,7 @@ class MainAppBarWidget extends StatelessWidget {
                   CustomAppBarMainTextWidget(
                       text: Strings.hello.tr),
                   Gap(8.w),
-                 Image.asset(Assets.imagesFace,
+                 Image.asset(Assets.imagesFaceSmile,
                    width: 24.w,
                   ),
                   const Spacer(),
@@ -349,7 +351,7 @@ class SecondaryAppBarWidgetState extends State<SecondaryAppBarWidget> {
                       CustomAppBarMainTextWidget(text: Strings.hello.tr),
                       Gap(8.w),
                       Image.asset(
-                        Assets.imagesFace,
+                        Assets.imagesFaceSmile,
                         width: 24.w,
                       ),
                       const Spacer(),

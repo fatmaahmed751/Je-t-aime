@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:je_t_aime/core/Language/locales.dart';
 
 import '../Utilities/text_style_helper.dart';
 import '../Utilities/theme_helper.dart';

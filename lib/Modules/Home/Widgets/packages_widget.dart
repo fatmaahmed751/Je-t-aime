@@ -19,7 +19,7 @@ class PackagesWidget extends StatelessWidget{
        borderRadius: BorderRadius.circular(30.r),
          image: DecorationImage(
            fit: BoxFit.cover,
-             image:NetworkImage(packagesModel.imageName,
+             image:AssetImage(packagesModel.imageName,
              )
          )
      ),

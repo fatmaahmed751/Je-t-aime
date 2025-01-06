@@ -26,7 +26,7 @@ class CategoriesWidget extends StatelessWidget{
             child: CircleAvatar(
               radius:50.r,
               backgroundImage:
-              NetworkImage(
+              AssetImage(
                   categoryModel.imageName ),),
           ),
           Gap(6.h),

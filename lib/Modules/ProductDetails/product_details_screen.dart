@@ -69,11 +69,22 @@ class _ProductDetailsScreenState extends StateMVC<ProductDetailsScreen> {
                     ),
                   ),
                   const Spacer(),
-                  con.isClick?SvgPicture.asset(Assets.imagesHeartBroken):
-                  SvgPicture.asset(Assets.imagesFavoriteIcon)
+                  GestureDetector(
+                    onTap: (){
+                      setState((){
+                        con.isClick = !con.isClick;
+                      });
+                    },
+                      child: con.isClick?SvgPicture.asset(Assets.imagesHeartBroken):
+                      SizedBox(
+                        height: 27.h,
+                        child: SvgPicture.asset(Assets.imagesFavoriteIcon,
+                                     ),
+                      )
+                  ),
                 ],
               ),
-              Gap(18.h),
+              Gap(12.h),
               const ProductDetailsWidget(),
               // Row(
               // //  mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -101,7 +112,7 @@ class _ProductDetailsScreenState extends StateMVC<ProductDetailsScreen> {
               //   maxLines: con.isExpanded ? null : 4,
               //   overflow:con. isExpanded ? TextOverflow.visible : TextOverflow.ellipsis,
               // ),
-              Gap(8.h),
+              Gap(16.h),
               // if(con.product!=null&&con.product!.reviews.isNotEmpty)
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,

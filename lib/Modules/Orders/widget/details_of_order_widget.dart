@@ -31,8 +31,10 @@ class DetailsOfOrder extends StatelessWidget {
           ),
           boxShadow: [
             BoxShadow(
-              color:
-                  ThemeClass.of(context).secondaryBlackColor.withOpacity(0.15),
+                offset: const Offset(0, 0),
+               color:   ThemeClass.of(context).secondaryBlackColor.withOpacity(0.10),
+                blurRadius:3,
+               spreadRadius:0.3
             ),
           ],
         ),
