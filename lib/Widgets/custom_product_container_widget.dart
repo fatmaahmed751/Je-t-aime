@@ -10,9 +10,15 @@ import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
 import '../Utilities/strings.dart';
 import '../generated/assets.dart';
-class CustomProductContainerWidget extends StatelessWidget{
+class CustomProductContainerWidget extends StatefulWidget{
   const CustomProductContainerWidget({super.key});
 
+  @override
+  State<CustomProductContainerWidget> createState() => _CustomProductContainerWidgetState();
+}
+
+class _CustomProductContainerWidgetState extends State<CustomProductContainerWidget> {
+  bool isClick = false;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -20,7 +26,7 @@ class CustomProductContainerWidget extends StatelessWidget{
         context.pushNamed(ProductDetailsScreen.routeName);
       },
       child: Container(
-        height: 215.h,
+        height: 217.h,
         width: 175.w,
         decoration: BoxDecoration(
           color: ThemeClass.of(context).background,
@@ -36,103 +42,138 @@ class CustomProductContainerWidget extends StatelessWidget{
             ),
           ],
         ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Padding(
-              padding: EdgeInsetsDirectional.symmetric(
-                  horizontal: 16.w ,vertical: 16.h),
-              child: Row(
-                // mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.baseline,
-                textBaseline: TextBaseline.alphabetic,
-                children: [
-                  Gap(40.w),
-                  SizedBox(
-                    height: 113.h,
-                    width: 45.w,
-                    child: Image.asset(
-                      Assets.imagesProduct,
-                      alignment: Alignment.center,
-                      //  fit: BoxFit.cover,
-                    ),
-                  ),
-                  Spacer(),
-                  Align(
-                    alignment: Alignment.topRight,
-                    child: Padding(
-                      padding: EdgeInsetsDirectional.only(
-                          bottom:0.h
-                      ),
-                      child: GestureDetector(
-                        onTap: (){
-                          ToastHelper.showSuccess(
-                            context: context,
-                            message: Strings.addToFavoriteSuccess.tr,
-                         icon:SvgPicture.asset(Assets.imagesSubmit,width:60.w,
-                         height:50.h,
-                         fit: BoxFit.cover,),
-
-                            backgroundColor: ThemeClass.of(context).primaryColor,
-                          );
-                        },
-                          child: SvgPicture.asset(Assets.imagesHeartBroken)),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            Padding(
-              padding:  EdgeInsetsDirectional.only(start: 5.w),
-              child: Text(
-                  Strings.productDesc.tr,
-                  style: TextStyleHelper.of(context).b_14.copyWith(
-                      color: ThemeClass.of(context).mainBlack
-                  )
-              ),
-            ),
-            Expanded(
-              child: Padding(
-                padding:  EdgeInsetsDirectional.symmetric(
-                    horizontal: 16.w) ,
+        child: Padding(
+          padding: EdgeInsetsDirectional.symmetric(
+              vertical: 16.h ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(
+                padding: EdgeInsetsDirectional.symmetric(
+                    horizontal: 16.w ),
                 child: Row(
+                  // mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.baseline,
+                  textBaseline: TextBaseline.alphabetic,
                   children: [
-                    Text("350 ${Strings.jod.tr}" ,
-                      style: TextStyleHelper.of(context).h_16.copyWith(
-                          color: ThemeClass.of(context).primaryColor
-                      ),),
-                    const Spacer(),
-                GestureDetector(
-                  onTap: (){
-                    ToastHelper.showSuccess(
-                      context: context,
-                      message: Strings.addToCartSuccess.tr,
-                      icon:SvgPicture.asset(Assets.imagesSubmit,width:60.w,
-                        height:50.h,
-                        fit: BoxFit.cover,),
-                      backgroundColor: ThemeClass.of(context).primaryColor,
-                    );
-                  },
-                      child: Container(
-                        width: 28.w,
-                        height: 28.h,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(30.r),
-                          color: ThemeClass.of(context).primaryColor,
+                    Gap(40.w),
+                    SizedBox(
+                      height: 113.h,
+                      width: 45.w,
+                      child: Image.asset(
+                        Assets.imagesProduct,
+                        alignment: Alignment.center,
+                        //  fit: BoxFit.cover,
+                      ),
+                    ),
+                    Spacer(),
+                    Align(
+                      alignment: Alignment.topRight,
+                      child: Padding(
+                        padding: EdgeInsetsDirectional.only(
+                            bottom:0.h
                         ),
-                        child:  Icon(Icons.add,
-                          color: ThemeClass.of(context).background ,
-                          size: 17,),
+                        child: GestureDetector(
+                          onTap: (){
+                            setState((){
+                             isClick = !isClick;
+                             if(isClick == true){
+                               ToastHelper.showSuccess(
+                                 context: context,
+                                 message: Strings.addToFavoriteSuccess.tr,
+                                 icon:SvgPicture.asset(Assets.imagesSubmit,width:60.w,
+                                   height:50.h,
+                                   fit: BoxFit.cover,),
+
+                                 backgroundColor: ThemeClass.of(context).primaryColor,
+                               );
+                             }else{
+                               ToastHelper.showSuccess(
+                                 context: context,
+                                 message: Strings.removedFromFav.tr,
+                                 icon:SvgPicture.asset(Assets.imagesSubmit,width:60.w,
+                                   height:50.h,
+                                   fit: BoxFit.cover,),
+
+                                 backgroundColor: ThemeClass.of(context).primaryColor,
+                               );
+
+                             }
+                            });
+                           //  ToastHelper.showSuccess(
+                           //    context: context,
+                           //    message: Strings.addToFavoriteSuccess.tr,
+                           // icon:SvgPicture.asset(Assets.imagesSubmit,width:60.w,
+                           // height:50.h,
+                           // fit: BoxFit.cover,),
+                           //
+                           //    backgroundColor: ThemeClass.of(context).primaryColor,
+                           //  );
+                          },
+                            child: isClick?SvgPicture.asset(Assets.imagesFavoriteIcon):
+                            SizedBox(
+                              height: 27.h,
+                              child: SvgPicture.asset(Assets.imagesHeartBroken,
+                              ),
+                            )),
                       ),
                     ),
                   ],
                 ),
               ),
-            ),
-          ],
+              Gap(8.h),
+              Padding(
+                padding:  EdgeInsetsDirectional.only(start: 14.w),
+                child: Text(
+                    Strings.productDesc.tr,
+                    style: TextStyleHelper.of(context).b_14.copyWith(
+                        color: ThemeClass.of(context).mainBlack
+                    )
+                ),
+              ),
+              Gap(8.h),
+              Expanded(
+                child: Padding(
+                  padding:  EdgeInsetsDirectional.symmetric(
+                      horizontal: 16.w) ,
+                  child: Row(
+                    children: [
+                      Text("350 ${Strings.jod.tr}" ,
+                        style: TextStyleHelper.of(context).h_16.copyWith(
+                            color: ThemeClass.of(context).primaryColor
+                        ),),
+                      const Spacer(),
+                  GestureDetector(
+                    onTap: (){
+                      ToastHelper.showSuccess(
+                        context: context,
+                        message: Strings.addToCartSuccess.tr,
+                        icon:SvgPicture.asset(Assets.imagesSubmit,width:60.w,
+                          height:50.h,
+                          fit: BoxFit.cover,),
+                        backgroundColor: ThemeClass.of(context).primaryColor,
+                      );
+                    },
+                        child: Container(
+                          width: 28.w,
+                          height: 28.h,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(30.r),
+                            color: ThemeClass.of(context).primaryColor,
+                          ),
+                          child:  Icon(Icons.add,
+                            color: ThemeClass.of(context).background ,
+                            size: 17,),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
   }
-
 }

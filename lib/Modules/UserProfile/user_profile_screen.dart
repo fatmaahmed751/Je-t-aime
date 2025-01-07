@@ -60,10 +60,10 @@ class _UserProfileScreenState extends StateMVC<UserProfileScreen> {
         child: SafeArea(
           child: Padding(
               padding: EdgeInsetsDirectional.only(
-                  end: 24.w, start: 24.w, bottom: 20.h, top: 30.h),
+                  end: 24.w, start: 24.w, bottom: 20.h, top: 25.h),
               child: con.isLogin
                   ? Container(
-                      height: 520.h,
+                      height: 490.h,
                       decoration: BoxDecoration(
                         color: ThemeClass.of(context).background,
                         borderRadius: BorderRadius.circular(30.r),
@@ -78,115 +78,118 @@ class _UserProfileScreenState extends StateMVC<UserProfileScreen> {
                           ),
                         ],
                       ),
-                      child: ListView(
-                        children: [
-                          Gap(20.h),
-                          GestureDetector(
-                            onTap: () {
-                              context.pushNamed(PersonalDataScreen.routeName);
-                            },
-                            child: UserProfileContainerWidget(
-                              image: (Assets.imagesPersonal),
-                              text: Strings.personalData.tr,
+                      child: Padding(
+                        padding:
+                            EdgeInsetsDirectional.only(top: 24.h, bottom: 24.h),
+                        child: ListView(
+                          children: [
+                            GestureDetector(
+                              onTap: () {
+                                context.pushNamed(PersonalDataScreen.routeName);
+                              },
+                              child: UserProfileContainerWidget(
+                                image: (Assets.imagesPersonal),
+                                text: Strings.personalData.tr,
+                              ),
                             ),
-                          ),
-                          // Gap(10.h),
-                          Divider(
-                            thickness: 1.w,
-                            color: ThemeClass.of(context).secondary,
-                            indent: 15.w,
-                            endIndent: 15.w,
-                          ),
-                          GestureDetector(
-                            onTap: () {
-                              context.pushNamed(
-                                OrdersScreen.routeName,
-                                // extra:OrderInfoModel()
-                              );
-                            },
-                            child: UserProfileContainerWidget(
-                              image: (Assets.imagesOrders),
-                              text: Strings.orders.tr,
+                            // Gap(10.h),
+                            Divider(
+                              thickness: 1.w,
+                              color: ThemeClass.of(context).secondary,
+                              indent: 15.w,
+                              endIndent: 15.w,
                             ),
-                          ),
-                          Divider(
-                            thickness: 1.w,
-                            color: ThemeClass.of(context).secondary,
-                            indent: 15.w,
-                            endIndent: 15.w,
-                          ),
-                          GestureDetector(
-                            onTap: () {
-                              context.pushNamed(SupportScreen.routeName);
-                            },
-                            child: UserProfileContainerWidget(
-                              image: (Assets.imagesSupport),
-                              text: Strings.support.tr,
+                            GestureDetector(
+                              onTap: () {
+                                context.pushNamed(
+                                  OrdersScreen.routeName,
+                                  // extra:OrderInfoModel()
+                                );
+                              },
+                              child: UserProfileContainerWidget(
+                                image: (Assets.imagesOrders),
+                                text: Strings.orders.tr,
+                              ),
                             ),
-                          ),
-                          Divider(
-                            thickness: 1.w,
-                            color: ThemeClass.of(context).secondary,
-                            indent: 15.w,
-                            endIndent: 15.w,
-                          ),
-                          GestureDetector(
-                            onTap: () async {
-                              await con.changeLanguageOfApp(context);
-                            },
-                            child: UserProfileContainerWidget(
-                              image: (Assets.imagesGlobe),
-                              text: Strings.languages.tr,
+                            Divider(
+                              thickness: 1.w,
+                              color: ThemeClass.of(context).secondary,
+                              indent: 15.w,
+                              endIndent: 15.w,
                             ),
-                          ),
-                          Divider(
-                            thickness: 1.w,
-                            color: ThemeClass.of(context).secondary,
-                            indent: 15.w,
-                            endIndent: 15.w,
-                          ),
-                          GestureDetector(
-                            onTap: () {
-                              context.pushNamed(PoliciesScreen.routeName
-                                  // ,extra:PoliciesModel()
-                                  );
-                            },
-                            child: UserProfileContainerWidget(
-                              image: (Assets.imagesPolicies),
-                              text: Strings.policy.tr,
+                            GestureDetector(
+                              onTap: () {
+                                context.pushNamed(SupportScreen.routeName);
+                              },
+                              child: UserProfileContainerWidget(
+                                image: (Assets.imagesSupport),
+                                text: Strings.support.tr,
+                              ),
                             ),
-                          ),
-                          Divider(
-                            thickness: 1.w,
-                            color: ThemeClass.of(context).secondary,
-                            indent: 15.w,
-                            endIndent: 15.w,
-                          ),
-                          GestureDetector(
-                            onTap: () {
-                             con.deleteUserAccountPop(context);
-                            },
-                            child: UserProfileContainerWidget(
-                              image: (Assets.imagesDeleteAccount),
-                              text: Strings.deleteAccount.tr,
+                            Divider(
+                              thickness: 1.w,
+                              color: ThemeClass.of(context).secondary,
+                              indent: 15.w,
+                              endIndent: 15.w,
                             ),
-                          ),
-                          Divider(
-                            thickness: 1.w,
-                            color: ThemeClass.of(context).secondary,
-                            indent: 15.w,
-                            endIndent: 15.w,
-                          ),
-                          GestureDetector(
-                            onTap: () {
-                              con.userLogOutPop(context);
-                            },
-                            child: UserProfileContainerWidget(
-                              image: (Assets.imagesLogout),
-                              text: Strings.logOut.tr,
+                            GestureDetector(
+                              onTap: () async {
+                                await con.changeLanguageOfApp(context);
+                              },
+                              child: UserProfileContainerWidget(
+                                image: (Assets.imagesGlobe),
+                                text: Strings.languages.tr,
+                              ),
                             ),
-                          ),
-                        ],
+                            Divider(
+                              thickness: 1.w,
+                              color: ThemeClass.of(context).secondary,
+                              indent: 15.w,
+                              endIndent: 15.w,
+                            ),
+                            GestureDetector(
+                              onTap: () {
+                                context.pushNamed(PoliciesScreen.routeName
+                                    // ,extra:PoliciesModel()
+                                    );
+                              },
+                              child: UserProfileContainerWidget(
+                                image: (Assets.imagesPolicies),
+                                text: Strings.policy.tr,
+                              ),
+                            ),
+                            Divider(
+                              thickness: 1.w,
+                              color: ThemeClass.of(context).secondary,
+                              indent: 15.w,
+                              endIndent: 15.w,
+                            ),
+                            GestureDetector(
+                              onTap: () {
+                                con.deleteUserAccountPop(context);
+                              },
+                              child: UserProfileContainerWidget(
+                                image: (Assets.imagesDeleteAccount),
+                                text: Strings.deleteAccount.tr,
+                              ),
+                            ),
+                            Divider(
+                              thickness: 1.w,
+                              color: ThemeClass.of(context).secondary,
+                              indent: 15.w,
+                              endIndent: 15.w,
+                            ),
+                            GestureDetector(
+                              onTap: () {
+                                con.userLogOutPop(context);
+                              },
+                              child: UserProfileContainerWidget(
+                                image: (Assets.imagesLogout),
+                                text: Strings.logOut.tr,
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                     )
                   : Column(

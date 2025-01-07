@@ -176,7 +176,7 @@ class BottomNavBarItemModel {
   BottomNavBarItemModel(
     iconPath: Assets.imagesHome,
     selectedIconPath: Assets.imagesHome,
-    title:Strings.home.tr,
+    title:Strings.home,
     routeName:HomeScreen.routeName,
     type: SelectedBottomNavBar.home,
   );
@@ -184,7 +184,7 @@ class BottomNavBarItemModel {
   static BottomNavBarItemModel favorite = BottomNavBarItemModel(
     iconPath: Assets.imagesFavNav,
     selectedIconPath: Assets.imagesFavNav,
-    title: Strings.favorite.tr,
+    title: Strings.favorite,
     routeName:FavoriteScreen.routeName,
     type: SelectedBottomNavBar.favorite,
   );
@@ -192,7 +192,7 @@ class BottomNavBarItemModel {
   static BottomNavBarItemModel notification = BottomNavBarItemModel(
     iconPath: Assets.imagesNotNav,
     selectedIconPath: Assets.imagesNotNav,
-    title:Strings.notification.tr,
+    title:Strings.notification,
     routeName: NotificationsScreen.routeName,
     type: SelectedBottomNavBar.notification,
   );
@@ -200,7 +200,7 @@ class BottomNavBarItemModel {
   static BottomNavBarItemModel account = BottomNavBarItemModel(
     iconPath: Assets.imagesProfileNav,
     selectedIconPath: Assets.imagesProfileNav,
-    title: Strings.profile.tr,
+    title: Strings.profile,
     routeName: UserProfileScreen.routeName,
     type: SelectedBottomNavBar.account,
   );

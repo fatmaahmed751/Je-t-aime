@@ -21,20 +21,13 @@ class UserProfileContainerWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 52.h,
+      height: 48.h,
       width: 382.w,
       decoration: BoxDecoration(
           color: ThemeClass.of(context).background,
-
-        // border: Border(
-        //   bottom: BorderSide(
-        //   color:ThemeClass.of(context).secondary,
-        //   width: 1.w,
-        // ),
-        // )
       ),
       child: Padding(
-        padding:  EdgeInsetsDirectional.symmetric(horizontal: 15.w),
+        padding:  EdgeInsetsDirectional.symmetric(horizontal: 16.w),
         child: Row(
           children: [
             Container(

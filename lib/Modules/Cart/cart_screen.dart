@@ -97,7 +97,7 @@ class _CartScreenState extends StateMVC<CartScreen> {
                             borderRadius: BorderRadius.circular(30.r)),
                         child: Center(
                           child: Text(
-                            "${Strings.total.tr}1150",
+                            "1150 ${Strings.jod.tr} ",
                             style: TextStyleHelper.of(context).b_14.copyWith(
                                 color: ThemeClass.of(context).mainBlack),
                           ),

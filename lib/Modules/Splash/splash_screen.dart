@@ -192,12 +192,13 @@ class _SplashScreenState extends StateMVC<SplashScreen>  {
             Padding(
               padding: EdgeInsetsDirectional.symmetric(horizontal: 24.w),
               child: Center(
-                child: Lottie.asset(
-                  'assets/images/try.json',
-                  width: 380.w,
-                  height: 380.h,
-                  fit: BoxFit.contain,
-                ),
+                child:Image.asset(Assets.imagesLooog),
+                // child: Lottie.asset(
+                //   'assets/images/try.json',
+                //   width: 380.w,
+                //   height: 380.h,
+                //   fit: BoxFit.contain,
+                // ),
               ),
             ),
 

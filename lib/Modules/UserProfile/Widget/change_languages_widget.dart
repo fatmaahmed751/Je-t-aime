@@ -11,6 +11,7 @@ import '../../../../Utilities/text_style_helper.dart';
 import '../../../../Utilities/theme_helper.dart';
 import '../../../../core/Language/app_languages.dart';
 import '../../../../generated/assets.dart';
+import '../../Home/home_screen.dart';
 import '../user_profile_controller.dart';
 
 class ChangeLanguage extends StatefulWidget {
@@ -132,7 +133,7 @@ class _ChangeLanguageState extends StateMVC<ChangeLanguage> {
                   ),
                   Gap(16.w),
                   GestureDetector(
-                    onTap: () {
+                    onTap: ()async {
                       setState(() {
                         if (con.selectedLanguage == 1) {
                           Provider.of<AppLanguage>(context, listen: false)
@@ -143,7 +144,9 @@ class _ChangeLanguageState extends StateMVC<ChangeLanguage> {
                               .changeLanguage(language: Languages.ar);
                         }
                       });
-                      context.pop();
+                      await Future.delayed(const Duration(milliseconds: 200));
+                      GoRouter.of(context).pushNamed(HomeScreen.routeName);
+
                     },
                     child: Container(
                       width: 165.w,

@@ -69,6 +69,7 @@ class Strings {
   static const String emailError = "email_error";
   static const String changePasswordTitle = "changePasswordTitle";
   static const String cart = "cart";
+  static const String removedFromFav = "removedFromFav";
   static const String address = "address";
   static const String  validAddress ="validAddress";
   static const String addressField = "addressField";

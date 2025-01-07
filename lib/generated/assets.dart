@@ -49,9 +49,11 @@ class Assets {
   static const String imagesLeftHeart = 'assets/images/leftHeart.svg';
   static const String imagesLocation = 'assets/images/location.svg';
   static const String imagesLockIcon = 'assets/images/lockIcon.svg';
+  static const String imagesLoggo = 'assets/images/loggo.gif';
   static const String imagesLoginImage = 'assets/images/loginImage.png';
   static const String imagesLogoIcon = 'assets/images/logoIcon.png';
   static const String imagesLogout = 'assets/images/logout.svg';
+  static const String imagesLooog = 'assets/images/looog.gif';
   static const String imagesNail = 'assets/images/nail.png';
   static const String imagesNewPassword = 'assets/images/newPassword.png';
   static const String imagesNoFavorite = 'assets/images/noFavorite.svg';

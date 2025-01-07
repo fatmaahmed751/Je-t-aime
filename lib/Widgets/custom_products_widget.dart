@@ -41,76 +41,81 @@ class CustomProductsWidget extends StatelessWidget{
               ),
             ],
           ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Padding(
-                padding: EdgeInsetsDirectional.symmetric(
-                    horizontal: 16.w ,vertical: 16.h),
-                child: Row(
-                  // mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.baseline,
-                  textBaseline: TextBaseline.alphabetic,
-                  children: [
-                    Gap(40.w),
-                    SizedBox(
-                      height: 113.h,
-                      width: 45.w,
-                      child: Image.asset(
-                        Assets.imagesProduct,
-                        alignment: Alignment.center,
-                        //  fit: BoxFit.cover,
-                      ),
-                    ),
-                    Spacer(),
-                    Align(
-                      alignment: Alignment.topRight,
-                      child: Padding(
-                        padding: EdgeInsetsDirectional.only(
-                            bottom:0.h
-                        ),
-                        child: SvgPicture.asset(Assets.imagesFavoriteIcon),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Padding(
-                padding: EdgeInsetsDirectional.only(start: 6.w),
-                child: Text(
-                    Strings.productDesc.tr,
-                    style: TextStyleHelper.of(context).b_14.copyWith(
-                        color: ThemeClass.of(context).mainBlack
-                    )
-                ),
-              ),
-              Expanded(
-                child: Padding(
-                  padding:  EdgeInsetsDirectional.symmetric(
-                      horizontal: 16.w) ,
+          child: Padding(
+            padding:  EdgeInsetsDirectional.symmetric(vertical: 16.h),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: EdgeInsetsDirectional.symmetric(
+                      horizontal: 16.w ),
                   child: Row(
+                    // mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.baseline,
+                    textBaseline: TextBaseline.alphabetic,
                     children: [
-                      Text("350 JOD" ,
-                        style: TextStyleHelper.of(context).h_16.copyWith(
-                            color: ThemeClass.of(context).primaryColor
-                        ),),
-                      const Spacer(),
-                      Container(
-                        width: 28.w,
-                        height: 28.h,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(30.r),
-                          color: ThemeClass.of(context).primaryColor,
+                      Gap(40.w),
+                      SizedBox(
+                        height: 113.h,
+                        width: 45.w,
+                        child: Image.asset(
+                          Assets.imagesProduct,
+                          alignment: Alignment.center,
+                          //  fit: BoxFit.cover,
                         ),
-                        child:  Icon(Icons.add,
-                          color: ThemeClass.of(context).background ,
-                          size: 17,),
+                      ),
+                      Spacer(),
+                      Align(
+                        alignment: Alignment.topRight,
+                        child: Padding(
+                          padding: EdgeInsetsDirectional.only(
+                              bottom:0.h
+                          ),
+                          child: SvgPicture.asset(Assets.imagesFavoriteIcon),
+                        ),
                       ),
                     ],
                   ),
                 ),
-              ),
-            ],
+                Gap(8.h),
+                Padding(
+                  padding: EdgeInsetsDirectional.only(start:14.w),
+                  child: Text(
+                      Strings.productDesc.tr,
+                      style: TextStyleHelper.of(context).b_14.copyWith(
+                          color: ThemeClass.of(context).mainBlack
+                      )
+                  ),
+                ),
+                Gap(8.h),
+                Expanded(
+                  child: Padding(
+                    padding:  EdgeInsetsDirectional.symmetric(
+                        horizontal: 16.w) ,
+                    child: Row(
+                      children: [
+                        Text("350 ${Strings.jod.tr}" ,
+                          style: TextStyleHelper.of(context).h_16.copyWith(
+                              color: ThemeClass.of(context).primaryColor
+                          ),),
+                        const Spacer(),
+                        Container(
+                          width: 28.w,
+                          height: 28.h,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(30.r),
+                            color: ThemeClass.of(context).primaryColor,
+                          ),
+                          child:  Icon(Icons.add,
+                            color: ThemeClass.of(context).background ,
+                            size: 17,),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       );

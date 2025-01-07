@@ -35,9 +35,7 @@ class _HomeScreenState extends StateMVC<HomeScreen> {
     super.initState();
     con.update();
     con.loadCurrentLanguage(context);
-
   }
-
 
 //     HomeController().controller.addListener(_updateView);
 // }
@@ -61,11 +59,10 @@ class _HomeScreenState extends StateMVC<HomeScreen> {
     return Scaffold(
       appBar: PreferredSize(
           preferredSize: Size(double.infinity, 180.h),
-          child:  const CustomAppBarWidget.secondaryAppBar(
+          child: const CustomAppBarWidget.secondaryAppBar(
             title: "",
             icon: "",
-          )
-      ),
+          )),
       bottomNavigationBar: const BottomNavBarWidget(
         selected: SelectedBottomNavBar.home,
       ),
@@ -88,7 +85,7 @@ class _HomeScreenState extends StateMVC<HomeScreen> {
               ),
               Gap(16.h),
               Padding(
-                padding: EdgeInsetsDirectional.only(start: 10.w),
+                padding: EdgeInsetsDirectional.only(start: 12.w),
                 child: SizedBox(
                   height: 150.h,
                   child: ListView.separated(
@@ -103,12 +100,12 @@ class _HomeScreenState extends StateMVC<HomeScreen> {
               ),
               Gap(10.h),
               Padding(
-                padding: EdgeInsetsDirectional.only(start: 11.w),
+                padding: EdgeInsetsDirectional.only(start: 16.w),
                 child: SizedBox(
                   height: 200.h,
                   // width: MediaQuery.sizeOf(context).width,
                   child: ListView.separated(
-                    physics: const BouncingScrollPhysics(),
+                      physics: const BouncingScrollPhysics(),
                       scrollDirection: Axis.horizontal,
                       itemBuilder: (context, index) => PackagesWidget(
                             packagesModel: con.packagesModel[index],
@@ -124,35 +121,36 @@ class _HomeScreenState extends StateMVC<HomeScreen> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     CustomDetailsSideTextWidget(
-                        text: Strings.popularProduct.tr,),
-                      InkWell(
-                        onTap: () => context.pushNamed(PopularProductsScreen.routeName),
-                        child: Text(
-                          Strings.viewAll.tr,
-                          style: TextStyleHelper.of(context).b_16.copyWith(
-                              decoration: TextDecoration.underline,
-                              color: ThemeClass.of(context).primaryColor),
-                        ),
+                      text: Strings.popularProduct.tr,
+                    ),
+                    InkWell(
+                      onTap: () =>
+                          context.pushNamed(PopularProductsScreen.routeName),
+                      child: Text(
+                        Strings.viewAll.tr,
+                        style: TextStyleHelper.of(context).b_16.copyWith(
+                            decoration: TextDecoration.underline,
+                            color: ThemeClass.of(context).primaryColor),
                       ),
+                    ),
                   ],
                 ),
               ),
               Gap(16.h),
               Padding(
-                padding: EdgeInsetsDirectional.only(start: 11.w),
+                padding: EdgeInsetsDirectional.only(start: 16.w),
                 child: SizedBox(
-                  height: 220.h,
+                   height: 220.h,
                   child: ListView.separated(
+                      physics: const BouncingScrollPhysics(),
                       scrollDirection: Axis.horizontal,
-                      itemBuilder: (context, index) => const CustomProductContainerWidget(
-                      ),
+                      itemBuilder: (context, index) =>
+                          const CustomProductContainerWidget(),
                       separatorBuilder: (context, index) => Gap(10.w),
-                      itemCount:5),
+                      itemCount: 5),
                 ),
               ),
-              SizedBox(
-                height: 50.h,
-              )
+              Gap(20.h)
             ],
           ),
         ),

@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
+import 'package:je_t_aime/Utilities/shared_preferences.dart';
 import 'package:je_t_aime/Utilities/text_style_helper.dart';
 import 'package:je_t_aime/core/Language/locales.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
@@ -146,7 +147,7 @@ class VisaPaymentMethodWidgetState extends StateMVC<VisaPaymentMethodWidget> {
                   controller: con.cvvController,
                   validator: (v) => Validate.validatePhone(v),
                 ),
-               Gap(45.h),
+               Gap(SharedPref.getCurrentLanguage() =="ar"?40.h:90.h),
 
                 CustomButtonWidget.primary(
                     title: Strings.payNow.tr,
