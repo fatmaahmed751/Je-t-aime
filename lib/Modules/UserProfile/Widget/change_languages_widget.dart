@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
+import 'package:je_t_aime/Utilities/router_config.dart';
 import 'package:je_t_aime/core/Language/locales.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 import 'package:provider/provider.dart';
@@ -144,8 +145,11 @@ class _ChangeLanguageState extends StateMVC<ChangeLanguage> {
                               .changeLanguage(language: Languages.ar);
                         }
                       });
-                      await Future.delayed(const Duration(milliseconds: 200));
-                      GoRouter.of(context).pushNamed(HomeScreen.routeName);
+                      await Future.delayed(const Duration(milliseconds: 100));
+                      currentContext_!.pushNamed(HomeScreen.routeName);
+
+                     // await Future.delayed(const Duration(milliseconds: 200));
+                     //  GoRouter.of(context).pushNamed(HomeScreen.routeName);
 
                     },
                     child: Container(

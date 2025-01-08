@@ -140,12 +140,15 @@ class _HomeScreenState extends StateMVC<HomeScreen> {
               Padding(
                 padding: EdgeInsetsDirectional.only(start: 16.w),
                 child: SizedBox(
-                   height: 220.h,
+                   height: 230.h,
                   child: ListView.separated(
-                      physics: const BouncingScrollPhysics(),
+                     physics: const BouncingScrollPhysics(),
                       scrollDirection: Axis.horizontal,
                       itemBuilder: (context, index) =>
-                          const CustomProductContainerWidget(),
+                          Padding(
+                            padding: EdgeInsetsDirectional.symmetric(vertical: 5.h),
+                            child: const CustomProductContainerWidget(),
+                          ),
                       separatorBuilder: (context, index) => Gap(10.w),
                       itemCount: 5),
                 ),

@@ -56,6 +56,7 @@ class _PoliciesScreenState extends StateMVC<PoliciesScreen> {
             padding: EdgeInsetsDirectional.symmetric(
                 horizontal: 24.w),
             child: ListView(
+              physics: const BouncingScrollPhysics(),
               children: [
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,

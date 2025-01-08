@@ -66,7 +66,7 @@ class _CustomProductContainerWidgetState extends State<CustomProductContainerWid
                         //  fit: BoxFit.cover,
                       ),
                     ),
-                    Spacer(),
+                    const Spacer(),
                     Align(
                       alignment: Alignment.topRight,
                       child: Padding(
@@ -115,7 +115,8 @@ class _CustomProductContainerWidgetState extends State<CustomProductContainerWid
                               height: 27.h,
                               child: SvgPicture.asset(Assets.imagesHeartBroken,
                               ),
-                            )),
+                            )
+                        ),
                       ),
                     ),
                   ],

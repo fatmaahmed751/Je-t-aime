@@ -75,16 +75,18 @@ class _ProductDetailsScreenState extends StateMVC<ProductDetailsScreen> {
                         con.isClick = !con.isClick;
                       });
                     },
-                      child: con.isClick?SvgPicture.asset(Assets.imagesHeartBroken):
+                      child: con.isClick?SizedBox(
+                          height: 26.h,
+                          child: SvgPicture.asset(Assets.imagesFavoriteIcon)):
                       SizedBox(
-                        height: 27.h,
-                        child: SvgPicture.asset(Assets.imagesFavoriteIcon,
-                                     ),
+                        height: 26.h,
+                        child: SvgPicture.asset(Assets.imagesHeartBroken,
+                        ),
                       )
                   ),
                 ],
               ),
-              Gap(12.h),
+              Gap(10.h),
               const ProductDetailsWidget(),
               // Row(
               // //  mainAxisAlignment: MainAxisAlignment.spaceBetween,

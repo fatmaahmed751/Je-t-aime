@@ -2,7 +2,6 @@
 class Assets {
   Assets._();
 
-  static const String assetsImagesTry = 'assets/images/try.json';
   static const String fontsOutfitBlack = 'assets/fonts/Outfit-Black.ttf';
   static const String fontsOutfitExtraLight = 'assets/fonts/Outfit-ExtraLight.ttf';
   static const String fontsOutfitLight = 'assets/fonts/Outfit-Light.ttf';
@@ -81,7 +80,6 @@ class Assets {
   static const String imagesProfileIcon = 'assets/images/profileIcon.svg';
   static const String imagesProfileNav = 'assets/images/profileNav.svg';
   static const String imagesRGroup = 'assets/images/rGroup.svg';
-  static const String imagesRImage = 'assets/images/rImage.svg';
   static const String imagesRewards = 'assets/images/rewards.svg';
   static const String imagesRewardsContainer = 'assets/images/rewardsContainer.svg';
   static const String imagesSearch = 'assets/images/search.svg';
@@ -89,8 +87,8 @@ class Assets {
   static const String imagesShop = 'assets/images/shop.svg';
   static const String imagesSignUp = 'assets/images/signUp.png';
   static const String imagesSmillingFace = 'assets/images/smillingFace.svg';
-  static const String imagesSplash = 'assets/images/splash.png';
   static const String imagesSplashOne = 'assets/images/splashOne.svg';
+  static const String imagesSplashScreen = 'assets/images/splashScreen.png';
   static const String imagesSplashThree = 'assets/images/splashThree.svg';
   static const String imagesStar = 'assets/images/star.svg';
   static const String imagesSubmit = 'assets/images/submit.svg';

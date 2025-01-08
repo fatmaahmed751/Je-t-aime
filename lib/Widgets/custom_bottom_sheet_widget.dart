@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
+import 'package:je_t_aime/Modules/UserProfile/user_profile_screen.dart';
 import 'package:je_t_aime/core/Language/locales.dart';
 
 import '../Utilities/strings.dart';
@@ -53,8 +54,7 @@ class CustomBottomSheetWidget extends StatelessWidget{
                CustomButtonWidget.primary(
                    title: Strings.backToHome.tr,
                    onTap: () {
-                     context.pop();
-
+                   GoRouter.of(context).pushNamed(UserProfileScreen.routeName);
                    }),
              ],
            ),

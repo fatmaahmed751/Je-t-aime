@@ -9,6 +9,7 @@ import '../../../Utilities/theme_helper.dart';
 import '../../../Utilities/validate.dart';
 import '../../../Widgets/custom_button_widget.dart';
 import '../../../Widgets/loading_screen.dart';
+import '../../Utilities/shared_preferences.dart';
 import '../../Utilities/strings.dart';
 import '../../Widgets/custom_app_bar_widget.dart';
 import '../../Widgets/custom_side_text_widget.dart';
@@ -52,6 +53,7 @@ class _SupportScreenState extends StateMVC<SupportScreen> {
                   padding: EdgeInsetsDirectional.symmetric(
                       horizontal: 23.w,),
                   child: ListView(
+                    physics: const BouncingScrollPhysics(),
                     // crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
 
@@ -129,7 +131,7 @@ class _SupportScreenState extends StateMVC<SupportScreen> {
                                   Validate.validateNormalString(v),
                             ),
                           ),
-                        Gap(140.h),
+                        Gap(SharedPref.getCurrentLanguage()=="ar"?140.h:190.h),
 
                           CustomButtonWidget.primary(
                               title: Strings.send.tr,

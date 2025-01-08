@@ -149,7 +149,7 @@ class ToastHelper {
   }) {
     OverlayEntry overlayEntry = OverlayEntry(
       builder: (context) => Positioned(
-        bottom:50,
+        bottom:70,
         left: 50,
         child: Material(
           color: Colors.transparent,
