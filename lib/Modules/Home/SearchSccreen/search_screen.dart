@@ -84,7 +84,7 @@ class _SearchScreenState extends StateMVC<SearchScreen> {
                             con.isSearch=true;
                           });
                         }
-                      }
+                      },
                   )),
 
                 ],

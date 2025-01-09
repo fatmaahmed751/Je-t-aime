@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:je_t_aime/Modules/ProductDetails/product_details_screen.dart';
+import 'package:je_t_aime/Widgets/toast_helper.dart';
 import 'package:je_t_aime/core/Language/locales.dart';
 import '../../Utilities/text_style_helper.dart';
 import '../../Utilities/theme_helper.dart';
@@ -99,16 +100,28 @@ class CustomProductsWidget extends StatelessWidget{
                               color: ThemeClass.of(context).primaryColor
                           ),),
                         const Spacer(),
-                        Container(
-                          width: 28.w,
-                          height: 28.h,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(30.r),
-                            color: ThemeClass.of(context).primaryColor,
+                        GestureDetector(
+                          onTap: (){
+                            ToastHelper.showSuccess(
+                              context: context,
+                              message: Strings.addToCartSuccess.tr,
+                              icon:SvgPicture.asset(Assets.imagesSubmit,width:60.w,
+                                height:50.h,
+                                fit: BoxFit.cover,),
+                              backgroundColor: ThemeClass.of(context).primaryColor,
+                            );
+                          },
+                          child: Container(
+                            width: 28.w,
+                            height: 28.h,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(30.r),
+                              color: ThemeClass.of(context).primaryColor,
+                            ),
+                            child:  Icon(Icons.add,
+                              color: ThemeClass.of(context).background ,
+                              size: 17,),
                           ),
-                          child:  Icon(Icons.add,
-                            color: ThemeClass.of(context).background ,
-                            size: 17,),
                         ),
                       ],
                     ),

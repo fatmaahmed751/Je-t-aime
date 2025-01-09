@@ -13,6 +13,7 @@ import '../../../../Utilities/validate.dart';
 import '../../../../Widgets/custom_button_widget.dart';
 import '../../../../Widgets/custom_textfield_widget.dart';
 import '../../../../Widgets/loading_screen.dart';
+import '../../Utilities/shared_preferences.dart';
 import '../../Widgets/circle_avatar_widget.dart';
 import '../../generated/assets.dart';
 import '../ForgetPassword/forget_password_screen.dart';
@@ -166,7 +167,7 @@ class _ChangePasswordScreenState extends StateMVC<ChangePasswordScreen> {
                             });
                           },
                         ),
-                        Gap(40.h),
+                        Gap(SharedPref.getCurrentLanguage()=="ar"?25.h:40.h),
                         CustomButtonWidget.primary(
                         title: Strings.changePasswordTitle.tr,
                         onTap: () {

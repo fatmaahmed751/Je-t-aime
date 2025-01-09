@@ -40,8 +40,11 @@ class UserProfileContainerWidget extends StatelessWidget {
                   padding: EdgeInsetsDirectional.symmetric(
                       horizontal: 6.w,
                   vertical: 6.h),
-                  child: SvgPicture.asset(image,
-                 ),
+                  child: Transform.flip(
+                    flipX:SharedPref.getCurrentLanguage()=="ar"? true:false,
+                    child: SvgPicture.asset(image,
+                                     ),
+                  ),
                 )),
             Gap(10.w),
             Text(

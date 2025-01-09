@@ -128,7 +128,7 @@ class _RateProductScreenState extends StateMVC<RateProductScreen> {
                   onTap: () {
                     context.pop();
                   }),
-              Gap(10.h),
+              Gap(25.h),
             ],
           ),
         ),
