@@ -23,4 +23,6 @@ class ForgetPasswordController extends ControllerMVC {
     emailController.dispose();
     super.dispose();
   }
+
+  
 }

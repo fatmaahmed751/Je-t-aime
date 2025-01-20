@@ -3,7 +3,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
-import 'package:je_t_aime/Modules/OTP/verification_otp_screen.dart';
 import 'package:je_t_aime/core/Language/locales.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 import '../../../Utilities/strings.dart';
@@ -16,6 +15,7 @@ import '../../../Widgets/loading_screen.dart';
 import '../../Widgets/circle_avatar_widget.dart';
 import '../../Widgets/custom_side_text_widget.dart';
 import '../../generated/assets.dart';
+import '../VerificationAccountOtp/verification_otp_screen.dart';
 import 'forget_password_controller.dart';
 
 class ForgetPasswordScreen extends StatefulWidget {

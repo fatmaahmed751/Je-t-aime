@@ -149,14 +149,13 @@ class _LoginScreenState extends StateMVC<LoginScreen> {
                             radius: 30.r,
                             title: Strings.login.tr,
                             onTap: () {
-                            GoRouter.of(context).pushNamed(HomeScreen.routeName);
-                              // if (_formKey.currentState?.validate() ?? false) {
-                              //   //con.onLogin();
-                              // } else {
-                              //   setState(() {
-                              //     con.autoValidate = true;
-                              //   });
-                              // }
+                              if (_formKey.currentState?.validate() ?? false) {
+                              con.onLogin();
+                              } else {
+                                setState(() {
+                                  con.autoValidate = true;
+                                });
+                              }
                             }
                             ),
                         Gap(8.h),

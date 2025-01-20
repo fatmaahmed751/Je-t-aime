@@ -186,5 +186,9 @@
    "writeCvvNumber" :"Enter your CVV",
   "successCash": "Your order has been confirmed! Please prepare the exact amount for cash on delivery. Thank you for shopping with us!",
   "successVisa": "Your payment has been successfully completed. Thank you for your purchase!",
-  "cashText": "You have selected \t'Cash on Delivery' as your payment method.No payment is required at this time "
+  "cashText": "You have selected \t'Cash on Delivery' as your payment method.No payment is required at this time ",
+  "verificationSuccess": "Verification success",
+  "verificationFailed": "Verification failed",
+  "passwordResetSu": "Password reset successful!",
+  "verificationAccountCode": "We've sent you a code to verify your account. Please enter the code below."
 }

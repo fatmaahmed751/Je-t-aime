@@ -8,24 +8,26 @@ import 'package:je_t_aime/Modules/Orders/orders_screen.dart';
 import 'package:je_t_aime/Modules/Payment/payment_screen.dart';
 import 'package:je_t_aime/Modules/Register/register_screen.dart';
 import 'package:je_t_aime/Modules/Support/support_screen.dart';
+import 'package:je_t_aime/Utilities/shared_preferences.dart';
 import '../Modules/AllCategories/all_categories_screen.dart';
 import '../Modules/Cart/cart_screen.dart';
 import '../Modules/ForgetPassword/forget_password_screen.dart';
 import '../Modules/Home/SearchSccreen/search_screen.dart';
 import '../Modules/Home/home_screen.dart';
 import '../Modules/Login/login_screen.dart';
-import '../Modules/OTP/verification_otp_screen.dart';
 import '../Modules/OnBoarding/onboarding_screen.dart';
 import '../Modules/PersonalData/personal_data_screen.dart';
 import '../Modules/Policies/policies_screen.dart';
 import '../Modules/PopularProducts/popular_product_screen.dart';
 import '../Modules/ProductDetails/product_details_screen.dart';
 import '../Modules/ResetPassword/reset_password_screen.dart';
+import '../Modules/ResetPassword/widget/verify_password_otp.dart';
 import '../Modules/Reviews/reviews_screen.dart';
 import '../Modules/Rewards/LoginRewardsScreen/login_rewards_screen.dart';
 import '../Modules/Shipping/shipping_screen.dart';
 import '../Modules/Splash/splash_screen.dart';
 import '../Modules/UserProfile/user_profile_screen.dart';
+import '../Modules/VerificationAccountOtp/verification_otp_screen.dart';
 
 BuildContext? get currentContext_ => GoRouterConfig.router.routerDelegate.navigatorKey.currentContext;
 class GoRouterConfig{
@@ -234,16 +236,21 @@ class GoRouterConfig{
         name: VerificationOtpScreen.routeName,
         path: "/${VerificationOtpScreen.routeName}",
         pageBuilder: (_, GoRouterState state) {
-          //final String email = state.extra as String;
+         final int id = int.tryParse(state.extra?.toString() ?? '') ?? 0;
+         final loggedInUserId = SharedPref.getCurrentUser()?.user?.id;
+  if (loggedInUserId != id) {
+    print("ID mismatch: This is not the logged-in user's ID.");
+  }
           return getCustomTransitionPage(
             state: state,
-            child:  const VerificationOtpScreen(
-            //    email:email
+            child:   VerificationOtpScreen(
+               id:id
             ),
           );
         },
         routes: const <RouteBase>[],
       ),
+
       GoRoute(
         name: ForgetPasswordScreen.routeName,
         path: "/${ForgetPasswordScreen.routeName}",
@@ -251,6 +258,24 @@ class GoRouterConfig{
           return getCustomTransitionPage(
             state: state,
             child: const ForgetPasswordScreen(),
+          );
+        },
+        routes: const <RouteBase>[],
+      ),
+      GoRoute(
+        name: VerificationPasswordScreen.routeName,
+        path: "/${VerificationPasswordScreen.routeName}",
+        pageBuilder: (_, GoRouterState state) {
+          final int id = int.tryParse(state.extra?.toString() ?? '') ?? 0;
+          final resetPassword = SharedPref.getCurrentUser()?.user?.id;
+          if (resetPassword != id) {
+            print("ID mismatch: This is not the logged-in user's ID.");
+          }
+          return getCustomTransitionPage(
+            state: state,
+            child:  VerificationPasswordScreen(
+              id:id
+            ),
           );
         },
         routes: const <RouteBase>[],

@@ -5,9 +5,11 @@ class Strings {
   static const String profile = "profile";
   static const String notification = "notification";
   static const String favorite = "favorite";
+  static const String verificationFailed = "verificationFailed";
   static const String light = "light";
   static const String dark = "dark";
   static const String update = "update";
+  static const String verificationSuccess =  "verificationSuccess";
   static const String mainColor = "mainColor";
   static const String secondaryColor = "secondaryColor";
   static const String selectColor = "selectColor";
@@ -221,11 +223,13 @@ class Strings {
   static const String notNotificationsYet ="notNotificationsYet";
   static const String getNotifications ="getNotifications";
   static const String verificationCode ="verificationCode";
+  static const String verificationAccountCode ="verificationAccountCode";
   static const String setYourPassword ="setYourPassword";
   static const String settings ="settings";
   static const String unhandeledNotification ="unhandeled_notification";
   static const String passwordRequired ="passwordRequired";
   static const String lengthPassword ="lengthPassword";
+  static const String passwordResetSu ="passwordResetSu";
   static const String upperCase ="uppercase";
   static const String lowerCase ="lowerCase";
   static const String specialCharacter ="specialCharacter";

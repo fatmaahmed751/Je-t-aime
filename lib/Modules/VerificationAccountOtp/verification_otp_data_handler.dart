@@ -5,45 +5,38 @@ import '../../../core/API/request_method.dart';
 import '../../../core/error/exceptions.dart';
 import '../../../core/error/failures.dart';
 
-class ResetPasswordDataHandler{
-  static Future<Either<Failure,String>> resetNewPassword({
-    required int id,
-    required String password,
-    required String confirmPassword,
-
-  })async{
-    try {
-      var response = await GenericRequest<String>(
-        method: RequestApi.post(
-          url:APIEndPoint.resetPassword,
-          body: {
-            "user_id": id.toString(),
-            "password": password,
-            "password_confirmation": confirmPassword,
-          },
-        ),
-        fromMap : (_) => _["message"],
-      ).getResponse();
-      return Right(response);
-    } on ServerException catch (failure) {
-      return Left(ServerFailure(failure.errorMessageModel));
-    }
-  }
-  static Future<Either<Failure, String>> verificationCodeResetPassword({
-    required String email,
+class OTPCodeDataHandler {
+  static Future<Either<Failure, String>> verificationAccountCode({
+   required int id,
     required String code,
-    // required String password,
-    // required String confirmPassword,
   }) async {
     try {
       var response = await GenericRequest<String>(
         method: RequestApi.post(
-          url: APIEndPoint.resetPassword,
+          url: APIEndPoint.checkOtp,
           body: {
-            "email": email,
+           "user_id": id.toString(),
             "code": code,
-            //"password": password,
-            // "password_confirmation": confirmPassword,
+          },
+        ),
+        fromMap : (_) => _["message"],
+      ).getResponse();
+
+      return Right(response);
+    } on ServerException catch (failure) {
+      return Left((ServerFailure(failure.errorMessageModel)));
+    }
+  }
+  static Future<Either<Failure, String>> resentOtp({
+    required int id,
+    required int code,
+  }) async {
+    try {
+      var response = await GenericRequest<String>(
+        method: RequestApi.post(
+          url: APIEndPoint.checkOtp,
+          body: {
+            "user_id": id.toString(),
           },
         ),
         fromMap : (_) => _["message"],
@@ -55,3 +48,5 @@ class ResetPasswordDataHandler{
     }
   }
 }
+
+

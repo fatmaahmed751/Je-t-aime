@@ -7,6 +7,9 @@ import '../../../Models/user_model.dart';
 import '../../../Utilities/api_end_point.dart';
 import '../../../Utilities/router_config.dart';
 import '../../../Utilities/shared_preferences.dart';
+import '../../Widgets/toast_helper.dart';
+import '../Home/home_screen.dart';
+import 'login_data_handler.dart';
 
 class LoginController extends ControllerMVC {
   // singleton
@@ -139,27 +142,27 @@ class LoginController extends ControllerMVC {
   //   });
   // }
   //
-  // onLogin() async {
-  //   setState(() {
-  //     loading = true;
-  //   });
-  //   final result = await LoginDataHandler.login(
-  //     email: emailController.text,
-  //     password: passwordController.text,
-  //   );
-  //
-  //   result.fold((l) {
-  //  ToastHelper.showError(message: l.errorModel.statusMessage);
-  //   }, (r) async {
-  //     await SharedPref.saveCurrentUser(user: r);
-  //     print("token loginnnn ${SharedPref.getCurrentUser()?.token}");
-  //     currentContext_?.pushNamed(
-  //       HomeScreen.routeName,
-  //     );
-  //     setState(() {});
-  //   });
-  //   setState(() {
-  //     loading = false;
-  //   });
-  // }
+  onLogin() async {
+    setState(() {
+      loading = true;
+    });
+    final result = await LoginDataHandler.login(
+      email: emailController.text,
+      password: passwordController.text,
+    );
+
+    result.fold((l) {
+   ToastHelper.showError(message: l.errorModel.statusMessage);
+    }, (r) async {
+     // await SharedPref.saveCurrentUser(user: r);
+      print("token loginnnn ${SharedPref.getCurrentUser()?.token}");
+      currentContext_?.pushNamed(
+        HomeScreen.routeName,
+      );
+      setState(() {});
+    });
+    setState(() {
+      loading = false;
+    });
+  }
 }

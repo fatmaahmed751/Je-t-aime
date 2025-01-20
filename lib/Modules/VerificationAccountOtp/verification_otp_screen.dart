@@ -17,11 +17,11 @@ import 'verification_otp_controller.dart';
 
 class VerificationOtpScreen extends StatefulWidget {
   static const routeName = "otpScreen";
-  //final String email;
+ final int id;
 
   const VerificationOtpScreen({
     Key? key,
-    // required this.email
+   required this.id
   }) : super(key: key);
 
   @override
@@ -38,7 +38,7 @@ class _VerificationOtpScreenState extends StateMVC<VerificationOtpScreen> {
   @override
   void initState() {
     super.initState();
-    //con.email =  widget.email;
+    con.userId = widget.id;
   }
 
   @override
@@ -111,7 +111,7 @@ class _VerificationOtpScreenState extends StateMVC<VerificationOtpScreen> {
                       SizedBox(
                         width: 382.w,
                         height: 48.h,
-                        child: Text(Strings.verifyCode.tr,
+                        child: Text(Strings.verificationAccountCode.tr,
                             textAlign: TextAlign.start,
                             style: TextStyleHelper.of(context).b_16.copyWith(
                                 color: ThemeClass.of(context).secondaryBlackColor.withOpacity(0.6))),
@@ -170,14 +170,14 @@ class _VerificationOtpScreenState extends StateMVC<VerificationOtpScreen> {
                           height: 54.h,
                           title: Strings.continu.tr,
                           onTap: () {
-                            context.pushNamed(ResetPasswordScreen.routeName);
-                            // if (formKey.currentState?.validate() ?? false) {
-                            //  // con.verifyCodeToResetPassword();
-                            // } else {
-                            //   setState(() {
-                            //   con.autoValidate = true;
-                            //   });
-                            // }
+
+                            if (formKey.currentState?.validate() ?? false) {
+                            con.verifyCodeToResetPassword();
+                            } else {
+                              setState(() {
+                              con.autoValidate = true;
+                              });
+                            }
                           }),
                       Gap(30.h),
                       Row(

@@ -105,6 +105,7 @@ class _RegisterScreenState extends StateMVC<RegisterScreen> {
                         CustomSideTextWidget(text: Strings.password.tr),
                         Gap(8.h),
                         CustomTextFieldWidget(
+                          obscure: con.isPassword,
                           hintStyle: TextStyle(
                               color: ThemeClass.of(context)
                                   .secondaryBlackColor
@@ -161,14 +162,14 @@ class _RegisterScreenState extends StateMVC<RegisterScreen> {
                         CustomButtonWidget.primary(
                             title: Strings.joinUs.tr,
                            onTap: () {
-                              GoRouter.of(context).pushNamed(HomeScreen.routeName);
-                            //   if (_formKey.currentState?.validate() ?? false) {
-                            //   //  con.onRegister();
-                            //   } else {
-                            //     setState(() {
-                            //       con.autoValidate = true;
-                            //     });
-                            //   }
+
+                              if (_formKey.currentState?.validate() ?? false) {
+                               con.userRegister();
+                              } else {
+                                setState(() {
+                                  con.autoValidate = true;
+                                });
+                              }
                             }),
                       Gap(10.h),
                         UserStatusRow(

@@ -6,7 +6,6 @@ import '../../../../Utilities/strings.dart';
 import '../../../../Utilities/theme_helper.dart';
 import '../../../../Widgets/custom_textfield_widget.dart';
 import '../../../../generated/assets.dart';
-import '../../../Utilities/text_style_helper.dart';
 import '../../../Utilities/validate.dart';
 
 
@@ -27,7 +26,7 @@ class SearchWidget extends StatefulWidget {
 
 class _SearchWidgetState extends State<SearchWidget> {
   late FocusNode _focusNode;
-  bool _isFocused = true;
+  bool _isFocused = false;
 
   @override
   void initState() {
@@ -61,11 +60,6 @@ class _SearchWidgetState extends State<SearchWidget> {
       onSave:widget.onSearch,
      controller:widget.controller,
 focusNode:  _focusNode,
-        // fillColor :_isFocused
-        //     ? Colors.transparent
-        //     : widget.backGroundColor ?? Theme.of(context).dividerColor,
-        // focusedBorder:
-        // filled: true,
 focusedBorderColor: Colors.white,
       width: widget.width,
       height: 45.h,
@@ -73,9 +67,19 @@ focusedBorderColor: Colors.white,
       borderRadiusValue: 30.r,
       isDense: true,
       prefixIcon: SvgPicture.asset(Assets.imagesSearch,
-        colorFilter:_isFocused?  ColorFilter.mode(ThemeClass.of(context).pinkColor.withOpacity(0.8), BlendMode.srcIn):null,),
+        colorFilter: _isFocused
+            ? ColorFilter.mode(
+          ThemeClass.of(context).pinkColor.withOpacity(0.8),
+          BlendMode.srcIn,
+        )
+            : ColorFilter.mode(
+          ThemeClass.of(context).secondaryBlackColor.withOpacity(0.7),
+          BlendMode.srcIn,
+        ),
+      ),
+      //  colorFilter:_isFocused?  ColorFilter.mode(ThemeClass.of(context).pinkColor.withOpacity(0.8), BlendMode.srcIn):null,),
       hint: Strings.searchHere.tr,
-      backGroundColor:widget.backGroundColor,
+      backGroundColor:widget.backGroundColor?? Colors.white,
      // ThemeClass.of(context).secondary.withOpacity(1),
       onchange:widget.onChange,
       hintStyle:_isFocused?TextStyle(
