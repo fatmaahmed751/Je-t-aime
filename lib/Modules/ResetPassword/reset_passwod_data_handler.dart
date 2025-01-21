@@ -17,7 +17,7 @@ class ResetPasswordDataHandler{
         method: RequestApi.post(
           url:APIEndPoint.resetPassword,
           body: {
-            "user_id": id.toString(),
+            "user_id": id,
             "password": password,
             "password_confirmation": confirmPassword,
           },

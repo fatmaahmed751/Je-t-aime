@@ -12,7 +12,7 @@ import '../network/error_message_model.dart';
 
 class RequestApi {
   final Uri uri;
-  final Map<String, String> body;
+  final Map<String, dynamic> body;
   final Map<String, dynamic> bodyJson;
   final List<http.MultipartFile> files;
   final Map<String, String>? headers;
@@ -113,7 +113,10 @@ class RequestApi {
     debugPrint(uri.toString());
     debugPrint(json.encode(body));
     var request = http.MultipartRequest(method, uri);
-    if(body.isNotEmpty) request.fields.addAll(body);
+    if(body.isNotEmpty) request.fields.addAll(body.map((key, value) => MapEntry(key, value.toString())));
+
+    //request.fields.addAll(body);
+
     request.files.addAll(files);
     if (headers != null) request.headers.addAll(headers!);
     return await _ApiBaseHelper.httpSendRequest(request,this,getResponseBytes: getResponseBytes);

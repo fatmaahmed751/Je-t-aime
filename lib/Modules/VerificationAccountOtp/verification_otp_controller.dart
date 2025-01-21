@@ -27,7 +27,13 @@ class VerificationOtpController extends ControllerMVC {
     return _this!;
   }
   static VerificationOtpController? _this;
-  VerificationOtpController._();
+  VerificationOtpController._(){
+    // Initialize fields in the constructor
+    pinController = TextEditingController();
+    focusNode = FocusNode();
+    smsRetriever = SmsRetrieverImpl(SmartAuth());
+  }
+
   bool loading=false,autoValidate = false;
  late final SmsRetriever smsRetriever;
   late TextEditingController pinController;
@@ -37,10 +43,10 @@ class VerificationOtpController extends ControllerMVC {
   @override
   void initState() {
     super.initState();
-    pinController= TextEditingController();
-    focusNode = FocusNode();
-   smsRetriever = SmsRetrieverImpl(
-        SmartAuth());
+   //  pinController= TextEditingController();
+   //  focusNode = FocusNode();
+   // smsRetriever = SmsRetrieverImpl(
+   //      SmartAuth());
     // userId = SharedPref.getCurrentUser()?.user?.id;
     // if (userId == null) {
     //   print('User ID not found in Shared Preferences');
@@ -54,7 +60,7 @@ class VerificationOtpController extends ControllerMVC {
     super.dispose();
   }
   void setUserId(int userId) {
-    final userId = SharedPref.getCurrentUser()?.user?.id;
+    this.userId = userId;
   }
   void verifyCode(String code, String inputCode) {
     if (code == inputCode) {
@@ -64,7 +70,7 @@ class VerificationOtpController extends ControllerMVC {
     }
   }
 
-  verifyCodeToResetPassword()async {
+  verifyCodeToVerifyAccount()async {
     if (userId == null) {
       userId = SharedPref.getCurrentUser()?.user?.id; // Attempt to fetch from SharedPref
       if (userId == null) {
@@ -72,6 +78,10 @@ class VerificationOtpController extends ControllerMVC {
         ToastHelper.showError(message: "User ID is required for verification.");
         return;
       }
+    }
+    if (pinController.text.isEmpty) {
+      ToastHelper.showError(message: "Please enter the OTP code.");
+      return;
     }
     setState((){loading=true;});
     final result = await OTPCodeDataHandler.verificationAccountCode(
@@ -96,7 +106,6 @@ print(result);
       currentContext_?.pushNamed(
         HomeScreen.routeName,
       );
-      setState(() {});
     });
     setState(() {
       loading = false;
@@ -104,7 +113,44 @@ print(result);
 
   }
 
+ resendVerifyAccountCode()async {
+    if (userId == null) {
+      userId = SharedPref.getCurrentUser()?.user?.id; // Attempt to fetch from SharedPref
+      if (userId == null) {
+        print('User ID is missing');
+        ToastHelper.showError(message: "User ID is required for verification.");
+        return;
+      }
+    }
+    // if (pinController.text.isEmpty) {
+    //   ToastHelper.showError(message: "Please enter the OTP code.");
+    //   return;
+    // }
+    setState((){loading=true;});
+    final result = await OTPCodeDataHandler.resentOtp(
+      id:userId!,
+    );
+    print(result);
+    result.fold((l) {
+      print('Failure: ${l.toString()}');
+      ToastHelper.showError(message: Strings.verificationFailed.tr,
+          backgroundColor:ThemeClass.of(currentContext_!).primaryColor );
+    }, (r) {
+      ToastHelper.showSuccess(
+        context:   currentContext_!,
+        message: Strings.verificationSuccess.tr,
+        icon:SvgPicture.asset(Assets.imagesSubmit,width:60.w,
+          height:50.h,
+          fit: BoxFit.cover,),
 
+        backgroundColor: ThemeClass.of(currentContext_!).primaryColor,
+      );
+    });
+    setState(() {
+      loading = false;
+    });
+
+  }
 
 }
 

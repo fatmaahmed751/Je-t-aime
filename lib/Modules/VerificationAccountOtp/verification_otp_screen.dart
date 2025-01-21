@@ -12,17 +12,15 @@ import '../../../Utilities/text_style_helper.dart';
 import '../../../Utilities/theme_helper.dart';
 import '../../../Widgets/custom_button_widget.dart';
 import '../../../Widgets/loading_screen.dart';
+import '../../Widgets/timer_widget.dart';
 import '../../generated/assets.dart';
 import 'verification_otp_controller.dart';
 
 class VerificationOtpScreen extends StatefulWidget {
   static const routeName = "otpScreen";
- final int id;
+  final int id;
 
-  const VerificationOtpScreen({
-    Key? key,
-   required this.id
-  }) : super(key: key);
+  const VerificationOtpScreen({Key? key, required this.id}) : super(key: key);
 
   @override
   createState() => _VerificationOtpScreenState();
@@ -38,8 +36,8 @@ class _VerificationOtpScreenState extends StateMVC<VerificationOtpScreen> {
   @override
   void initState() {
     super.initState();
-    con.userId = widget.id;
-  }
+    con.setUserId(widget.id);
+    }
 
   @override
   void dispose() {
@@ -114,7 +112,9 @@ class _VerificationOtpScreenState extends StateMVC<VerificationOtpScreen> {
                         child: Text(Strings.verificationAccountCode.tr,
                             textAlign: TextAlign.start,
                             style: TextStyleHelper.of(context).b_16.copyWith(
-                                color: ThemeClass.of(context).secondaryBlackColor.withOpacity(0.6))),
+                                color: ThemeClass.of(context)
+                                    .secondaryBlackColor
+                                    .withOpacity(0.6))),
                       ),
                       Gap(20.h),
                       Directionality(
@@ -170,35 +170,20 @@ class _VerificationOtpScreenState extends StateMVC<VerificationOtpScreen> {
                           height: 54.h,
                           title: Strings.continu.tr,
                           onTap: () {
-
                             if (formKey.currentState?.validate() ?? false) {
-                            con.verifyCodeToResetPassword();
+                              con.verifyCodeToVerifyAccount();
                             } else {
                               setState(() {
-                              con.autoValidate = true;
+                                con.autoValidate = true;
                               });
                             }
                           }),
                       Gap(30.h),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          GestureDetector(
-                            onTap: () {},
-                            child: Text(
-                              Strings.resendCode.tr,
-                              textAlign: TextAlign.left,
-                              style: TextStyleHelper.of(context).b_16.copyWith(
-                                  color: ThemeClass.of(context).secondaryBlackColor.withOpacity(0.6)),
-                            ),
-                          ),
-                          Text(
-                            Strings.timeCount.tr,
-                            textAlign: TextAlign.left,
-                            style: TextStyleHelper.of(context).b_16.copyWith(
-                                color: ThemeClass.of(context).primaryColor),
-                          ),
-                        ],
+                      OtpResendTimer(
+                        initialSeconds: 78,
+                        onResend: () {
+                          con.resendVerifyAccountCode();
+                        },
                       ),
                     ],
                   ),

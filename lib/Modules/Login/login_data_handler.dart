@@ -8,13 +8,13 @@ import '../../core/error/exceptions.dart';
 import '../../core/error/failures.dart';
 
 class LoginDataHandler {
-  static Future<Either<Failure, String>> login({
+  static Future<Either<Failure, UserModel>> login({
     required String email,
     required String password,
   }) async {
     try {
       //    String? fcm = await FirebaseMessaging.instance.getToken();
-      String response = await GenericRequest<String>(
+      UserModel response = await GenericRequest<UserModel>(
         method: RequestApi.post(
             url: APIEndPoint.login,
             body: {
@@ -23,8 +23,8 @@ class LoginDataHandler {
               // "token":fcm??'',
 
             }),
-        fromMap: (_) => _["message"],
-      ).getResponse();
+        fromMap:UserModel.fromJson,
+      ).getObject();
       print("heeeeeeeeeeeeeeeeel");
       return Right(response);
     } on ServerException catch (failure) {

@@ -15,7 +15,7 @@ class OTPCodeDataHandler {
         method: RequestApi.post(
           url: APIEndPoint.checkOtp,
           body: {
-           "user_id": id.toString(),
+           "user_id": id,
             "code": code,
           },
         ),
@@ -29,14 +29,13 @@ class OTPCodeDataHandler {
   }
   static Future<Either<Failure, String>> resentOtp({
     required int id,
-    required int code,
   }) async {
     try {
       var response = await GenericRequest<String>(
         method: RequestApi.post(
-          url: APIEndPoint.checkOtp,
+          url: APIEndPoint.reSentOtp,
           body: {
-            "user_id": id.toString(),
+            "user_id": id,
           },
         ),
         fromMap : (_) => _["message"],

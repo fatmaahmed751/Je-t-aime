@@ -53,7 +53,88 @@ class RegisterController extends ControllerMVC {
     confirmPasswordController.dispose();
     super.dispose();
   }
+  userRegister() async {
+    setState(() { loading = true; });
 
+    final result = await RegisterDataHandler.register(
+      email: emailController.text,
+      password: passwordController.text,
+      name: "Ahmed",
+    );
+
+    result.fold((l) {
+      ToastHelper.showError(message: l.errorModel.statusMessage);
+    }, (r) async {
+      await SharedPref.saveCurrentUser(user: r);
+      print("User ID saved: ${r.user?.id}");
+
+      // Retrieve user ID from the saved data
+      final userId = SharedPref.getCurrentUser()?.user?.id;
+
+      if (userId == null) {
+        print("Error: User ID is null after registration");
+        ToastHelper.showError(message: "Failed to fetch user ID");
+        return;
+      }
+
+      print("Navigating to OTP screen with ID: $userId");
+
+      // Ensure context is not null before navigating
+      if (currentContext_ != null) {
+        currentContext_?.pushNamed(
+          VerificationOtpScreen.routeName,
+          extra: userId,
+        );
+        print("Navigated to OTP screen with extra ID: $userId");
+      } else {
+        print("Error: Context is null");
+      }
+    });
+
+    setState(() { loading = false; });
+  }
+  // userRegister() async{
+  //   setState((){loading=true;});
+  //   final result = await RegisterDataHandler.register(
+  //       email: emailController.text,
+  //       password: passwordController.text,
+  //       name: "Ahmed"
+  //   );
+  //   result.fold((l) {
+  //     ToastHelper.showError(message: l.errorModel.statusMessage);
+  //   }, (r) async {
+  //     await SharedPref.saveCurrentUser( user: r);
+  //     print("User ID saved: ${r.user?.id}");
+  //
+  //     // Retrieve user ID from the saved data
+  //     final userId = SharedPref.getCurrentUser()?.user?.id;
+  //
+  //     if (userId == null) {
+  //       print("Error: User ID is null after registration");
+  //       ToastHelper.showError(message: "Failed to fetch user ID");
+  //       return;
+  //     }
+  //     print("Navigating to OTP screen with ID: ${SharedPref.getCurrentUser()?.user?.id}");
+  //
+  //
+  //     // Navigate to VerificationOtpScreen with the correct ID
+  //     currentContext_?.pushNamed(
+  //       VerificationOtpScreen.routeName,
+  //       extra: userId,
+  //     );
+  //     print("Navigated to OTP screen with extra ID: $userId");
+  //     print("Logged-in user ID: ${SharedPref.getCurrentUser()?.user?.id}");
+  //
+  //     setState(() {});
+  //   });
+  //   setState(() {
+  //     loading = false;
+  //   });
+  //
+  //   await Future.delayed(const Duration(seconds: 2));
+  //   setState((){loading=false;});
+  // }
+  //***************************************************************************
   // Future<UserModel?> signIn() async {
   //   return await _authService.signInWithApple();
   // }
@@ -138,46 +219,6 @@ class RegisterController extends ControllerMVC {
   //   setState((){loading=false;});
   // }
 
-  userRegister() async{
-      setState((){loading=true;});
-      final result = await RegisterDataHandler.register(
-        email: emailController.text,
-        password: passwordController.text,
-        name: "Ahmed"
-      );
-      result.fold((l) {
-        ToastHelper.showError(message: l.errorModel.statusMessage);
-      }, (r) async {
-       // await SharedPref.saveCurrentUser( user: r);
-       // print("User ID saved: ${r.id}");
 
-        // Retrieve user ID from the saved data
-        final userId = SharedPref.getCurrentUser()?.user?.id;
-
-        if (userId == null) {
-          print("Error: User ID is null after registration");
-          ToastHelper.showError(message: "Failed to fetch user ID");
-          return;
-        }
-        print("Navigating to OTP screen with ID: ${SharedPref.getCurrentUser()?.user?.id}");
-
-
-        // Navigate to VerificationOtpScreen with the correct ID
-        currentContext_?.pushNamed(
-          VerificationOtpScreen.routeName,
-          extra: userId,
-        );
-        print("Navigated to OTP screen with extra ID: $userId");
-        print("Logged-in user ID: ${SharedPref.getCurrentUser()?.user?.id}");
-
-        setState(() {});
-      });
-      setState(() {
-        loading = false;
-      });
-
-      await Future.delayed(const Duration(seconds: 2));
-      setState((){loading=false;});
-    }
 }
 

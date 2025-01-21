@@ -1,11 +1,5 @@
-import 'dart:convert';
-import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
-import '../../../Models/user_model.dart';
-import '../../../Utilities/shared_preferences.dart';
-import '../../../generated/assets.dart';
 
 class PersonalDataController extends ControllerMVC {
   // singleton
