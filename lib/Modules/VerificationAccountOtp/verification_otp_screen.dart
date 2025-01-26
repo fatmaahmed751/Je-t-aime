@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
-import 'package:go_router/go_router.dart';
-import 'package:je_t_aime/Modules/ResetPassword/reset_password_screen.dart';
 import 'package:je_t_aime/core/Language/locales.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 import 'package:pinput/pinput.dart';
@@ -204,18 +202,16 @@ class SmsRetrieverImpl implements SmsRetriever {
 
   @override
   Future<void> dispose() {
-    return smartAuth.removeSmsListener();
+    return smartAuth.removeSmsRetrieverApiListener();
   }
 
   @override
   Future<String?> getSmsCode() async {
     final signature = await smartAuth.getAppSignature();
     debugPrint('App Signature: $signature');
-    final res = await smartAuth.getSmsCode(
-      useUserConsentApi: true,
-    );
-    if (res.succeed && res.codeFound) {
-      return res.code!;
+    final res = await smartAuth.getSmsWithRetrieverApi();
+    if (res.hasData && res.requireData.code != null) {
+      return res.requireData.code;
     }
     return null;
   }

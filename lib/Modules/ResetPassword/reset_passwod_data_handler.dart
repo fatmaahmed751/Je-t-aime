@@ -18,7 +18,7 @@ class ResetPasswordDataHandler{
           url:APIEndPoint.resetPassword,
           body: {
             "user_id": id,
-            "password": password,
+            "new_password": password,
             "password_confirmation": confirmPassword,
           },
         ),
@@ -31,9 +31,6 @@ class ResetPasswordDataHandler{
   }
   static Future<Either<Failure, String>> verificationCodeResetPassword({
     required String email,
-    required String code,
-    // required String password,
-    // required String confirmPassword,
   }) async {
     try {
       var response = await GenericRequest<String>(
@@ -41,9 +38,6 @@ class ResetPasswordDataHandler{
           url: APIEndPoint.resetPassword,
           body: {
             "email": email,
-            "code": code,
-            //"password": password,
-            // "password_confirmation": confirmPassword,
           },
         ),
         fromMap : (_) => _["message"],

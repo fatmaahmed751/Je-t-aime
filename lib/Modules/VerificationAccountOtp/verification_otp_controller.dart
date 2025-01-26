@@ -9,15 +9,12 @@ import 'package:je_t_aime/core/Language/locales.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 import 'package:pinput/pinput.dart';
 import 'package:smart_auth/smart_auth.dart';
-
-import '../../Models/user_model.dart';
 import '../../Utilities/router_config.dart';
 import '../../Utilities/strings.dart';
 import '../../Utilities/theme_helper.dart';
 import '../../Widgets/toast_helper.dart';
 import '../../generated/assets.dart';
 import '../Home/home_screen.dart';
-import '../ResetPassword/reset_password_screen.dart';
 import 'verification_otp_screen.dart';
 
 class VerificationOtpController extends ControllerMVC {
@@ -31,7 +28,7 @@ class VerificationOtpController extends ControllerMVC {
     // Initialize fields in the constructor
     pinController = TextEditingController();
     focusNode = FocusNode();
-    smsRetriever = SmsRetrieverImpl(SmartAuth());
+    smsRetriever =  SmsRetrieverImpl(SmartAuth.instance);
   }
 
   bool loading=false,autoValidate = false;
@@ -113,7 +110,7 @@ print(result);
 
   }
 
- resendVerifyAccountCode()async {
+  resendVerifyAccountCode()async {
     if (userId == null) {
       userId = SharedPref.getCurrentUser()?.user?.id; // Attempt to fetch from SharedPref
       if (userId == null) {

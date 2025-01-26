@@ -62,7 +62,7 @@ dependencies:
   smooth_page_indicator: ^1.2.0+3
   url_launcher: ^6.1.10
   flutter_colorpicker: ^1.0.3
-  smart_auth: ^2.0.0
+  smart_auth: ^3.1.0
   gap: ^3.0.1
   ansicolor: ^2.0.2
   timeago: ^3.3.0

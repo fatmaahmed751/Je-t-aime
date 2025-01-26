@@ -2,14 +2,14 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:je_t_aime/Models/category_model.dart';
 import 'package:je_t_aime/Widgets/custom_product_container_widget.dart';
-import 'package:je_t_aime/core/Language/locales.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 import 'package:provider/provider.dart';
 import '../../Models/packages_model.dart';
 import '../../Utilities/router_config.dart';
-import '../../Utilities/strings.dart';
+import '../../Widgets/toast_helper.dart';
 import '../../core/Language/app_languages.dart';
 import '../../generated/assets.dart';
+import 'home_data_handler.dart';
 
 class HomeController extends ControllerMVC {
   // singleton
@@ -20,131 +20,90 @@ class HomeController extends ControllerMVC {
 
   static HomeController? _this;
   int selectedLanguage = 1;
+
   Future<void> loadCurrentLanguage(BuildContext ctx) async {
     await Provider.of<AppLanguage>(ctx, listen: false).fetchLocale(ctx);
 
-    final currentLanguage = Provider.of<AppLanguage>(ctx, listen: false).appLang;
+    final currentLanguage = Provider
+        .of<AppLanguage>(ctx, listen: false)
+        .appLang;
 
     print("Current language: $currentLanguage");
     setState(() {
       selectedLanguage = currentLanguage == Languages.en ? 1 : 2;
     });
   }
+
   HomeController._();
+
   bool loading = false;
   int activeIndex = 0;
   bool isSearch = false;
   late TextEditingController searchController;
-  List imageUrl = [
-    // "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTDKErC39UCJ75tiSVi9KyKLpF921rkFpP1Zg&s",
-    // "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTDKErC39UCJ75tiSVi9KyKLpF921rkFpP1Zg&s",
-    // "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTDKErC39UCJ75tiSVi9KyKLpF921rkFpP1Zg&s",
-  ];
+
   int bottomNavCurrentIndex = 0;
+
   void changeBottomNav(int index) {
     bottomNavCurrentIndex = index;
-    setState((){});
+    setState(() {});
   }
+
   List<PackagesModel> packagesModel = [
-  PackagesModel(
-    imageName:Assets.imagesPackagesOne,),
-  PackagesModel(
-      imageName:Assets.imagesPackagesTwo,),
-   PackagesModel(imageName:Assets.imagesPackagesOne,),
-    PackagesModel( imageName:Assets.imagesPackagesTwo,),
+    PackagesModel(
+      imageName: Assets.imagesPackagesOne,),
+    PackagesModel(
+      imageName: Assets.imagesPackagesTwo,),
+    PackagesModel(imageName: Assets.imagesPackagesOne,),
+    PackagesModel(imageName: Assets.imagesPackagesTwo,),
   ];
-  List<CustomProductContainerWidget> products=[
+  List<CustomProductContainerWidget> products = [
     const CustomProductContainerWidget(),
     const CustomProductContainerWidget(),
   ];
- late List<CategoryModel> categoryModel;
+  List<CategoryModel> categories = [];
+  bool isLiked = false;
 
-  // late List<BottomNavBarItemModel> items;
-  // void updateBottomNav() {
-  //   setState(() {
-  //     items = [
-  //       BottomNavBarItemModel(
-  //         iconPath: Assets.imagesHome,
-  //         selectedIconPath: Assets.imagesHome,
-  //         title: Strings.home,
-  //         routeName: HomeScreen.routeName,
-  //         type: SelectedBottomNavBar.home,
-  //       ),
-  //       BottomNavBarItemModel(
-  //         iconPath: Assets.imagesFavNav,
-  //         selectedIconPath: Assets.imagesFavNav,
-  //         title: Strings.favorite,
-  //         routeName: FavoriteScreen.routeName,
-  //         type: SelectedBottomNavBar.favorite,
-  //       ),
-  //       BottomNavBarItemModel(
-  //         iconPath: Assets.imagesNotNav,
-  //         selectedIconPath: Assets.imagesNotNav,
-  //         title: Strings.notification,
-  //         routeName: NotificationsScreen.routeName,
-  //         type: SelectedBottomNavBar.notification,
-  //       ),
-  //     BottomNavBarItemModel(
-  //   iconPath: Assets.imagesProfileNav,
-  //   selectedIconPath: Assets.imagesProfileNav,
-  //   title: Strings.profile,
-  //   routeName: UserProfileScreen.routeName,
-  //   type: SelectedBottomNavBar.account,
-  // )
-  //
-  //     ];
-  //   });
-  // }
+  init() async {
+    loadCurrentLanguage(currentContext_!);
+    getCategories();
+  }
 
- void update() {
-   setState(() {
-     categoryModel = [
-       CategoryModel(
-         imageName: Assets.imagesFace,
-         mainText: Strings.faceCare.tr,
-       ),
-       CategoryModel(
+  @override
+  void initState() {
+    searchController = TextEditingController();
+    super.initState();
+  }
 
-         imageName: Assets.imagesBody,
-         mainText: Strings.bodyCare.tr,
-       ),
-       CategoryModel(
-         imageName: Assets.imagesHair,
-         mainText: Strings.hairCare.tr,
-       ),
-       CategoryModel(
-         imageName: Assets.imagesNail,
-         mainText: Strings.nailCare.tr,
-       ),
+  @override
+  void dispose() {
+    searchController.dispose();
+    super.dispose();
+  }
 
-     ];
-   });
- }
-   bool isLiked = false;
-init()async{
-  loadCurrentLanguage(currentContext_!);
+  onPageChange(int index) {
+    setState(() {
+      activeIndex = index;
+    });
+    activeIndex = index;
+  }
+
+  getCategories() async {
+    loading = true;
+    setState(() {});
+    final result = await HomeDataHandler.getHomeCategories();
+    result.fold((l) {
+      ToastHelper.showError(message: l.toString());
+    }, (r) {
+          categories =r;
+        });
+    print('succccccesssssssssss');
+    setState(() {
+      loading = false;
+    });
+  }
+
+
 }
-
-   @override
-   void initState() {
-     searchController = TextEditingController();
-     super.initState();
-   }
-
-   @override
-   void dispose() {
-     searchController.dispose();
-     super.dispose();
-   }
-
-   onPageChange(int index) {
-     setState(() {
-       activeIndex = index;
-     });
-     activeIndex = index;
-   }
- }
-
   // Future<void> _handlePermissionPermanentlyDenied() async {
   //   onPermanentDenied();
   // }

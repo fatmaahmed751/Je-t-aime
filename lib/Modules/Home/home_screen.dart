@@ -32,9 +32,9 @@ class _HomeScreenState extends StateMVC<HomeScreen> {
   late HomeController con;
   @override
   void initState() {
+    con.init();
     super.initState();
-    con.update();
-    con.loadCurrentLanguage(context);
+
   }
 
 //     HomeController().controller.addListener(_updateView);
@@ -92,10 +92,10 @@ class _HomeScreenState extends StateMVC<HomeScreen> {
                       physics: const BouncingScrollPhysics(),
                       scrollDirection: Axis.horizontal,
                       itemBuilder: (context, index) => CategoriesWidget(
-                            categoryModel: con.categoryModel[index],
+                            categoryModel: con.categories[index],
                           ),
                       separatorBuilder: (context, index) => Gap(6.w),
-                      itemCount: con.categoryModel.length),
+                      itemCount: con.categories.length),
                 ),
               ),
               Gap(10.h),

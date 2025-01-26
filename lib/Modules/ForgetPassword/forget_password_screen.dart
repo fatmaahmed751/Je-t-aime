@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
-import 'package:go_router/go_router.dart';
 import 'package:je_t_aime/core/Language/locales.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 import '../../../Utilities/strings.dart';
@@ -15,7 +14,6 @@ import '../../../Widgets/loading_screen.dart';
 import '../../Widgets/circle_avatar_widget.dart';
 import '../../Widgets/custom_side_text_widget.dart';
 import '../../generated/assets.dart';
-import '../VerificationAccountOtp/verification_otp_screen.dart';
 import 'forget_password_controller.dart';
 
 class ForgetPasswordScreen extends StatefulWidget {
@@ -128,16 +126,16 @@ class _ForgetPasswordScreenState extends StateMVC<ForgetPasswordScreen> {
                                   height: 54.h,
                                   title: Strings.sendCode.tr,
                                   onTap: () {
-                                    context.pushNamed(VerificationOtpScreen.routeName);
 
-                                    // if (formKey.currentState?.validate() ?? false) {
-                                    //  // con.onForgetPassword();
-                                    // } else {
-                                    //   setState(() {
-                                    //     con.autoValidate = true;
-                                    //   });
-                                    //   context.pushNamed(VerificationOtpScreen.routeName);
-                                    // }
+                                    if (formKey.currentState?.validate() ?? false) {
+                                    con.verifyCodeForNewPassword();
+
+                                    } else {
+                                      setState(() {
+                                        con.autoValidate = true;
+                                      });
+
+                                    }
                                   }
                                   ),
                               Gap(20.h),

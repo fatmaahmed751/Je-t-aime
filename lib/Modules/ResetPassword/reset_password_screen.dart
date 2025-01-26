@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
-import 'package:go_router/go_router.dart';
-import 'package:je_t_aime/Modules/Home/home_screen.dart';
 import 'package:je_t_aime/Widgets/custom_side_text_widget.dart';
 import 'package:je_t_aime/core/Language/locales.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
@@ -21,10 +19,10 @@ class ResetPasswordScreen extends StatefulWidget {
   static const routeName = "ResetPassword";
   const ResetPasswordScreen({
     Key? key,
-    //required this.email,
+   required this.id,
     // required this.code
   }) : super(key: key);
-//final String email;
+final int  id;
 //final String code;
   @override
   createState() => _ResetPasswordScreenState();
@@ -40,8 +38,8 @@ class _ResetPasswordScreenState extends StateMVC<ResetPasswordScreen> {
   @override
   void initState() {
     super.initState();
-    //con.email =  widget.email;
-//con.pinController.text = widget.code;
+   con.userId =  widget.id;
+    print("User ID in ResetPassword${widget.id}");
   }
 
   @override
@@ -158,15 +156,13 @@ class _ResetPasswordScreenState extends StateMVC<ResetPasswordScreen> {
                       CustomButtonWidget.primary(
                           title: Strings.login.tr,
                           onTap: () {
-                            GoRouter.of(context)
-                                .pushNamed(HomeScreen.routeName);
-                            // if (formKey.currentState?.validate() ?? false) {
-                            //   // con.getNewPassword();
-                            // } else {
-                            //   setState(() {
-                            //     con.autoValidate = true;
-                            //   });
-                            // }
+                            if (formKey.currentState?.validate() ?? false) {
+                              con.getNewPassword();
+                            } else {
+                              setState(() {
+                                con.autoValidate = true;
+                              });
+                            }
                           }),
                     ],
                   ),

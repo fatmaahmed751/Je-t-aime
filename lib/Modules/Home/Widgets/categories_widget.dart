@@ -27,10 +27,10 @@ class CategoriesWidget extends StatelessWidget{
               radius:50.r,
               backgroundImage:
               AssetImage(
-                  categoryModel.imageName ),),
+                  categoryModel.image!),),
           ),
           Gap(6.h),
-          CustomHomeDetailsTextWidget(text:categoryModel.mainText,
+          CustomHomeDetailsTextWidget(text:categoryModel.title!,
             style: TextStyleHelper.of(context).b_16.copyWith(
               color: ThemeClass.of(context).mainBlack,
               fontWeight: FontWeight.w600

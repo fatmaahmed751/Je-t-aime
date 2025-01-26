@@ -266,15 +266,11 @@ class GoRouterConfig{
         name: VerificationPasswordScreen.routeName,
         path: "/${VerificationPasswordScreen.routeName}",
         pageBuilder: (_, GoRouterState state) {
-          final int id = int.tryParse(state.extra?.toString() ?? '') ?? 0;
-          final resetPassword = SharedPref.getCurrentUser()?.user?.id;
-          if (resetPassword != id) {
-            print("ID mismatch: This is not the logged-in user's ID.");
-          }
+          final String email = state.extra as String;
           return getCustomTransitionPage(
             state: state,
             child:  VerificationPasswordScreen(
-              id:id
+              email:email
             ),
           );
         },
@@ -296,12 +292,18 @@ class GoRouterConfig{
         name: ResetPasswordScreen.routeName,
         path: "/${ResetPasswordScreen.routeName}",
         pageBuilder: (_, GoRouterState state) {
-        //  final args = state.extra as Map<String, String?>;
+          final int id = int.tryParse(state.extra?.toString() ?? '') ?? 0;
+          final loggedInUserId = SharedPref.getCurrentUser()?.user?.id;
+          print("Passed ID: $id");
+          print("Logged In User ID: $loggedInUserId");
+
+          if (loggedInUserId != id) {
+            print("ID mismatch: This is not the logged-in user's ID.");
+          }
           return getCustomTransitionPage(
             state: state,
-            child: const ResetPasswordScreen(
-              //email: args['email'] ?? '', // Handle null case by providing a default value
-             // code: args['code'] ?? '',   // Handle null case
+            child:  ResetPasswordScreen(
+              id:id
             ),
           );
         },

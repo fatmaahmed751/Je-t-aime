@@ -1,10 +1,33 @@
+// To parse this JSON data, do
+//
+//     final categoryModel = categoryModelFromJson(jsonString);
+
+import 'dart:convert';
+
+CategoryModel categoryModelFromJson(String str) => CategoryModel.fromJson(json.decode(str));
+
+String categoryModelToJson(CategoryModel data) => json.encode(data.toJson());
 
 class CategoryModel {
-  final String imageName;
-  final String mainText;
+  final int? id;
+  final String? title;
+  final String? image;
 
-  CategoryModel(  {
-    required this.imageName,
-    required this.mainText,
+  CategoryModel({
+    this.id,
+    this.title,
+    this.image,
   });
+
+  factory CategoryModel.fromJson(Map<String, dynamic> json) => CategoryModel(
+    id: json["id"],
+    title: json["title"],
+    image: json["image"],
+  );
+
+  Map<String, dynamic> toJson() => {
+    "id": id,
+    "title": title,
+    "image": image,
+  };
 }
