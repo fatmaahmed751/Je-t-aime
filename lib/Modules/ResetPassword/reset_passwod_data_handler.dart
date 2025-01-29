@@ -15,7 +15,7 @@ class ResetPasswordDataHandler{
     try {
       var response = await GenericRequest<String>(
         method: RequestApi.post(
-          url:APIEndPoint.resetPassword,
+          url:APIEndPoint.newPassword,
           body: {
             "user_id": id,
             "new_password": password,

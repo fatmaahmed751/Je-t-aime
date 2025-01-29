@@ -108,10 +108,10 @@ class _HomeScreenState extends StateMVC<HomeScreen> {
                       physics: const BouncingScrollPhysics(),
                       scrollDirection: Axis.horizontal,
                       itemBuilder: (context, index) => PackagesWidget(
-                            packagesModel: con.packagesModel[index],
+                           sliderModel: con.sliders[index],
                           ),
                       separatorBuilder: (context, index) => Gap(14.w),
-                      itemCount: con.packagesModel.length),
+                      itemCount: con.sliders.length),
                 ),
               ),
               Gap(16.h),

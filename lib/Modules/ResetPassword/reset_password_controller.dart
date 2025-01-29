@@ -149,31 +149,45 @@ class ResetPasswordController extends ControllerMVC {
       );
       currentContext_?.pushNamed(
         ResetPasswordScreen.routeName,
-        extra: userId
+        extra: loggedInUserId.toString()
       );
     });
     setState(() {
       loading = false;
     });
   }
-
   getNewPassword() async {
     setState(() {
       loading = true;
     });
+    print("PIN Value: ${pinController.text}");
+
+    // Check if the PIN is empty
+    if (pinController.text.isEmpty) {
+      print("Error: PIN is empty.");
+      ToastHelper.showError(message: "Please enter your PIN.");
+      setState(() {
+        loading = false;
+      });
+      return;
+    }
     final loggedInUserId = SharedPref.getCurrentUser()?.user?.id;
+    print("Logged In User ID: $loggedInUserId");
+    print("User ID: $userId");
+
     if (userId == null || loggedInUserId != userId) {
-      print("kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk.");
-      ToastHelper.showError(message: "llllllllllllllllll.");
+      print("Error: User ID is null or does not match logged-in user ID.");
+      ToastHelper.showError(message: "Invalid user ID.");
       return;
     }
-    if (userId == null || pinController.text.isEmpty) {
-      print("Error: cccccccccccccccccccccccccccccccccc");
-      ToastHelper.showError(message: "ooooooooooooooo.");
+
+    if (pinController.text.isEmpty) {
+      print("Error: PIN is empty.");
+      ToastHelper.showError(message: "Please enter your PIN.");
       return;
     }
-    if (newPasswordController.text.isEmpty ||
-        confirmNewPasswordController.text.isEmpty) {
+
+    if (newPasswordController.text.isEmpty || confirmNewPasswordController.text.isEmpty) {
       ToastHelper.showError(message: "Please fill in both password fields.");
       return;
     }
@@ -183,26 +197,77 @@ class ResetPasswordController extends ControllerMVC {
       password: newPasswordController.text,
       confirmPassword: confirmNewPasswordController.text,
     );
+
     result.fold((l) {
       ToastHelper.showError(message: l.errorModel.statusMessage.toString());
-      ToastHelper.showError(message: "password fields.");
     }, (r) {
-      print(r);
       ToastHelper.showSuccess(
-        context:   currentContext_!,
+        context: currentContext_!,
         message: Strings.passwordResetSu.tr,
-        icon:SvgPicture.asset(Assets.imagesSubmit,width:60.w,
-          height:50.h,
-          fit: BoxFit.cover,),
-
+        icon: SvgPicture.asset(
+          Assets.imagesSubmit,
+          width: 60.w,
+          height: 50.h,
+          fit: BoxFit.cover,
+        ),
         backgroundColor: ThemeClass.of(currentContext_!).primaryColor,
       );
-      currentContext_?.pushNamed(
-        LoginScreen.routeName,
-      );
+      currentContext_?.pushNamed(LoginScreen.routeName);
     });
+
     setState(() {
       loading = false;
     });
   }
+  // getNewPassword() async {
+  //   setState(() {
+  //     loading = true;
+  //   });
+  //   final loggedInUserId = SharedPref.getCurrentUser()?.user?.id;
+  //   if (userId == null || loggedInUserId != userId) {
+  //     print("kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk.");
+  //     ToastHelper.showError(message: "llllllllllllllllll.");
+  //     return;
+  //   }
+  //   if (userId == null || pinController.text.isEmpty) {
+  //     print("Error: cccccccccccccccccccccccccccccccccc");
+  //     ToastHelper.showError(message: "ooooooooooooooo.");
+  //     return;
+  //
+  //   }
+  //   print("Logged In User ID: $loggedInUserId");
+  //   print("User ID: $userId");
+  //   if (newPasswordController.text.isEmpty ||
+  //       confirmNewPasswordController.text.isEmpty) {
+  //     ToastHelper.showError(message: "Please fill in both password fields.");
+  //     return;
+  //   }
+  //
+  //   final result = await ResetPasswordDataHandler.resetNewPassword(
+  //     id: userId!,
+  //     password: newPasswordController.text,
+  //     confirmPassword: confirmNewPasswordController.text,
+  //   );
+  //   result.fold((l) {
+  //     ToastHelper.showError(message: l.errorModel.statusMessage.toString());
+  //     ToastHelper.showError(message: "password fields.");
+  //   }, (r) {
+  //     print(r);
+  //     ToastHelper.showSuccess(
+  //       context:   currentContext_!,
+  //       message: Strings.passwordResetSu.tr,
+  //       icon:SvgPicture.asset(Assets.imagesSubmit,width:60.w,
+  //         height:50.h,
+  //         fit: BoxFit.cover,),
+  //
+  //       backgroundColor: ThemeClass.of(currentContext_!).primaryColor,
+  //     );
+  //     currentContext_?.pushNamed(
+  //       LoginScreen.routeName,
+  //     );
+  //   });
+  //   setState(() {
+  //     loading = false;
+  //   });
+  // }
 }

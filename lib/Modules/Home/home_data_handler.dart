@@ -24,6 +24,16 @@ class HomeDataHandler{
       return Left(ServerFailure(failure.errorMessageModel));
     }
   }
-
+  static Future<Either<Failure,Map<String,dynamic>>> getHomeData()async{
+    try {
+      Map<String,dynamic> response = await GenericRequest<Map<String,dynamic>>(
+        method: RequestApi.get(url: APIEndPoint.category),
+        fromMap:(_)=> _,
+      ).getResponse();
+      return Right(response);
+    } on ServerException catch (failure) {
+      return Left(ServerFailure(failure.errorMessageModel));
+    }
+  }
 
 }

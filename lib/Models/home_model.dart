@@ -1,8 +1,10 @@
 // To parse this JSON data, do
 //
-//     final homeModel = homeModelFromJson(jsonString);
+//     final home = homeModelFromJson(jsonString);
 
 import 'dart:convert';
+
+import 'package:je_t_aime/Models/slider_model.dart';
 
 import 'category_model.dart';
 
@@ -59,7 +61,7 @@ class HomeModel {
 }
 
 class Data {
-  final List<Slider>? sliders;
+  final List<SliderModel>? sliders;
   final List<CategoryModel>? categories;
   final List<dynamic>? popularProducts;
 
@@ -70,7 +72,7 @@ class Data {
   });
 
   factory Data.fromJson(Map<String, dynamic> json) => Data(
-    sliders: json["sliders"] == null ? [] : List<Slider>.from(json["sliders"]!.map((x) => Slider.fromJson(x))),
+    sliders: json["sliders"] == null ? [] : List<SliderModel>.from(json["sliders"]!.map((x) => SliderModel.fromJson(x))),
     categories: json["categories"] == null ? [] : List<CategoryModel>.from(json["categories"]!.map((x) => CategoryModel.fromJson(x))),
     popularProducts: json["popular_products"] == null ? [] : List<dynamic>.from(json["popular_products"]!.map((x) => x)),
   );
@@ -84,30 +86,4 @@ class Data {
 
 
 
-class Slider {
-  final int? id;
-  final String? image;
-  final int? categoryId;
-  final String? categoryName;
 
-  Slider({
-    this.id,
-    this.image,
-    this.categoryId,
-    this.categoryName,
-  });
-
-  factory Slider.fromJson(Map<String, dynamic> json) => Slider(
-    id: json["id"],
-    image: json["image"],
-    categoryId: json["category_id"],
-    categoryName: json["category_name"],
-  );
-
-  Map<String, dynamic> toJson() => {
-    "id": id,
-    "image": image,
-    "category_id": categoryId,
-    "category_name": categoryName,
-  };
-}

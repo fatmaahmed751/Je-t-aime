@@ -5,6 +5,7 @@ import 'package:je_t_aime/Widgets/custom_product_container_widget.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 import 'package:provider/provider.dart';
 import '../../Models/packages_model.dart';
+import '../../Models/slider_model.dart';
 import '../../Utilities/router_config.dart';
 import '../../Widgets/toast_helper.dart';
 import '../../core/Language/app_languages.dart';
@@ -48,19 +49,12 @@ class HomeController extends ControllerMVC {
     setState(() {});
   }
 
-  List<PackagesModel> packagesModel = [
-    PackagesModel(
-      imageName: Assets.imagesPackagesOne,),
-    PackagesModel(
-      imageName: Assets.imagesPackagesTwo,),
-    PackagesModel(imageName: Assets.imagesPackagesOne,),
-    PackagesModel(imageName: Assets.imagesPackagesTwo,),
-  ];
   List<CustomProductContainerWidget> products = [
     const CustomProductContainerWidget(),
     const CustomProductContainerWidget(),
   ];
   List<CategoryModel> categories = [];
+  List<SliderModel> sliders = [];
   bool isLiked = false;
 
   init() async {
@@ -90,12 +84,14 @@ class HomeController extends ControllerMVC {
   getCategories() async {
     loading = true;
     setState(() {});
-    final result = await HomeDataHandler.getHomeCategories();
+    final result = await HomeDataHandler.getHomeData();
     result.fold((l) {
       ToastHelper.showError(message: l.toString());
     }, (r) {
-          categories =r;
-        });
+          categories = List.from(((r["data"]["categories"]??[]) as List).map((e) => CategoryModel.fromJson(e)));
+          sliders = List.from(((r["data"]["sliders"]??[]) as List).map((e) => SliderModel.fromJson(e)));
+
+    });
     print('succccccesssssssssss');
     setState(() {
       loading = false;
@@ -178,22 +174,7 @@ class HomeController extends ControllerMVC {
   //       }
   //   );
   // }
-  // Future getHomeData() async {
-  //   loading=true;
-  //   setState(() { });
-  //   final result = await HomeDataHandler.getHomeData();
-  //   result.fold((l) {
-  //     ToastHelper.showError(message: l.toString());},(r) {
-  //
-  //     categories=List.from(((r["data"]["categories"]??[]) as List).map((e) => CategoryElementModel.fromJson(e)));
-  //     //banners=List.from(((r["data"]["banners"]??[]) as List).map((e) => BannerModel.fromJson(e)));
-  //     products=List.from(((r["data"]["products"]??[]) as List).map((e) => BannerModel.fromJson(e)));
-  //     // if(sliders!=null){
-  //     //   sliders=List.from(((r["data"]["sliders"]??[]) as List).map((e)=>BannerModel.fromJson(e)));
-  //     // }
-  //   });
-  //   setState(() {loading=false;});
-  // }
+
   // Future getBanners() async {
   //   loading=true;
   //   setState(() { });

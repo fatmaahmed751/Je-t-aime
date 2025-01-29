@@ -13,6 +13,7 @@ class APIEndPoint{
   static const String resetPassword = "${_baseURL}user/reset-password";
   static const String reSentOtp = "${_baseURL}user/re-SentOTP";
   static const String category = "${_baseURL}user/home";
+  static const String newPassword = "${_baseURL}user/new-password";
 }
 
 

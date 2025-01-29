@@ -19,11 +19,8 @@ class ResetPasswordScreen extends StatefulWidget {
   static const routeName = "ResetPassword";
   const ResetPasswordScreen({
     Key? key,
-   required this.id,
-    // required this.code
-  }) : super(key: key);
-final int  id;
-//final String code;
+   required this.id}) : super(key: key);
+final int id;
   @override
   createState() => _ResetPasswordScreenState();
 }
