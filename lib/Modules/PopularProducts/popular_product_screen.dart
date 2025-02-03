@@ -1,17 +1,16 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:gap/gap.dart';
-import 'package:je_t_aime/Modules/Home/Widgets/search_widget.dart';
-import 'package:je_t_aime/Modules/PopularProducts/popular_products_controller.dart';
-import 'package:je_t_aime/core/Language/locales.dart';
-import 'package:mvc_pattern/mvc_pattern.dart';
-import '../../Utilities/strings.dart';
-import '../../Utilities/theme_helper.dart';
-import '../../Widgets/custom_app_bar_widget.dart';
-import '../../Widgets/custom_product_container_widget.dart';
-import '../../Widgets/loading_screen.dart';
-import '../../generated/assets.dart';
+import "package:flutter/material.dart";
+import "package:flutter_screenutil/flutter_screenutil.dart";
+import "package:flutter_svg/flutter_svg.dart";
+import "package:gap/gap.dart";
+import "package:je_t_aime/Modules/Home/Widgets/search_widget.dart";
+import "package:je_t_aime/Modules/PopularProducts/popular_products_controller.dart";
+import "package:je_t_aime/core/Language/locales.dart";
+import "package:mvc_pattern/mvc_pattern.dart";
+import "../../Utilities/strings.dart";
+import "../../Utilities/theme_helper.dart";
+import "../../Widgets/custom_app_bar_widget.dart";
+import "../../Widgets/loading_screen.dart";
+import "../../generated/assets.dart";
 
 class PopularProductsScreen extends StatefulWidget {
   static const routeName = "PopularProduct";

@@ -8,6 +8,7 @@ import 'package:je_t_aime/Modules/ProductDetails/product_details_controller.dart
 import 'package:je_t_aime/core/Language/locales.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 
+import "../../Models/review_model.dart";
 import '../../Utilities/format_date_helper.dart';
 import '../../Utilities/shared_preferences.dart';
 import '../../Utilities/strings.dart';
@@ -159,9 +160,9 @@ class _ProductDetailsScreenState extends StateMVC<ProductDetailsScreen> {
                 ],
               ),
               Gap(8.h),
-              const ReviewsItem(),
+             // const ReviewsItem(),
               Gap(8.h),
-              const ReviewsItem(),
+             // const ReviewsItem(),
               Gap(8.h),
               CustomDetailsSideTextWidget(
                 text: Strings.relatedProduct.tr,
@@ -202,76 +203,4 @@ class _ProductDetailsScreenState extends StateMVC<ProductDetailsScreen> {
   }
 }
 
-class ReviewsItem extends StatelessWidget {
-  const ReviewsItem({super.key});
 
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: 382.w,
-      //height: 154.h,
-      decoration: const BoxDecoration(
-        color: Colors.white,
-      ),
-      child: Padding(
-        padding: EdgeInsets.only(top: 10.h),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  "Linda Mohamed",
-                  style: TextStyleHelper.of(context)
-                      .h_19
-                      .copyWith(color: ThemeClass.of(context).mainBlack),
-                ),
-                Gap(4.h),
-                RatingBar.builder(
-                  initialRating: 4,
-                  minRating: 1, // Minimum rating that can be given
-                  direction: Axis.horizontal, // Rating direction
-                  allowHalfRating: true, // Allow half-star ratings
-                  itemCount: 5,
-                  unratedColor: ThemeClass.of(context).labelColor,
-                  itemSize: 18, // Number of stars
-                  itemPadding: EdgeInsets.symmetric(horizontal: 4.w),
-                  itemBuilder: (context, _) => SvgPicture.asset(
-                    Assets.imagesFilledStar,
-                  ),
-                  onRatingUpdate: (rating) {},
-                ),
-              ],
-            ),
-            Gap(12.h),
-            SizedBox(
-              //height:130.h,
-              width: 382.w,
-              child: Text(
-                Strings.reviewsDesc.tr,
-                style: TextStyleHelper.of(context).b_16.copyWith(
-                    fontWeight: FontWeight.w400,
-                    color: ThemeClass.of(context)
-                        .secondaryBlackColor
-                        .withOpacity(0.6)),
-              ),
-            ),
-            Gap(16.h),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                Text(
-                  FormatDateHelper.formatWalletDate.format(DateTime.now()),
-                  style: TextStyleHelper.of(context)
-                      .b_14
-                      .copyWith(color: ThemeClass.of(context).mainBlack),
-                ),
-              ],
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}

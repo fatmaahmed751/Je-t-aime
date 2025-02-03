@@ -1,32 +1,35 @@
-import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
-import 'package:je_t_aime/Modules/ChangePassword/change_password_screen.dart';
-import 'package:je_t_aime/Modules/Favorite/favorite_screen.dart';
-import 'package:je_t_aime/Modules/Notifications/notifications_screen.dart';
-import 'package:je_t_aime/Modules/Orders/orders_screen.dart';
-import 'package:je_t_aime/Modules/Payment/payment_screen.dart';
-import 'package:je_t_aime/Modules/Register/register_screen.dart';
-import 'package:je_t_aime/Modules/Support/support_screen.dart';
-import 'package:je_t_aime/Utilities/shared_preferences.dart';
-import '../Modules/AllCategories/all_categories_screen.dart';
-import '../Modules/Cart/cart_screen.dart';
-import '../Modules/ForgetPassword/forget_password_screen.dart';
-import '../Modules/Home/SearchSccreen/search_screen.dart';
-import '../Modules/Home/home_screen.dart';
-import '../Modules/Login/login_screen.dart';
-import '../Modules/OnBoarding/onboarding_screen.dart';
-import '../Modules/PersonalData/personal_data_screen.dart';
-import '../Modules/Policies/policies_screen.dart';
-import '../Modules/PopularProducts/popular_product_screen.dart';
-import '../Modules/ProductDetails/product_details_screen.dart';
-import '../Modules/ResetPassword/reset_password_screen.dart';
-import '../Modules/ResetPassword/widget/verify_password_otp.dart';
-import '../Modules/Reviews/reviews_screen.dart';
-import '../Modules/Rewards/LoginRewardsScreen/login_rewards_screen.dart';
-import '../Modules/Shipping/shipping_screen.dart';
-import '../Modules/Splash/splash_screen.dart';
-import '../Modules/UserProfile/user_profile_screen.dart';
-import '../Modules/VerificationAccountOtp/verification_otp_screen.dart';
+import "package:flutter/material.dart";
+import "package:go_router/go_router.dart";
+import "package:je_t_aime/Models/category_model.dart";
+import "package:je_t_aime/Models/popular_products_model.dart";
+import "package:je_t_aime/Modules/ChangePassword/change_password_screen.dart";
+import "package:je_t_aime/Modules/Favorite/favorite_screen.dart";
+import "package:je_t_aime/Modules/Notifications/notifications_screen.dart";
+import "package:je_t_aime/Modules/Orders/orders_screen.dart";
+import "package:je_t_aime/Modules/Payment/payment_screen.dart";
+import "package:je_t_aime/Modules/Register/register_screen.dart";
+import "package:je_t_aime/Modules/Support/support_screen.dart";
+import "package:je_t_aime/Utilities/shared_preferences.dart";
+import "../Models/categories_product_model.dart";
+import "../Modules/AllCategories/all_categories_screen.dart";
+import "../Modules/Cart/cart_screen.dart";
+import "../Modules/ForgetPassword/forget_password_screen.dart";
+import "../Modules/Home/SearchSccreen/search_screen.dart";
+import "../Modules/Home/home_screen.dart";
+import "../Modules/Login/login_screen.dart";
+import "../Modules/OnBoarding/onboarding_screen.dart";
+import "../Modules/PersonalData/personal_data_screen.dart";
+import "../Modules/Policies/policies_screen.dart";
+import "../Modules/PopularProducts/popular_product_screen.dart";
+import "../Modules/ProductDetails/product_details_screen.dart";
+import "../Modules/ResetPassword/reset_password_screen.dart";
+import "../Modules/ResetPassword/widget/verify_password_otp.dart";
+import "../Modules/Reviews/reviews_screen.dart";
+import "../Modules/Rewards/LoginRewardsScreen/login_rewards_screen.dart";
+import "../Modules/Shipping/shipping_screen.dart";
+import "../Modules/Splash/splash_screen.dart";
+import "../Modules/UserProfile/user_profile_screen.dart";
+import "../Modules/VerificationAccountOtp/verification_otp_screen.dart";
 
 BuildContext? get currentContext_ =>
     GoRouterConfig.router.routerDelegate.navigatorKey.currentContext;
@@ -41,7 +44,7 @@ class GoRouterConfig {
         pageBuilder: (_, GoRouterState state) {
           return getCustomTransitionPage(
             state: state,
-            child: SplashScreen(),
+            child: const SplashScreen(),
           );
         },
         routes: const <RouteBase>[],
@@ -52,7 +55,9 @@ class GoRouterConfig {
         pageBuilder: (_, GoRouterState state) {
           return getCustomTransitionPage(
             state: state,
-            child: const ReviewsForProductScreen(),
+            child:  ReviewsForProductScreen(
+              productsModel:state.extra as PopularProductsModel,
+            ),
           );
         },
         routes: const <RouteBase>[],
@@ -63,7 +68,10 @@ class GoRouterConfig {
         pageBuilder: (_, GoRouterState state) {
           return getCustomTransitionPage(
             state: state,
-            child: const AllCategoriesScreen(),
+            child:  AllCategoriesScreen(
+              categoryProductModel: state.extra as CategoryProductModel,
+              model: state.extra as CategoryModel,
+            ),
           );
         },
         routes: const <RouteBase>[],
@@ -86,7 +94,7 @@ class GoRouterConfig {
           return getCustomTransitionPage(
             state: state,
             child: const SearchScreen(
-              search: '',
+              search: "",
             ),
           );
         },
@@ -239,7 +247,7 @@ class GoRouterConfig {
         name: VerificationOtpScreen.routeName,
         path: "/${VerificationOtpScreen.routeName}",
         pageBuilder: (_, GoRouterState state) {
-          final int id = int.tryParse(state.extra?.toString() ?? '') ?? 0;
+          final int id = int.tryParse(state.extra?.toString() ?? "") ?? 0;
           final loggedInUserId = SharedPref.getCurrentUser()?.user?.id;
           if (loggedInUserId != id) {
             print("ID mismatch: This is not the logged-in user's ID.");
@@ -289,7 +297,7 @@ class GoRouterConfig {
         name: ResetPasswordScreen.routeName,
         path: "/${ResetPasswordScreen.routeName}",
         pageBuilder: (_, GoRouterState state) {
-          final int id = int.tryParse(state.extra?.toString() ?? '') ?? 0;
+          final int id = int.tryParse(state.extra?.toString() ?? "") ?? 0;
           final loggedInUserId = SharedPref.getCurrentUser()?.user?.id;
           print("Passed ID: $id");
           print("Logged In User ID: $loggedInUserId");

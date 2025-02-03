@@ -1,23 +1,25 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:gap/gap.dart';
-import 'package:go_router/go_router.dart';
-import 'package:je_t_aime/Modules/RateProducts/rate_product_controller.dart';
-import 'package:je_t_aime/core/Language/locales.dart';
-import 'package:mvc_pattern/mvc_pattern.dart';
-import '../../../Utilities/strings.dart';
-import '../../../Utilities/text_style_helper.dart';
-import '../../../Utilities/theme_helper.dart';
-import '../../../Utilities/validate.dart';
-import '../../../Widgets/custom_button_widget.dart';
-import '../../../Widgets/custom_textfield_widget.dart';
-import '../../../generated/assets.dart';
-import '../../Widgets/custom_home_details_text_widget.dart';
-import '../../Widgets/loading_screen.dart';
+import "package:flutter/material.dart";
+import "package:flutter_rating_bar/flutter_rating_bar.dart";
+import "package:flutter_screenutil/flutter_screenutil.dart";
+import "package:flutter_svg/svg.dart";
+import "package:gap/gap.dart";
+import "package:go_router/go_router.dart";
+import "package:je_t_aime/Models/popular_products_model.dart";
+import "package:je_t_aime/Modules/RateProducts/rate_product_controller.dart";
+import "package:je_t_aime/core/Language/locales.dart";
+import "package:mvc_pattern/mvc_pattern.dart";
+import "../../../Utilities/strings.dart";
+import "../../../Utilities/text_style_helper.dart";
+import "../../../Utilities/theme_helper.dart";
+import "../../../Utilities/validate.dart";
+import "../../../Widgets/custom_button_widget.dart";
+import "../../../Widgets/custom_textfield_widget.dart";
+import "../../../generated/assets.dart";
+import "../../Widgets/custom_home_details_text_widget.dart";
+import "../../Widgets/loading_screen.dart";
 
 class RateProductScreen extends StatefulWidget {
+
   const RateProductScreen({
     super.key,
   });

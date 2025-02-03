@@ -1,12 +1,12 @@
-import 'dart:async';
-import 'dart:convert';
-import 'dart:io';
-import 'package:ansicolor/ansicolor.dart';
-import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
-import '../../Utilities/shared_preferences.dart';
-import '../error/exceptions.dart';
-import '../network/error_message_model.dart';
+import "dart:async";
+import "dart:convert";
+import "dart:io";
+import "package:ansicolor/ansicolor.dart";
+import "package:flutter/material.dart";
+import "package:http/http.dart" as http;
+import "../../Utilities/shared_preferences.dart";
+import "../error/exceptions.dart";
+import "../network/error_message_model.dart";
 
 class RequestApi {
   final Uri uri;
@@ -111,9 +111,10 @@ class RequestApi {
     debugPrint(uri.toString());
     debugPrint(json.encode(body));
     var request = http.MultipartRequest(method, uri);
-    if (body.isNotEmpty)
+    if (body.isNotEmpty) {
       request.fields
           .addAll(body.map((key, value) => MapEntry(key, value.toString())));
+    }
 
     //request.fields.addAll(body);
 
@@ -141,10 +142,10 @@ class _ApiBaseHelper {
     http.StreamedResponse response;
     try {
       request.headers.addAll({
-        // 'Accept': '*/*',
-        'content-type': 'application/json',
+         "Accept": "*/*",
+        "content-type": "multipart/form-data",
         "access-language": SharedPref.getLanguage() ?? "en",
-        // "Authorization": 'Bearer ${SharedPref.getCurrentUser()?.token.toString()}',
+        "Authorization": "Bearer ${SharedPref.getCurrentUser()?.token.toString()}",
       });
 
       response = await request.send().timeout(const Duration(seconds: 180));
@@ -170,7 +171,7 @@ class _ApiBaseHelper {
       throw ServerException(
         errorMessageModel: ErrorMessageModel(
           statusCode: 500,
-          statusMessage: 'Unexpected error 😢',
+          statusMessage: "Unexpected error 😢",
           requestApi: requestApi,
         ),
       );
