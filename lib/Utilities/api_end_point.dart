@@ -13,7 +13,10 @@ class APIEndPoint {
   static const String newPassword = "${_baseURL}new-password";
   static const String postReview = "${_baseURL}store-review";
   static const String categories = "${_baseURL}categories";
+  static const String addToCart = "${_baseURL}store-cart";
+  static String getProductDetails(int productId) =>
+      "${_baseURL}show/$productId";
   static  String getCategoriesProduct(int categoryProductId) => "${_baseURL}get-product-by-category/$categoryProductId";
   static String getReviews(int productId) =>
-      "${_baseURL}user/get-reviews/$productId";
+      "${_baseURL}get-reviews/$productId";
 }

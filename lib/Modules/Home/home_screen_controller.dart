@@ -1,15 +1,22 @@
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:je_t_aime/Models/category_model.dart';
-import 'package:je_t_aime/Widgets/custom_product_container_widget.dart';
-import 'package:mvc_pattern/mvc_pattern.dart';
-import 'package:provider/provider.dart';
-import '../../Models/popular_products_model.dart';
-import '../../Models/slider_model.dart';
-import '../../Utilities/router_config.dart';
-import '../../Widgets/toast_helper.dart';
-import '../../core/Language/app_languages.dart';
-import 'home_data_handler.dart';
+import "package:flutter/cupertino.dart";
+import "package:flutter/material.dart";
+import "package:flutter_screenutil/flutter_screenutil.dart";
+import "package:flutter_svg/svg.dart";
+import "package:je_t_aime/Models/cart_item_model.dart";
+import "package:je_t_aime/Models/category_model.dart";
+import "package:je_t_aime/Widgets/custom_product_container_widget.dart";
+import "package:je_t_aime/core/Language/locales.dart";
+import "package:mvc_pattern/mvc_pattern.dart";
+import "package:provider/provider.dart";
+import "../../Models/popular_products_model.dart";
+import "../../Models/slider_model.dart";
+import "../../Utilities/router_config.dart";
+import "../../Utilities/strings.dart";
+import "../../Utilities/theme_helper.dart";
+import "../../Widgets/toast_helper.dart";
+import "../../core/Language/app_languages.dart";
+import "../../generated/assets.dart";
+import "home_data_handler.dart";
 
 class HomeController extends ControllerMVC {
   // singleton
@@ -51,7 +58,9 @@ class HomeController extends ControllerMVC {
   List<SliderModel> sliders = [];
   List<PopularProductsModel> products = [];
   bool isLiked = false;
-
+  int quyCount =1;
+  PopularProductsModel? productsModel;
+ CartModel? cartModel;
   init() async {
     loadCurrentLanguage(currentContext_!);
     getHomeDetails();
@@ -75,6 +84,34 @@ class HomeController extends ControllerMVC {
     });
     activeIndex = index;
   }
+addProductToCart()async{
+  loading = true;
+  setState(() {});
+  print("Product ID: ${productsModel?.id}, Quantity: $quyCount");
+  final result = await HomeDataHandler.addToCart(
+      productId: productsModel?.id??0,
+      quantity: quyCount);
+  result.fold((l) {
+    ToastHelper.showError(message: l.toString());
+  }, (r) {
+    ToastHelper.showSuccess(
+      context: currentContext_!,
+      message: Strings.addToCartSuccess.tr,
+      icon: SvgPicture.asset(
+        Assets.imagesSubmit,
+        width: 60.w,
+        height: 50.h,
+        fit: BoxFit.cover,
+      ),
+      backgroundColor:
+      ThemeClass.of(currentContext_!).primaryColor,
+    );
+    print("addddddd");
+});
+  setState(() {
+    loading = false;
+  });
+}
 
   getHomeDetails() async {
     loading = true;
@@ -90,7 +127,7 @@ class HomeController extends ControllerMVC {
       products = List.from(((r["data"]["popular_products"] ?? []) as List)
           .map((e) => PopularProductsModel.fromJson(e)));
     });
-    print('succccccesssssssssss');
+    print("succccccesssssssssss");
     setState(() {
       loading = false;
     });

@@ -1,30 +1,35 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:gap/gap.dart';
-import 'package:go_router/go_router.dart';
-import 'package:je_t_aime/Modules/ProductDetails/product_details_controller.dart';
-import 'package:je_t_aime/core/Language/locales.dart';
-import 'package:mvc_pattern/mvc_pattern.dart';
+import "package:flutter/material.dart";
+import "package:flutter_rating_bar/flutter_rating_bar.dart";
+import "package:flutter_screenutil/flutter_screenutil.dart";
+import "package:flutter_svg/svg.dart";
+import "package:gap/gap.dart";
+import "package:go_router/go_router.dart";
+import "package:je_t_aime/Models/popular_products_model.dart";
+import "package:je_t_aime/Models/product_details_model.dart";
+import "package:je_t_aime/Modules/ProductDetails/product_details_controller.dart";
+import "package:je_t_aime/core/Language/locales.dart";
+import "package:mvc_pattern/mvc_pattern.dart";
 
+import "../../Models/categories_product_model.dart";
 import "../../Models/review_model.dart";
-import '../../Utilities/format_date_helper.dart';
-import '../../Utilities/shared_preferences.dart';
-import '../../Utilities/strings.dart';
-import '../../Utilities/text_style_helper.dart';
-import '../../Utilities/theme_helper.dart';
-import '../../Widgets/custom_button_widget.dart';
-import '../../Widgets/custom_details_side_text.dart';
-import '../../Widgets/custom_product_container_widget.dart';
-import '../../generated/assets.dart';
-import '../Reviews/reviews_screen.dart';
-import 'Widgets/product_details_widget.dart';
+import "../../Utilities/format_date_helper.dart";
+import "../../Utilities/shared_preferences.dart";
+import "../../Utilities/strings.dart";
+import "../../Utilities/text_style_helper.dart";
+import "../../Utilities/theme_helper.dart";
+import "../../Widgets/custom_button_widget.dart";
+import "../../Widgets/custom_details_side_text.dart";
+import "../../Widgets/custom_product_container_widget.dart";
+import "../../generated/assets.dart";
+import "../Reviews/reviews_screen.dart";
+import "Widgets/product_details_widget.dart";
 
 class ProductDetailsScreen extends StatefulWidget {
   static const routeName = "ProductDetails";
+  final PopularProductsModel popularProductsModel;
+
   const ProductDetailsScreen({
-    super.key,
+    super.key, required this.popularProductsModel,
   });
 
   @override
@@ -39,6 +44,7 @@ class _ProductDetailsScreenState extends StateMVC<ProductDetailsScreen> {
   late ProductDetailsController con;
   @override
   void initState() {
+    con.getProductDetails(productId: widget.popularProductsModel.id ?? 0);
     super.initState();
   }
 
@@ -90,7 +96,7 @@ class _ProductDetailsScreenState extends StateMVC<ProductDetailsScreen> {
                 ],
               ),
               Gap(10.h),
-              const ProductDetailsWidget(),
+               ProductDetailsWidget(model: con.productDetailsModel??ProductDetailsModel(), productsModel: widget.popularProductsModel,),
               // Row(
               // //  mainAxisAlignment: MainAxisAlignment.spaceBetween,
               //   children: [

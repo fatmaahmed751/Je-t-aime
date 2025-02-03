@@ -1,19 +1,23 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:gap/gap.dart';
-import 'package:je_t_aime/core/Language/locales.dart';
-import 'package:mvc_pattern/mvc_pattern.dart';
+import "package:flutter/material.dart";
+import "package:flutter_screenutil/flutter_screenutil.dart";
+import "package:flutter_svg/svg.dart";
+import "package:gap/gap.dart";
+import "package:je_t_aime/core/Language/locales.dart";
+import "package:mvc_pattern/mvc_pattern.dart";
 
-import '../../../Utilities/strings.dart';
-import '../../../Utilities/text_style_helper.dart';
-import '../../../Utilities/theme_helper.dart';
-import '../../../Widgets/custom_details_side_text.dart';
-import '../../../generated/assets.dart';
-import '../product_details_controller.dart';
+import "../../../Models/popular_products_model.dart";
+import "../../../Models/product_details_model.dart";
+import "../../../Utilities/strings.dart";
+import "../../../Utilities/text_style_helper.dart";
+import "../../../Utilities/theme_helper.dart";
+import "../../../Widgets/custom_details_side_text.dart";
+import "../../../generated/assets.dart";
+import "../product_details_controller.dart";
 
 class ProductDetailsWidget extends StatefulWidget {
-  const ProductDetailsWidget({super.key});
+final ProductDetailsModel model;
+ final PopularProductsModel productsModel;
+  const ProductDetailsWidget({super.key, required this.model, required this.productsModel});
 
   @override
   createState() => _ProductDetailsWidgetState();
@@ -47,21 +51,32 @@ class _ProductDetailsWidgetState extends StateMVC<ProductDetailsWidget> {
                   SizedBox(
                     width: 65.w,
                     height: 158.h,
-                    child: Image.asset(
-                      Assets.imagesProduct, // Replace with your main image
-                      fit: BoxFit.contain,
+                    child: Image.network(
+                      widget.productsModel.image ?? "", // Network image URL
+                      fit: BoxFit.cover,
+                      width: 328.w,
+                      height: 192.h, // Adjust height as needed
+                      errorBuilder: (context, error, stackTrace) {
+                        // Fallback widget when the image fails to load
+                        return Container(
+                          color: Colors
+                              .grey[300], // Background color for the fallback
+                          alignment: Alignment.center,
+                          child: const Icon(
+                            Icons.image, // Built-in icon as a fallback
+                            size: 50,
+                            color: Colors.grey,
+                          ),
+                        );
+                      },
                     ),
                   ),
                   Gap(20.h), // Spacing between images
-                  // Thumbnail images row
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: List.generate(4, (index) {
-                      return GestureDetector(
-                        onTap: () {
-                          // Handle thumbnail selection
-                        },
-                        child: Container(
+                  if (con.productDetailsModel != null && con.productDetailsModel!.images != null)
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: con.productDetailsModel!.images!.map((e) {
+                        return Container(
                           width: 60.w,
                           height: 60.h,
                           margin: EdgeInsets.symmetric(horizontal: 3.w),
@@ -69,26 +84,37 @@ class _ProductDetailsWidgetState extends StateMVC<ProductDetailsWidget> {
                             borderRadius: BorderRadius.circular(10.r),
                             color: Colors.white,
                             border: Border.all(
-                              color: index == 0
-                                  ? ThemeClass.of(context).primaryColor
-                                  : ThemeClass.of(context).labelColor,
                               width: 0.5,
                             ),
                           ),
                           child: Padding(
-                            padding:
-                                EdgeInsetsDirectional.symmetric(vertical: 8.h),
-                            child: Image.asset(
-                              Assets
-                                  .imagesProduct, // Replace with your thumbnails
+                            padding: EdgeInsetsDirectional.symmetric(vertical: 8.h),
+                            child: Image.network(
+                              e.toString() ?? "https://via.placeholder.com/150", // استخدام الصورة من القائمة
                               fit: BoxFit.contain,
+                                errorBuilder: (context, error, stackTrace) {
+                                  // Fallback widget when the image fails to load
+                                  return Container(
+                                    color: Colors
+                                        .grey[300],
+                                    // Background color for the fallback
+                                    alignment: Alignment.center,
+                                    child: const Icon(
+                                      Icons.image,
+                                      // Built-in icon as a fallback
+                                      size: 50,
+                                      color: Colors.grey,
+                                    ),
+                                  );
+                                }
                             ),
                           ),
-                        ),
-                      );
-                    }),
-                  ),
+                        );
+                      }).toList(),
+                    )
                 ],
+
+
               ),
             ),
           ),
@@ -106,7 +132,7 @@ class _ProductDetailsWidgetState extends StateMVC<ProductDetailsWidget> {
             ),
             const Spacer(),
             Text(
-              "4.5",
+              widget.model.averageRating??"0",
               style: TextStyleHelper.of(context)
                   .b_16
                   .copyWith(color: ThemeClass.of(context).mainBlack),
@@ -120,13 +146,13 @@ class _ProductDetailsWidgetState extends StateMVC<ProductDetailsWidget> {
         ),
         Gap(10.h),
         CustomDetailsSideTextWidget(
-          text: Strings.productDesc.tr,
+          text: widget.model.title??""
         ),
         Gap(16.h),
         Row(
           children: [
             Text(
-              "350 ${Strings.jod.tr}",
+              "${widget.model.price} ${Strings.jod.tr}",
               style: TextStyleHelper.of(context)
                   .h_16
                   .copyWith(color: ThemeClass.of(context).primaryColor),
@@ -152,7 +178,7 @@ class _ProductDetailsWidgetState extends StateMVC<ProductDetailsWidget> {
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 16.w),
               child: Text(
-                '${con.counter}',
+                "${con.counter}",
                 style: TextStyleHelper.of(context).b_16.copyWith(
                     color: ThemeClass.of(context).mainBlack,
                     fontWeight: FontWeight.w500),
@@ -185,7 +211,7 @@ class _ProductDetailsWidgetState extends StateMVC<ProductDetailsWidget> {
           //  height:130.h,
           width: 382.w,
           child: Text(
-            Strings.productDetailsDesc.tr,
+            widget.model.desc??"",
             style: TextStyleHelper.of(context).b_16.copyWith(
                 fontWeight: FontWeight.w400,
                 color: ThemeClass.of(context)

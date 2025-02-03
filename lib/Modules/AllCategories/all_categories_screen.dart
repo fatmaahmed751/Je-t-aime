@@ -3,6 +3,7 @@ import "package:flutter_screenutil/flutter_screenutil.dart";
 import "package:flutter_svg/svg.dart";
 import "package:gap/gap.dart";
 import "package:je_t_aime/Models/category_model.dart";
+import "package:je_t_aime/Models/popular_products_model.dart";
 import "package:je_t_aime/Modules/AllCategories/widget/category_product_widget.dart";
 import "package:mvc_pattern/mvc_pattern.dart";
 
@@ -16,9 +17,12 @@ import "all_categories_controller.dart";
 
 class AllCategoriesScreen extends StatefulWidget {
   static const routeName = "AllCategoriesScreen";
-  final CategoryModel model;
-  final CategoryProductModel categoryProductModel;
-  const AllCategoriesScreen({super.key, required this.model, required this.categoryProductModel});
+  final CategoryModel? model;
+final CategoryProductModel categoryProductModel;
+  const AllCategoriesScreen({super.key,
+    required this.model,
+  required this.categoryProductModel
+  });
 
   @override
   _AllCategoriesScreenState createState() => _AllCategoriesScreenState();
@@ -31,19 +35,25 @@ class _AllCategoriesScreenState extends StateMVC<AllCategoriesScreen> {
   late AllCategoriesController con;
   @override
   void initState() {
-    con.init(
-      categoryModel: widget.model
-    );
+    con.init(categoryModel: widget.model! );
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
+    if (widget.model == null) {
+      return const Scaffold(
+        body: Center(
+          child: Text('No category data available'),
+        ),
+      );
+    }
+
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: Size(0, 75.h),
         child: CustomAppBarWidget.detailsScreen(
-          title:widget.model.title??"",
+          title:widget.model?.title??"",
           icon: "",
         ),
       ),
@@ -83,7 +93,8 @@ class _AllCategoriesScreenState extends StateMVC<AllCategoriesScreen> {
                       spacing: 12.w,
                       runSpacing: 12.h,
                       children:con.categoryProducts.data.map((e) {
-                        return CustomCategoryProductContainerWidget(categoryProductModel:widget.categoryProductModel,);
+                        return CustomCategoryProductContainerWidget(categoryProductModel:widget.categoryProductModel,
+                        productsModel: PopularProductsModel(),);
                       }).toList(),
                     ),
                   ),

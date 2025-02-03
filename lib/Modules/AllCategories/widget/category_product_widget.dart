@@ -18,13 +18,15 @@ import "../../../generated/assets.dart";
 
 class CustomCategoryProductContainerWidget extends StatelessWidget {
   final CategoryProductModel categoryProductModel;
+  final PopularProductsModel productsModel;
 
-  const CustomCategoryProductContainerWidget({super.key, required this.categoryProductModel});
+  const CustomCategoryProductContainerWidget({super.key, required this.categoryProductModel, required this.productsModel});
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        context.pushNamed(ProductDetailsScreen.routeName);
+        context.pushNamed(ProductDetailsScreen.routeName,
+        extra:categoryProductModel );
       },
       child: Container(
         height: 217.h,

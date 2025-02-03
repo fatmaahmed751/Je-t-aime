@@ -21,7 +21,8 @@ class CategoriesWidget extends StatelessWidget {
         children: [
           GestureDetector(
             onTap: () {
-              context.pushNamed(AllCategoriesScreen.routeName,);
+              context.pushNamed(AllCategoriesScreen.routeName,
+              extra:categoryModel);
             },
             child: CircleAvatar(
               radius: 50.r,

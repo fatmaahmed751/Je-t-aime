@@ -66,14 +66,19 @@ class GoRouterConfig {
         name: AllCategoriesScreen.routeName,
         path: "/${AllCategoriesScreen.routeName}",
         pageBuilder: (_, GoRouterState state) {
+          final CategoryModel model = state.extra as CategoryModel;
+          print(state.extra);
           return getCustomTransitionPage(
             state: state,
             child:  AllCategoriesScreen(
-              categoryProductModel: state.extra as CategoryProductModel,
-              model: state.extra as CategoryModel,
+              //categoryProductModel: state.extra as CategoryProductModel,
+              model: model,
+               categoryProductModel: CategoryProductModel(),
             ),
+
           );
         },
+
         routes: const <RouteBase>[],
       ),
       GoRoute(
@@ -137,9 +142,13 @@ class GoRouterConfig {
         name: ProductDetailsScreen.routeName,
         path: "/${ProductDetailsScreen.routeName}",
         pageBuilder: (_, GoRouterState state) {
+          final PopularProductsModel model = state.extra as PopularProductsModel;
           return getCustomTransitionPage(
             state: state,
-            child: const ProductDetailsScreen(),
+            child:  ProductDetailsScreen(
+              popularProductsModel: model,
+
+            ),
           );
         },
         routes: const <RouteBase>[],

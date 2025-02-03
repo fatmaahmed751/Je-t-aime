@@ -1,16 +1,13 @@
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:go_router/go_router.dart';
-import 'package:je_t_aime/core/Language/locales.dart';
-import 'package:mvc_pattern/mvc_pattern.dart';
-import '../../Utilities/dialog_helper.dart';
-import '../../Utilities/router_config.dart';
-import '../../Utilities/strings.dart';
-import '../../Widgets/custom_bottom_sheet_widget.dart';
-import '../../generated/assets.dart';
-import '../RateProducts/rate_product_screen.dart';
-import 'Widgets/add_to_cart_bottom_sheet.dart';
+import "package:flutter/cupertino.dart";
+import "package:flutter/material.dart";
+import "package:flutter_screenutil/flutter_screenutil.dart";
+import "package:je_t_aime/Models/product_details_model.dart";
+import "package:je_t_aime/Models/review_model.dart";
+import "package:je_t_aime/Modules/ProductDetails/product_details_data_handler.dart";
+import "package:mvc_pattern/mvc_pattern.dart";
+import "../../Widgets/toast_helper.dart";
+import "../RateProducts/rate_product_screen.dart";
+import "Widgets/add_to_cart_bottom_sheet.dart";
 
 class ProductDetailsController extends ControllerMVC {
   // singleton
@@ -33,6 +30,7 @@ class ProductDetailsController extends ControllerMVC {
   int activeIndex = 0;
   bool isSearch = false;
   bool loading = false;
+  ProductDetailsModel? productDetailsModel;
 
   @override
   void initState() {
@@ -141,4 +139,18 @@ class ProductDetailsController extends ControllerMVC {
   //       dismiss: false);
   // }
   //
+  Future getProductDetails({required int productId}) async {
+    loading=true;
+    setState(() { });
+    final result = await ProductDetailsDataHandler.getProductDetails(id: productId);
+    result.fold((l){
+      ToastHelper.showError(message: l.toString());
+      print("product error ${l.errorModel.statusMessage.toString()}");
+    },(r) {
+      productDetailsModel=r;
+      print("product reviews${productDetailsModel?.reviews??ReviewModel()}");
+
+    });
+    setState(() {loading=false;});
+  }
 }
