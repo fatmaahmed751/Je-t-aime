@@ -122,20 +122,21 @@ import '../Utilities/router_config.dart';
 import '../Utilities/theme_helper.dart';
 
 class ToastHelper {
-
   static final FToast _fToast = FToast();
 
   static void init(BuildContext context) {
     _fToast.init(context);
   }
 
-  static Future showError({required String? message, Color? backgroundColor}) async {
+  static Future showError(
+      {required String? message, Color? backgroundColor}) async {
     await Fluttertoast.showToast(
       msg: message ?? "error",
       toastLength: Toast.LENGTH_LONG,
       gravity: ToastGravity.BOTTOM,
       timeInSecForIosWeb: 2,
-      backgroundColor: backgroundColor ?? ThemeClass.of(currentContext_!).primaryColor,
+      backgroundColor:
+          backgroundColor ?? ThemeClass.of(currentContext_!).primaryColor,
       textColor: Colors.white,
       fontSize: 16.sp,
     );
@@ -149,7 +150,7 @@ class ToastHelper {
   }) {
     OverlayEntry overlayEntry = OverlayEntry(
       builder: (context) => Positioned(
-        bottom:70,
+        bottom: 70,
         left: 50,
         child: Material(
           color: Colors.transparent,
@@ -169,8 +170,8 @@ class ToastHelper {
                   child: Text(
                     message,
                     style: TextStyleHelper.of(context).h_16.copyWith(
-                      color:ThemeClass.of(context).background,
-                    ),
+                          color: ThemeClass.of(context).background,
+                        ),
                   ),
                 ),
               ],
@@ -198,7 +199,8 @@ class ToastHelper {
     _showCustomOverlay(
       context: context,
       message: message ?? "success",
-      backgroundColor: backgroundColor ?? ThemeClass.of(currentContext_!).primaryColor,
+      backgroundColor:
+          backgroundColor ?? ThemeClass.of(currentContext_!).primaryColor,
       icon: icon,
     );
   }

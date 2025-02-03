@@ -9,7 +9,7 @@ import '../../../../Utilities/theme_helper.dart';
 import '../../../../Widgets/custom_button_widget.dart';
 import '../../../../generated/assets.dart';
 
-class  AlertSubmitProblemSuccessfully extends StatelessWidget {
+class AlertSubmitProblemSuccessfully extends StatelessWidget {
   const AlertSubmitProblemSuccessfully({super.key});
 
   @override
@@ -19,14 +19,12 @@ class  AlertSubmitProblemSuccessfully extends StatelessWidget {
         width: 373.w,
         height: 690.h,
         decoration: BoxDecoration(
-          color: ThemeClass
-              .of(context)
-              .background,
+          color: ThemeClass.of(context).background,
           borderRadius: BorderRadius.circular(20),
         ),
         child: Padding(
-          padding: EdgeInsetsDirectional.symmetric(
-              horizontal: 30.w, vertical: 30.h),
+          padding:
+              EdgeInsetsDirectional.symmetric(horizontal: 30.w, vertical: 30.h),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -39,23 +37,16 @@ class  AlertSubmitProblemSuccessfully extends StatelessWidget {
                 textAlign: TextAlign.center,
                 maxLines: 2,
                 Strings.sendingProblem.tr,
-                style: TextStyleHelper
-                    .of(context)
-                    .h_20
-                    .copyWith(
-                  decoration: TextDecoration.none,
-                ),
+                style: TextStyleHelper.of(context).h_20.copyWith(
+                      decoration: TextDecoration.none,
+                    ),
               ),
               Gap(10.h),
               Text(Strings.thanksForTrust.tr,
                   textAlign: TextAlign.center,
-                  style: TextStyleHelper
-                      .of(context)
-                      .b_16
-                      .copyWith(
+                  style: TextStyleHelper.of(context).b_16.copyWith(
                       decoration: TextDecoration.none,
-                      color:
-                      const Color(0xff968F8A))),
+                      color: const Color(0xff968F8A))),
               Gap(20.h),
               Card(
                 color: Colors.white,

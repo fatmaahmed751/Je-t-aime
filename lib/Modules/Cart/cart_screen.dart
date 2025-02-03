@@ -41,7 +41,7 @@ class _CartScreenState extends StateMVC<CartScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: PreferredSize(
-        preferredSize: Size(0,75.h),
+        preferredSize: Size(0, 75.h),
         child: CustomAppBarWidget.detailsScreen(
           title: Strings.cart.tr,
           icon: "",
@@ -75,19 +75,18 @@ class _CartScreenState extends StateMVC<CartScreen> {
                           incrementCounter: () async {
                             con.incrementCounter(counter: con.counterValue);
                           },
-                          counter:con.counterValue,
+                          counter: con.counterValue,
                         );
                       },
                       separatorBuilder: (context, index) => Gap(10.h),
                       itemCount: 5,
                     ),
                     Gap(150.h),
-
                   ],
                 ),
                 Padding(
                   padding: EdgeInsetsDirectional.symmetric(vertical: 20.h),
-                  child:Row(
+                  child: Row(
                     children: [
                       Container(
                         width: 90.w,
@@ -122,15 +121,15 @@ class _CartScreenState extends StateMVC<CartScreen> {
                           //ShippingScreen.routeName,extra: con.subtotal
                         },
                         child: CustomButtonWidget.primary(
-                          onTap: (){
+                          onTap: () {
                             context.pushNamed(ShippingScreen.routeName);
                           },
                           width: 248.w,
                           height: 54.h,
                           title: Strings.checkOut.tr,
                           textStyle: TextStyleHelper.of(context).h_20.copyWith(
-                            color: ThemeClass.of(context).background,
-                          ),
+                                color: ThemeClass.of(context).background,
+                              ),
                         ),
                       ),
                     ],
@@ -165,7 +164,7 @@ class _ProductItemState extends State<ProductItem> {
   @override
   Widget build(BuildContext context) {
     return Container(
-     // height: 140.h,
+      // height: 140.h,
       decoration: BoxDecoration(
         color: ThemeClass.of(context).background,
         borderRadius: BorderRadius.circular(30.r),
@@ -177,16 +176,20 @@ class _ProductItemState extends State<ProductItem> {
               color:
                   ThemeClass.of(context).secondaryBlackColor.withOpacity(0.15),
               blurRadius: 1,
-              spreadRadius:0.5),
+              spreadRadius: 0.5),
         ],
       ),
       child: Padding(
-        padding: EdgeInsetsDirectional.only(start: 12.w, top:8.h, bottom:8.h,),
+        padding: EdgeInsetsDirectional.only(
+          start: 12.w,
+          top: 8.h,
+          bottom: 8.h,
+        ),
         child: Row(
           children: [
             Container(
-               width: 96.w,
-               height: 96.h,
+              width: 96.w,
+              height: 96.h,
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(14.r),
                   color: ThemeClass.of(context).containerColor),
@@ -205,13 +208,12 @@ class _ProductItemState extends State<ProductItem> {
                   SizedBox(
                     height: 38.h,
                     child: Row(
-                     // mainAxisSize: MainAxisSize.min,
+                      // mainAxisSize: MainAxisSize.min,
                       children: [
                         Text(
                           Strings.productDesc.tr,
-                          style: TextStyleHelper.of(context)
-                              .b_16
-                              .copyWith(color: ThemeClass.of(context).mainBlack),
+                          style: TextStyleHelper.of(context).b_16.copyWith(
+                              color: ThemeClass.of(context).mainBlack),
                         ),
                         const Spacer(), // Moves the delete icon to the end of the row
                         IconButton(

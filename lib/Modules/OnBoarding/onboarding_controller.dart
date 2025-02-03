@@ -28,26 +28,29 @@ class OnBoardingController extends ControllerMVC {
       subText: Strings.onBoardingDescTextOne.tr,
     ),
     OnBoardingModel(
-      id:1,
+      id: 1,
       skipText: Strings.skip.tr,
-      imageName:Assets.imagesOnBoardingTwo,
+      imageName: Assets.imagesOnBoardingTwo,
       mainText: Strings.onBoardingMainTextTwo.tr,
       subText: Strings.onBoardingDescTextTwo.tr,
     ),
     OnBoardingModel(
-      id:2,
+      id: 2,
       skipText: "",
-      imageName:Assets.imagesOnBoardingThree,
+      imageName: Assets.imagesOnBoardingThree,
       mainText: Strings.onBoardingMainTextThree.tr,
       subText: Strings.onBoardingDescTextThree.tr,
     ),
   ];
   bool isLast = false;
   int index = 0;
-  onNext(){
-    controller.nextPage(duration: const Duration(milliseconds: 400), curve: Curves.linear);
+  onNext() {
+    controller.nextPage(
+        duration: const Duration(milliseconds: 400), curve: Curves.linear);
   }
-  onPrevious(){
-    controller.previousPage(duration: const Duration(milliseconds:500), curve: Curves.linear);
+
+  onPrevious() {
+    controller.previousPage(
+        duration: const Duration(milliseconds: 500), curve: Curves.linear);
   }
 }

@@ -70,20 +70,22 @@ class _ProductDetailsScreenState extends StateMVC<ProductDetailsScreen> {
                   ),
                   const Spacer(),
                   GestureDetector(
-                    onTap: (){
-                      setState((){
-                        con.isClick = !con.isClick;
-                      });
-                    },
-                      child: con.isClick?SizedBox(
-                          height: 26.h,
-                          child: SvgPicture.asset(Assets.imagesFavoriteIcon)):
-                      SizedBox(
-                        height: 26.h,
-                        child: SvgPicture.asset(Assets.imagesHeartBroken,
-                        ),
-                      )
-                  ),
+                      onTap: () {
+                        setState(() {
+                          con.isClick = !con.isClick;
+                        });
+                      },
+                      child: con.isClick
+                          ? SizedBox(
+                              height: 26.h,
+                              child:
+                                  SvgPicture.asset(Assets.imagesFavoriteIcon))
+                          : SizedBox(
+                              height: 26.h,
+                              child: SvgPicture.asset(
+                                Assets.imagesHeartBroken,
+                              ),
+                            )),
                 ],
               ),
               Gap(10.h),
@@ -124,7 +126,7 @@ class _ProductDetailsScreenState extends StateMVC<ProductDetailsScreen> {
                   ),
                   GestureDetector(
                     onTap: () {
-                        context.pushNamed(ReviewsForProductScreen.routeName);
+                      context.pushNamed(ReviewsForProductScreen.routeName);
                     },
                     child: Text(
                       Strings.viewAll.tr,
@@ -166,37 +168,36 @@ class _ProductDetailsScreenState extends StateMVC<ProductDetailsScreen> {
               ),
               Gap(16.h),
 
-            SizedBox(
-              height: 220.h,
-              child: ListView.separated(
-                  physics: const BouncingScrollPhysics(),
-                  scrollDirection: Axis.horizontal,
-                  itemBuilder: (context, index) => const CustomProductContainerWidget(
-                  ),
-                  separatorBuilder: (context, index) => Gap(10.w),
-                  itemCount:5),
-            ),
+              // SizedBox(
+              //   height: 220.h,
+              //   child: ListView.separated(
+              //       physics: const BouncingScrollPhysics(),
+              //       scrollDirection: Axis.horizontal,
+              //       itemBuilder: (context, index) => const CustomProductContainerWidget(
+              //       ),
+              //       separatorBuilder: (context, index) => Gap(10.w),
+              //       itemCount:5),
+              // ),
               Gap(100.h)
             ],
           ),
         ),
         Padding(
-          padding: EdgeInsetsDirectional.symmetric(horizontal: 24.w,vertical: 20.h),
+          padding:
+              EdgeInsetsDirectional.symmetric(horizontal: 24.w, vertical: 20.h),
           child: CustomButtonWidget.primary(
-            onTap: (){
-          con.addToCartSheet(context);
+            onTap: () {
+              con.addToCartSheet(context);
             },
             width: 382.w,
             height: 54.h,
             title: Strings.addToCart.tr,
             textStyle: TextStyleHelper.of(context).h_20.copyWith(
-              color: ThemeClass.of(context).background,
-            ),
+                  color: ThemeClass.of(context).background,
+                ),
           ),
         ),
-
-      ]
-      ),
+      ]),
     );
   }
 }
@@ -213,7 +214,7 @@ class ReviewsItem extends StatelessWidget {
         color: Colors.white,
       ),
       child: Padding(
-        padding: EdgeInsets.only(top:10.h),
+        padding: EdgeInsets.only(top: 10.h),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -246,26 +247,27 @@ class ReviewsItem extends StatelessWidget {
             Gap(12.h),
             SizedBox(
               //height:130.h,
-              width:382.w,
+              width: 382.w,
               child: Text(
                 Strings.reviewsDesc.tr,
-                style: TextStyleHelper.of(context)
-                    .b_16
-                    .copyWith(fontWeight: FontWeight.w400,color: ThemeClass.of(context).secondaryBlackColor.withOpacity(0.6)),
+                style: TextStyleHelper.of(context).b_16.copyWith(
+                    fontWeight: FontWeight.w400,
+                    color: ThemeClass.of(context)
+                        .secondaryBlackColor
+                        .withOpacity(0.6)),
               ),
             ),
             Gap(16.h),
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
-             children: [
-               Text(
-                 FormatDateHelper.formatWalletDate.format(DateTime.now()),
-                 style: TextStyleHelper.of(context)
-                     .b_14
-                     .copyWith(color: ThemeClass.of(context).mainBlack),
-               ),
-             ],
-
+              children: [
+                Text(
+                  FormatDateHelper.formatWalletDate.format(DateTime.now()),
+                  style: TextStyleHelper.of(context)
+                      .b_14
+                      .copyWith(color: ThemeClass.of(context).mainBlack),
+                ),
+              ],
             ),
           ],
         ),

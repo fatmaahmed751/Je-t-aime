@@ -23,8 +23,8 @@ class PopularProductController extends ControllerMVC {
   }
 
   static PopularProductController? _this;
-  bool isSearch=false;
-  bool isLiked=false;
+  bool isSearch = false;
+  bool isLiked = false;
   bool loading = false;
   bool autoValidate = false;
   TextEditingController searchText = TextEditingController();
@@ -34,9 +34,9 @@ class PopularProductController extends ControllerMVC {
   late TextEditingController endController;
   @override
   void initState() {
-    searchController=TextEditingController();
-    startController=TextEditingController();
-    endController=TextEditingController();
+    searchController = TextEditingController();
+    startController = TextEditingController();
+    endController = TextEditingController();
     super.initState();
   }
 
@@ -46,58 +46,71 @@ class PopularProductController extends ControllerMVC {
     startController.dispose();
     endController.dispose();
     super.dispose();
-
   }
-  init(){
 
-
-  }
+  init() {}
 
   Future onSearchReq({String? search}) async {
-    loading=true;
+    loading = true;
 
-    setState(() {loading=false;});
+    setState(() {
+      loading = false;
+    });
   }
-  Future onSearchReqInCategory({String? search,required int categoryId}) async {
-    loading=true;
 
-    setState(() {loading=false;});
+  Future onSearchReqInCategory(
+      {String? search, required int categoryId}) async {
+    loading = true;
+
+    setState(() {
+      loading = false;
+    });
   }
-  onSearch({String? search,}) async {
+
+  onSearch({
+    String? search,
+  }) async {
     if (search == null || search.isEmpty) return;
-
   }
 
-  Future getProducts({bool refresh=false}) async {
-    setState(() {loading=false;});
+  Future getProducts({bool refresh = false}) async {
+    setState(() {
+      loading = false;
+    });
   }
+
   Future addFavorite({required int productId}) async {
     setState(() {
       loading = true;
     });
 
-   //   ToastHelper.showSuccess(message: ,icon: '');
-
+    //   ToastHelper.showSuccess(message: ,icon: '');
 
     setState(() {
       loading = false;
     });
   }
+
   Future getCategoryProducts({required int categoryId}) async {
-    loading=true;
-
-    setState(() {loading=false;});
-  }
-  Future deleteFavorite({required int productId}) async {
+    loading = true;
 
     setState(() {
       loading = false;
     });
   }
-  Future getAllCategories() async {
 
-    setState(() {loading=false;});
+  Future deleteFavorite({required int productId}) async {
+    setState(() {
+      loading = false;
+    });
   }
+
+  Future getAllCategories() async {
+    setState(() {
+      loading = false;
+    });
+  }
+
   Future filterBottomSheet(BuildContext context) {
     return showModalBottomSheet(
       context: context,
@@ -106,24 +119,31 @@ class PopularProductController extends ControllerMVC {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(30.r)),
       ),
-      builder:(context)=>   FilterBottomSheetWidget(
-        onButtonAccept:()=> context.pop(),
-        onButtonReject:()=> context.pop(),
-        checkBoxWidget: const CustomCheckBoxWidget(),
-        sideTextWidget: CustomHomeDetailsTextWidget(
-          text:Strings.categories.tr,
-          style:TextStyleHelper.of(context).b_20.copyWith(
-              color: ThemeClass.of(context).mainBlack,
-              fontWeight: FontWeight.w500),
-        ),
+      builder: (context) => FilterBottomSheetWidget(
+          onButtonAccept: () => context.pop(),
+          onButtonReject: () => context.pop(),
+          checkBoxWidget: const CustomCheckBoxWidget(),
+          sideTextWidget: CustomHomeDetailsTextWidget(
+            text: Strings.categories.tr,
+            style: TextStyleHelper.of(context).b_20.copyWith(
+                color: ThemeClass.of(context).mainBlack,
+                fontWeight: FontWeight.w500),
+          ),
           autoValidate: autoValidate,
           startController: startController,
           endController: endController),
     );
   }
-  Future filter({required int start,required int end,required List categoryIds,required List rateIds }) async {
-    loading=true;
-    setState(() { });
-    setState(() {loading=false;});
+
+  Future filter(
+      {required int start,
+      required int end,
+      required List categoryIds,
+      required List rateIds}) async {
+    loading = true;
+    setState(() {});
+    setState(() {
+      loading = false;
+    });
   }
 }

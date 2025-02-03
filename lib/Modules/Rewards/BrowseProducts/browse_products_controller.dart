@@ -9,9 +9,9 @@ class BrowseProductsController extends ControllerMVC {
   }
   static BrowseProductsController? _this;
   BrowseProductsController._();
-  bool loading=false,autoValidate = false;
+  bool loading = false, autoValidate = false;
   bool isClick = false;
-  bool isSearch= false;
+  bool isSearch = false;
   late TextEditingController searchController;
   // List<BannerModel> products=[];
   // GenericPaginationModel<BannerModel> productsPagination = GenericPaginationModel<BannerModel>();

@@ -45,7 +45,11 @@ class ErrorMessageModel extends Equatable {
     }
   }
 
-  ErrorMessageModel({required this.statusCode, String? statusMessage, required this.requestApi, this.responseApi})
+  ErrorMessageModel(
+      {required this.statusCode,
+      String? statusMessage,
+      required this.requestApi,
+      this.responseApi})
       : modelName = null,
         expectType = null,
         statusMessage = statusMessage ?? getStatusCodeName(statusCode);
@@ -67,7 +71,9 @@ class ErrorMessageModel extends Equatable {
         responseApi = null;
 
   @override
-  String toString() => modelName == null ? "API ERROR: statusCode: $statusCode ,message: $statusMessage" : "PARSING ERROR: modelName: $modelName";
+  String toString() => modelName == null
+      ? "API ERROR: statusCode: $statusCode ,message: $statusMessage"
+      : "PARSING ERROR: modelName: $modelName";
 
   @override
   List<Object?> get props => [

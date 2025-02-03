@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 extension Translate on String {
-  String get tr => AppLocalizations.instance.translate(this)??"";
+  String get tr => AppLocalizations.instance.translate(this) ?? "";
 }
 
 class AppLocalizations {
@@ -21,16 +21,17 @@ class AppLocalizations {
 
   // Static member to have a simple access to the delegate from the MaterialApp
   static const LocalizationsDelegate<AppLocalizations> delegate =
-  _AppLocalizationsDelegate();
+      _AppLocalizationsDelegate();
 
   Map<String, String> _localizedStrings = {};
 
-  static AppLocalizations get instance => _AppLocalizationsDelegate.instance; // add this
+  static AppLocalizations get instance =>
+      _AppLocalizationsDelegate.instance; // add this
 
   Future<bool> load() async {
     // Load the language JSON file from the "lang" folder
     String jsonString =
-    await rootBundle.loadString('i18n/${locale.languageCode}.json');
+        await rootBundle.loadString('i18n/${locale.languageCode}.json');
     Map<String, dynamic> jsonMap = json.decode(jsonString);
 
     _localizedStrings = jsonMap.map((key, value) {
@@ -62,7 +63,7 @@ class _AppLocalizationsDelegate
 
   @override
   Future<AppLocalizations> load(Locale locale) async {
-    AppLocalizations localizations =AppLocalizations(locale);
+    AppLocalizations localizations = AppLocalizations(locale);
     await localizations.load();
 
     instance = localizations; // set the static instance here

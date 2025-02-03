@@ -11,12 +11,11 @@ import '../../../Widgets/custom_button_widget.dart';
 import '../../../Widgets/custom_home_details_text_widget.dart';
 import '../payment_controller.dart';
 
-class CashPaymentMethodWidget extends StatefulWidget{
+class CashPaymentMethodWidget extends StatefulWidget {
   const CashPaymentMethodWidget({super.key});
 
   @override
- createState() => CashPaymentMethodWidgetState();
-
+  createState() => CashPaymentMethodWidgetState();
 }
 
 class CashPaymentMethodWidgetState extends StateMVC<CashPaymentMethodWidget> {
@@ -27,25 +26,28 @@ class CashPaymentMethodWidgetState extends StateMVC<CashPaymentMethodWidget> {
   late PaymentController con;
   @override
   Widget build(BuildContext context) {
-   return Padding(
-     padding:  EdgeInsetsDirectional.symmetric(horizontal: 24.w,vertical: 20.h),
-     child: Column(
-       crossAxisAlignment: CrossAxisAlignment.start,
-       children: [
-         Gap(10.h),
-         CustomHomeDetailsTextWidget(text: Strings.cashText.tr,
-           style: TextStyleHelper.of(context).h_18.copyWith(
-               color: ThemeClass.of(context).mainBlack
-           ),),
-         Gap(500.h),
-         CustomButtonWidget.primary(
-             title: Strings.payNow.tr,
-             onTap: () {
-               con.cashPaymentSuccess(context);
-             }),
-         Gap(20.h)
-       ],
-     ),
-   );
+    return Padding(
+      padding:
+          EdgeInsetsDirectional.symmetric(horizontal: 24.w, vertical: 20.h),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Gap(10.h),
+          CustomHomeDetailsTextWidget(
+            text: Strings.cashText.tr,
+            style: TextStyleHelper.of(context)
+                .h_18
+                .copyWith(color: ThemeClass.of(context).mainBlack),
+          ),
+          Gap(500.h),
+          CustomButtonWidget.primary(
+              title: Strings.payNow.tr,
+              onTap: () {
+                con.cashPaymentSuccess(context);
+              }),
+          Gap(20.h)
+        ],
+      ),
+    );
   }
 }

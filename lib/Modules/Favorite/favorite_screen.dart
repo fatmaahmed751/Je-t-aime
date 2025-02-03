@@ -37,55 +37,56 @@ class _FavoriteScreenState extends StateMVC<FavoriteScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-    appBar:con.isUserHaveFavorites?
-    PreferredSize(preferredSize: Size(double.infinity,180.h),
-        child: const CustomAppBarWidget.secondaryAppBar(title: "", icon: "",
-     //controller: con.searchController,
-        )):
-    const CustomAppBarWidget.mainScreen(title: "", icon: "",),
+        appBar: con.isUserHaveFavorites
+            ? PreferredSize(
+                preferredSize: Size(double.infinity, 180.h),
+                child: const CustomAppBarWidget.secondaryAppBar(
+                  title: "", icon: "",
+                  //controller: con.searchController,
+                ))
+            : const CustomAppBarWidget.mainScreen(
+                title: "",
+                icon: "",
+              ),
         bottomNavigationBar: const BottomNavBarWidget(
           selected: SelectedBottomNavBar.favorite,
         ),
-      body:  LoadingScreen(
-    loading: con.loading,
-        child: SafeArea(
-            child:con.isUserHaveFavorites?
-            ContainerEmptyContentWidget(
-              image:Assets.imagesNoFavorite ,
-              mainText:Strings.noFavorites.tr ,
-              descText:Strings.noFavoritesDesc.tr ,
-              button: CustomButtonWidget.primary(
-                  height: 48.h,
-                  width: 155.w,
-                  radius: 30.r,
-                  title: con.isLogin
-                      ? Strings.exploreProduct.tr
-                      : Strings.joinUs.tr,
-                  onTap: () {
-                    // SharedPref.getCurrentUser()!
-                    //         .token!
-                    //         .isNotEmpty
-                    //     ? GoRouter.of(context)
-                    //         .pushNamed(PopularProductsScreen.routeName,)
-                    //     : GoRouter.of(context).pushNamed(
-                    //         RegisterScreen.routeName);
-                  }),
-            ):
-            ListView(
-              physics: const BouncingScrollPhysics(),
-              children: [
-                Padding(
-                  padding: EdgeInsetsDirectional.symmetric(
-                   vertical: 24.h,horizontal: 12.w
+        body: LoadingScreen(
+          loading: con.loading,
+          child: SafeArea(
+            child: con.isUserHaveFavorites
+                ? ContainerEmptyContentWidget(
+                    image: Assets.imagesNoFavorite,
+                    mainText: Strings.noFavorites.tr,
+                    descText: Strings.noFavoritesDesc.tr,
+                    button: CustomButtonWidget.primary(
+                        height: 48.h,
+                        width: 155.w,
+                        radius: 30.r,
+                        title: con.isLogin
+                            ? Strings.exploreProduct.tr
+                            : Strings.joinUs.tr,
+                        onTap: () {
+                          // SharedPref.getCurrentUser()!
+                          //         .token!
+                          //         .isNotEmpty
+                          //     ? GoRouter.of(context)
+                          //         .pushNamed(PopularProductsScreen.routeName,)
+                          //     : GoRouter.of(context).pushNamed(
+                          //         RegisterScreen.routeName);
+                        }),
+                  )
+                : ListView(
+                    physics: const BouncingScrollPhysics(),
+                    children: [
+                      Padding(
+                        padding: EdgeInsetsDirectional.symmetric(
+                            vertical: 24.h, horizontal: 12.w),
+                        child: const CustomProductsWidget(),
+                      ),
+                    ],
                   ),
-                  child:const CustomProductsWidget(),
-                ),
-              ],
-            ),
-              ),
-      )
-    );
+          ),
+        ));
   }
-
-
 }

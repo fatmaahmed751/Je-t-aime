@@ -27,7 +27,6 @@ class _OrdersScreenState extends StateMVC<OrdersScreen> {
   }
   late OrdersController con;
 
-
   @override
   void initState() {
     con.init();
@@ -38,7 +37,7 @@ class _OrdersScreenState extends StateMVC<OrdersScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: PreferredSize(
-        preferredSize: Size(0,75.h),
+        preferredSize: Size(0, 75.h),
         child: CustomAppBarWidget.detailsScreen(
           title: Strings.orders.tr,
           icon: "",
@@ -49,16 +48,15 @@ class _OrdersScreenState extends StateMVC<OrdersScreen> {
         loading: con.loading,
         child: SafeArea(
           child: Padding(
-              padding:
-                  EdgeInsetsDirectional.only(start: 23.w, end: 23.w),
+              padding: EdgeInsetsDirectional.only(start: 23.w, end: 23.w),
               child:
-              // con.isLogin?
-              ListView.separated(
+                  // con.isLogin?
+                  ListView.separated(
                       physics: const BouncingScrollPhysics(),
                       itemBuilder: (context, index) => const DetailsOfOrder(),
                       separatorBuilder: (context, index) => Gap(8.h),
                       itemCount: 6)
-                 // :
+              // :
               // ContainerEmptyContentWidget(
               //         image: Assets.imagesNoOrdersImage,
               //         mainText: Strings.noOrders.tr,
@@ -80,7 +78,7 @@ class _OrdersScreenState extends StateMVC<OrdersScreen> {
               //               //         RegisterScreen.routeName);
               //             }),
               //       )
-          ),
+              ),
         ),
       ),
     );

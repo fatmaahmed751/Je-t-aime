@@ -7,14 +7,15 @@ import '../../core/API/request_method.dart';
 import '../../core/error/exceptions.dart';
 import '../../core/error/failures.dart';
 
-class HomeDataHandler{
-  static Future<Either<Failure, List<CategoryModel>>> getHomeCategories() async {
+class HomeDataHandler {
+  static Future<Either<Failure, List<CategoryModel>>>
+      getHomeCategories() async {
     try {
       List<CategoryModel> response = await GenericRequest<CategoryModel>(
         method: RequestApi.get(
-            url: APIEndPoint.category,
-           ),
-        fromMap:CategoryModel.fromJson,
+          url: APIEndPoint.category,
+        ),
+        fromMap: CategoryModel.fromJson,
       ).getList();
       print("heeeeeeeeeeeeeeeeel");
       return Right(response);
@@ -24,16 +25,17 @@ class HomeDataHandler{
       return Left(ServerFailure(failure.errorMessageModel));
     }
   }
-  static Future<Either<Failure,Map<String,dynamic>>> getHomeData()async{
+
+  static Future<Either<Failure, Map<String, dynamic>>> getHomeData() async {
     try {
-      Map<String,dynamic> response = await GenericRequest<Map<String,dynamic>>(
+      Map<String, dynamic> response =
+          await GenericRequest<Map<String, dynamic>>(
         method: RequestApi.get(url: APIEndPoint.category),
-        fromMap:(_)=> _,
+        fromMap: (_) => _,
       ).getResponse();
       return Right(response);
     } on ServerException catch (failure) {
       return Left(ServerFailure(failure.errorMessageModel));
     }
   }
-
 }

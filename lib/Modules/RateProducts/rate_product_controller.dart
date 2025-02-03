@@ -1,8 +1,16 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
+import 'package:je_t_aime/Models/popular_products_model.dart';
+import 'package:je_t_aime/Modules/RateProducts/rate_product_data_handler.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
+import '../../Utilities/router_config.dart';
 import '../../Utilities/strings.dart';
+import '../../Utilities/theme_helper.dart';
+import '../../Widgets/toast_helper.dart';
+import '../../generated/assets.dart';
 
 class RateProductController extends ControllerMVC {
   // singleton
@@ -16,17 +24,18 @@ class RateProductController extends ControllerMVC {
   RateProductController._();
   bool loading = false;
   bool autoValidate = false;
-  late TextEditingController commentController = TextEditingController();
+  late TextEditingController messageController = TextEditingController();
   double productRating = 0.0;
+  PopularProductsModel? product;
   @override
   void initState() {
-    commentController = TextEditingController();
+    messageController = TextEditingController();
     super.initState();
   }
 
   @override
   void dispose() {
-    commentController.dispose();
+    messageController.dispose();
     super.dispose();
   }
 
@@ -34,32 +43,26 @@ class RateProductController extends ControllerMVC {
     setState(() {
       loading = true;
     });
-    // final result = await RateProductDataHandler.rateProduct(
-    //     productId:product?.id.toString()??'',
-    //     rate: productRating.toString(),
-    //     comment: commentController.text);
-    // result.fold((l) {
-    //   setState(() {
-    //     loading = false;
-    //   });
-    //   ToastHelper.showError(message: l.errorModel.statusMessage);
-    // }, (r) async {
-    //   setState(() {
-    //     loading = false;
-    //   });
-    //   showDialog(
-    //     context: currentContext_!,
-    //     builder: (context) => AlertRateProductSuccessfully(
-    //       firstText: Strings.thanksForReview.tr,
-    //       secondText: Strings.submitFeedback.tr,
-    //     ),
-    //   );
-    //
-    // });
-    // setState(() {
-    //   loading = false;
-    // });
+    final result = await RateProductDataHandler.rateProduct(
+        productId: product?.id ?? 0,
+        rate: productRating.toString(),
+        comment: messageController.text);
+    result.fold((l) {
+      setState(() {
+        loading = false;
+      });
+      ToastHelper.showError(message: l.errorModel.statusMessage);
+    }, (r) async {
+      // ToastHelper.showSuccess(
+      //     backgroundColor:ThemeClass.of(currentContext_!).primaryColor,
+      //   icon:SvgPicture.asset(Assets.imagesSubmit,width:60.w,
+      //     height:50.h,
+      //     fit: BoxFit.cover,),
+      //     message:"", context: currentContext_!);
+      currentContext_!.pop();
+    });
+    setState(() {
+      loading = false;
+    });
   }
-
-
 }

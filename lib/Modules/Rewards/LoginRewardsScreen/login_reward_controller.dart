@@ -1,4 +1,5 @@
 import 'package:mvc_pattern/mvc_pattern.dart';
+
 class LoginRewardsController extends ControllerMVC {
   // singleton
   factory LoginRewardsController() {
@@ -7,22 +8,26 @@ class LoginRewardsController extends ControllerMVC {
   }
   static LoginRewardsController? _this;
   LoginRewardsController._();
-  bool loading=false,autoValidate = false;
+  bool loading = false, autoValidate = false;
   bool isClick = true;
-bool isSearch= false;
+  bool isSearch = false;
   @override
   void initState() {
-
     super.initState();
   }
+
   @override
   void dispose() {
-
     super.dispose();
   }
-  userRewards()async{
-    setState((){loading=true;});
+
+  userRewards() async {
+    setState(() {
+      loading = true;
+    });
     await Future.delayed(const Duration(seconds: 2));
-    setState((){loading=false;});
+    setState(() {
+      loading = false;
+    });
   }
 }

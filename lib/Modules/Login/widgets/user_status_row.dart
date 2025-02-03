@@ -7,11 +7,11 @@ class UserStatusRow extends StatelessWidget {
   final String text;
   final String nextText;
   final void Function() onNextTextTap;
-  const UserStatusRow({
-    super.key, required this.text, required this.nextText,
-    required this.onNextTextTap
-
-  });
+  const UserStatusRow(
+      {super.key,
+      required this.text,
+      required this.nextText,
+      required this.onNextTextTap});
 
   @override
   Widget build(BuildContext context) {
@@ -21,16 +21,16 @@ class UserStatusRow extends StatelessWidget {
         Text(
           text,
           style: TextStyleHelper.of(context).b_16.copyWith(
-              color:ThemeClass.of(context)
-                  .secondaryBlackColor
-                  .withOpacity(0.7)),
+              color:
+                  ThemeClass.of(context).secondaryBlackColor.withOpacity(0.7)),
         ),
         TextButton(
-          onPressed:onNextTextTap ,
+          onPressed: onNextTextTap,
           child: Text(
             nextText,
-            style: TextStyleHelper.of(context).b_16.copyWith(
-                color: ThemeClass.of(context).primaryColor),
+            style: TextStyleHelper.of(context)
+                .b_16
+                .copyWith(color: ThemeClass.of(context).primaryColor),
           ),
         ),
       ],

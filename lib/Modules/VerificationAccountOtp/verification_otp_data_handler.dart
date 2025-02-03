@@ -7,7 +7,7 @@ import '../../../core/error/failures.dart';
 
 class OTPCodeDataHandler {
   static Future<Either<Failure, String>> verificationAccountCode({
-   required int id,
+    required int id,
     required String code,
   }) async {
     try {
@@ -15,11 +15,11 @@ class OTPCodeDataHandler {
         method: RequestApi.post(
           url: APIEndPoint.checkOtp,
           body: {
-           "user_id": id,
+            "user_id": id,
             "code": code,
           },
         ),
-        fromMap : (_) => _["message"],
+        fromMap: (_) => _["message"],
       ).getResponse();
 
       return Right(response);
@@ -27,6 +27,7 @@ class OTPCodeDataHandler {
       return Left((ServerFailure(failure.errorMessageModel)));
     }
   }
+
   static Future<Either<Failure, String>> resentOtp({
     required int id,
   }) async {
@@ -38,7 +39,7 @@ class OTPCodeDataHandler {
             "user_id": id,
           },
         ),
-        fromMap : (_) => _["message"],
+        fromMap: (_) => _["message"],
       ).getResponse();
 
       return Right(response);
@@ -47,5 +48,3 @@ class OTPCodeDataHandler {
     }
   }
 }
-
-

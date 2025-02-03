@@ -1,8 +1,7 @@
-
 class PackagesModel {
   final String imageName;
 
-  PackagesModel(  {
+  PackagesModel({
     required this.imageName,
- } );
+  });
 }

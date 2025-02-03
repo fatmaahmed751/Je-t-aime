@@ -14,12 +14,12 @@ class CircleAvatarWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: (){
+      onTap: () {
         context.pop();
       },
       child: CircleAvatar(
         radius: 8.r,
-       backgroundColor: ThemeClass.of(context).background,
+        backgroundColor: ThemeClass.of(context).background,
         child: SvgPicture.asset(
           Assets.imagesArrowBack,
         ),

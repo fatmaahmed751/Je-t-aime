@@ -17,13 +17,12 @@ class SupportController extends ControllerMVC {
   static SupportController? _this;
 
   SupportController._();
-  bool loading=false;
+  bool loading = false;
   bool autoValidate = false;
   late TextEditingController problemController,
-  emailController,
-   phoneController ,
-  nameController;
-
+      emailController,
+      phoneController,
+      nameController;
 
   @override
   void initState() {
@@ -50,8 +49,8 @@ class SupportController extends ControllerMVC {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(30.r)),
       ),
-      builder:(context)=> CustomBottomSheetWidget(
-        image:Assets.imagesSubmitProblem,
+      builder: (context) => CustomBottomSheetWidget(
+        image: Assets.imagesSubmitProblem,
         text: Strings.thanksForTrust.tr,
       ),
     );

@@ -11,10 +11,9 @@ import '../../../../Utilities/theme_helper.dart';
 class DeleteDialog extends StatelessWidget {
   const DeleteDialog({Key? key}) : super(key: key);
 
-
   @override
   Widget build(BuildContext context) {
-    return  Center(
+    return Center(
       child: Container(
         width: 382.w,
         height: 204.h,
@@ -30,9 +29,9 @@ class DeleteDialog extends StatelessWidget {
               Text(
                 Strings.confirmDeleteAccount.tr,
                 style: TextStyleHelper.of(context).h_20.copyWith(
-                  color: ThemeClass.of(context).mainBlack,
-                  decoration: TextDecoration.none,
-                ),
+                      color: ThemeClass.of(context).mainBlack,
+                      decoration: TextDecoration.none,
+                    ),
               ),
               Gap(15.h),
               Row(
@@ -47,8 +46,8 @@ class DeleteDialog extends StatelessWidget {
                   _dialogButton(
                     context,
                     onTap: () {
-                   //  context.pushNamed(RegisterScreen.routeName);
-                     context.pop();
+                      //  context.pushNamed(RegisterScreen.routeName);
+                      context.pop();
                     },
                     Strings.yes.tr,
                     ThemeClass.of(context).mainBlack,
@@ -63,41 +62,29 @@ class DeleteDialog extends StatelessWidget {
     );
   }
 
-  Widget _dialogButton(
-      BuildContext context,
-      String text,
-      Color textColor,
-      {
-        bool isPrimary = false,
-        VoidCallback? onTap
-      }) {
+  Widget _dialogButton(BuildContext context, String text, Color textColor,
+      {bool isPrimary = false, VoidCallback? onTap}) {
     return GestureDetector(
       onTap: onTap ?? () {},
       child: Container(
         width: 155.w,
         height: 56.h,
         decoration: BoxDecoration(
-          color: isPrimary ? ThemeClass
-              .of(context)
-              .primaryColor : ThemeClass
-              .of(context)
-              .background,
+          color: isPrimary
+              ? ThemeClass.of(context).primaryColor
+              : ThemeClass.of(context).background,
           borderRadius: BorderRadius.circular(25),
         ),
         child: Center(
           child: Text(
             text,
-            style: TextStyleHelper
-                .of(context)
-                .h_20
-                .copyWith(
-              color: textColor,
-              decoration: TextDecoration.none,
-            ),
+            style: TextStyleHelper.of(context).h_20.copyWith(
+                  color: textColor,
+                  decoration: TextDecoration.none,
+                ),
           ),
         ),
       ),
     );
   }
 }
-

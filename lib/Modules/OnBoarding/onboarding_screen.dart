@@ -50,7 +50,7 @@ class _OnBoardingScreenState extends StateMVC<OnBoardingScreen> {
             ),
           ),
           Padding(
-            padding: EdgeInsetsDirectional.only(bottom:20.h),
+            padding: EdgeInsetsDirectional.only(bottom: 20.h),
             child: SmoothPageIndicator(
               controller: con.controller, // PageController
               count: con.onBoarding.length,
@@ -65,22 +65,22 @@ class _OnBoardingScreenState extends StateMVC<OnBoardingScreen> {
           ),
           if (con.isLast)
             Padding(
-              padding: EdgeInsetsDirectional.symmetric(horizontal:24.w),
+              padding: EdgeInsetsDirectional.symmetric(horizontal: 24.w),
               child: CustomButtonWidget.primary(
-                height: 54.h,
+                  height: 54.h,
                   title: Strings.getStarted.tr,
                   textStyle: TextStyleHelper.of(context)
                       .h_16
                       .copyWith(color: ThemeClass.of(context).background),
                   radius: 30.r,
                   onTap: () {
-                   GoRouter.of(context).goNamed(LoginScreen.routeName);
+                    GoRouter.of(context).goNamed(LoginScreen.routeName);
                   }),
             ),
           // Gap(10.h),
           if (!con.isLast)
             Padding(
-              padding: EdgeInsetsDirectional.symmetric(horizontal:24.w),
+              padding: EdgeInsetsDirectional.symmetric(horizontal: 24.w),
               child: CustomButtonWidget.primary(
                   title: Strings.next.tr,
                   height: 54.h,

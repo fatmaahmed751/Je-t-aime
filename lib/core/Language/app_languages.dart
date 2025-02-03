@@ -7,9 +7,11 @@ import '../../Utilities/shared_preferences.dart';
 
 enum Languages { en, ar }
 
-Languages appLan(BuildContext context) => Provider.of<AppLanguage>(context, listen: false).appLang;
+Languages appLan(BuildContext context) =>
+    Provider.of<AppLanguage>(context, listen: false).appLang;
 
-bool appLangIsArabic({BuildContext? context}) => appLan(context??currentContext_!) == Languages.ar;
+bool appLangIsArabic({BuildContext? context}) =>
+    appLan(context ?? currentContext_!) == Languages.ar;
 
 class AppLanguage extends ChangeNotifier {
   static Languages defaultLang = Languages.en;
@@ -17,13 +19,18 @@ class AppLanguage extends ChangeNotifier {
 
   Languages get appLang => _appLanguage;
 
-
-
   Future fetchLocale(BuildContext context) async {
     if (SharedPref.getLanguage() == null) {
-      _appLanguage = Languages.values.firstWhereOrNull((lang) => View.of(context).platformDispatcher.locale.languageCode.contains(lang.name)) ?? defaultLang;
+      _appLanguage = Languages.values.firstWhereOrNull((lang) =>
+              View.of(context)
+                  .platformDispatcher
+                  .locale
+                  .languageCode
+                  .contains(lang.name)) ??
+          defaultLang;
     } else {
-      _appLanguage = Languages.values.firstWhere((lang) => lang.name == SharedPref.getLanguage());
+      _appLanguage = Languages.values
+          .firstWhere((lang) => lang.name == SharedPref.getLanguage());
     }
   }
 
@@ -37,7 +44,8 @@ class AppLanguage extends ChangeNotifier {
         _appLanguage = Languages.ar;
         break;
       case null:
-        _appLanguage = _appLanguage == Languages.ar ? Languages.en : Languages.ar;
+        _appLanguage =
+            _appLanguage == Languages.ar ? Languages.en : Languages.ar;
         break;
     }
     await SharedPref.setLanguage(lang: _appLanguage.name);
@@ -52,14 +60,14 @@ extension AppLanguageExtensions on AppLanguage {
         key; // Fallback to the key if no translation is found
   }
 }
-  final Map<String, Map<Languages, String>> translations = {
-    'home': {
-      Languages.en: 'Home',
-      Languages.ar: 'الرئيسية',
-    },
-    'settings': {
-      Languages.en: 'Settings',
-      Languages.ar: 'الإعدادات',
-    },
 
-  };
+final Map<String, Map<Languages, String>> translations = {
+  'home': {
+    Languages.en: 'Home',
+    Languages.ar: 'الرئيسية',
+  },
+  'settings': {
+    Languages.en: 'Settings',
+    Languages.ar: 'الإعدادات',
+  },
+};

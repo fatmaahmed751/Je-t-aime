@@ -34,7 +34,6 @@ class _HomeScreenState extends StateMVC<HomeScreen> {
   void initState() {
     con.init();
     super.initState();
-
   }
 
 //     HomeController().controller.addListener(_updateView);
@@ -108,7 +107,7 @@ class _HomeScreenState extends StateMVC<HomeScreen> {
                       physics: const BouncingScrollPhysics(),
                       scrollDirection: Axis.horizontal,
                       itemBuilder: (context, index) => PackagesWidget(
-                           sliderModel: con.sliders[index],
+                            sliderModel: con.sliders[index],
                           ),
                       separatorBuilder: (context, index) => Gap(14.w),
                       itemCount: con.sliders.length),
@@ -140,17 +139,19 @@ class _HomeScreenState extends StateMVC<HomeScreen> {
               Padding(
                 padding: EdgeInsetsDirectional.only(start: 16.w),
                 child: SizedBox(
-                   height: 230.h,
+                  height: 230.h,
                   child: ListView.separated(
-                     physics: const BouncingScrollPhysics(),
+                      physics: const BouncingScrollPhysics(),
                       scrollDirection: Axis.horizontal,
-                      itemBuilder: (context, index) =>
-                          Padding(
-                            padding: EdgeInsetsDirectional.symmetric(vertical: 5.h),
-                            child: const CustomProductContainerWidget(),
+                      itemBuilder: (context, index) => Padding(
+                            padding:
+                                EdgeInsetsDirectional.symmetric(vertical: 5.h),
+                            child: CustomProductContainerWidget(
+                              productsModel: con.products[index],
+                            ),
                           ),
                       separatorBuilder: (context, index) => Gap(10.w),
-                      itemCount: 5),
+                      itemCount: con.products.length),
                 ),
               ),
               Gap(20.h)

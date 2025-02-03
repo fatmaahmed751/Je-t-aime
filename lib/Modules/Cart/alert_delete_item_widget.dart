@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
@@ -9,13 +8,20 @@ import '../../Utilities/text_style_helper.dart';
 import '../../Utilities/theme_helper.dart';
 
 class AlertDeleteItemWidget extends StatelessWidget {
-  final Function()?onButtonAccept,onButtonReject;
-  final String? des,titleButtonAccept,titleButtonReject,mainText;
-  const AlertDeleteItemWidget({super.key,this.mainText,  this.onButtonAccept,  this.des,  this.onButtonReject,  this.titleButtonAccept,  this.titleButtonReject});
+  final Function()? onButtonAccept, onButtonReject;
+  final String? des, titleButtonAccept, titleButtonReject, mainText;
+  const AlertDeleteItemWidget(
+      {super.key,
+      this.mainText,
+      this.onButtonAccept,
+      this.des,
+      this.onButtonReject,
+      this.titleButtonAccept,
+      this.titleButtonReject});
 
   @override
   Widget build(BuildContext context) {
-    return  Container(
+    return Container(
       // height: 277.h,
       // height: 252.h,
       decoration: BoxDecoration(
@@ -24,7 +30,7 @@ class AlertDeleteItemWidget extends StatelessWidget {
       ),
       child: Padding(
         padding: EdgeInsetsDirectional.only(
-            start: 23.w,top: 48.h,end: 23.w,bottom: 48.h),
+            start: 23.w, top: 48.h, end: 23.w, bottom: 48.h),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -32,14 +38,18 @@ class AlertDeleteItemWidget extends StatelessWidget {
           //mainAxisSize: MainAxisSize.min,
           children: [
             //Gap(32.h),
-            Text(mainText??'',style: TextStyleHelper.of(context).h_16.copyWith(color:ThemeClass.of(context).mainBlack,
-                fontWeight: FontWeight.w500)),
+            Text(mainText ?? '',
+                style: TextStyleHelper.of(context).h_16.copyWith(
+                    color: ThemeClass.of(context).mainBlack,
+                    fontWeight: FontWeight.w500)),
             Gap(16.h),
             SizedBox(
                 width: 337.w,
                 // height: 111.h,
-                child: Text(des??'',style: TextStyleHelper.of(context).b_16.copyWith(color:ThemeClass.of(context).secondaryBlackColor,
-                    fontWeight: FontWeight.w400))),
+                child: Text(des ?? '',
+                    style: TextStyleHelper.of(context).b_16.copyWith(
+                        color: ThemeClass.of(context).secondaryBlackColor,
+                        fontWeight: FontWeight.w400))),
             Gap(30.h),
             Row(
               //mainAxisAlignment: MainAxisAlignment.center,
@@ -50,18 +60,19 @@ class AlertDeleteItemWidget extends StatelessWidget {
                     width: 165.w,
                     height: 48.h,
                     decoration: BoxDecoration(
-                        border: Border.all(
-                            color: ThemeClass.of(context).secondary
-                        ),
+                        border:
+                            Border.all(color: ThemeClass.of(context).secondary),
                         borderRadius: BorderRadius.circular(30.r),
-                        color:ThemeClass.of(context).secondary
-                      // ThemeClass.of(context).background.withOpacity(0.20)
-                    ),
+                        color: ThemeClass.of(context).secondary
+                        // ThemeClass.of(context).background.withOpacity(0.20)
+                        ),
                     //  backgroundColor: ThemeClass.of(context).primaryColor,
-                    child: Center(child: Text(Strings.cancel.tr,
-                      style: TextStyleHelper.of(context).h_16.copyWith(
-                          color: ThemeClass.of(context).secondaryBlackColor
-                      ),),
+                    child: Center(
+                      child: Text(
+                        Strings.cancel.tr,
+                        style: TextStyleHelper.of(context).h_16.copyWith(
+                            color: ThemeClass.of(context).secondaryBlackColor),
+                      ),
                     ),
                   ),
                 ),
@@ -73,14 +84,17 @@ class AlertDeleteItemWidget extends StatelessWidget {
                     height: 48.h,
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(30.r),
-                        color:ThemeClass.of(context).cancel
-                      // ThemeClass.of(context).background.withOpacity(0.20)
-                    ),
+                        color: ThemeClass.of(context).cancel
+                        // ThemeClass.of(context).background.withOpacity(0.20)
+                        ),
                     //  backgroundColor: ThemeClass.of(context).primaryColor,
-                    child: Center(child: Text(Strings.delete.tr,
-                      style: TextStyleHelper.of(context).h_16.copyWith(
-                        color: ThemeClass.of(context).background,
-                      ),),
+                    child: Center(
+                      child: Text(
+                        Strings.delete.tr,
+                        style: TextStyleHelper.of(context).h_16.copyWith(
+                              color: ThemeClass.of(context).background,
+                            ),
+                      ),
                     ),
                   ),
                 ),
@@ -92,4 +106,3 @@ class AlertDeleteItemWidget extends StatelessWidget {
     );
   }
 }
-

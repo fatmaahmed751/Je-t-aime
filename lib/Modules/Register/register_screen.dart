@@ -54,7 +54,7 @@ class _RegisterScreenState extends StateMVC<RegisterScreen> {
                   child: Image.asset(
                     Assets.imagesSignUp,
                     width: 170.w,
-                    height:125.h,
+                    height: 125.h,
                   ),
                 ),
                 Gap(20.h),
@@ -63,10 +63,12 @@ class _RegisterScreenState extends StateMVC<RegisterScreen> {
                     color: Colors.white, // Background color of the container
                     boxShadow: [
                       BoxShadow(
-                        color: const Color(0xff33333326).withOpacity(0.15),// Shadow color
+                        color: const Color(0xff33333326)
+                            .withOpacity(0.15), // Shadow color
                         spreadRadius: 0, // Spread radius
                         // blurRadius:1, // Blur radius for a soft shadow
-                        offset: const Offset(0, -1), // Negative offset to place shadow on top
+                        offset: const Offset(
+                            0, -1), // Negative offset to place shadow on top
                       ),
                     ],
                     borderRadius: BorderRadius.circular(30.r),
@@ -91,12 +93,13 @@ class _RegisterScreenState extends StateMVC<RegisterScreen> {
                               color: ThemeClass.of(context)
                                   .secondaryBlackColor
                                   .withOpacity(0.7)),
-                          backGroundColor:  ThemeClass.of(context).secondary.withOpacity(1),
+                          backGroundColor:
+                              ThemeClass.of(context).secondary.withOpacity(1),
                           hint: Strings.enterEmail.tr,
                           focusedBorderColor:
                               ThemeClass.of(context).primaryColor,
                           prefixIcon: SvgPicture.asset(Assets.imagesEmailIcon),
-                         // isDense: true,
+                          // isDense: true,
                           insidePadding: EdgeInsets.symmetric(vertical: 10.h),
                           controller: con.emailController,
                           validator: (v) => Validate.validateEmail(v),
@@ -110,7 +113,8 @@ class _RegisterScreenState extends StateMVC<RegisterScreen> {
                               color: ThemeClass.of(context)
                                   .secondaryBlackColor
                                   .withOpacity(0.7)),
-                          backGroundColor:  ThemeClass.of(context).secondary.withOpacity(1),
+                          backGroundColor:
+                              ThemeClass.of(context).secondary.withOpacity(1),
                           hint: Strings.enterPassword.tr,
                           focusedBorderColor:
                               ThemeClass.of(context).primaryColor,
@@ -119,7 +123,7 @@ class _RegisterScreenState extends StateMVC<RegisterScreen> {
                           suffixIcon: con.isPassword
                               ? SvgPicture.asset(Assets.imagesObsecureIcon)
                               : SvgPicture.asset(Assets.imagesEyeOpen),
-                        //  isDense: true,
+                          //  isDense: true,
                           onSuffixTap: () {
                             setState(() {
                               con.isPassword = !con.isPassword;
@@ -139,12 +143,13 @@ class _RegisterScreenState extends StateMVC<RegisterScreen> {
                               color: ThemeClass.of(context)
                                   .secondaryBlackColor
                                   .withOpacity(0.7)),
-                          backGroundColor:  ThemeClass.of(context).secondary.withOpacity(1),
+                          backGroundColor:
+                              ThemeClass.of(context).secondary.withOpacity(1),
                           prefixIcon: SvgPicture.asset(Assets.imagesLockIcon),
                           suffixIcon: con.isConfirmPassword
                               ? SvgPicture.asset(Assets.imagesObsecureIcon)
                               : SvgPicture.asset(Assets.imagesEyeOpen),
-                         isDense: true,
+                          isDense: true,
                           onSuffixTap: () {
                             setState(() {
                               con.isConfirmPassword = !con.isConfirmPassword;
@@ -161,17 +166,16 @@ class _RegisterScreenState extends StateMVC<RegisterScreen> {
                         Gap(25.h),
                         CustomButtonWidget.primary(
                             title: Strings.joinUs.tr,
-                           onTap: () {
-
+                            onTap: () {
                               if (_formKey.currentState?.validate() ?? false) {
-                               con.userRegister();
+                                con.userRegister();
                               } else {
                                 setState(() {
                                   con.autoValidate = true;
                                 });
                               }
                             }),
-                      Gap(10.h),
+                        Gap(10.h),
                         UserStatusRow(
                           text: Strings.haveAccount.tr,
                           nextText: Strings.login.tr,
@@ -203,7 +207,7 @@ class _RegisterScreenState extends StateMVC<RegisterScreen> {
                             ),
                           ],
                         ),
-                       Gap(15.h),
+                        Gap(15.h),
                         Row(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           mainAxisAlignment: MainAxisAlignment.center,

@@ -1,5 +1,3 @@
-
-
 import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
@@ -41,7 +39,7 @@ class RequestApi {
     this.body = const {},
     this.files = const [],
     this.headers,
-  })  : method = "POST" ;
+  }) : method = "POST";
 
   RequestApi.put({
     required String url,
@@ -113,13 +111,16 @@ class RequestApi {
     debugPrint(uri.toString());
     debugPrint(json.encode(body));
     var request = http.MultipartRequest(method, uri);
-    if(body.isNotEmpty) request.fields.addAll(body.map((key, value) => MapEntry(key, value.toString())));
+    if (body.isNotEmpty)
+      request.fields
+          .addAll(body.map((key, value) => MapEntry(key, value.toString())));
 
     //request.fields.addAll(body);
 
     request.files.addAll(files);
     if (headers != null) request.headers.addAll(headers!);
-    return await _ApiBaseHelper.httpSendRequest(request,this,getResponseBytes: getResponseBytes);
+    return await _ApiBaseHelper.httpSendRequest(request, this,
+        getResponseBytes: getResponseBytes);
   }
 
   Future<dynamic> requestJson({bool getResponseBytes = false}) async {
@@ -128,15 +129,17 @@ class RequestApi {
     var request = http.Request(method, uri);
     request.body = json.encode(bodyJson);
     if (headers != null) request.headers.addAll(headers!);
-    return await _ApiBaseHelper.httpSendRequest(request,this,getResponseBytes: getResponseBytes);
+    return await _ApiBaseHelper.httpSendRequest(request, this,
+        getResponseBytes: getResponseBytes);
   }
 }
 
 class _ApiBaseHelper {
-  static Future<dynamic> httpSendRequest(http.BaseRequest request,RequestApi requestApi,{bool getResponseBytes = false}) async {
+  static Future<dynamic> httpSendRequest(
+      http.BaseRequest request, RequestApi requestApi,
+      {bool getResponseBytes = false}) async {
     http.StreamedResponse response;
     try {
-
       request.headers.addAll({
         // 'Accept': '*/*',
         'content-type': 'application/json',
@@ -172,45 +175,48 @@ class _ApiBaseHelper {
         ),
       );
     }
-    if(getResponseBytes) return await response.stream.toBytes();
-    return _returnResponse(response,requestApi);
+    if (getResponseBytes) return await response.stream.toBytes();
+    return _returnResponse(response, requestApi);
   }
 
-  static Future<dynamic> _returnResponse(http.StreamedResponse response,RequestApi requestApi) async {
+  static Future<dynamic> _returnResponse(
+      http.StreamedResponse response, RequestApi requestApi) async {
     String resStream = await response.stream.bytesToString();
-    Map<String,dynamic> jsonResponse = {};
+    Map<String, dynamic> jsonResponse = {};
 
     ServerException serverException({String? message}) => ServerException(
-      errorMessageModel: ErrorMessageModel(
-          statusCode: response.statusCode,
-          statusMessage: message,
-          requestApi: requestApi,
-          responseApi: jsonResponse
-      ),
-    );
+          errorMessageModel: ErrorMessageModel(
+              statusCode: response.statusCode,
+              statusMessage: message,
+              requestApi: requestApi,
+              responseApi: jsonResponse),
+        );
 
-    try{
-      jsonResponse = jsonDecode(resStream) as Map<String,dynamic>;
-    }catch(e){
+    try {
+      jsonResponse = jsonDecode(resStream) as Map<String, dynamic>;
+    } catch (e) {
       throw ServerException(
         errorMessageModel: ErrorMessageModel(
             statusCode: response.statusCode,
             requestApi: requestApi,
-            responseApi: {"_THIS_KEY_FROM_APP_THERE_IS_NO_KEY_GETTING_":resStream}
-        ),
+            responseApi: {
+              "_THIS_KEY_FROM_APP_THERE_IS_NO_KEY_GETTING_": resStream
+            }),
       );
     }
     AnsiPen pen = AnsiPen()..green(bold: true);
     debugPrint(pen("$jsonResponse"));
 
     switch (response.statusCode) {
-      case 200:{
-        if (jsonResponse["success"] == false) {
-          throw serverException(message: jsonResponse["message"]);
+      case 200:
+        {
+          if (jsonResponse["success"] == false) {
+            throw serverException(message: jsonResponse["message"]);
+          }
+          return jsonResponse;
         }
-        return jsonResponse;
-      }
-      default: throw serverException(message: jsonResponse["message"]);
+      default:
+        throw serverException(message: jsonResponse["message"]);
     }
   }
 }

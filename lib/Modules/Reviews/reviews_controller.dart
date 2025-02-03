@@ -1,8 +1,8 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 import '../RateProducts/rate_product_screen.dart';
+
 class ReviewsForProductController extends ControllerMVC {
   // singleton
   factory ReviewsForProductController() {
@@ -11,13 +11,13 @@ class ReviewsForProductController extends ControllerMVC {
   }
   static ReviewsForProductController? _this;
   ReviewsForProductController._();
-  bool loading=false,autoValidate = false;
-  late TextEditingController writeReviewController =TextEditingController();
+  bool loading = false, autoValidate = false;
+  late TextEditingController writeReviewController = TextEditingController();
 
   dynamic image;
   @override
   void initState() {
-    writeReviewController =TextEditingController();
+    writeReviewController = TextEditingController();
     super.initState();
   }
 
@@ -34,7 +34,7 @@ class ReviewsForProductController extends ControllerMVC {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(30.r)),
       ),
-      builder:(context)=> const RateProductScreen(),
+      builder: (context) => const RateProductScreen(),
     );
   }
 // listOfReviewsOfProduct()async{
@@ -54,8 +54,6 @@ class ReviewsForProductController extends ControllerMVC {
 //     });
 //   }
 
-
-
   // unLoginForRatedPop(BuildContext ctx) {
   //   DialogHelper.custom(context: ctx).customDialog(
   //       dialogWidget: UnLoginForRatedWidget(
@@ -72,5 +70,4 @@ class ReviewsForProductController extends ControllerMVC {
   //       ),
   //       dismiss: false);
   // }
-
 }

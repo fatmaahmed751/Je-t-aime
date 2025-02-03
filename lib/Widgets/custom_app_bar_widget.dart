@@ -14,7 +14,7 @@ import '../generated/assets.dart';
 import 'custom_app_bar_text_widget.dart';
 import 'custom_details_app_bar_text_widget.dart';
 
-enum _AppBarType { main, mainDetails, details,secondary,secondaryGradient }
+enum _AppBarType { main, mainDetails, details, secondary, secondaryGradient }
 
 //
 class CustomAppBarWidget extends StatelessWidget
@@ -24,20 +24,20 @@ class CustomAppBarWidget extends StatelessWidget
   final List<Widget>? actions;
   final String title;
   final String icon;
- // final TextEditingController? controller;
+  // final TextEditingController? controller;
   final void Function()? onPressed;
 //
   const CustomAppBarWidget.mainScreen(
 
       // final void Function()? onPressed,
-      {Key? key,
-      this.onPressed,
-      required this.title,
-      required this.icon,
-      this.actions,
-     // this.controller
-      })
-      : _appBarType = _AppBarType.main,
+      {
+    Key? key,
+    this.onPressed,
+    required this.title,
+    required this.icon,
+    this.actions,
+    // this.controller
+  })  : _appBarType = _AppBarType.main,
         screenName = title,
         //actions = const [],
         super(key: key);
@@ -48,7 +48,7 @@ class CustomAppBarWidget extends StatelessWidget
     required this.icon,
     this.actions,
     this.onPressed,
-  //  this.controller
+    //  this.controller
   })  : _appBarType = _AppBarType.mainDetails,
         screenName = title,
         super(key: key);
@@ -56,8 +56,9 @@ class CustomAppBarWidget extends StatelessWidget
   const CustomAppBarWidget.secondaryGradient({
     Key? key,
     required this.title,
-    this.onPressed, required this.icon,
-  //  this.controller
+    this.onPressed,
+    required this.icon,
+    //  this.controller
   })  : _appBarType = _AppBarType.secondaryGradient,
         screenName = title,
         actions = const [],
@@ -68,7 +69,7 @@ class CustomAppBarWidget extends StatelessWidget
     required this.title,
     required this.icon,
     this.onPressed,
-  //  this.controller
+    //  this.controller
   })  : _appBarType = _AppBarType.details,
         screenName = title,
         actions = const [],
@@ -78,13 +79,12 @@ class CustomAppBarWidget extends StatelessWidget
     Key? key,
     required this.title,
     required this.icon,
-   // this.controller,
+    // this.controller,
 
-    this.onPressed, this.actions,
+    this.onPressed,
+    this.actions,
   })  : _appBarType = _AppBarType.secondary,
         screenName = title,
-
-
         super(key: key);
 
   @override
@@ -97,7 +97,7 @@ class CustomAppBarWidget extends StatelessWidget
             );
       case _AppBarType.secondaryGradient:
         return SecondaryGradientAppBarWidget(
-            title: screenName,
+          title: screenName,
           //  () {  },
         );
       case _AppBarType.mainDetails:
@@ -118,7 +118,7 @@ class CustomAppBarWidget extends StatelessWidget
           title: screenName,
           icon: icon,
           function: onPressed,
-          controller:TextEditingController(),
+          controller: TextEditingController(),
         );
       default:
         return Container();
@@ -127,7 +127,7 @@ class CustomAppBarWidget extends StatelessWidget
 
 //
   @override
-  Size get preferredSize => Size.fromHeight(kToolbarHeight +35.h);
+  Size get preferredSize => Size.fromHeight(kToolbarHeight + 35.h);
 // }
 }
 
@@ -148,8 +148,8 @@ class MainAppBarWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     //final language = Provider.of<AppLanguage>(context, listen: false).fetchLocale(context);
     SharedPref.getCurrentLanguage();
-    return  SizedBox(
-    height: 320.h,
+    return SizedBox(
+      height: 320.h,
       child: Stack(
         children: [
           Container(
@@ -157,7 +157,9 @@ class MainAppBarWidget extends StatelessWidget {
             width: double.infinity,
             decoration: BoxDecoration(
               gradient: LinearGradient(
-                colors:SharedPref.getCurrentLanguage() == "ar" ?ThemeClass.anotherBackGround:ThemeClass.backgroundGradiant,
+                colors: SharedPref.getCurrentLanguage() == "ar"
+                    ? ThemeClass.anotherBackGround
+                    : ThemeClass.backgroundGradiant,
                 begin: Alignment.centerLeft,
                 end: Alignment.centerRight,
               ),
@@ -172,36 +174,36 @@ class MainAppBarWidget extends StatelessWidget {
             left: 0,
             right: 0,
             child: Padding(
-              padding: EdgeInsetsDirectional.only(
-                  start: 16.w, top: 65.h, end: 16.w),
+              padding:
+                  EdgeInsetsDirectional.only(start: 16.w, top: 65.h, end: 16.w),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   //const SizedBox(width: 15,),
 
-                  CustomAppBarMainTextWidget(
-                      text: Strings.hello.tr),
+                  CustomAppBarMainTextWidget(text: Strings.hello.tr),
                   Gap(8.w),
-                 Image.asset(Assets.imagesFaceSmile,
-                   width: 24.w,
+                  Image.asset(
+                    Assets.imagesFaceSmile,
+                    width: 24.w,
                   ),
                   const Spacer(),
                   GestureDetector(
                     onTap: () {
-                      GoRouter.of(context).pushNamed(LoginRewardsScreen.routeName);
+                      GoRouter.of(context)
+                          .pushNamed(LoginRewardsScreen.routeName);
                     },
-                    child:Container(
+                    child: Container(
                         width: 32.w,
                         height: 32.h,
                         decoration: BoxDecoration(
                             color: ThemeClass.of(context).background,
-                            borderRadius: BorderRadius.circular(30.r)
-                        ),
+                            borderRadius: BorderRadius.circular(30.r)),
                         child: Padding(
                           padding: EdgeInsetsDirectional.symmetric(
-                              horizontal: 6.w,
-                              vertical: 6.h),
-                          child: SvgPicture.asset(Assets.imagesRewards,
+                              horizontal: 6.w, vertical: 6.h),
+                          child: SvgPicture.asset(
+                            Assets.imagesRewards,
                           ),
                         )),
                   ),
@@ -210,27 +212,24 @@ class MainAppBarWidget extends StatelessWidget {
                     onTap: () {
                       GoRouter.of(context).pushNamed(CartScreen.routeName);
                     },
-                    child:Container(
+                    child: Container(
                         width: 32.w,
                         height: 32.h,
                         decoration: BoxDecoration(
                             color: ThemeClass.of(context).background,
-                            borderRadius: BorderRadius.circular(30.r)
-                        ),
+                            borderRadius: BorderRadius.circular(30.r)),
                         child: Padding(
                           padding: EdgeInsetsDirectional.symmetric(
-                              horizontal: 6.w,
-                              vertical: 6.h),
-                          child: SvgPicture.asset(Assets.imagesShop,
+                              horizontal: 6.w, vertical: 6.h),
+                          child: SvgPicture.asset(
+                            Assets.imagesShop,
                           ),
                         )),
                   ),
-
                 ],
               ),
             ),
           ),
-
         ],
       ),
       // child: Row(
@@ -266,22 +265,22 @@ class MainDetailsAppBarWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsetsDirectional.only( top:20.h),
+      padding: EdgeInsetsDirectional.only(top: 20.h),
       child: Container(
-      // color: Colors.red,
+        // color: Colors.red,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.start,
-
           children: [
             IconButton(
                 icon: Transform.flip(
-        flipX: SharedPref.getCurrentLanguage() == "ar" ? true : false,child: SvgPicture.asset(Assets.imagesArrowBack)), onPressed: (){
+                    flipX:
+                        SharedPref.getCurrentLanguage() == "ar" ? true : false,
+                    child: SvgPicture.asset(Assets.imagesArrowBack)),
+                onPressed: () {
                   context.pop();
-            }
-            ),
-             Gap(10.w),
-        Center(child: CustomAppBarDetailsTextWidget(text: title)),
-
+                }),
+            Gap(10.w),
+            Center(child: CustomAppBarDetailsTextWidget(text: title)),
           ],
         ),
       ),
@@ -293,15 +292,16 @@ class SecondaryAppBarWidget extends StatefulWidget {
   final String title;
   final String? icon;
   final TextEditingController controller;
-   final void Function()? function;
+  final void Function()? function;
 
-   const SecondaryAppBarWidget({
+  const SecondaryAppBarWidget({
     Key? key,
     required this.title,
-    this.icon, required this.controller, this.function,
-   // required this.controller
+    this.icon,
+    required this.controller,
+    this.function,
+    // required this.controller
     //this.onDeleteIconToggle
-
   }) : super(key: key);
 
   @override
@@ -309,8 +309,6 @@ class SecondaryAppBarWidget extends StatefulWidget {
 }
 
 class SecondaryAppBarWidgetState extends State<SecondaryAppBarWidget> {
-
-
   // bool isPressed = false;
 
   @override
@@ -320,13 +318,15 @@ class SecondaryAppBarWidgetState extends State<SecondaryAppBarWidget> {
       child: Stack(
         children: [
           Container(
-           // height:500.h,
+            // height:500.h,
             width: double.infinity,
             decoration: BoxDecoration(
               gradient: LinearGradient(
-                colors:SharedPref.getCurrentLanguage() == "ar" ?ThemeClass.anotherBackGround:ThemeClass.backgroundGradiant,
-              end  :Alignment.centerRight,
-              begin:  Alignment.centerLeft,
+                colors: SharedPref.getCurrentLanguage() == "ar"
+                    ? ThemeClass.anotherBackGround
+                    : ThemeClass.backgroundGradiant,
+                end: Alignment.centerRight,
+                begin: Alignment.centerLeft,
               ),
               borderRadius: BorderRadius.only(
                 bottomLeft: Radius.circular(30.r),
@@ -339,8 +339,8 @@ class SecondaryAppBarWidgetState extends State<SecondaryAppBarWidget> {
             left: 0,
             right: 0,
             child: Padding(
-              padding: EdgeInsetsDirectional.only(
-                  start: 24.w, top: 60.h, end: 24.w),
+              padding:
+                  EdgeInsetsDirectional.only(start: 24.w, top: 60.h, end: 24.w),
               child: Column(
                 children: [
                   Row(
@@ -357,7 +357,8 @@ class SecondaryAppBarWidgetState extends State<SecondaryAppBarWidget> {
                       const Spacer(),
                       GestureDetector(
                         onTap: () {
-                          GoRouter.of(context).pushNamed(LoginRewardsScreen.routeName);
+                          GoRouter.of(context)
+                              .pushNamed(LoginRewardsScreen.routeName);
                         },
                         child: Container(
                             width: 32.w,
@@ -375,7 +376,7 @@ class SecondaryAppBarWidgetState extends State<SecondaryAppBarWidget> {
                       ),
                       Gap(8.w),
                       GestureDetector(
-                        onTap: (){
+                        onTap: () {
                           GoRouter.of(context).pushNamed(CartScreen.routeName);
                         },
                         child: Container(
@@ -395,16 +396,14 @@ class SecondaryAppBarWidgetState extends State<SecondaryAppBarWidget> {
                     ],
                   ),
                   Gap(30.h),
-              SearchWidget(
-                  width: 382.w,
-                  backGroundColor: ThemeClass.of(context).background,
-                  onSearch: (String? text) {
-
-                  },
-                  isSearch: true,
-                  controller: widget.controller,
-                  onRemove: () {},
-                  onChange: (String? value) {}),
+                  SearchWidget(
+                      width: 382.w,
+                      backGroundColor: ThemeClass.of(context).background,
+                      onSearch: (String? text) {},
+                      isSearch: true,
+                      controller: widget.controller,
+                      onRemove: () {},
+                      onChange: (String? value) {}),
 
                   // CustomTextFieldWidget(
                   //   height: 45.h,
@@ -441,7 +440,7 @@ class SecondaryGradientAppBarWidget extends StatelessWidget {
     return Padding(
       padding: EdgeInsetsDirectional.only(start: 10.w, top: 50.h),
       child: Container(
-      // color: Colors.red,
+        // color: Colors.red,
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.start,
@@ -463,16 +462,16 @@ class SecondaryGradientAppBarWidget extends StatelessWidget {
             //     ),
             //   ),
             // ),
-         Spacer(),
+            Spacer(),
 
             Spacer()
-
           ],
         ),
       ),
     );
   }
 }
+
 class GradientAppBarWidget extends StatelessWidget {
   final String title;
   final void Function()? onPressed;
@@ -481,26 +480,24 @@ class GradientAppBarWidget extends StatelessWidget {
   const GradientAppBarWidget({
     Key? key,
     required this.title,
-  this.icon,
+    this.icon,
     required this.onPressed,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsetsDirectional.only(start: 10.w, top:50.h),
+      padding: EdgeInsetsDirectional.only(start: 10.w, top: 50.h),
       child: Container(
- // color: Colors.red,
+        // color: Colors.red,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.baseline,
           textBaseline: TextBaseline.alphabetic,
           children: [
-           IconButton(icon: SvgPicture.asset(icon!), onPressed: onPressed),
-           Gap(50.w),
-
-           const Spacer(),
-
+            IconButton(icon: SvgPicture.asset(icon!), onPressed: onPressed),
+            Gap(50.w),
+            const Spacer(),
           ],
         ),
       ),

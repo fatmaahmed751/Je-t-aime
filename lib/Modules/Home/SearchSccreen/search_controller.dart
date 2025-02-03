@@ -8,16 +8,15 @@ class SearchScreenController extends ControllerMVC {
     return _this!;
   }
   static SearchScreenController? _this;
-  bool isSearch=false;
+  bool isSearch = false;
   late TextEditingController controller;
-  bool isLiked=false;//in model when link
+  bool isLiked = false; //in model when link
   SearchScreenController._();
-
 
   @override
   void initState() {
     super.initState();
-    controller=TextEditingController();
+    controller = TextEditingController();
   }
 
   @override
@@ -25,5 +24,4 @@ class SearchScreenController extends ControllerMVC {
     super.dispose();
     controller.dispose();
   }
-
 }

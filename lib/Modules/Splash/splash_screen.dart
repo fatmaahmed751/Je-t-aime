@@ -27,7 +27,6 @@ class _SplashScreenState extends StateMVC<SplashScreen> {
   void initState() {
     super.initState();
     con.init(context);
-
   }
 
   @override

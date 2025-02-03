@@ -22,7 +22,7 @@ class BottomNavBarWidget extends StatefulWidget {
       : super(key: key);
 
   @override
- createState() => _BottomNavBarWidgetState();
+  createState() => _BottomNavBarWidgetState();
 }
 
 class _BottomNavBarWidgetState extends StateMVC<BottomNavBarWidget> {
@@ -33,11 +33,11 @@ class _BottomNavBarWidgetState extends StateMVC<BottomNavBarWidget> {
   // late UserProfileController con;
   void initState() {
     super.initState();
-   // con.loadCurrentLanguage(context);
+    // con.loadCurrentLanguage(context);
   }
+
   int selectedLanguage = 1;
   // late List<_BottomNavBarItemModel> items;
-
 
   // void update() {
   //   setState(() {
@@ -71,57 +71,53 @@ class _BottomNavBarWidgetState extends StateMVC<BottomNavBarWidget> {
   // }
   @override
   Widget build(BuildContext context) {
-
-      return Container(
-        height: 72.h,
-       decoration: BoxDecoration(
-           color:ThemeClass.of(context).background,
-            borderRadius: BorderRadius.vertical(top: Radius.circular(30.r)),
-            boxShadow:  [
-
-                BoxShadow(
-                    color: ThemeClass.of(context).secondaryBlackColor.withOpacity(0.16),
-                    blurRadius:0.5,
-                    spreadRadius: 0.5
-                ),
-              ],
-            ),
-        child: ClipRRect(
-            borderRadius: BorderRadius.vertical(
-      top: Radius.circular(30.r),
+    return Container(
+      height: 72.h,
+      decoration: BoxDecoration(
+        color: ThemeClass.of(context).background,
+        borderRadius: BorderRadius.vertical(top: Radius.circular(30.r)),
+        boxShadow: [
+          BoxShadow(
+              color:
+                  ThemeClass.of(context).secondaryBlackColor.withOpacity(0.16),
+              blurRadius: 0.5,
+              spreadRadius: 0.5),
+        ],
       ),
+      child: ClipRRect(
+        borderRadius: BorderRadius.vertical(
+          top: Radius.circular(30.r),
+        ),
+        child: BottomNavigationBar(
+          //elevation:10,
+          backgroundColor: ThemeClass.of(context).background,
+          currentIndex: widget.selected.index,
+          type: BottomNavigationBarType.fixed,
+          selectedItemColor: ThemeClass.of(context).primaryColor,
+          unselectedItemColor:
+              ThemeClass.of(context).secondaryBlackColor.withOpacity(0.6),
+          onTap: (index) {
+            context.pushNamed(BottomNavBarItemModel.screens[index].routeName);
+          },
+          items: BottomNavBarItemModel.screens.map((item) {
+            final isSelected = item.type == widget.selected;
+            //final appLanguage = Provider.of<AppLanguage>(context, listen: false);
+            // final translatedLabel = appLanguage.translate(item.title);
 
-            child:  BottomNavigationBar(
-              //elevation:10,
-              backgroundColor: ThemeClass.of(context).background,
-              currentIndex: widget.selected.index,
-              type: BottomNavigationBarType.fixed,
-              selectedItemColor: ThemeClass.of(context).primaryColor,
-              unselectedItemColor: ThemeClass.of(context).secondaryBlackColor.withOpacity(0.6
-              ),
-              onTap: (index) {
-                context.pushNamed(BottomNavBarItemModel.screens[index].routeName);
-              },
-              items: BottomNavBarItemModel.screens.map((item) {
-                final isSelected = item.type == widget.selected;
-                //final appLanguage = Provider.of<AppLanguage>(context, listen: false);
-               // final translatedLabel = appLanguage.translate(item.title);
-
-               final currentLanguage = Provider.of<AppLanguage>(context, listen: false).appLang;
-                // selectedLanguage = currentLanguage == Languages.en ? 1 : 2;
-                return BottomNavigationBarItem(
-                  icon: isSelected
-                      ? buildSelectedIcon(item, context)
-                      : buildUnselectedIcon(item, context),
-                  label: item.title.tr,
-                );
-               //   item.title.tr,
-               // );
-              }).toList(),
-            ),
-          ),
-
-
+            final currentLanguage =
+                Provider.of<AppLanguage>(context, listen: false).appLang;
+            // selectedLanguage = currentLanguage == Languages.en ? 1 : 2;
+            return BottomNavigationBarItem(
+              icon: isSelected
+                  ? buildSelectedIcon(item, context)
+                  : buildUnselectedIcon(item, context),
+              label: item.title.tr,
+            );
+            //   item.title.tr,
+            // );
+          }).toList(),
+        ),
+      ),
     );
   }
 
@@ -131,24 +127,25 @@ class _BottomNavBarWidgetState extends StateMVC<BottomNavBarWidget> {
         padding: EdgeInsetsDirectional.only(bottom: 6.h),
         child: SvgPicture.asset(
           item.selectedIconPath,
-          colorFilter:  ColorFilter.mode(ThemeClass.of(context).primaryColor, BlendMode.srcIn),
+          colorFilter: ColorFilter.mode(
+              ThemeClass.of(context).primaryColor, BlendMode.srcIn),
         ),
       ),
     );
   }
 
-  Widget buildUnselectedIcon(
-      BottomNavBarItemModel item, BuildContext context) {
+  Widget buildUnselectedIcon(BottomNavBarItemModel item, BuildContext context) {
     return Padding(
       padding: EdgeInsetsDirectional.only(bottom: 6.h),
       child: SvgPicture.asset(
         item.iconPath,
-        colorFilter:  ColorFilter.mode(ThemeClass.of(context).secondaryBlackColor.withOpacity(0.8), BlendMode.srcIn),
+        colorFilter: ColorFilter.mode(
+            ThemeClass.of(context).secondaryBlackColor.withOpacity(0.8),
+            BlendMode.srcIn),
       ),
     );
   }
 }
-
 
 class BottomNavBarItemModel {
   final String iconPath;
@@ -172,12 +169,11 @@ class BottomNavBarItemModel {
     account,
   ];
 
-  static BottomNavBarItemModel home =
-  BottomNavBarItemModel(
+  static BottomNavBarItemModel home = BottomNavBarItemModel(
     iconPath: Assets.imagesHome,
     selectedIconPath: Assets.imagesHome,
-    title:Strings.home,
-    routeName:HomeScreen.routeName,
+    title: Strings.home,
+    routeName: HomeScreen.routeName,
     type: SelectedBottomNavBar.home,
   );
 
@@ -185,14 +181,14 @@ class BottomNavBarItemModel {
     iconPath: Assets.imagesFavNav,
     selectedIconPath: Assets.imagesFavNav,
     title: Strings.favorite,
-    routeName:FavoriteScreen.routeName,
+    routeName: FavoriteScreen.routeName,
     type: SelectedBottomNavBar.favorite,
   );
 
   static BottomNavBarItemModel notification = BottomNavBarItemModel(
     iconPath: Assets.imagesNotNav,
     selectedIconPath: Assets.imagesNotNav,
-    title:Strings.notification,
+    title: Strings.notification,
     routeName: NotificationsScreen.routeName,
     type: SelectedBottomNavBar.notification,
   );

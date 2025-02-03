@@ -1,9 +1,6 @@
-
-class APIEndPoint{
+class APIEndPoint {
   static const String baseServerURL = "https://jetaime.petraright.com";
   static const String _baseURL = "$baseServerURL/api/";
-
-
 
   //=========================== api User ====================================
   static const String test = "${_baseURL}todos";
@@ -14,7 +11,7 @@ class APIEndPoint{
   static const String reSentOtp = "${_baseURL}user/re-SentOTP";
   static const String category = "${_baseURL}user/home";
   static const String newPassword = "${_baseURL}user/new-password";
+  static const String postReview = "${_baseURL}user/store-review";
+  static String getReviews(int productId) =>
+      "${_baseURL}user/get-reviews/$productId";
 }
-
-
-

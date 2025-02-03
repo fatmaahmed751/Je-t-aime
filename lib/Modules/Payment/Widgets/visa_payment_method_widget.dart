@@ -47,7 +47,7 @@ class VisaPaymentMethodWidgetState extends StateMVC<VisaPaymentMethodWidget> {
             // horizontal: 20.w, vertical: 30.h),(
             child: Column(
               //physics: const NeverScrollableScrollPhysics(),
-             crossAxisAlignment: CrossAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 CustomSideTextWidget(
                   text: Strings.cardName.tr,
@@ -147,8 +147,7 @@ class VisaPaymentMethodWidgetState extends StateMVC<VisaPaymentMethodWidget> {
                   controller: con.cvvController,
                   validator: (v) => Validate.validatePhone(v),
                 ),
-               Gap(SharedPref.getCurrentLanguage() =="ar"?40.h:90.h),
-
+                Gap(SharedPref.getCurrentLanguage() == "ar" ? 40.h : 90.h),
                 CustomButtonWidget.primary(
                     title: Strings.payNow.tr,
                     onTap: () {

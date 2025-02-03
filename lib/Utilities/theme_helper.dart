@@ -4,22 +4,21 @@ import 'package:provider/provider.dart';
 import '../core/Theme/theme_model.dart';
 import '../core/Theme/theme_provider.dart';
 
-class ThemeClass extends ThemeModel{
-
-  static ThemeModel of(BuildContext context) => Provider.of<ThemeProvider>(context,listen: false).appTheme;
-
+class ThemeClass extends ThemeModel {
+  static ThemeModel of(BuildContext context) =>
+      Provider.of<ThemeProvider>(context, listen: false).appTheme;
 
   static List<Color> get backgroundGradiant => const [
-    Color.fromRGBO(122, 67, 67, 1),
-    Color.fromRGBO(198, 151, 151, 1),
-    // Color.fromRGBO(216, 143, 143, 1),
-    // Color.fromRGBO(203, 227, 227, 1),
-  ];
+        Color.fromRGBO(122, 67, 67, 1),
+        Color.fromRGBO(198, 151, 151, 1),
+        // Color.fromRGBO(216, 143, 143, 1),
+        // Color.fromRGBO(203, 227, 227, 1),
+      ];
   static List<Color> get anotherBackGround => const [
-    //Color.fromRGBO(203, 227, 227, 1),
-    Color.fromRGBO(198, 151, 151, 1),
-    Color.fromRGBO(122, 67, 67, 1),
-  ];
+        //Color.fromRGBO(203, 227, 227, 1),
+        Color.fromRGBO(198, 151, 151, 1),
+        Color.fromRGBO(122, 67, 67, 1),
+      ];
 
   ThemeClass.lightTheme({
     super.isDark = false,
@@ -36,9 +35,7 @@ class ThemeClass extends ThemeModel{
     super.success = const Color(0xff00B060),
     super.descTextColor = const Color(0xff635D59),
     super.sideText = const Color(0xff1F1B17),
-  super.pinkColor =   const Color(0xffF9F5F5),
-
-
+    super.pinkColor = const Color(0xffF9F5F5),
   });
 
   ThemeClass.darkTheme({
@@ -56,21 +53,17 @@ class ThemeClass extends ThemeModel{
     super.success = const Color(0xff00B060),
     super.sideText = const Color(0xff1F1B17),
     super.descTextColor = const Color(0xff635D59),
-    super.pinkColor =   const Color(0xffF9F5F5),
-
-
-
+    super.pinkColor = const Color(0xffF9F5F5),
   });
 }
+
 class BackGroundClass {
-
   static List<Color> get backgroundGradiant => const [
-    Color.fromRGBO(241, 128, 107, 0.19),
-    Color.fromRGBO(236, 174, 114, 0.28),
-    Color.fromRGBO(244, 201, 150, 0.23),
-    Color.fromRGBO(163, 114, 80, 0.25),
-    Color.fromRGBO(210, 199, 238, 0.22),
-    Color.fromRGBO(254, 242, 205, 0.69),
-  ];
-
+        Color.fromRGBO(241, 128, 107, 0.19),
+        Color.fromRGBO(236, 174, 114, 0.28),
+        Color.fromRGBO(244, 201, 150, 0.23),
+        Color.fromRGBO(163, 114, 80, 0.25),
+        Color.fromRGBO(210, 199, 238, 0.22),
+        Color.fromRGBO(254, 242, 205, 0.69),
+      ];
 }

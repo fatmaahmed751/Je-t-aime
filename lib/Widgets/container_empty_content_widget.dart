@@ -53,13 +53,12 @@ class ContainerEmptyContentWidget extends StatelessWidget {
                 descText,
                 maxLines: 3,
                 textAlign: TextAlign.center,
-                style: TextStyleHelper.of(context)
-                    .b_16
-                    .copyWith(color: ThemeClass.of(context).secondaryBlackColor),
+                style: TextStyleHelper.of(context).b_16.copyWith(
+                    color: ThemeClass.of(context).secondaryBlackColor),
               ),
             ),
             Gap(30.h),
-            button??const SizedBox(),
+            button ?? const SizedBox(),
             Gap(170.h)
           ]),
     );

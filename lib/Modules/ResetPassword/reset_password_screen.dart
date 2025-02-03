@@ -17,10 +17,8 @@ import 'reset_password_controller.dart';
 
 class ResetPasswordScreen extends StatefulWidget {
   static const routeName = "ResetPassword";
-  const ResetPasswordScreen({
-    Key? key,
-   required this.id}) : super(key: key);
-final int id;
+  const ResetPasswordScreen({Key? key, required this.id}) : super(key: key);
+  final int id;
   @override
   createState() => _ResetPasswordScreenState();
 }
@@ -35,7 +33,7 @@ class _ResetPasswordScreenState extends StateMVC<ResetPasswordScreen> {
   @override
   void initState() {
     super.initState();
-   con.userId =  widget.id;
+    con.userId = widget.id;
     print("User ID in ResetPassword${widget.id}");
   }
 
@@ -59,8 +57,10 @@ class _ResetPasswordScreenState extends StateMVC<ResetPasswordScreen> {
             physics: const BouncingScrollPhysics(),
             children: [
               Gap(8.h),
-              Image.asset(Assets.imagesNewPassword,
-                height: 312.h,  ),
+              Image.asset(
+                Assets.imagesNewPassword,
+                height: 312.h,
+              ),
               Gap(15.h),
               Container(
                 decoration: BoxDecoration(
@@ -78,7 +78,9 @@ class _ResetPasswordScreenState extends StateMVC<ResetPasswordScreen> {
                   borderRadius: BorderRadius.circular(30.r),
                 ),
                 child: Padding(
-                padding: EdgeInsetsDirectional.symmetric(  horizontal: 23.w,),
+                  padding: EdgeInsetsDirectional.symmetric(
+                    horizontal: 23.w,
+                  ),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -102,8 +104,7 @@ class _ResetPasswordScreenState extends StateMVC<ResetPasswordScreen> {
                                 .withOpacity(0.7)),
                         backGroundColor:
                             ThemeClass.of(context).secondary.withOpacity(1),
-                        focusedBorderColor:
-                            ThemeClass.of(context).primaryColor,
+                        focusedBorderColor: ThemeClass.of(context).primaryColor,
                         hint: Strings.enterPassword.tr,
                         prefixIcon: SvgPicture.asset(Assets.imagesLockIcon),
                         suffixIcon: con.isPassword
@@ -129,8 +130,7 @@ class _ResetPasswordScreenState extends StateMVC<ResetPasswordScreen> {
                                 .withOpacity(0.7)),
                         backGroundColor:
                             ThemeClass.of(context).secondary.withOpacity(1),
-                        focusedBorderColor:
-                            ThemeClass.of(context).primaryColor,
+                        focusedBorderColor: ThemeClass.of(context).primaryColor,
                         hint: Strings.enterPassword.tr,
                         prefixIcon: SvgPicture.asset(Assets.imagesLockIcon),
                         suffixIcon: con.repeatPassword

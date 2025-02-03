@@ -19,18 +19,18 @@ class HorizontalListWidget<T> extends StatelessWidget {
 
   const HorizontalListWidget(
       {super.key,
-        required this.title,
-        this.viewAllRouteName,
-        required this.itemHeight,
-        required this.buildWidget,
-        this.separateValue,
-        required this.itemsList});
+      required this.title,
+      this.viewAllRouteName,
+      required this.itemHeight,
+      required this.buildWidget,
+      this.separateValue,
+      required this.itemsList});
 
   factory HorizontalListWidget.onlyListView(
       {required double itemHeight,
-        required List<T> itemsList,
-        required Widget Function(T) buildWidget,
-        double? separateValue}) {
+      required List<T> itemsList,
+      required Widget Function(T) buildWidget,
+      double? separateValue}) {
     return HorizontalListWidget(
       buildWidget: buildWidget,
       itemHeight: itemHeight,
@@ -53,8 +53,7 @@ class HorizontalListWidget<T> extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  CustomDetailsSideTextWidget(
-                      text: title),
+                  CustomDetailsSideTextWidget(text: title),
                   if (viewAllRouteName != null)
                     InkWell(
                       onTap: () => context.pushNamed(viewAllRouteName!),
@@ -72,11 +71,10 @@ class HorizontalListWidget<T> extends StatelessWidget {
           SizedBox(
             height: itemHeight,
             child: ListView.separated(
-              itemCount:
-             itemsList.length,
+              itemCount: itemsList.length,
               scrollDirection: Axis.horizontal,
               padding:
-              EdgeInsets.symmetric(horizontal: title.isNotEmpty ? 16.w : 0),
+                  EdgeInsets.symmetric(horizontal: title.isNotEmpty ? 16.w : 0),
               itemBuilder: (_, index) => buildWidget(itemsList[index]),
               separatorBuilder: (_, __) => Gap(separateValue ?? 16.w),
             ),

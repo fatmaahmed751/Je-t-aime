@@ -6,8 +6,8 @@ import '../../../core/API/request_method.dart';
 import '../../../core/error/exceptions.dart';
 import '../../../core/error/failures.dart';
 
-class SplashDataHandler{
-  static Future<Either<Failure,UserModel>> getCurrentUser()async{
+class SplashDataHandler {
+  static Future<Either<Failure, UserModel>> getCurrentUser() async {
     try {
       UserModel response = await GenericRequest<UserModel>(
         method: RequestApi.get(url: APIEndPoint.test),

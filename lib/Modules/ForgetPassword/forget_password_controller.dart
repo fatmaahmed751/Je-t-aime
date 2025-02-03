@@ -15,20 +15,22 @@ class ForgetPasswordController extends ControllerMVC {
   }
   static ForgetPasswordController? _this;
   ForgetPasswordController._();
-  bool loading=false,autoValidate = false;
+  bool loading = false, autoValidate = false;
   late TextEditingController emailController;
 
   @override
   void initState() {
-    emailController=TextEditingController();
+    emailController = TextEditingController();
 
     super.initState();
   }
+
   @override
   void dispose() {
     emailController.dispose();
     super.dispose();
   }
+
   verifyCodeForNewPassword() async {
     setState(() {
       loading = true;
@@ -39,9 +41,7 @@ class ForgetPasswordController extends ControllerMVC {
       return;
     }
     final result = await ResetPasswordDataHandler.verificationCodeResetPassword(
-        email:emailController.text
-
-    );
+        email: emailController.text);
     result.fold((l) {
       ToastHelper.showError(message: l.errorModel.statusMessage.toString());
       ToastHelper.showError(message: "email not correct");
@@ -55,14 +55,11 @@ class ForgetPasswordController extends ControllerMVC {
       //     fit: BoxFit.cover,),
       //   backgroundColor: ThemeClass.of(currentContext_!).primaryColor,
       // );
-      currentContext_!.pushNamed(
-          VerificationPasswordScreen.routeName,
-          extra:emailController.text
-      );
+      currentContext_!.pushNamed(VerificationPasswordScreen.routeName,
+          extra: emailController.text);
     });
     setState(() {
       loading = false;
     });
   }
-  
 }

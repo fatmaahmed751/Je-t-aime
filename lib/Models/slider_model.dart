@@ -12,16 +12,16 @@ class SliderModel {
   });
 
   factory SliderModel.fromJson(Map<String, dynamic> json) => SliderModel(
-    id: json["id"],
-    image: json["image"],
-    categoryId: json["category_id"],
-    categoryName: json["category_name"],
-  );
+        id: json["id"],
+        image: json["image"],
+        categoryId: json["category_id"],
+        categoryName: json["category_name"],
+      );
 
   Map<String, dynamic> toJson() => {
-    "id": id,
-    "image": image,
-    "category_id": categoryId,
-    "category_name": categoryName,
-  };
+        "id": id,
+        "image": image,
+        "category_id": categoryId,
+        "category_name": categoryName,
+      };
 }

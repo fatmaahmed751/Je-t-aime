@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:je_t_aime/Modules/Register/register_data_handler.dart';
@@ -18,7 +17,7 @@ class RegisterController extends ControllerMVC {
   }
   static RegisterController? _this;
   RegisterController._();
-  bool loading=false,autoValidate = false;
+  bool loading = false, autoValidate = false;
   late TextEditingController emailController,
       passwordController,
       confirmPasswordController;
@@ -26,26 +25,26 @@ class RegisterController extends ControllerMVC {
   //   scopes: ['email'],
   // );
   // final AuthService _authService = AuthService();
-   UserModel? userModel;
-   bool isPassword = true;
+  UserModel? userModel;
+  bool isPassword = true;
   bool isConfirmPassword = true;
   // final AuthController _authController = AuthController();
   // GoogleSignInAccount? currentUser;
   @override
   void initState() {
-    emailController=TextEditingController();
-    passwordController=TextEditingController(text:"Nonabatta@202020");
-    confirmPasswordController=TextEditingController(text:"Nonabatta@202020");
+    emailController = TextEditingController();
+    passwordController = TextEditingController(text: "Nonabatta@202020");
+    confirmPasswordController = TextEditingController(text: "Nonabatta@202020");
     super.initState();
-   //  googleSignIn.onCurrentUserChanged
-   //      .listen((GoogleSignInAccount? account) {
-   //    setState(() {
-   //      currentUser = account;
-   //    });
-   //  });
-   // googleSignIn.signInSilently();
-
+    //  googleSignIn.onCurrentUserChanged
+    //      .listen((GoogleSignInAccount? account) {
+    //    setState(() {
+    //      currentUser = account;
+    //    });
+    //  });
+    // googleSignIn.signInSilently();
   }
+
   @override
   void dispose() {
     emailController.dispose();
@@ -53,8 +52,11 @@ class RegisterController extends ControllerMVC {
     confirmPasswordController.dispose();
     super.dispose();
   }
+
   userRegister() async {
-    setState(() { loading = true; });
+    setState(() {
+      loading = true;
+    });
 
     final result = await RegisterDataHandler.register(
       email: emailController.text,
@@ -91,7 +93,9 @@ class RegisterController extends ControllerMVC {
       }
     });
 
-    setState(() { loading = false; });
+    setState(() {
+      loading = false;
+    });
   }
   // userRegister() async{
   //   setState((){loading=true;});
@@ -218,7 +222,4 @@ class RegisterController extends ControllerMVC {
   //   await Future.delayed(const Duration(seconds: 2));
   //   setState((){loading=false;});
   // }
-
-
 }
-

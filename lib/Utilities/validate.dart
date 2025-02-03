@@ -3,7 +3,6 @@ import 'package:je_t_aime/Utilities/strings.dart';
 import 'package:je_t_aime/core/Language/locales.dart';
 
 class Validate {
-
   static String? validatePassword(String? password) {
     if (password == null || password.isEmpty) {
       return Strings.passwordRequired.tr;
@@ -25,7 +24,7 @@ class Validate {
       return Strings.lowerCase.tr;
     }
     if (!hasDigit) {
-      return Strings.oneNumber.tr ;
+      return Strings.oneNumber.tr;
     }
     if (!hasSpecialChar) {
       return Strings.specialCharacter.tr;
@@ -33,18 +32,20 @@ class Validate {
 
     return null; // Password is valid
   }
-  static String?  validatePhone(String? phone) {
+
+  static String? validatePhone(String? phone) {
     var phoneRegExp = RegExp(r'^(0[0-9]{10})$');
     var textIsArabic = RegExp(r'^[\0621-\064A0-9 ]+$');
     if (phone!.trim().isEmpty) {
       return Strings.validPhone.tr;
-    }  else if(!textIsArabic.hasMatch(phone)){
+    } else if (!textIsArabic.hasMatch(phone)) {
       return Strings.phoneError.tr;
     } else if (!phoneRegExp.hasMatch(phone)) {
       return Strings.phoneError.tr;
     }
     return null;
   }
+
   // static String? validatePhone(String? phone) {
   //   if (phone!.trim().isEmpty) {
   //     return Strings.validPhone.tr;
@@ -55,10 +56,9 @@ class Validate {
   // }
   static String? validateConfPassword(
       {required String newPassword, required String confPassword}) {
-    if(confPassword.isEmpty){
+    if (confPassword.isEmpty) {
       return Strings.confirmPassword.tr;
-    }
-    else if (newPassword.characters == confPassword.characters) {
+    } else if (newPassword.characters == confPassword.characters) {
       return null;
     } else {
       return Strings.confirmPasswordNotMatch.tr;
@@ -69,6 +69,7 @@ class Validate {
     if (text?.isEmpty ?? true) return Strings.validAddress.tr;
     return null;
   }
+
   static String? validateNormalString(String? text) {
     if (text == null || text.isEmpty) {
       return Strings.notEmptyField.tr;
@@ -85,6 +86,7 @@ class Validate {
     }
     return null;
   }
+
   static String? validateNormalFilterNumber(String? text) {
     // if (text?.isEmpty ?? true) {
     //   return "Please enter a number";
@@ -94,34 +96,36 @@ class Validate {
     }
     return null;
   }
+
   static String? validateFilterNumber(String? number, String? startNumber) {
     print("nummm: $number, startttt: $startNumber");
 
     // Check if the number is empty
     if (number == null || number.trim().isEmpty) {
-      return null;  // Return null if the number is empty, as per your requirements
+      return null; // Return null if the number is empty, as per your requirements
     }
 
     // Ensure both number and startNumber are valid integers
     int? parsedNumber = int.tryParse(number);
-    int? parsedStartNumber = startNumber != null ? int.tryParse(startNumber) : null;
+    int? parsedStartNumber =
+        startNumber != null ? int.tryParse(startNumber) : null;
 
     // Check if parsing failed for number or if startNumber is invalid
     if (parsedNumber == null) {
       return "Please enter a valid number";
     } else if (parsedStartNumber != null && parsedNumber == parsedStartNumber) {
-      return Strings.filterNumError.tr;  // Return error if numbers match
+      return Strings.filterNumError.tr; // Return error if numbers match
     }
 
     // Ensure parsedStartNumber is valid and check if parsedNumber is less than parsedStartNumber
     if (parsedStartNumber != null && parsedNumber < parsedStartNumber) {
-      return Strings.filterNumEnd.tr;  // Return error if parsedNumber is less than parsedStartNumber
+      return Strings.filterNumEnd
+          .tr; // Return error if parsedNumber is less than parsedStartNumber
     }
 
     // If all conditions are met, return null (indicating no error)
     return null;
   }
-
 
   // static String? validateFilterNumber(String? number,String? startNumber) {
   //   if (number!.trim().isEmpty) {
@@ -137,8 +141,6 @@ class Validate {
   static String? validateDropDown(dynamic value) {
     return value == null ? "Select one" : null;
   }
-
-
 
   static String? validatePhoneOptional(String? phone) {
     if (phone!.trim().isEmpty) return null;

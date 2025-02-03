@@ -25,7 +25,8 @@ class CustomButtonWidget extends StatelessWidget {
       this.height,
       this.title,
       this.onTap,
-      this.child, this.textStyle})
+      this.child,
+      this.textStyle})
       : buttonTypes = ButtonTypes.primary,
         backgroundColor = null;
 
@@ -36,7 +37,8 @@ class CustomButtonWidget extends StatelessWidget {
       this.height,
       this.title,
       this.onTap,
-      this.child, this.textStyle})
+      this.child,
+      this.textStyle})
       : buttonTypes = ButtonTypes.secondary,
         backgroundColor = null;
 
@@ -47,7 +49,8 @@ class CustomButtonWidget extends StatelessWidget {
       this.height,
       this.title,
       this.onTap,
-      this.child, this.textStyle})
+      this.child,
+      this.textStyle})
       : buttonTypes = ButtonTypes.outline,
         backgroundColor = null;
 
@@ -58,7 +61,8 @@ class CustomButtonWidget extends StatelessWidget {
     this.width,
     this.height,
     this.onTap,
-    required Widget this.child, this.textStyle,
+    required Widget this.child,
+    this.textStyle,
   })  : buttonTypes = ButtonTypes.primary,
         title = null;
 
@@ -68,14 +72,14 @@ class CustomButtonWidget extends StatelessWidget {
       borderRadius: BorderRadius.circular(30.r ?? _radius),
     );
     final secondaryDecoration = BoxDecoration(
-      color:
-          backgroundColor ?? ThemeClass.of(context).mainSecondary.withOpacity(.16),
+      color: backgroundColor ??
+          ThemeClass.of(context).mainSecondary.withOpacity(.16),
       borderRadius: BorderRadius.circular(radius ?? _radius),
     );
     final outlinedDecoration = BoxDecoration(
-        color: backgroundColor ?? Colors.transparent,
-        borderRadius: BorderRadius.circular(radius ?? _radius),
-        // border: Border.all(color: ThemeClass.of(context).secondary, width: 1.2.r),
+      color: backgroundColor ?? Colors.transparent,
+      borderRadius: BorderRadius.circular(radius ?? _radius),
+      // border: Border.all(color: ThemeClass.of(context).secondary, width: 1.2.r),
     );
 
     switch (buttonTypes) {
@@ -111,10 +115,10 @@ class CustomButtonWidget extends StatelessWidget {
         child: child ??
             Text(
               title ?? '',
-              style:textStyle?? TextStyleHelper.of(context).h_16.copyWith(
-                  color: getTitleColor(context),
-
-              ),
+              style: textStyle ??
+                  TextStyleHelper.of(context).h_16.copyWith(
+                        color: getTitleColor(context),
+                      ),
               maxLines: 1,
             ),
       ),

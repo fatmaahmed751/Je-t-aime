@@ -1,4 +1,4 @@
-package com.example.templete
+package com.example.jetaime
 
 import io.flutter.embedding.android.FlutterActivity
 

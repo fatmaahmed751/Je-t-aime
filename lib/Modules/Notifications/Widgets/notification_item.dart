@@ -70,10 +70,10 @@ class ShowNotificationItemState extends StateMVC<ShowNotificationItem> {
                   width: 56.w,
                   height: 56.h,
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(14.r),
-                    color: ThemeClass.of(context).pinkColor
-                    // ThemeClass.of(context).pinkColor
-                  ),
+                      borderRadius: BorderRadius.circular(14.r),
+                      color: ThemeClass.of(context).pinkColor
+                      // ThemeClass.of(context).pinkColor
+                      ),
                   child: Padding(
                     padding: EdgeInsetsDirectional.symmetric(
                         horizontal: 18.w, vertical: 18.h),

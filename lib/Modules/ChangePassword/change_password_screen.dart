@@ -34,7 +34,6 @@ class _ChangePasswordScreenState extends StateMVC<ChangePasswordScreen> {
   late ChangePasswordController con;
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
-
   @override
   void initState() {
     super.initState();
@@ -60,17 +59,18 @@ class _ChangePasswordScreenState extends StateMVC<ChangePasswordScreen> {
               physics: const NeverScrollableScrollPhysics(),
               children: [
                 Gap(20.h),
-                 Padding(
-                  padding:
-                      EdgeInsetsDirectional.symmetric(horizontal: 24.w),
+                Padding(
+                  padding: EdgeInsetsDirectional.symmetric(horizontal: 24.w),
                   child: const Align(
                       alignment: Alignment.topLeft,
                       child: CircleAvatarWidget()),
                 ),
                 Center(
-                  child: Image.asset(Assets.imagesNewPassword,
-                //  width: ,
-                  height: 212.h,),
+                  child: Image.asset(
+                    Assets.imagesNewPassword,
+                    //  width: ,
+                    height: 212.h,
+                  ),
                 ),
                 Gap(18.h),
                 Container(
@@ -78,17 +78,18 @@ class _ChangePasswordScreenState extends StateMVC<ChangePasswordScreen> {
                     color: Colors.white, // Background color of the container
                     boxShadow: [
                       BoxShadow(
-                        color: const Color(0xff33333326).withOpacity(0.15),// Shadow color
+                        color: const Color(0xff33333326)
+                            .withOpacity(0.15), // Shadow color
                         spreadRadius: 0, // Spread radius
-                     // blurRadius:1, // Blur radius for a soft shadow
-                        offset: const Offset(0, -1), // Negative offset to place shadow on top
+                        // blurRadius:1, // Blur radius for a soft shadow
+                        offset: const Offset(
+                            0, -1), // Negative offset to place shadow on top
                       ),
                     ],
                     borderRadius: BorderRadius.circular(30.r),
                   ),
                   child: Padding(
-                    padding: EdgeInsetsDirectional.symmetric(
-                      horizontal: 24.w),
+                    padding: EdgeInsetsDirectional.symmetric(horizontal: 24.w),
                     child: Column(
                       children: [
                         Gap(20.h),
@@ -101,8 +102,9 @@ class _ChangePasswordScreenState extends StateMVC<ChangePasswordScreen> {
                         Gap(15.h),
                         _buildPasswordField(
                           context: context,
-                          suffixIcon:con.isPassword? SvgPicture.asset(Assets.imagesObsecureIcon)
-                              :SvgPicture.asset(Assets.imagesEyeOpen),
+                          suffixIcon: con.isPassword
+                              ? SvgPicture.asset(Assets.imagesObsecureIcon)
+                              : SvgPicture.asset(Assets.imagesEyeOpen),
                           title: Strings.oldPassword.tr,
                           hint: Strings.enterPassword.tr,
                           controller: con.oldPasswordController,
@@ -120,13 +122,17 @@ class _ChangePasswordScreenState extends StateMVC<ChangePasswordScreen> {
                           children: [
                             GestureDetector(
                               onTap: () {
-                                context.pushNamed(ForgetPasswordScreen.routeName);
+                                context
+                                    .pushNamed(ForgetPasswordScreen.routeName);
                               },
                               child: Text(
                                 Strings.forgetPassword.tr,
                                 textAlign: TextAlign.left,
-                                style: TextStyleHelper.of(context).b_16.copyWith(
-                                    color: ThemeClass.of(context).primaryColor),
+                                style: TextStyleHelper.of(context)
+                                    .b_16
+                                    .copyWith(
+                                        color: ThemeClass.of(context)
+                                            .primaryColor),
                               ),
                             ),
                           ],
@@ -134,8 +140,9 @@ class _ChangePasswordScreenState extends StateMVC<ChangePasswordScreen> {
                         Gap(10.h),
                         _buildPasswordField(
                           context: context,
-                          suffixIcon:con.newPassword? SvgPicture.asset(Assets.imagesObsecureIcon)
-                              :SvgPicture.asset(Assets.imagesEyeOpen),
+                          suffixIcon: con.newPassword
+                              ? SvgPicture.asset(Assets.imagesObsecureIcon)
+                              : SvgPicture.asset(Assets.imagesEyeOpen),
                           title: Strings.newPasswordBigTitle.tr,
                           hint: Strings.enterPassword.tr,
                           controller: con.newPasswordController,
@@ -150,8 +157,9 @@ class _ChangePasswordScreenState extends StateMVC<ChangePasswordScreen> {
                         Gap(10.h),
                         _buildPasswordField(
                           context: context,
-                          suffixIcon:con.repeatPassword? SvgPicture.asset(Assets.imagesObsecureIcon)
-                              :SvgPicture.asset(Assets.imagesEyeOpen),
+                          suffixIcon: con.repeatPassword
+                              ? SvgPicture.asset(Assets.imagesObsecureIcon)
+                              : SvgPicture.asset(Assets.imagesEyeOpen),
                           title: Strings.repeatPassword.tr,
                           hint: Strings.enterPassword.tr,
                           controller: con.confirmNewPasswordController,
@@ -159,7 +167,6 @@ class _ChangePasswordScreenState extends StateMVC<ChangePasswordScreen> {
                             confPassword: con.confirmNewPasswordController.text,
                             newPassword: v!,
                           ),
-
                           isPassword: con.repeatPassword,
                           onSuffixTap: () {
                             setState(() {
@@ -167,20 +174,22 @@ class _ChangePasswordScreenState extends StateMVC<ChangePasswordScreen> {
                             });
                           },
                         ),
-                        Gap(SharedPref.getCurrentLanguage()=="ar"?25.h:40.h),
+                        Gap(SharedPref.getCurrentLanguage() == "ar"
+                            ? 25.h
+                            : 40.h),
                         CustomButtonWidget.primary(
-                        title: Strings.changePasswordTitle.tr,
-                        onTap: () {
-                          con.displayBottomSheet(context);
+                            title: Strings.changePasswordTitle.tr,
+                            onTap: () {
+                              con.displayBottomSheet(context);
 
-                          // if (formKey.currentState?.validate() ?? false) {
-                          //  con.displayBottomSheet(context);
-                          // } else {
-                          //   setState(() {
-                          //     con.autoValidate = true;
-                          //   });
-                          // }
-                        }),
+                              // if (formKey.currentState?.validate() ?? false) {
+                              //  con.displayBottomSheet(context);
+                              // } else {
+                              //   setState(() {
+                              //     con.autoValidate = true;
+                              //   });
+                              // }
+                            }),
                       ],
                     ),
                   ),
@@ -206,20 +215,19 @@ class _ChangePasswordScreenState extends StateMVC<ChangePasswordScreen> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-       CustomSideTextWidget(text: title),
+        CustomSideTextWidget(text: title),
         Gap(10.h),
         CustomTextFieldWidget(
           obscure: isPassword,
           hint: hint,
           hintStyle: TextStyle(
-              color: ThemeClass.of(context)
-                  .secondaryBlackColor
-                  .withOpacity(0.7)),
-          backGroundColor:  ThemeClass.of(context).secondary.withOpacity(1),
+              color:
+                  ThemeClass.of(context).secondaryBlackColor.withOpacity(0.7)),
+          backGroundColor: ThemeClass.of(context).secondary.withOpacity(1),
           prefixIcon: SvgPicture.asset(Assets.imagesLockIcon),
           isDense: true,
-          suffixIcon:suffixIcon,
-          onSuffixTap:onSuffixTap,
+          suffixIcon: suffixIcon,
+          onSuffixTap: onSuffixTap,
           //     () {
           //   setState(() {
           //  isPassword = !isPassword;

@@ -2,10 +2,9 @@ import 'package:flutter/material.dart';
 
 import '../../Utilities/shared_preferences.dart';
 
-enum FontFamilyTypes {outfit,cairo,poppins}
+enum FontFamilyTypes { outfit, cairo, poppins }
 
 class FontProvider extends ChangeNotifier {
-
   static const maxScaleSize = 3;
   static const minScaleSize = 0.3;
   static const double _defaultFontScaleSize = 1;
@@ -17,23 +16,21 @@ class FontProvider extends ChangeNotifier {
   FontFamilyTypes _fontFamily = _defaultFontFamily;
   FontFamilyTypes get fontFamily => _fontFamily;
 
-
   void fetchFontSettings() {
-    _fontSizeScale = SharedPref.getFontSizeScale()??_defaultFontScaleSize;
-    _fontFamily = SharedPref.getFontFamily()??_defaultFontFamily;
+    _fontSizeScale = SharedPref.getFontSizeScale() ?? _defaultFontScaleSize;
+    _fontFamily = SharedPref.getFontFamily() ?? _defaultFontFamily;
   }
 
-
   Future changeFontFamily({required FontFamilyTypes fontFamily}) async {
-    if(_fontFamily == fontFamily) return;
+    if (_fontFamily == fontFamily) return;
     _fontFamily = fontFamily;
     await SharedPref.setFontFamily(fontFamily: fontFamily);
     notifyListeners();
   }
 
   Future changeFontSizeScale({required double fontSizeScale}) async {
-    if(_fontSizeScale == fontSizeScale) return;
-    if(fontSizeScale >= maxScaleSize || fontSizeScale<=minScaleSize) return;
+    if (_fontSizeScale == fontSizeScale) return;
+    if (fontSizeScale >= maxScaleSize || fontSizeScale <= minScaleSize) return;
     _fontSizeScale = fontSizeScale;
     await SharedPref.setFontSizeScale(fontSizeScale: fontSizeScale);
     notifyListeners();

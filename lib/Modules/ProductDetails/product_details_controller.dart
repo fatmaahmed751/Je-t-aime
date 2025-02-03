@@ -23,16 +23,16 @@ class ProductDetailsController extends ControllerMVC {
   static ProductDetailsController? _this;
   bool isClick = false;
   ProductDetailsController._();
-  List list=[1,2,3,4,5];
-  List imageUrl=[
+  List list = [1, 2, 3, 4, 5];
+  List imageUrl = [
     "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQx1bJeWtv-CEwrlzO09wgwE3sDUETLh5ZOzg&s",
     "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQx1bJeWtv-CEwrlzO09wgwE3sDUETLh5ZOzg&s",
     "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQx1bJeWtv-CEwrlzO09wgwE3sDUETLh5ZOzg&s",
   ];
   bool isExpanded = false;
-  int activeIndex=0;
-  bool isSearch=false;
-  bool loading=false;
+  int activeIndex = 0;
+  bool isSearch = false;
+  bool loading = false;
 
   @override
   void initState() {
@@ -43,11 +43,14 @@ class ProductDetailsController extends ControllerMVC {
   void dispose() {
     super.dispose();
   }
-  onPageChange(int index)
-  {
-    setState(() {activeIndex=index; });
-    activeIndex=index;
+
+  onPageChange(int index) {
+    setState(() {
+      activeIndex = index;
+    });
+    activeIndex = index;
   }
+
   void incrementCounter() {
     setState(() {
       counter++;
@@ -61,6 +64,7 @@ class ProductDetailsController extends ControllerMVC {
       }
     });
   }
+
   void toggleExpanded() {
     setState(() {
       isExpanded = !isExpanded;
@@ -74,9 +78,10 @@ class ProductDetailsController extends ControllerMVC {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(30.r)),
       ),
-      builder:(context)=> const RateProductScreen(),
+      builder: (context) => const RateProductScreen(),
     );
   }
+
   Future addToCartSheet(BuildContext context) {
     return showModalBottomSheet(
       context: context,
@@ -84,7 +89,7 @@ class ProductDetailsController extends ControllerMVC {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(30.r)),
       ),
-      builder:(context)=>   const AddToCartBottomSheetWidget(),
+      builder: (context) => const AddToCartBottomSheetWidget(),
     );
   }
   // Future addFavorite({required int productId}) async {

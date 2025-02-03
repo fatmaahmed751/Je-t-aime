@@ -5,7 +5,6 @@ import 'package:mvc_pattern/mvc_pattern.dart';
 
 import '../PopularProducts/Widgets/filter_bottom_sheet_widget.dart';
 
-
 class AllCategoriesController extends ControllerMVC {
   // singleton
   factory AllCategoriesController() {
@@ -15,7 +14,7 @@ class AllCategoriesController extends ControllerMVC {
 
   static AllCategoriesController? _this;
   bool loading = false;
-  bool isSearch=false;
+  bool isSearch = false;
   bool autoValidate = false;
   late TextEditingController startController;
   late TextEditingController endController;
@@ -25,9 +24,9 @@ class AllCategoriesController extends ControllerMVC {
 
   @override
   void initState() {
-    searchController=TextEditingController();
-    startController=TextEditingController();
-    endController=TextEditingController();
+    searchController = TextEditingController();
+    startController = TextEditingController();
+    endController = TextEditingController();
     super.initState();
   }
 
@@ -37,11 +36,12 @@ class AllCategoriesController extends ControllerMVC {
     startController.dispose();
     endController.dispose();
     super.dispose();
-
   }
-  init(){
+
+  init() {
     getAllCategories();
   }
+
   Future filterBottomSheet(BuildContext context) {
     return showModalBottomSheet(
       context: context,
@@ -50,17 +50,20 @@ class AllCategoriesController extends ControllerMVC {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(30.r)),
       ),
-      builder:(context)=>   FilterBottomSheetWidget(
-          onButtonAccept:()=> context.pop(),
-          onButtonReject:()=> context.pop(),
+      builder: (context) => FilterBottomSheetWidget(
+          onButtonAccept: () => context.pop(),
+          onButtonReject: () => context.pop(),
           autoValidate: autoValidate,
           startController: startController,
           endController: endController),
     );
   }
-  Future getAllCategories() async {
-    loading=true;
 
-    setState(() {loading=false;});
+  Future getAllCategories() async {
+    loading = true;
+
+    setState(() {
+      loading = false;
+    });
   }
 }

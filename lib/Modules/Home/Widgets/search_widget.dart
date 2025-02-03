@@ -8,17 +8,26 @@ import '../../../../Widgets/custom_textfield_widget.dart';
 import '../../../../generated/assets.dart';
 import '../../../Utilities/validate.dart';
 
-
 class SearchWidget extends StatefulWidget {
   final bool isSearch;
   final Function(String?) onSearch;
   final Function(String?) onChange;
- final FocusNode? focusNode;
+  final FocusNode? focusNode;
   final Function() onRemove;
   final Color? backGroundColor, focusedBorderColor;
   final double width;
   final TextEditingController controller;
-   const SearchWidget({super.key,required this.onSearch, required this.isSearch, required this.controller, required this.onRemove, required this.onChange, required this.backGroundColor, required this.width, this.focusNode, this.focusedBorderColor});
+  const SearchWidget(
+      {super.key,
+      required this.onSearch,
+      required this.isSearch,
+      required this.controller,
+      required this.onRemove,
+      required this.onChange,
+      required this.backGroundColor,
+      required this.width,
+      this.focusNode,
+      this.focusedBorderColor});
 
   @override
   State<SearchWidget> createState() => _SearchWidgetState();
@@ -39,6 +48,7 @@ class _SearchWidgetState extends State<SearchWidget> {
       });
     });
   }
+
   @override
   void dispose() {
     if (widget.focusNode == null) {
@@ -46,6 +56,7 @@ class _SearchWidgetState extends State<SearchWidget> {
     }
     super.dispose();
   }
+
   // InputBorder? getBorder({double? radius, Color? color}) {
   //   if (widget.disableBorder) return null;
   //   return OutlineInputBorder(
@@ -55,42 +66,40 @@ class _SearchWidgetState extends State<SearchWidget> {
   // }
   @override
   Widget build(BuildContext context) {
-    return
-      CustomTextFieldWidget(
-      onSave:widget.onSearch,
-     controller:widget.controller,
-focusNode:  _focusNode,
-focusedBorderColor: Colors.white,
-      width: widget.width,
-      height: 45.h,
-      insidePadding: EdgeInsets.symmetric(vertical: 10.h),
-      borderRadiusValue: 30.r,
-      isDense: true,
-      prefixIcon: SvgPicture.asset(Assets.imagesSearch,
-        colorFilter: _isFocused
-            ? ColorFilter.mode(
-          ThemeClass.of(context).pinkColor.withOpacity(0.8),
-          BlendMode.srcIn,
-        )
-            : ColorFilter.mode(
-          ThemeClass.of(context).secondaryBlackColor.withOpacity(0.7),
-          BlendMode.srcIn,
+    return CustomTextFieldWidget(
+        onSave: widget.onSearch,
+        controller: widget.controller,
+        focusNode: _focusNode,
+        focusedBorderColor: Colors.white,
+        width: widget.width,
+        height: 45.h,
+        insidePadding: EdgeInsets.symmetric(vertical: 10.h),
+        borderRadiusValue: 30.r,
+        isDense: true,
+        prefixIcon: SvgPicture.asset(
+          Assets.imagesSearch,
+          colorFilter: _isFocused
+              ? ColorFilter.mode(
+                  ThemeClass.of(context).pinkColor.withOpacity(0.8),
+                  BlendMode.srcIn,
+                )
+              : ColorFilter.mode(
+                  ThemeClass.of(context).secondaryBlackColor.withOpacity(0.7),
+                  BlendMode.srcIn,
+                ),
         ),
-      ),
-      //  colorFilter:_isFocused?  ColorFilter.mode(ThemeClass.of(context).pinkColor.withOpacity(0.8), BlendMode.srcIn):null,),
-      hint: Strings.searchHere.tr,
-      backGroundColor:widget.backGroundColor?? Colors.white,
-     // ThemeClass.of(context).secondary.withOpacity(1),
-      onchange:widget.onChange,
-      hintStyle:_isFocused?TextStyle(
-          color: ThemeClass.of(context)
-              .pinkColor
-              .withOpacity(0.7)):  TextStyle(
-          color: ThemeClass.of(context)
-          .secondaryBlackColor.withOpacity(0.7)
-    ),
-      validator: (v) => Validate.validateNormalString(v)
-
-    );
+        //  colorFilter:_isFocused?  ColorFilter.mode(ThemeClass.of(context).pinkColor.withOpacity(0.8), BlendMode.srcIn):null,),
+        hint: Strings.searchHere.tr,
+        backGroundColor: widget.backGroundColor ?? Colors.white,
+        // ThemeClass.of(context).secondary.withOpacity(1),
+        onchange: widget.onChange,
+        hintStyle: _isFocused
+            ? TextStyle(
+                color: ThemeClass.of(context).pinkColor.withOpacity(0.7))
+            : TextStyle(
+                color: ThemeClass.of(context)
+                    .secondaryBlackColor
+                    .withOpacity(0.7)),
+        validator: (v) => Validate.validateNormalString(v));
   }
 }

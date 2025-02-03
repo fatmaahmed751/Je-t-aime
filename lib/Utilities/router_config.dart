@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:je_t_aime/Modules/ChangePassword/change_password_screen.dart';
@@ -29,8 +28,10 @@ import '../Modules/Splash/splash_screen.dart';
 import '../Modules/UserProfile/user_profile_screen.dart';
 import '../Modules/VerificationAccountOtp/verification_otp_screen.dart';
 
-BuildContext? get currentContext_ => GoRouterConfig.router.routerDelegate.navigatorKey.currentContext;
-class GoRouterConfig{
+BuildContext? get currentContext_ =>
+    GoRouterConfig.router.routerDelegate.navigatorKey.currentContext;
+
+class GoRouterConfig {
   static GoRouter get router => _router;
 
   static final GoRouter _router = GoRouter(
@@ -40,7 +41,7 @@ class GoRouterConfig{
         pageBuilder: (_, GoRouterState state) {
           return getCustomTransitionPage(
             state: state,
-            child:   SplashScreen(),
+            child: SplashScreen(),
           );
         },
         routes: const <RouteBase>[],
@@ -51,7 +52,7 @@ class GoRouterConfig{
         pageBuilder: (_, GoRouterState state) {
           return getCustomTransitionPage(
             state: state,
-            child:  const ReviewsForProductScreen(),
+            child: const ReviewsForProductScreen(),
           );
         },
         routes: const <RouteBase>[],
@@ -62,7 +63,7 @@ class GoRouterConfig{
         pageBuilder: (_, GoRouterState state) {
           return getCustomTransitionPage(
             state: state,
-            child:  const AllCategoriesScreen(),
+            child: const AllCategoriesScreen(),
           );
         },
         routes: const <RouteBase>[],
@@ -73,7 +74,7 @@ class GoRouterConfig{
         pageBuilder: (_, GoRouterState state) {
           return getCustomTransitionPage(
             state: state,
-            child:  const HomeScreen(),
+            child: const HomeScreen(),
           );
         },
         routes: const <RouteBase>[],
@@ -84,7 +85,9 @@ class GoRouterConfig{
         pageBuilder: (_, GoRouterState state) {
           return getCustomTransitionPage(
             state: state,
-            child:  const SearchScreen(search: '',),
+            child: const SearchScreen(
+              search: '',
+            ),
           );
         },
         routes: const <RouteBase>[],
@@ -95,7 +98,7 @@ class GoRouterConfig{
         pageBuilder: (_, GoRouterState state) {
           return getCustomTransitionPage(
             state: state,
-            child:  const PopularProductsScreen(),
+            child: const PopularProductsScreen(),
           );
         },
         routes: const <RouteBase>[],
@@ -106,7 +109,7 @@ class GoRouterConfig{
         pageBuilder: (_, GoRouterState state) {
           return getCustomTransitionPage(
             state: state,
-            child:  const CartScreen(),
+            child: const CartScreen(),
           );
         },
         routes: const <RouteBase>[],
@@ -117,7 +120,7 @@ class GoRouterConfig{
         pageBuilder: (_, GoRouterState state) {
           return getCustomTransitionPage(
             state: state,
-            child:  ShippingScreen(),
+            child: ShippingScreen(),
           );
         },
         routes: const <RouteBase>[],
@@ -128,7 +131,7 @@ class GoRouterConfig{
         pageBuilder: (_, GoRouterState state) {
           return getCustomTransitionPage(
             state: state,
-            child:  const ProductDetailsScreen(),
+            child: const ProductDetailsScreen(),
           );
         },
         routes: const <RouteBase>[],
@@ -139,7 +142,7 @@ class GoRouterConfig{
         pageBuilder: (_, GoRouterState state) {
           return getCustomTransitionPage(
             state: state,
-            child:  const PaymentScreen(),
+            child: const PaymentScreen(),
           );
         },
         routes: const <RouteBase>[],
@@ -236,21 +239,18 @@ class GoRouterConfig{
         name: VerificationOtpScreen.routeName,
         path: "/${VerificationOtpScreen.routeName}",
         pageBuilder: (_, GoRouterState state) {
-         final int id = int.tryParse(state.extra?.toString() ?? '') ?? 0;
-         final loggedInUserId = SharedPref.getCurrentUser()?.user?.id;
-  if (loggedInUserId != id) {
-    print("ID mismatch: This is not the logged-in user's ID.");
-  }
+          final int id = int.tryParse(state.extra?.toString() ?? '') ?? 0;
+          final loggedInUserId = SharedPref.getCurrentUser()?.user?.id;
+          if (loggedInUserId != id) {
+            print("ID mismatch: This is not the logged-in user's ID.");
+          }
           return getCustomTransitionPage(
             state: state,
-            child:   VerificationOtpScreen(
-               id:id
-            ),
+            child: VerificationOtpScreen(id: id),
           );
         },
         routes: const <RouteBase>[],
       ),
-
       GoRoute(
         name: ForgetPasswordScreen.routeName,
         path: "/${ForgetPasswordScreen.routeName}",
@@ -269,9 +269,7 @@ class GoRouterConfig{
           final String email = state.extra as String;
           return getCustomTransitionPage(
             state: state,
-            child:  VerificationPasswordScreen(
-              email:email
-            ),
+            child: VerificationPasswordScreen(email: email),
           );
         },
         routes: const <RouteBase>[],
@@ -287,7 +285,6 @@ class GoRouterConfig{
         },
         routes: const <RouteBase>[],
       ),
-
       GoRoute(
         name: ResetPasswordScreen.routeName,
         path: "/${ResetPasswordScreen.routeName}",
@@ -302,9 +299,7 @@ class GoRouterConfig{
           }
           return getCustomTransitionPage(
             state: state,
-            child:  ResetPasswordScreen(
-              id:id
-            ),
+            child: ResetPasswordScreen(id: id),
           );
         },
         routes: const <RouteBase>[],
@@ -315,7 +310,7 @@ class GoRouterConfig{
         pageBuilder: (_, GoRouterState state) {
           return getCustomTransitionPage(
             state: state,
-            child:  const NotificationsScreen(),
+            child: const NotificationsScreen(),
           );
         },
         routes: const <RouteBase>[],
@@ -354,8 +349,8 @@ class GoRouterConfig{
     // },
   );
 
-
-  static CustomTransitionPage getCustomTransitionPage({required GoRouterState state, required Widget child}){
+  static CustomTransitionPage getCustomTransitionPage(
+      {required GoRouterState state, required Widget child}) {
     return CustomTransitionPage(
       key: state.pageKey,
       child: child,
@@ -370,8 +365,3 @@ class GoRouterConfig{
     );
   }
 }
-
-
-
-
-

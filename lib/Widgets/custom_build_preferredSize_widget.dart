@@ -13,13 +13,12 @@ import 'custom_app_bar_text_widget.dart';
 import 'custom_textfield_widget.dart';
 
 Widget buildPreferredSize(BuildContext context) {
-
   return SizedBox(
-   // height: 400.h,
+    // height: 400.h,
     child: Stack(
       children: [
         Container(
-          height:280.h,
+          height: 280.h,
           width: double.infinity,
           decoration: BoxDecoration(
             gradient: LinearGradient(
@@ -38,8 +37,8 @@ Widget buildPreferredSize(BuildContext context) {
           left: 0,
           right: 0,
           child: Padding(
-            padding: EdgeInsetsDirectional.only(
-                start: 10.w, top: 50.h, end: 10.w),
+            padding:
+                EdgeInsetsDirectional.only(start: 10.w, top: 50.h, end: 10.w),
             child: Column(
               children: [
                 Row(

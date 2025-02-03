@@ -33,7 +33,7 @@ class ResetPasswordController extends ControllerMVC {
   late TextEditingController pinController;
   late FocusNode focusNode;
   String? email;
-  int? userId ;
+  int? userId;
   bool isPassword = true;
   bool repeatPassword = true;
 
@@ -44,7 +44,7 @@ class ResetPasswordController extends ControllerMVC {
     confirmNewPasswordController = TextEditingController();
     pinController = TextEditingController();
     focusNode = FocusNode();
-    smsRetriever =  SmsRetrieverImpl(SmartAuth.instance);
+    smsRetriever = SmsRetrieverImpl(SmartAuth.instance);
     userId = SharedPref.getCurrentUser()?.user?.id;
     String? email;
   }
@@ -58,7 +58,6 @@ class ResetPasswordController extends ControllerMVC {
     super.dispose();
   }
 
-
   void verifyCode(String code, String inputCode) {
     if (code == inputCode) {
       print('Verification successful');
@@ -66,9 +65,12 @@ class ResetPasswordController extends ControllerMVC {
       print('Verification failed');
     }
   }
-  resendVerifyAccountCode()async {
+
+  resendVerifyAccountCode() async {
     if (userId == null) {
-      userId = SharedPref.getCurrentUser()?.user?.id; // Attempt to fetch from SharedPref
+      userId = SharedPref.getCurrentUser()
+          ?.user
+          ?.id; // Attempt to fetch from SharedPref
       if (userId == null) {
         print('User ID is missing');
         ToastHelper.showError(message: "User ID is required for verification.");
@@ -79,33 +81,37 @@ class ResetPasswordController extends ControllerMVC {
     //   ToastHelper.showError(message: "Please enter the OTP code.");
     //   return;
     // }
-    setState((){loading=true;});
+    setState(() {
+      loading = true;
+    });
     final result = await OTPCodeDataHandler.resentOtp(
-      id:userId!,
+      id: userId!,
     );
     print(result);
     result.fold((l) {
       print('Failure: ${l.toString()}');
-      ToastHelper.showError(message: Strings.verificationFailed.tr,
-          backgroundColor:ThemeClass.of(currentContext_!).primaryColor );
+      ToastHelper.showError(
+          message: Strings.verificationFailed.tr,
+          backgroundColor: ThemeClass.of(currentContext_!).primaryColor);
     }, (r) {
       ToastHelper.showSuccess(
-        context:   currentContext_!,
+        context: currentContext_!,
         message: Strings.verificationSuccess.tr,
-        icon:SvgPicture.asset(Assets.imagesSubmit,width:60.w,
-          height:50.h,
-          fit: BoxFit.cover,),
-
+        icon: SvgPicture.asset(
+          Assets.imagesSubmit,
+          width: 60.w,
+          height: 50.h,
+          fit: BoxFit.cover,
+        ),
         backgroundColor: ThemeClass.of(currentContext_!).primaryColor,
       );
     });
     setState(() {
       loading = false;
     });
-
   }
 
-  verifyCodeForNewPassword()async{
+  verifyCodeForNewPassword() async {
     setState(() {
       loading = true;
     });
@@ -118,7 +124,7 @@ class ResetPasswordController extends ControllerMVC {
       return;
     }
 
-    if(email==null ){
+    if (email == null) {
       print("Error: email or code is null");
       ToastHelper.showError(message: "Email or code is missing.");
       return;
@@ -131,31 +137,31 @@ class ResetPasswordController extends ControllerMVC {
       loading = true;
     });
     final result = await ResetPasswordDataHandler.verificationCodeResetPassword(
-      email: email!
-    );
+        email: email!);
     result.fold((l) {
       ToastHelper.showError(message: l.errorModel.statusMessage.toString());
       ToastHelper.showError(message: "the email is incorrect.");
     }, (r) {
       print(r);
       ToastHelper.showSuccess(
-        context:   currentContext_!,
+        context: currentContext_!,
         message: Strings.passwordResetSu.tr,
-        icon:SvgPicture.asset(Assets.imagesSubmit,width:60.w,
-          height:50.h,
-          fit: BoxFit.cover,),
-
+        icon: SvgPicture.asset(
+          Assets.imagesSubmit,
+          width: 60.w,
+          height: 50.h,
+          fit: BoxFit.cover,
+        ),
         backgroundColor: ThemeClass.of(currentContext_!).primaryColor,
       );
-      currentContext_?.pushNamed(
-        ResetPasswordScreen.routeName,
-        extra: loggedInUserId.toString()
-      );
+      currentContext_?.pushNamed(ResetPasswordScreen.routeName,
+          extra: loggedInUserId.toString());
     });
     setState(() {
       loading = false;
     });
   }
+
   getNewPassword() async {
     setState(() {
       loading = true;
@@ -187,7 +193,8 @@ class ResetPasswordController extends ControllerMVC {
       return;
     }
 
-    if (newPasswordController.text.isEmpty || confirmNewPasswordController.text.isEmpty) {
+    if (newPasswordController.text.isEmpty ||
+        confirmNewPasswordController.text.isEmpty) {
       ToastHelper.showError(message: "Please fill in both password fields.");
       return;
     }

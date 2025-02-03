@@ -57,36 +57,38 @@ class _OtpResendTimerState extends State<OtpResendTimer> {
 
   @override
   Widget build(BuildContext context) {
-    return
-                         Row(
-                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                           children: [
-                             GestureDetector(
-                               onTap: () {
-                                 widget.onResend();
-                                 setState(() {
-                                   remainingSeconds = widget.initialSeconds;
-                                 });
-                                 startTimer();
-                               },
-                               child: Text(
-                                 Strings.resendCode.tr,
-                                 textAlign: TextAlign.left,
-                                 style: TextStyleHelper.of(context).b_16.copyWith(
-                                     color: ThemeClass.of(context).secondaryBlackColor.withOpacity(0.6)),
-                               ),
-                             ),
-                             Text(
-                               remainingSeconds > 0
-                             ? formatTime(remainingSeconds)
-        : "Didn't receive the OTP?",
-                              // Strings.timeCount.tr,
-                               textAlign: TextAlign.left,
-                               style: TextStyleHelper.of(context).b_16.copyWith(
-                                   color: ThemeClass.of(context).primaryColor),
-                             ),
-                           ],
-                         );
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        GestureDetector(
+          onTap: () {
+            widget.onResend();
+            setState(() {
+              remainingSeconds = widget.initialSeconds;
+            });
+            startTimer();
+          },
+          child: Text(
+            Strings.resendCode.tr,
+            textAlign: TextAlign.left,
+            style: TextStyleHelper.of(context).b_16.copyWith(
+                color: ThemeClass.of(context)
+                    .secondaryBlackColor
+                    .withOpacity(0.6)),
+          ),
+        ),
+        Text(
+          remainingSeconds > 0
+              ? formatTime(remainingSeconds)
+              : "Didn't receive the OTP?",
+          // Strings.timeCount.tr,
+          textAlign: TextAlign.left,
+          style: TextStyleHelper.of(context)
+              .b_16
+              .copyWith(color: ThemeClass.of(context).primaryColor),
+        ),
+      ],
+    );
     //   Column(
     //   mainAxisSize: MainAxisSize.min,
     //   children: [

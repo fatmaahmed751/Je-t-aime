@@ -41,7 +41,8 @@ Future<void> main() async {
   print("Initial Connectivity Status: $isConnected");
   HttpOverrides.global = MyHttpOverrides();
 
-  runApp(MultiProvider(
+  runApp(
+    MultiProvider(
       providers: [
         ChangeNotifierProvider<AppLanguage>(create: (_) => AppLanguage()),
         ChangeNotifierProvider<ThemeProvider>(create: (_) => ThemeProvider()),
@@ -52,15 +53,14 @@ Future<void> main() async {
         ),
       ],
       child: const ConnectivityWrapper(child: EntryPoint()),
-  ),
+    ),
   );
 }
-      // child: StreamProvider<bool>(
-      //   create: (_) => connectivityService.connectivityStream,
-      //   initialData: true,
-      //   child: const ConnectivityWrapper(child: EntryPoint()),
-      // )));
-
+// child: StreamProvider<bool>(
+//   create: (_) => connectivityService.connectivityStream,
+//   initialData: true,
+//   child: const ConnectivityWrapper(child: EntryPoint()),
+// )));
 
 class EntryPoint extends StatelessWidget {
   const EntryPoint({Key? key}) : super(key: key);
@@ -77,7 +77,7 @@ class EntryPoint extends StatelessWidget {
         scrollBehavior: MyCustomScrollBehavior(),
         routerConfig: GoRouterConfig.router,
         debugShowCheckedModeBanner: false,
-        title: '"templete"',
+        title: "jetaime",
         locale: Locale(appLan.appLang.name),
         theme: appTheme.appThemeMode?.copyWith(
             scaffoldBackgroundColor: ThemeClass.of(context).background),
@@ -126,14 +126,11 @@ class ConnectivityWrapper extends StatelessWidget {
                             width: 220.w,
                             child: Image.asset(Assets.imagesLogout)),
                         Gap(10.h),
-                        Text(
-                            "No connection",
+                        Text("No connection",
                             style: const TextStyle(
                                 fontWeight: FontWeight.w600,
                                 fontSize: 24,
-                                fontFamily: "Poppins"
-                            )
-                        ),
+                                fontFamily: "Poppins")),
                         Gap(50.h)
                       ],
                     ),
@@ -149,40 +146,6 @@ class ConnectivityWrapper extends StatelessWidget {
     return child;
   }
 }
-
-    //   Directionality(
-    //     textDirection: TextDirection.ltr,
-    //   child: Stack(
-    //     alignment: Alignment.topCenter,
-    //     children: [
-    //       child,
-    //       if (!isConnected)
-    //         Positioned(
-    //           top: 0,
-    //           left: 0,
-    //           right: 0,
-    //           child: Container(
-    //             width: 50.r,
-    //             height: 20.r,
-    //             padding: const EdgeInsets.all(8),
-    //             color: Colors.red,
-    //             child: const Center(
-    //               child: Text(
-    //                 textAlign: TextAlign.right,
-    //                 "No Internet Connection",
-    //                 style: TextStyle(
-    //                   color: Colors.white,
-    //                   fontSize: 16,
-    //                 ),
-    //               ),
-    //             ),
-    //           ),
-    //         ),
-    //     ],
-    //   ),
-    // );
- // }
-//}
 
 class MyCustomScrollBehavior extends MaterialScrollBehavior {
   // Override behavior methods and getters like dragDevices

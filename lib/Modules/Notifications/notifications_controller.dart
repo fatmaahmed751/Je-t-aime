@@ -1,4 +1,5 @@
 import 'package:mvc_pattern/mvc_pattern.dart';
+
 class NotificationsController extends ControllerMVC {
   // singleton
   factory NotificationsController() {
@@ -7,19 +8,16 @@ class NotificationsController extends ControllerMVC {
   }
   static NotificationsController? _this;
   NotificationsController._();
-  bool loading=false,autoValidate = false;
+  bool loading = false, autoValidate = false;
   bool isLogin = true;
 
   @override
   void initState() {
     super.initState();
   }
+
   @override
   void dispose() {
     super.dispose();
   }
-
-
-
-
 }

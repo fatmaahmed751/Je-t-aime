@@ -34,7 +34,7 @@ class PaymentScreenState extends StateMVC<PaymentScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: PreferredSize(
-        preferredSize: Size(0,80.h),
+        preferredSize: Size(0, 80.h),
         child: CustomAppBarWidget.detailsScreen(
           title: Strings.paymentMethod.tr,
           icon: "",
@@ -47,8 +47,8 @@ class PaymentScreenState extends StateMVC<PaymentScreen> {
             physics: const BouncingScrollPhysics(),
             children: [
               Padding(
-                padding: EdgeInsetsDirectional.symmetric(horizontal:  20.w),
-                child:  togglePaymentsMethodsWidget(),
+                padding: EdgeInsetsDirectional.symmetric(horizontal: 20.w),
+                child: togglePaymentsMethodsWidget(),
               ),
               con.isClick
                   ? VisaPaymentMethodWidget()
@@ -59,81 +59,84 @@ class PaymentScreenState extends StateMVC<PaymentScreen> {
       ),
     );
   }
-  Widget togglePaymentsMethodsWidget()=>Row(
-    mainAxisAlignment: MainAxisAlignment.center,
-    children: [
-      GestureDetector(
-        onTap: () {
-          setState(() {
-           con.isClick = ! con.isClick ;
-          });
-        },
-        child: Container(
-          padding: EdgeInsetsDirectional.symmetric(
-              vertical: 20.h, horizontal: 16.w),
-          width: 170.w,
-          height: 56.h,
-          decoration: BoxDecoration(
-              color:  con.isClick
-                  ? ThemeClass.of(context).primaryColor
-                  : Colors.transparent,
-              border: Border.all(
-                color:  con.isClick
-                    ? Colors.transparent
-                    : ThemeClass.of(context)
-                    .secondaryBlackColor
-                    .withOpacity(0.6),
-              ),
-              borderRadius: BorderRadius.circular(30.r)),
-          clipBehavior: Clip.hardEdge,
-          child: SvgPicture.asset(
-            Assets.imagesVisalogo,
-            color:  con.isClick
-                ? ThemeClass.of(context).background
-                : ThemeClass.of(context).secondaryBlackColor.withOpacity(0.6),
-          ),
-        ),
-      ),
-      Gap(10.w),
-      GestureDetector(
-        onTap: () {
-          setState(() {
-            con.isClick  = ! con.isClick ;
-          });
-        },
-        child: Container(
-          padding: EdgeInsetsDirectional.symmetric(
-              horizontal: 16.w, vertical: 13.h),
-          width: 170.w,
-          height: 56.h,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(30.r),
-            color: ! con.isClick
-                ? ThemeClass.of(context).primaryColor
-                : ThemeClass.of(context).background,
-            border: Border.all(
-              color: ! con.isClick
-                  ? Colors.transparent
-                  : ThemeClass.of(context)
-                  .secondaryBlackColor
-                  .withOpacity(0.6),
-            ),
-          ),
-          clipBehavior: Clip.hardEdge,
-          child: Text(
-            Strings.cash.tr,
-            textAlign: TextAlign.center,
-            style: TextStyleHelper.of(context).h_16.copyWith(
-                fontWeight: FontWeight.w600,
-                color: ! con.isClick
+
+  Widget togglePaymentsMethodsWidget() => Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          GestureDetector(
+            onTap: () {
+              setState(() {
+                con.isClick = !con.isClick;
+              });
+            },
+            child: Container(
+              padding: EdgeInsetsDirectional.symmetric(
+                  vertical: 20.h, horizontal: 16.w),
+              width: 170.w,
+              height: 56.h,
+              decoration: BoxDecoration(
+                  color: con.isClick
+                      ? ThemeClass.of(context).primaryColor
+                      : Colors.transparent,
+                  border: Border.all(
+                    color: con.isClick
+                        ? Colors.transparent
+                        : ThemeClass.of(context)
+                            .secondaryBlackColor
+                            .withOpacity(0.6),
+                  ),
+                  borderRadius: BorderRadius.circular(30.r)),
+              clipBehavior: Clip.hardEdge,
+              child: SvgPicture.asset(
+                Assets.imagesVisalogo,
+                color: con.isClick
                     ? ThemeClass.of(context).background
                     : ThemeClass.of(context)
-                    .secondaryBlackColor
-                    .withOpacity(0.6),
-                decoration: TextDecoration.none),
+                        .secondaryBlackColor
+                        .withOpacity(0.6),
+              ),
+            ),
           ),
-        ),
-      ),
-    ],
-  );
+          Gap(10.w),
+          GestureDetector(
+            onTap: () {
+              setState(() {
+                con.isClick = !con.isClick;
+              });
+            },
+            child: Container(
+              padding: EdgeInsetsDirectional.symmetric(
+                  horizontal: 16.w, vertical: 13.h),
+              width: 170.w,
+              height: 56.h,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(30.r),
+                color: !con.isClick
+                    ? ThemeClass.of(context).primaryColor
+                    : ThemeClass.of(context).background,
+                border: Border.all(
+                  color: !con.isClick
+                      ? Colors.transparent
+                      : ThemeClass.of(context)
+                          .secondaryBlackColor
+                          .withOpacity(0.6),
+                ),
+              ),
+              clipBehavior: Clip.hardEdge,
+              child: Text(
+                Strings.cash.tr,
+                textAlign: TextAlign.center,
+                style: TextStyleHelper.of(context).h_16.copyWith(
+                    fontWeight: FontWeight.w600,
+                    color: !con.isClick
+                        ? ThemeClass.of(context).background
+                        : ThemeClass.of(context)
+                            .secondaryBlackColor
+                            .withOpacity(0.6),
+                    decoration: TextDecoration.none),
+              ),
+            ),
+          ),
+        ],
+      );
 }

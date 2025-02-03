@@ -1,4 +1,3 @@
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
@@ -24,41 +23,43 @@ class VerificationOtpController extends ControllerMVC {
     return _this!;
   }
   static VerificationOtpController? _this;
-  VerificationOtpController._(){
+  VerificationOtpController._() {
     // Initialize fields in the constructor
     pinController = TextEditingController();
     focusNode = FocusNode();
-    smsRetriever =  SmsRetrieverImpl(SmartAuth.instance);
+    smsRetriever = SmsRetrieverImpl(SmartAuth.instance);
   }
 
-  bool loading=false,autoValidate = false;
- late final SmsRetriever smsRetriever;
+  bool loading = false, autoValidate = false;
+  late final SmsRetriever smsRetriever;
   late TextEditingController pinController;
   late final FocusNode focusNode;
- int? userId ;
+  int? userId;
 
   @override
   void initState() {
     super.initState();
-   //  pinController= TextEditingController();
-   //  focusNode = FocusNode();
-   // smsRetriever = SmsRetrieverImpl(
-   //      SmartAuth());
+    //  pinController= TextEditingController();
+    //  focusNode = FocusNode();
+    // smsRetriever = SmsRetrieverImpl(
+    //      SmartAuth());
     // userId = SharedPref.getCurrentUser()?.user?.id;
     // if (userId == null) {
     //   print('User ID not found in Shared Preferences');
     // }
-
   }
+
   @override
   void dispose() {
     pinController.dispose();
     focusNode.dispose();
     super.dispose();
   }
+
   void setUserId(int userId) {
     this.userId = userId;
   }
+
   void verifyCode(String code, String inputCode) {
     if (code == inputCode) {
       print('Verification successful');
@@ -67,9 +68,11 @@ class VerificationOtpController extends ControllerMVC {
     }
   }
 
-  verifyCodeToVerifyAccount()async {
+  verifyCodeToVerifyAccount() async {
     if (userId == null) {
-      userId = SharedPref.getCurrentUser()?.user?.id; // Attempt to fetch from SharedPref
+      userId = SharedPref.getCurrentUser()
+          ?.user
+          ?.id; // Attempt to fetch from SharedPref
       if (userId == null) {
         print('User ID is missing');
         ToastHelper.showError(message: "User ID is required for verification.");
@@ -80,24 +83,29 @@ class VerificationOtpController extends ControllerMVC {
       ToastHelper.showError(message: "Please enter the OTP code.");
       return;
     }
-    setState((){loading=true;});
+    setState(() {
+      loading = true;
+    });
     final result = await OTPCodeDataHandler.verificationAccountCode(
-     id:userId!,
+      id: userId!,
       code: pinController.text,
     );
-print(result);
+    print(result);
     result.fold((l) {
       print('Failure: ${l.toString()}');
-      ToastHelper.showError(message: Strings.verificationFailed.tr,
-      backgroundColor:ThemeClass.of(currentContext_!).primaryColor );
+      ToastHelper.showError(
+          message: Strings.verificationFailed.tr,
+          backgroundColor: ThemeClass.of(currentContext_!).primaryColor);
     }, (r) {
       ToastHelper.showSuccess(
-        context:   currentContext_!,
+        context: currentContext_!,
         message: Strings.verificationSuccess.tr,
-        icon:SvgPicture.asset(Assets.imagesSubmit,width:60.w,
-          height:50.h,
-          fit: BoxFit.cover,),
-
+        icon: SvgPicture.asset(
+          Assets.imagesSubmit,
+          width: 60.w,
+          height: 50.h,
+          fit: BoxFit.cover,
+        ),
         backgroundColor: ThemeClass.of(currentContext_!).primaryColor,
       );
       currentContext_?.pushNamed(
@@ -107,12 +115,13 @@ print(result);
     setState(() {
       loading = false;
     });
-
   }
 
-  resendVerifyAccountCode()async {
+  resendVerifyAccountCode() async {
     if (userId == null) {
-      userId = SharedPref.getCurrentUser()?.user?.id; // Attempt to fetch from SharedPref
+      userId = SharedPref.getCurrentUser()
+          ?.user
+          ?.id; // Attempt to fetch from SharedPref
       if (userId == null) {
         print('User ID is missing');
         ToastHelper.showError(message: "User ID is required for verification.");
@@ -123,37 +132,33 @@ print(result);
     //   ToastHelper.showError(message: "Please enter the OTP code.");
     //   return;
     // }
-    setState((){loading=true;});
+    setState(() {
+      loading = true;
+    });
     final result = await OTPCodeDataHandler.resentOtp(
-      id:userId!,
+      id: userId!,
     );
     print(result);
     result.fold((l) {
       print('Failure: ${l.toString()}');
-      ToastHelper.showError(message: Strings.verificationFailed.tr,
-          backgroundColor:ThemeClass.of(currentContext_!).primaryColor );
+      ToastHelper.showError(
+          message: Strings.verificationFailed.tr,
+          backgroundColor: ThemeClass.of(currentContext_!).primaryColor);
     }, (r) {
       ToastHelper.showSuccess(
-        context:   currentContext_!,
+        context: currentContext_!,
         message: Strings.verificationSuccess.tr,
-        icon:SvgPicture.asset(Assets.imagesSubmit,width:60.w,
-          height:50.h,
-          fit: BoxFit.cover,),
-
+        icon: SvgPicture.asset(
+          Assets.imagesSubmit,
+          width: 60.w,
+          height: 50.h,
+          fit: BoxFit.cover,
+        ),
         backgroundColor: ThemeClass.of(currentContext_!).primaryColor,
       );
     });
     setState(() {
       loading = false;
     });
-
   }
-
 }
-
-
-
-
-
-
-

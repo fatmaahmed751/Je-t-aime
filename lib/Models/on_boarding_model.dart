@@ -1,12 +1,11 @@
-
 class OnBoardingModel {
   final String imageName;
   final String mainText;
   final String subText;
   final String skipText;
-   final int id;
+  final int id;
 
-  OnBoardingModel(  {
+  OnBoardingModel({
     required this.imageName,
     required this.mainText,
     required this.subText,

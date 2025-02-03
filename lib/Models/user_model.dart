@@ -18,14 +18,14 @@ class UserModel {
   });
 
   factory UserModel.fromJson(Map<String, dynamic> json) => UserModel(
-    user: json["user"] == null ? null : User.fromJson(json["user"]),
-    token: json["token"],
-  );
+        user: json["user"] == null ? null : User.fromJson(json["user"]),
+        token: json["token"],
+      );
 
   Map<String, dynamic> toJson() => {
-    "user": user?.toJson(),
-    "token": token,
-  };
+        "user": user?.toJson(),
+        "token": token,
+      };
 }
 
 class User {
@@ -44,18 +44,18 @@ class User {
   });
 
   factory User.fromJson(Map<String, dynamic> json) => User(
-    id: json["id"],
-    name: json["name"],
-    email: json["email"],
-    phone: json["phone"],
-    image: json["image"],
-  );
+        id: json["id"],
+        name: json["name"],
+        email: json["email"],
+        phone: json["phone"],
+        image: json["image"],
+      );
 
   Map<String, dynamic> toJson() => {
-    "id": id,
-    "name": name,
-    "email": email,
-    "phone": phone,
-    "image": image,
-  };
+        "id": id,
+        "name": name,
+        "email": email,
+        "phone": phone,
+        "image": image,
+      };
 }

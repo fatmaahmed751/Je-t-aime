@@ -30,41 +30,38 @@ class _NotificationsScreenState extends StateMVC<NotificationsScreen> {
   late NotificationsController con;
   @override
   void initState() {
-
     super.initState();
-
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const CustomAppBarWidget.mainScreen(
-          title:"",
-      icon: "",),
+        appBar: const CustomAppBarWidget.mainScreen(
+          title: "",
+          icon: "",
+        ),
         bottomNavigationBar: const BottomNavBarWidget(
           selected: SelectedBottomNavBar.notification,
         ),
-      body: LoadingScreen(
-        loading: con.loading,
-        child: SafeArea(
-         child: Padding(
-           padding: EdgeInsetsDirectional.symmetric(horizontal: 20.w,vertical: 10.h),
-            child:con.isLogin?
-            ListView.separated(
-                itemBuilder:(context,index) =>
-                  const ShowNotificationItem(
-                  ),
-                separatorBuilder:(context,index)=> Gap(8.h),
-                itemCount:6 ):
-            ContainerEmptyContentWidget(
-              image:Assets.imagesNoNotification ,
-              mainText:Strings.notNotificationsYet.tr ,
-              descText:Strings.getNotifications.tr ,
+        body: LoadingScreen(
+          loading: con.loading,
+          child: SafeArea(
+            child: Padding(
+              padding: EdgeInsetsDirectional.symmetric(
+                  horizontal: 20.w, vertical: 10.h),
+              child: con.isLogin
+                  ? ListView.separated(
+                      itemBuilder: (context, index) =>
+                          const ShowNotificationItem(),
+                      separatorBuilder: (context, index) => Gap(8.h),
+                      itemCount: 6)
+                  : ContainerEmptyContentWidget(
+                      image: Assets.imagesNoNotification,
+                      mainText: Strings.notNotificationsYet.tr,
+                      descText: Strings.getNotifications.tr,
+                    ),
+            ),
           ),
-        ),
-     ),
-      )
-    );
+        ));
   }
 }
-
-

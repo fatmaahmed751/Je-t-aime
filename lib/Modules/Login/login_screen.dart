@@ -53,26 +53,30 @@ class _LoginScreenState extends StateMVC<LoginScreen> {
               children: [
                 Gap(20.h),
                 Center(
-                  child: Image.asset(Assets.imagesLoginImage,
+                  child: Image.asset(
+                    Assets.imagesLoginImage,
                     width: 286.w,
-                    height: 216.h,),
+                    height: 216.h,
+                  ),
                 ),
                 Gap(20.h),
-            Container(
-            decoration: BoxDecoration(
-              color: Colors.white, // Background color of the container
-              boxShadow: [
-                BoxShadow(
-                  color: const Color(0xff33333326).withOpacity(0.13),// Shadow color
-                  spreadRadius: 0, // Spread radius
-                   blurRadius:1, // Blur radius for a soft shadow
-                  offset: const Offset(0, -1), // Negative offset to place shadow on top
-                ),
-              ],
-              borderRadius: BorderRadius.circular(30.r),
-            ),
+                Container(
+                  decoration: BoxDecoration(
+                    color: Colors.white, // Background color of the container
+                    boxShadow: [
+                      BoxShadow(
+                        color: const Color(0xff33333326)
+                            .withOpacity(0.13), // Shadow color
+                        spreadRadius: 0, // Spread radius
+                        blurRadius: 1, // Blur radius for a soft shadow
+                        offset: const Offset(
+                            0, -1), // Negative offset to place shadow on top
+                      ),
+                    ],
+                    borderRadius: BorderRadius.circular(30.r),
+                  ),
                   child: Padding(
-                    padding:EdgeInsetsDirectional.symmetric(horizontal:24.w),
+                    padding: EdgeInsetsDirectional.symmetric(horizontal: 24.w),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -86,7 +90,7 @@ class _LoginScreenState extends StateMVC<LoginScreen> {
                           ),
                         ),
                         Gap(15.h),
-                        CustomSideTextWidget(text:Strings.email.tr),
+                        CustomSideTextWidget(text: Strings.email.tr),
                         Gap(12.h),
                         CustomTextFieldWidget(
                           hint: Strings.enterEmail.tr,
@@ -94,34 +98,38 @@ class _LoginScreenState extends StateMVC<LoginScreen> {
                               color: ThemeClass.of(context)
                                   .secondaryBlackColor
                                   .withOpacity(0.7)),
-                          backGroundColor:  ThemeClass.of(context).secondary.withOpacity(1),
+                          backGroundColor:
+                              ThemeClass.of(context).secondary.withOpacity(1),
                           prefixIcon: SvgPicture.asset(Assets.imagesEmailIcon),
-                         // isDense: true,
+                          // isDense: true,
                           insidePadding: EdgeInsets.symmetric(vertical: 10.h),
                           controller: con.emailController,
                           validator: (v) => Validate.validateEmail(v),
                         ),
                         Gap(10.h),
-                        CustomSideTextWidget(text:Strings.password.tr),
+                        CustomSideTextWidget(text: Strings.password.tr),
                         Gap(12.h),
                         CustomTextFieldWidget(
                           hintStyle: TextStyle(
                               color: ThemeClass.of(context)
                                   .secondaryBlackColor
                                   .withOpacity(0.7)),
-                          backGroundColor:  ThemeClass.of(context).secondary.withOpacity(1),
+                          backGroundColor:
+                              ThemeClass.of(context).secondary.withOpacity(1),
                           obscure: con.isPassword,
-                          focusedBorderColor:ThemeClass.of(context).primaryColor ,
+                          focusedBorderColor:
+                              ThemeClass.of(context).primaryColor,
                           hint: Strings.enterPassword.tr,
                           prefixIcon: SvgPicture.asset(Assets.imagesLockIcon),
-                          suffixIcon:con.isPassword? SvgPicture.asset(Assets.imagesObsecureIcon)
-                          :SvgPicture.asset(Assets.imagesEyeOpen),
-                          onSuffixTap:(){
+                          suffixIcon: con.isPassword
+                              ? SvgPicture.asset(Assets.imagesObsecureIcon)
+                              : SvgPicture.asset(Assets.imagesEyeOpen),
+                          onSuffixTap: () {
                             setState(() {
-                             con.isPassword = !con.isPassword;
+                              con.isPassword = !con.isPassword;
                             });
-                          } ,
-                        //  isDense: true,
+                          },
+                          //  isDense: true,
                           insidePadding: EdgeInsets.symmetric(vertical: 10.h),
                           controller: con.passwordController,
                           validator: (v) => Validate.validatePassword(v),
@@ -132,58 +140,63 @@ class _LoginScreenState extends StateMVC<LoginScreen> {
                           children: [
                             GestureDetector(
                               onTap: () {
-                               context.pushNamed(ForgetPasswordScreen.routeName);
+                                context
+                                    .pushNamed(ForgetPasswordScreen.routeName);
                               },
                               child: Text(
                                 Strings.forgetPassword.tr,
                                 textAlign: TextAlign.left,
-                                style: TextStyleHelper.of(context).b_16.copyWith(
-                                    color: ThemeClass.of(context).primaryColor),
+                                style: TextStyleHelper.of(context)
+                                    .b_16
+                                    .copyWith(
+                                        color: ThemeClass.of(context)
+                                            .primaryColor),
                               ),
                             ),
                           ],
                         ),
                         Gap(12.h),
                         CustomButtonWidget.primary(
-                          height: 54.h,
+                            height: 54.h,
                             radius: 30.r,
                             title: Strings.login.tr,
                             onTap: () {
                               if (_formKey.currentState?.validate() ?? false) {
-                              con.onLogin();
+                                con.onLogin();
                               } else {
                                 setState(() {
                                   con.autoValidate = true;
                                 });
                               }
-                            }
-                            ),
+                            }),
                         Gap(8.h),
                         UserStatusRow(
                           text: Strings.noHavenAccount.tr,
                           nextText: Strings.signUp.tr,
                           onNextTextTap: () {
-                          context.pushNamed(RegisterScreen.routeName);
+                            context.pushNamed(RegisterScreen.routeName);
                           },
                         ),
                         Gap(8.h),
                         Row(
                           children: [
-                             Expanded(
+                            Expanded(
                               child: Divider(
-                                color:ThemeClass.of(context).labelColor,
+                                color: ThemeClass.of(context).labelColor,
                                 thickness: 1.w,
                               ),
                             ),
                             Gap(8.w),
-                            Text( Strings.or.tr,
-                              style: TextStyleHelper.of(context).b_16.copyWith(
-                                color:ThemeClass.of(context).labelColor
-                              )),
+                            Text(Strings.or.tr,
+                                style: TextStyleHelper.of(context)
+                                    .b_16
+                                    .copyWith(
+                                        color:
+                                            ThemeClass.of(context).labelColor)),
                             Gap(8.w),
-                             Expanded(
+                            Expanded(
                               child: Divider(
-                                color:ThemeClass.of(context).labelColor,
+                                color: ThemeClass.of(context).labelColor,
                                 thickness: 1.w,
                               ),
                             ),
@@ -204,8 +217,6 @@ class _LoginScreenState extends StateMVC<LoginScreen> {
                     ),
                   ),
                 ),
-
-
               ],
             ),
           ),

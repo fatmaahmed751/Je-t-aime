@@ -10,16 +10,25 @@ import '../../../Widgets/custom_home_details_text_widget.dart';
 import '../../../Widgets/custom_textfield_widget.dart';
 
 class FilterBottomSheetWidget extends StatefulWidget {
-final Widget? sideTextWidget;
-final Widget? checkBoxWidget;
-final bool autoValidate;
-final Function()?onButtonAccept,onButtonReject;
-final TextEditingController startController;
-final TextEditingController endController;
-  const FilterBottomSheetWidget({super.key, this.checkBoxWidget, required this.autoValidate, required this.startController, required this.endController, this.onButtonAccept, this.onButtonReject, this.sideTextWidget});
+  final Widget? sideTextWidget;
+  final Widget? checkBoxWidget;
+  final bool autoValidate;
+  final Function()? onButtonAccept, onButtonReject;
+  final TextEditingController startController;
+  final TextEditingController endController;
+  const FilterBottomSheetWidget(
+      {super.key,
+      this.checkBoxWidget,
+      required this.autoValidate,
+      required this.startController,
+      required this.endController,
+      this.onButtonAccept,
+      this.onButtonReject,
+      this.sideTextWidget});
 
   @override
-  State<FilterBottomSheetWidget> createState() => _FilterBottomSheetWidgetState();
+  State<FilterBottomSheetWidget> createState() =>
+      _FilterBottomSheetWidgetState();
 }
 
 class _FilterBottomSheetWidgetState extends State<FilterBottomSheetWidget> {
@@ -33,27 +42,25 @@ class _FilterBottomSheetWidgetState extends State<FilterBottomSheetWidget> {
         borderRadius: BorderRadius.vertical(top: Radius.circular(30.r)),
       ),
       child: Padding(
-        padding: EdgeInsetsDirectional.symmetric(
-            horizontal: 22.w,
-            vertical: 16.h),
-        child:Form(
-       key: _formKey ,
-        autovalidateMode: widget.autoValidate
-            ? AutovalidateMode.always
-            : AutovalidateMode.disabled,
+        padding:
+            EdgeInsetsDirectional.symmetric(horizontal: 22.w, vertical: 16.h),
+        child: Form(
+          key: _formKey,
+          autovalidateMode: widget.autoValidate
+              ? AutovalidateMode.always
+              : AutovalidateMode.disabled,
           child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisSize: MainAxisSize.min,
               children: [
-                widget.sideTextWidget??const SizedBox.shrink(),
-
+                widget.sideTextWidget ?? const SizedBox.shrink(),
                 Gap(10.h),
-               widget.checkBoxWidget??const SizedBox.shrink(),
+                widget.checkBoxWidget ?? const SizedBox.shrink(),
                 Gap(10.h),
                 CustomHomeDetailsTextWidget(
-                  text:Strings.price.tr,
-                  style:TextStyleHelper.of(context).b_20.copyWith(
+                  text: Strings.price.tr,
+                  style: TextStyleHelper.of(context).b_20.copyWith(
                       color: ThemeClass.of(context).mainBlack,
                       fontWeight: FontWeight.w500),
                 ),
@@ -72,7 +79,7 @@ class _FilterBottomSheetWidgetState extends State<FilterBottomSheetWidget> {
                         //isDense: true,
                         insidePadding: EdgeInsets.symmetric(vertical: 10.h),
                         backGroundColor:
-                        ThemeClass.of(context).secondary.withOpacity(1),
+                            ThemeClass.of(context).secondary.withOpacity(1),
                         controller: widget.startController,
                         //  validator: (v) => Validate.validateNormalFilterNumber(v),
                       ),
@@ -98,17 +105,18 @@ class _FilterBottomSheetWidgetState extends State<FilterBottomSheetWidget> {
                                 .withOpacity(0.6)),
                         insidePadding: EdgeInsets.symmetric(vertical: 10.h),
                         backGroundColor:
-                        ThemeClass.of(context).secondary.withOpacity(1),
+                            ThemeClass.of(context).secondary.withOpacity(1),
                         controller: widget.endController,
-                        validator: (v) => Validate.validateFilterNumber(v,widget.startController.text),
+                        validator: (v) => Validate.validateFilterNumber(
+                            v, widget.startController.text),
                       ),
                     ),
                   ],
                 ),
                 Gap(15.h),
                 CustomHomeDetailsTextWidget(
-                  text:Strings.rateFilter.tr,
-                  style:TextStyleHelper.of(context).b_20.copyWith(
+                  text: Strings.rateFilter.tr,
+                  style: TextStyleHelper.of(context).b_20.copyWith(
                       color: ThemeClass.of(context).mainBlack,
                       fontWeight: FontWeight.w500),
                 ),
@@ -118,22 +126,26 @@ class _FilterBottomSheetWidgetState extends State<FilterBottomSheetWidget> {
                   children: [
                     SliderTheme(
                       data: SliderTheme.of(context).copyWith(
-                        thumbShape:  RoundSliderThumbShape(enabledThumbRadius:9.r), // تصغير الكرة
+                        thumbShape: RoundSliderThumbShape(
+                            enabledThumbRadius: 9.r), // تصغير الكرة
                         trackHeight: 8.h,
-                        activeTrackColor:ThemeClass.of(context).primaryColor,
-                        inactiveTrackColor: ThemeClass.of(context).secondary.withOpacity(1),
-                        thumbColor:ThemeClass.of(context).primaryColor,
-                        overlayShape: const RoundSliderOverlayShape(overlayRadius:10), // حجم الظل حول الكرة عند السحب
+                        activeTrackColor: ThemeClass.of(context).primaryColor,
+                        inactiveTrackColor:
+                            ThemeClass.of(context).secondary.withOpacity(1),
+                        thumbColor: ThemeClass.of(context).primaryColor,
+                        overlayShape: const RoundSliderOverlayShape(
+                            overlayRadius: 10), // حجم الظل حول الكرة عند السحب
                       ),
                       child: Slider(
                         value: _sliderValue,
-                        min:0.0,
+                        min: 0.0,
                         max: 5.0,
-                        onChangeStart:(double startValue) {
+                        onChangeStart: (double startValue) {
                           print('Started change at $startValue');
                         },
-                        activeColor:ThemeClass.of(context).primaryColor,
-                        inactiveColor:ThemeClass.of(context).secondary.withOpacity(1),
+                        activeColor: ThemeClass.of(context).primaryColor,
+                        inactiveColor:
+                            ThemeClass.of(context).secondary.withOpacity(1),
                         label: _sliderValue.toStringAsFixed(1),
                         onChanged: (double value) {
                           setState(() {
@@ -143,20 +155,17 @@ class _FilterBottomSheetWidgetState extends State<FilterBottomSheetWidget> {
                       ),
                     ),
                     Padding(
-                      padding: EdgeInsetsDirectional.symmetric(horizontal:6.w),
+                      padding: EdgeInsetsDirectional.symmetric(horizontal: 6.w),
                       child: Row(
                         //mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text("${_sliderValue.toInt()}",style: TextStyleHelper.of(context).
-                          b_16.copyWith(
-                            color: ThemeClass.of(context).mainBlack
-                          )),
+                          Text("${_sliderValue.toInt()}",
+                              style: TextStyleHelper.of(context).b_16.copyWith(
+                                  color: ThemeClass.of(context).mainBlack)),
                           const Spacer(),
-                          Text("5",style:
-                              TextStyleHelper.of(context).
-                              b_16.copyWith(
-                                  color: ThemeClass.of(context).mainBlack
-                              ) )
+                          Text("5",
+                              style: TextStyleHelper.of(context).b_16.copyWith(
+                                  color: ThemeClass.of(context).mainBlack))
                         ],
                       ),
                     )
@@ -171,17 +180,20 @@ class _FilterBottomSheetWidgetState extends State<FilterBottomSheetWidget> {
                         width: 165.w,
                         height: 48.h,
                         decoration: BoxDecoration(
-                            border: Border.all(
-                                color: ThemeClass.of(context).secondary
-                            ),
-                            borderRadius: BorderRadius.circular(30.r),
-                            color:ThemeClass.of(context).secondary.withOpacity(1),
+                          border: Border.all(
+                              color: ThemeClass.of(context).secondary),
+                          borderRadius: BorderRadius.circular(30.r),
+                          color:
+                              ThemeClass.of(context).secondary.withOpacity(1),
                           // ThemeClass.of(context).background.withOpacity(0.20)
                         ),
-                        child: Center(child: Text(Strings.cancel.tr,
-                          style: TextStyleHelper.of(context).h_16.copyWith(
-                              color: ThemeClass.of(context).secondaryBlackColor
-                          ),),
+                        child: Center(
+                          child: Text(
+                            Strings.cancel.tr,
+                            style: TextStyleHelper.of(context).h_16.copyWith(
+                                color:
+                                    ThemeClass.of(context).secondaryBlackColor),
+                          ),
                         ),
                       ),
                     ),
@@ -193,21 +205,23 @@ class _FilterBottomSheetWidgetState extends State<FilterBottomSheetWidget> {
                         height: 48.h,
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(30.r),
-                            color:ThemeClass.of(context).primaryColor
-                          // ThemeClass.of(context).background.withOpacity(0.20)
-                        ),
+                            color: ThemeClass.of(context).primaryColor
+                            // ThemeClass.of(context).background.withOpacity(0.20)
+                            ),
                         //  backgroundColor: ThemeClass.of(context).primaryColor,
-                        child: Center(child: Text(Strings.apply.tr,
-                          style: TextStyleHelper.of(context).h_16.copyWith(
-                            color: ThemeClass.of(context).background,
-                          ),),
+                        child: Center(
+                          child: Text(
+                            Strings.apply.tr,
+                            style: TextStyleHelper.of(context).h_16.copyWith(
+                                  color: ThemeClass.of(context).background,
+                                ),
+                          ),
                         ),
                       ),
                     ),
                   ],
                 ),
-              ]
-          ),
+              ]),
         ),
       ),
     );

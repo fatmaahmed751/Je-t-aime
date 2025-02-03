@@ -11,24 +11,20 @@ class FavoriteController extends ControllerMVC {
   static FavoriteController? _this;
   bool isUserHaveFavorites = false;
   FavoriteController._();
-bool loading =false;
+  bool loading = false;
   bool isLiked = false;
   bool isLogin = false;
-late TextEditingController searchController;
-
+  late TextEditingController searchController;
 
   @override
   void initState() {
-searchController = TextEditingController();
+    searchController = TextEditingController();
     super.initState();
   }
 
   @override
   void dispose() {
- searchController.dispose();
+    searchController.dispose();
     super.dispose();
   }
-
-
 }
-

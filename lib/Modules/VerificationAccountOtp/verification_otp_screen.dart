@@ -35,7 +35,7 @@ class _VerificationOtpScreenState extends StateMVC<VerificationOtpScreen> {
   void initState() {
     super.initState();
     con.setUserId(widget.id);
-    }
+  }
 
   @override
   void dispose() {

@@ -8,33 +8,32 @@ import 'package:je_t_aime/Utilities/theme_helper.dart';
 import '../../../Models/category_model.dart';
 import '../../../Widgets/custom_home_details_text_widget.dart';
 
-class CategoriesWidget extends StatelessWidget{
+class CategoriesWidget extends StatelessWidget {
   final CategoryModel categoryModel;
 
   const CategoriesWidget({super.key, required this.categoryModel});
   @override
   Widget build(BuildContext context) {
-    return   SizedBox(
+    return SizedBox(
       width: 104.w,
       height: 136.h,
       child: Column(
         children: [
           GestureDetector(
-            onTap: (){
+            onTap: () {
               context.pushNamed(AllCategoriesScreen.routeName);
             },
             child: CircleAvatar(
-              radius:50.r,
-              backgroundImage:
-              NetworkImage(
-                  categoryModel.image??""),),
+              radius: 50.r,
+              backgroundImage: NetworkImage(categoryModel.image ?? ""),
+            ),
           ),
           Gap(6.h),
-          CustomHomeDetailsTextWidget(text:categoryModel.title!,
+          CustomHomeDetailsTextWidget(
+            text: categoryModel.title!,
             style: TextStyleHelper.of(context).b_16.copyWith(
-              color: ThemeClass.of(context).mainBlack,
-              fontWeight: FontWeight.w600
-            ),
+                color: ThemeClass.of(context).mainBlack,
+                fontWeight: FontWeight.w600),
           )
         ],
       ),

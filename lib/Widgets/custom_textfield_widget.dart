@@ -223,13 +223,13 @@ class CustomTextFieldWidgetState extends State<CustomTextFieldWidget> {
     if (widget.disableBorder) return null;
     return OutlineInputBorder(
       borderRadius: BorderRadius.circular(28.r),
-      borderSide: BorderSide(color: color ?? ThemeClass.of(context).secondary,width: 1.w),
+      borderSide: BorderSide(
+          color: color ?? ThemeClass.of(context).secondary, width: 1.w),
     );
   }
 
   @override
   Widget build(BuildContext context) {
-
     return SizedBox(
       width: widget.width,
       //height: 48.h,
@@ -249,19 +249,21 @@ class CustomTextFieldWidgetState extends State<CustomTextFieldWidget> {
         textInputAction: widget.textInputAction,
         onTap: widget.onTap,
         onFieldSubmitted: widget.onSave,
-        inputFormatters: widget.formatter?? [],
+        inputFormatters: widget.formatter ?? [],
         expands: widget.expands ?? false,
         onChanged: widget.onchange,
         textAlignVertical: TextAlignVertical.center,
         validator: widget.validator,
         decoration: InputDecoration(
-          disabledBorder: getBorder(radius: 30.r,color: Colors.transparent),
-          errorStyle:  TextStyle(height:1.h,color: ThemeClass.of(context).primaryColor),
-         errorBorder:  OutlineInputBorder(
+          disabledBorder: getBorder(radius: 30.r, color: Colors.transparent),
+          errorStyle: TextStyle(
+              height: 1.h, color: ThemeClass.of(context).primaryColor),
+          errorBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(30.r),
             borderSide: BorderSide(
-              color:ThemeClass.of(context).primaryColor, // Border color when there's an error
-              width:1,
+              color: ThemeClass.of(context)
+                  .primaryColor, // Border color when there's an error
+              width: 1,
             ),
           ),
           //textCapitalization: TextCapitalization.words,
@@ -271,10 +273,11 @@ class CustomTextFieldWidgetState extends State<CustomTextFieldWidget> {
           ),
           focusedErrorBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(28.r),
-            borderSide: BorderSide(color:  ThemeClass.of(context).primaryColor, width: 1.0),
+            borderSide: BorderSide(
+                color: ThemeClass.of(context).primaryColor, width: 1.0),
           ),
           focusedBorder: getBorder(
-            radius:28.r,
+            radius: 28.r,
             color: widget.focusedBorderColor ??
                 ThemeClass.of(context).primaryColor,
           ),
@@ -291,10 +294,12 @@ class CustomTextFieldWidgetState extends State<CustomTextFieldWidget> {
                   child: widget.prefixIcon,
                 )
               : null,
-           prefixIconConstraints:BoxConstraints( minWidth: widget.prefixIcon == null ? 0.w : 48.w, maxHeight: 48.w),
+          prefixIconConstraints: BoxConstraints(
+              minWidth: widget.prefixIcon == null ? 0.w : 48.w,
+              maxHeight: 48.w),
           suffixIconConstraints: BoxConstraints(
-           minWidth: widget.suffixIcon == null ? 0 : 48.w, maxHeight:24.h),
-            suffixIcon:widget.suffixIcon != null
+              minWidth: widget.suffixIcon == null ? 0 : 48.w, maxHeight: 24.h),
+          suffixIcon: widget.suffixIcon != null
               ? Padding(
                   padding: EdgeInsetsDirectional.symmetric(horizontal: 12.w),
                   child: InkWell(

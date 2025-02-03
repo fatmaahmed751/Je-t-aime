@@ -32,14 +32,15 @@ class DetailsOfOrder extends StatelessWidget {
           boxShadow: [
             BoxShadow(
                 offset: const Offset(0, 0),
-               color:   ThemeClass.of(context).secondaryBlackColor.withOpacity(0.10),
-                blurRadius:3,
-               spreadRadius:0.3
-            ),
+                color: ThemeClass.of(context)
+                    .secondaryBlackColor
+                    .withOpacity(0.10),
+                blurRadius: 3,
+                spreadRadius: 0.3),
           ],
         ),
         child: Padding(
-          padding: EdgeInsetsDirectional.only(top: 20.h,bottom: 10.h),
+          padding: EdgeInsetsDirectional.only(top: 20.h, bottom: 10.h),
           child:
               Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
             Row(
@@ -107,9 +108,8 @@ class DetailsOfOrder extends StatelessWidget {
                     .copyWith(color: ThemeClass.of(context).mainBlack),
               ),
             ]),
-                Gap(8.h)
-          ]
-              ),
+            Gap(8.h)
+          ]),
         ),
       ),
     );

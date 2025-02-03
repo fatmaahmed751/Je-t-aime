@@ -45,15 +45,14 @@ class _ChangeLanguageState extends StateMVC<ChangeLanguage> {
         borderRadius: BorderRadius.vertical(top: Radius.circular(30.r)),
       ),
       child: Padding(
-        padding:
-            EdgeInsetsDirectional.symmetric( vertical: 35.h),
+        padding: EdgeInsetsDirectional.symmetric(vertical: 35.h),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,
           children: [
             Padding(
-              padding: EdgeInsetsDirectional.symmetric( horizontal: 20.w),
+              padding: EdgeInsetsDirectional.symmetric(horizontal: 20.w),
               child: Text(Strings.languages.tr ?? '',
                   style: TextStyleHelper.of(context).h_20.copyWith(
                       color: ThemeClass.of(context).mainBlack,
@@ -68,7 +67,8 @@ class _ChangeLanguageState extends StateMVC<ChangeLanguage> {
                       ? SvgPicture.asset(Assets.imagesSelectedIcon)
                       : SvgPicture.asset(Assets.imagesUnSelectedIcon),
                   onPressed: () {
-                    setState(() {
+                    setState(
+                      () {
                         con.selectLanguage(1);
                       },
                     );
@@ -89,7 +89,8 @@ class _ChangeLanguageState extends StateMVC<ChangeLanguage> {
                       ? SvgPicture.asset(Assets.imagesSelectedIcon)
                       : SvgPicture.asset(Assets.imagesUnSelectedIcon),
                   onPressed: () {
-                    setState(() {
+                    setState(
+                      () {
                         con.selectLanguage(2);
                       },
                     );
@@ -104,9 +105,9 @@ class _ChangeLanguageState extends StateMVC<ChangeLanguage> {
               ],
             ),
             Padding(
-              padding: EdgeInsetsDirectional.symmetric( horizontal: 16.w),
+              padding: EdgeInsetsDirectional.symmetric(horizontal: 16.w),
               child: Row(
-              mainAxisAlignment: MainAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   GestureDetector(
                     onTap: () {
@@ -116,8 +117,8 @@ class _ChangeLanguageState extends StateMVC<ChangeLanguage> {
                       width: 170.w,
                       height: 48.h,
                       decoration: BoxDecoration(
-                          border:
-                              Border.all(color: ThemeClass.of(context).secondary),
+                          border: Border.all(
+                              color: ThemeClass.of(context).secondary),
                           borderRadius: BorderRadius.circular(30.r),
                           color: ThemeClass.of(context).secondary
                           // ThemeClass.of(context).background.withOpacity(0.20)
@@ -127,14 +128,15 @@ class _ChangeLanguageState extends StateMVC<ChangeLanguage> {
                         child: Text(
                           Strings.cancel.tr,
                           style: TextStyleHelper.of(context).h_16.copyWith(
-                              color: ThemeClass.of(context).secondaryBlackColor),
+                              color:
+                                  ThemeClass.of(context).secondaryBlackColor),
                         ),
                       ),
                     ),
                   ),
                   Gap(16.w),
                   GestureDetector(
-                    onTap: ()async {
+                    onTap: () async {
                       setState(() {
                         if (con.selectedLanguage == 1) {
                           Provider.of<AppLanguage>(context, listen: false)
@@ -148,9 +150,8 @@ class _ChangeLanguageState extends StateMVC<ChangeLanguage> {
                       await Future.delayed(const Duration(milliseconds: 100));
                       currentContext_!.pushNamed(HomeScreen.routeName);
 
-                     // await Future.delayed(const Duration(milliseconds: 200));
-                     //  GoRouter.of(context).pushNamed(HomeScreen.routeName);
-
+                      // await Future.delayed(const Duration(milliseconds: 200));
+                      //  GoRouter.of(context).pushNamed(HomeScreen.routeName);
                     },
                     child: Container(
                       width: 165.w,
@@ -162,13 +163,12 @@ class _ChangeLanguageState extends StateMVC<ChangeLanguage> {
                         child: Text(
                           Strings.change.tr,
                           style: TextStyleHelper.of(context).h_16.copyWith(
-                            color: ThemeClass.of(context).background,
-                          ),
+                                color: ThemeClass.of(context).background,
+                              ),
                         ),
                       ),
                     ),
                   ),
-
                 ],
               ),
             ),
@@ -178,4 +178,3 @@ class _ChangeLanguageState extends StateMVC<ChangeLanguage> {
     );
   }
 }
-

@@ -32,19 +32,9 @@ class LoginController extends ControllerMVC {
 
   @override
   void initState() {
-  emailController = TextEditingController();
-   passwordController = TextEditingController();
- //  emailController = TextEditingController(text:"sohum1@bcampbelleo.com");
- //  passwordController = TextEditingController(text:"Amirafatma@202020");
-   // emailController = TextEditingController(text:"gwendola@laoraclej.com");
-   //  passwordController = TextEditingController(text:"Amirafatma@202020");
+    emailController = TextEditingController();
+    passwordController = TextEditingController();
     super.initState();
-    // googleSignIn.onCurrentUserChanged.listen((GoogleSignInAccount? account) {
-    //   setState(() {
-    //     currentUser = account;
-    //   });
-    // });
-    // googleSignIn.signInSilently();
   }
 
   @override
@@ -54,94 +44,6 @@ class LoginController extends ControllerMVC {
     super.dispose();
   }
 
-  // Future<UserModel?> signIn() async {
-  //   return await _authService.signInWithApple();
-  // }
-  //
-  // void signOut() {
-  //   _authService.signOut();
-  // }
-  //
-  // void handleSignOut() {
-  //   _authController.signOut();
-  //   setState(() {
-  //     userModel = null;
-  //   });
-  // }
-  //
-  // void handleSignInWithApple() async {
-  //   final user = await _authController.signIn();
-  //   setState(() {
-  //     userModel = user;
-  //   });
-  // }
-  //
-  // Future<void> handleSignIn() async {
-  //   try {
-  //     GoogleSignInAccount? googleUser = await googleSignIn.signIn();
-  //     if (googleUser != null) {
-  //       GoogleSignInAuthentication googleAuth = await googleUser.authentication;
-  //       String? idToken = googleAuth.idToken;
-  //
-  //       // Send this ID token to your private API for verification
-  //       print("IDbbbbbbbbbbbbbbbbbbb Token: $idToken");
-  //     }
-  //   } catch (error) {
-  //     print(error);
-  //   }
-  // }
-  //
-  // Future<void> sendTokenToAPI(String? idToken) async {
-  //   if (idToken == null) return;
-  //   final response = await http.post(
-  //     Uri.parse(APIEndPoint.login),
-  //     body: jsonEncode({
-  //       'token': idToken, // Send the ID token to your backend API
-  //     }),
-  //     headers: {'Content-Type': 'multipart/form-data'},
-  //   );
-  //   // var response = await GenericRequest<String>(
-  //   //   method: RequestApi.postJson(
-  //   //     url: APIEndPoint.login,
-  //   //     bodyJson: ({
-  //   //       'token': idToken,
-  //   //     }),
-  //   //   ),
-  //   //   fromMap: (_) => _["data"]['key'],
-  //   // ).getResponse();
-  //   if (response.statusCode == 200) {
-  //     // Successful login
-  //     print('Login successful');
-  //   } else {
-  //     // Handle error
-  //     print('Login failed');
-  //   }
-  // }
-  //
-  // signInWithApple() async {
-  //   setState(() {
-  //     loading = true;
-  //   });
-  //   await Future.delayed(const Duration(seconds: 2));
-  //   setState(() {
-  //     loading = false;
-  //   });
-  // }
-  //
-  // Future<void> handleGoogleSignOut() async {
-  //   googleSignIn.disconnect();
-  // }
-  //
-  // signInWithGoogle() async {
-  //   setState(() {
-  //     loading = true;
-  //   });
-  //   await Future.delayed(const Duration(seconds: 2));
-  //   setState(() {
-  //     loading = false;
-  //   });
-  // }
-  //
   onLogin() async {
     setState(() {
       loading = true;
@@ -152,9 +54,9 @@ class LoginController extends ControllerMVC {
     );
 
     result.fold((l) {
-   ToastHelper.showError(message: l.errorModel.statusMessage);
+      ToastHelper.showError(message: l.errorModel.statusMessage);
     }, (r) async {
-     // await SharedPref.saveCurrentUser(user: r);
+      // await SharedPref.saveCurrentUser(user: r);
       print("token loginnnn ${SharedPref.getCurrentUser()?.token}");
       currentContext_?.pushNamed(
         HomeScreen.routeName,

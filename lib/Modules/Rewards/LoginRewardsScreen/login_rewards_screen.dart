@@ -37,8 +37,8 @@ class _LoginRewardsScreenState extends StateMVC<LoginRewardsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar:PreferredSize(
-        preferredSize: Size(0,75.h),
+      appBar: PreferredSize(
+        preferredSize: Size(0, 75.h),
         child: CustomAppBarWidget.detailsScreen(
           title: Strings.rewards.tr,
           icon: "",
@@ -55,77 +55,78 @@ class _LoginRewardsScreenState extends StateMVC<LoginRewardsScreen> {
                 Stack(
                   alignment: Alignment.centerLeft,
                   children: [
-                    SharedPref.getCurrentLanguage() == "ar"?
-                    SvgPicture.asset(
-                      Assets.imagesArabicContainer,
-                      height: 130.h,
-                    ):
-                    SvgPicture.asset(
-                      Assets.imagesContainer,
-                      height: 130.h,
-                    ),
+                    SharedPref.getCurrentLanguage() == "ar"
+                        ? SvgPicture.asset(
+                            Assets.imagesArabicContainer,
+                            height: 130.h,
+                          )
+                        : SvgPicture.asset(
+                            Assets.imagesContainer,
+                            height: 130.h,
+                          ),
                     Padding(
                       padding: EdgeInsetsDirectional.only(start: 16.w),
-                        child: Align(
-                          alignment:  SharedPref.getCurrentLanguage() == "ar"?
-                          Alignment.centerRight:  Alignment.centerLeft,
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              CustomDetailsSideTextWidget(
-                                  text: Strings.loyaltyPoints.tr),
-                              Gap(8.h),
-                              Text(
-                                "100 ${Strings.points.tr}",
-                                textAlign: TextAlign.left,
-                                style: TextStyleHelper.of(context).b_16.copyWith(
-                                    color: ThemeClass.of(context).primaryColor),
-                              ),
-                            ],
-                          ),
+                      child: Align(
+                        alignment: SharedPref.getCurrentLanguage() == "ar"
+                            ? Alignment.centerRight
+                            : Alignment.centerLeft,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            CustomDetailsSideTextWidget(
+                                text: Strings.loyaltyPoints.tr),
+                            Gap(8.h),
+                            Text(
+                              "100 ${Strings.points.tr}",
+                              textAlign: TextAlign.left,
+                              style: TextStyleHelper.of(context).b_16.copyWith(
+                                  color: ThemeClass.of(context).primaryColor),
+                            ),
+                          ],
                         ),
                       ),
+                    ),
                   ],
                 ),
                 Gap(24.h),
                 CustomDetailsSideTextWidget(text: Strings.transactions.tr),
                 Gap(16.h),
-                    ListView.separated(
-                      padding: EdgeInsets.zero,
+                ListView.separated(
+                  padding: EdgeInsets.zero,
                   shrinkWrap: true,
-                      physics: const NeverScrollableScrollPhysics(),
-                      itemBuilder: (context, index) => const EarnPoints(),
-                      itemCount: 10,
-                      separatorBuilder: (context, index) => Gap(8.h),
-                    )
-                    // : Column(
-                    //     mainAxisAlignment: MainAxisAlignment.center,
-                    //     //crossAxisAlignment: CrossAxisAlignment.center,
-                    //     children: [
-                    //         Gap(70.h),
-                    //         Text(
-                    //           Strings.noTransactionYet.tr,
-                    //           maxLines: 3,
-                    //           textAlign: TextAlign.center,
-                    //           style: TextStyleHelper.of(context).b_16.copyWith(
-                    //               color: ThemeClass.of(context)
-                    //                   .secondaryBlackColor),
-                    //         ),
-                    //         Gap(40.h),
-                    //         Padding(
-                    //           padding: EdgeInsetsDirectional.symmetric(
-                    //               horizontal: 40.w),
-                    //           child: CustomButtonWidget.primary(
-                    //               height: 48.h,
-                    //               width: 150.w,
-                    //               radius: 30.r,
-                    //               title: Strings.exploreProduct.tr,
-                    //               onTap: () {
-                    //                  GoRouter.of(context)
-                    //                    .pushNamed(PopularProductsScreen.routeName);
-                    //               }),
-                    //         ),
-                    //       ]),
+                  physics: const NeverScrollableScrollPhysics(),
+                  itemBuilder: (context, index) => const EarnPoints(),
+                  itemCount: 10,
+                  separatorBuilder: (context, index) => Gap(8.h),
+                )
+                // : Column(
+                //     mainAxisAlignment: MainAxisAlignment.center,
+                //     //crossAxisAlignment: CrossAxisAlignment.center,
+                //     children: [
+                //         Gap(70.h),
+                //         Text(
+                //           Strings.noTransactionYet.tr,
+                //           maxLines: 3,
+                //           textAlign: TextAlign.center,
+                //           style: TextStyleHelper.of(context).b_16.copyWith(
+                //               color: ThemeClass.of(context)
+                //                   .secondaryBlackColor),
+                //         ),
+                //         Gap(40.h),
+                //         Padding(
+                //           padding: EdgeInsetsDirectional.symmetric(
+                //               horizontal: 40.w),
+                //           child: CustomButtonWidget.primary(
+                //               height: 48.h,
+                //               width: 150.w,
+                //               radius: 30.r,
+                //               title: Strings.exploreProduct.tr,
+                //               onTap: () {
+                //                  GoRouter.of(context)
+                //                    .pushNamed(PopularProductsScreen.routeName);
+                //               }),
+                //         ),
+                //       ]),
               ],
             ),
           ),

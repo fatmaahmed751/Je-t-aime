@@ -24,26 +24,27 @@ class UserProfileContainerWidget extends StatelessWidget {
       height: 48.h,
       width: 382.w,
       decoration: BoxDecoration(
-          color: ThemeClass.of(context).background,
+        color: ThemeClass.of(context).background,
       ),
       child: Padding(
-        padding:  EdgeInsetsDirectional.symmetric(horizontal: 16.w),
+        padding: EdgeInsetsDirectional.symmetric(horizontal: 16.w),
         child: Row(
           children: [
             Container(
-              width: 40.w,
+                width: 40.w,
                 height: 40.h,
                 decoration: BoxDecoration(
                     color: ThemeClass.of(context).containerColor,
                     borderRadius: BorderRadius.circular(30.r)),
                 child: Padding(
                   padding: EdgeInsetsDirectional.symmetric(
-                      horizontal: 6.w,
-                  vertical: 6.h),
+                      horizontal: 6.w, vertical: 6.h),
                   child: Transform.flip(
-                    flipX:SharedPref.getCurrentLanguage()=="ar"? true:false,
-                    child: SvgPicture.asset(image,
-                                     ),
+                    flipX:
+                        SharedPref.getCurrentLanguage() == "ar" ? true : false,
+                    child: SvgPicture.asset(
+                      image,
+                    ),
                   ),
                 )),
             Gap(10.w),
@@ -53,13 +54,13 @@ class UserProfileContainerWidget extends StatelessWidget {
             ),
             const Spacer(),
             Transform.flip(
-              flipX:SharedPref.getCurrentLanguage()=="ar"? true:false,
-              child:  Center(
-                child:   SvgPicture.asset(Assets.imagesArrowForward),
-                   ),
+              flipX: SharedPref.getCurrentLanguage() == "ar" ? true : false,
+              child: Center(
+                child: SvgPicture.asset(Assets.imagesArrowForward),
+              ),
             ),
 
-           // SvgPicture.asset(Assets.imagesArrowForward)
+            // SvgPicture.asset(Assets.imagesArrowForward)
           ],
         ),
       ),

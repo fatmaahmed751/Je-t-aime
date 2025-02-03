@@ -44,18 +44,18 @@ class SplashController extends ControllerMVC {
   static SplashController? _this;
   SplashController._();
 
- //  final Connectivity connectivity = Connectivity();
- // // final ConnectivityService connectivityService = ConnectivityService();
- //  bool isConnected = true;
- //  Future<void> checkInternetConnection() async {
- //    var connectivityResult = await connectivity.checkConnectivity();
- //    setState(() {
- //        isConnected = connectivityResult != ConnectivityResult.none;
- //      });
- //
- //      if (!isConnected) {
- //        showNoInternetDialog();
- //      }
+  //  final Connectivity connectivity = Connectivity();
+  // // final ConnectivityService connectivityService = ConnectivityService();
+  //  bool isConnected = true;
+  //  Future<void> checkInternetConnection() async {
+  //    var connectivityResult = await connectivity.checkConnectivity();
+  //    setState(() {
+  //        isConnected = connectivityResult != ConnectivityResult.none;
+  //      });
+  //
+  //      if (!isConnected) {
+  //        showNoInternetDialog();
+  //      }
 
   //}
 
@@ -80,18 +80,16 @@ class SplashController extends ControllerMVC {
   }
 
   Future init(BuildContext context) async {
-   // await checkInternetConnection();
+    // await checkInternetConnection();
     await SplashDataHandler.getCurrentUser();
     await Future.delayed(const Duration(seconds: 2));
     if (context.mounted) {
-        GoRouter.of(context).goNamed(HomeScreen.routeName);
-      }
-      if (SharedPref.isLogin()) {
-        // Handle logged-in state
-      } else {
-        // Handle not logged-in state
-      }
+      GoRouter.of(context).goNamed(HomeScreen.routeName);
+    }
+    if (SharedPref.isLogin()) {
+      // Handle logged-in state
+    } else {
+      // Handle not logged-in state
     }
   }
-
-
+}

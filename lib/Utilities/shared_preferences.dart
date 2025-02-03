@@ -7,8 +7,7 @@ import '../core/Language/app_languages.dart';
 import '../core/Theme/theme_model.dart';
 import '../Models/user_model.dart';
 
-class SharedPref{
-
+class SharedPref {
   static SharedPreferences get prefs => GetIt.instance.get<SharedPreferences>();
   static const String _language = "language_code";
   static const String _currentUserKey = "currentUser";
@@ -18,35 +17,36 @@ class SharedPref{
   static const String _secondaryColor = "secondaryColor";
   static const String _primaryColor = "primaryColor";
 
-
-
-  static UserModel? getCurrentUser(){
-    if(prefs.getString(_currentUserKey) == null) return null;
+  static UserModel? getCurrentUser() {
+    if (prefs.getString(_currentUserKey) == null) return null;
     return UserModel.fromJson(json.decode(prefs.getString(_currentUserKey)!));
   }
 
-  static Future<bool> saveCurrentUser({required UserModel user})async{
+  static Future<bool> saveCurrentUser({required UserModel user}) async {
     return await prefs.setString(_currentUserKey, json.encode(user.toJson()));
   }
 
-  static bool isLogin()=> prefs.getString(_currentUserKey) != null;
+  static bool isLogin() => prefs.getString(_currentUserKey) != null;
 
-  static Future<void> logout() async=> await prefs.remove(_currentUserKey);
+  static Future<void> logout() async => await prefs.remove(_currentUserKey);
 
-  static ThemeModel? getTheme(){
-    if(prefs.getString(_themeKey) == null) return null;
+  static ThemeModel? getTheme() {
+    if (prefs.getString(_themeKey) == null) return null;
     return ThemeModel.fromJson(json.decode(prefs.getString(_themeKey)!));
   }
-  static Future<void> setTheme({required ThemeModel theme})async{
-    await prefs.setString(_themeKey,json.encode(theme.toJson()));
+
+  static Future<void> setTheme({required ThemeModel theme}) async {
+    await prefs.setString(_themeKey, json.encode(theme.toJson()));
   }
 
-  static double? getFontSizeScale(){
+  static double? getFontSizeScale() {
     return prefs.getDouble(_fontSizeKey);
   }
-  static Future<void> setFontSizeScale({required double fontSizeScale})async{
-    await prefs.setDouble(_fontSizeKey,fontSizeScale);
+
+  static Future<void> setFontSizeScale({required double fontSizeScale}) async {
+    await prefs.setDouble(_fontSizeKey, fontSizeScale);
   }
+
   static Color? getPrimaryColor() {
     if (prefs.getInt(_primaryColor) == null) return null;
     return Color(prefs.getInt(_primaryColor)!);
@@ -65,16 +65,18 @@ class SharedPref{
     await prefs.setInt(_secondaryColor, color.value);
   }
 
-  static Future setFontFamily({required FontFamilyTypes fontFamily}) async=> await prefs.setInt(_fontFamilyKey, fontFamily.index);
-  static FontFamilyTypes?  getFontFamily()=> prefs.getInt(_fontFamilyKey) == null?null:FontFamilyTypes.values[prefs.getInt(_fontFamilyKey)!];
+  static Future setFontFamily({required FontFamilyTypes fontFamily}) async =>
+      await prefs.setInt(_fontFamilyKey, fontFamily.index);
+  static FontFamilyTypes? getFontFamily() =>
+      prefs.getInt(_fontFamilyKey) == null
+          ? null
+          : FontFamilyTypes.values[prefs.getInt(_fontFamilyKey)!];
 
   static String? getLanguage() => prefs.getString(_language);
 
-  static String getCurrentLanguage() => prefs.getString(_language) ?? (appLangIsArabic()? "ar": "en");
+  static String getCurrentLanguage() =>
+      prefs.getString(_language) ?? (appLangIsArabic() ? "ar" : "en");
 
-
-
-  static Future<void> setLanguage({required String lang})async => await prefs.setString(_language,lang);
-
-
+  static Future<void> setLanguage({required String lang}) async =>
+      await prefs.setString(_language, lang);
 }

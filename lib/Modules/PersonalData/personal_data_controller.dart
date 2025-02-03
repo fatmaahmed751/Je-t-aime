@@ -13,9 +13,10 @@ class PersonalDataController extends ControllerMVC {
   PersonalDataController._();
 
   bool loading = false, autoValidate = false;
-  late TextEditingController nameController, phoneController, addressController,
+  late TextEditingController nameController,
+      phoneController,
+      addressController,
       emailController;
-
 
   @override
   void initState() {
@@ -27,21 +28,14 @@ class PersonalDataController extends ControllerMVC {
     super.initState();
   }
 
-init(){
-
-        }
+  init() {}
   @override
   void dispose() {
     nameController.dispose();
     phoneController.dispose();
     addressController.dispose();
     emailController.dispose();
-   // controller.dispose();
+    // controller.dispose();
     super.dispose();
   }
-
-
-
-
-  }
-
+}

@@ -12,13 +12,11 @@ class RegisterDataHandler {
     required String email,
     required String password,
     required String name,
-
   }) async {
     try {
       UserModel response = await GenericRequest<UserModel>(
-        method: RequestApi.post(url: APIEndPoint.register,
-            body: {
-          "name":name,
+        method: RequestApi.post(url: APIEndPoint.register, body: {
+          "name": name,
           "email": email,
           "password": password,
           "password_confirmation": password

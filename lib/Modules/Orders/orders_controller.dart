@@ -13,8 +13,7 @@ class OrdersController extends ControllerMVC {
 
   bool loading = false;
   bool isLogin = false;
- // List<OrderInfoModel> orders=[];
-
+  // List<OrderInfoModel> orders=[];
 
   @override
   void initState() {
@@ -25,9 +24,8 @@ class OrdersController extends ControllerMVC {
   void dispose() {
     super.dispose();
   }
-init(){
- // listOfOrders();
-}
 
-
+  init() {
+    // listOfOrders();
+  }
 }

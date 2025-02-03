@@ -12,7 +12,7 @@ import '../../../Widgets/custom_details_side_text.dart';
 import '../../../generated/assets.dart';
 import '../product_details_controller.dart';
 
-class ProductDetailsWidget extends StatefulWidget{
+class ProductDetailsWidget extends StatefulWidget {
   const ProductDetailsWidget({super.key});
 
   @override
@@ -20,7 +20,7 @@ class ProductDetailsWidget extends StatefulWidget{
 }
 
 class _ProductDetailsWidgetState extends StateMVC<ProductDetailsWidget> {
-  _ProductDetailsWidgetState():super(ProductDetailsController()){
+  _ProductDetailsWidgetState() : super(ProductDetailsController()) {
     con = ProductDetailsController();
   }
 
@@ -36,11 +36,10 @@ class _ProductDetailsWidgetState extends StateMVC<ProductDetailsWidget> {
             height: 270.h,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(30.r),
-              color:ThemeClass.of(context).pinkColor,
-
+              color: ThemeClass.of(context).pinkColor,
             ),
             child: Padding(
-              padding:  EdgeInsetsDirectional.symmetric(vertical: 10.h),
+              padding: EdgeInsetsDirectional.symmetric(vertical: 10.h),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -48,7 +47,8 @@ class _ProductDetailsWidgetState extends StateMVC<ProductDetailsWidget> {
                   SizedBox(
                     width: 65.w,
                     height: 158.h,
-                    child: Image.asset(Assets.imagesProduct,// Replace with your main image
+                    child: Image.asset(
+                      Assets.imagesProduct, // Replace with your main image
                       fit: BoxFit.contain,
                     ),
                   ),
@@ -69,14 +69,18 @@ class _ProductDetailsWidgetState extends StateMVC<ProductDetailsWidget> {
                             borderRadius: BorderRadius.circular(10.r),
                             color: Colors.white,
                             border: Border.all(
-                              color: index == 0 ?ThemeClass.of(context).primaryColor :ThemeClass.of(context).labelColor,
+                              color: index == 0
+                                  ? ThemeClass.of(context).primaryColor
+                                  : ThemeClass.of(context).labelColor,
                               width: 0.5,
                             ),
                           ),
                           child: Padding(
-                            padding:EdgeInsetsDirectional.symmetric(vertical: 8.h),
+                            padding:
+                                EdgeInsetsDirectional.symmetric(vertical: 8.h),
                             child: Image.asset(
-                              Assets.imagesProduct, // Replace with your thumbnails
+                              Assets
+                                  .imagesProduct, // Replace with your thumbnails
                               fit: BoxFit.contain,
                             ),
                           ),
@@ -95,9 +99,10 @@ class _ProductDetailsWidgetState extends StateMVC<ProductDetailsWidget> {
           children: [
             Text(
               Strings.available.tr,
-              style: TextStyleHelper.of(context)
-                  .b_16
-                  .copyWith(color: ThemeClass.of(context).secondaryBlackColor.withOpacity(0.8)),
+              style: TextStyleHelper.of(context).b_16.copyWith(
+                  color: ThemeClass.of(context)
+                      .secondaryBlackColor
+                      .withOpacity(0.8)),
             ),
             const Spacer(),
             Text(
@@ -140,15 +145,13 @@ class _ProductDetailsWidgetState extends StateMVC<ProductDetailsWidget> {
                       con.decrementCounter();
                     },
                     child: Icon(Icons.remove,
-                        color: ThemeClass.of(context)
-                            .secondaryBlackColor,
+                        color: ThemeClass.of(context).secondaryBlackColor,
                         size: 16)),
               ),
             ),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 16.w),
               child: Text(
-
                 '${con.counter}',
                 style: TextStyleHelper.of(context).b_16.copyWith(
                     color: ThemeClass.of(context).mainBlack,
@@ -168,25 +171,26 @@ class _ProductDetailsWidgetState extends StateMVC<ProductDetailsWidget> {
                       con.incrementCounter();
                     },
                     child: Icon(Icons.add,
-                        color: ThemeClass.of(context).background,
-                        size: 16)),
+                        color: ThemeClass.of(context).background, size: 16)),
               ),
             ),
           ],
         ),
         Gap(8.h),
         CustomDetailsSideTextWidget(
-          text:  Strings.productDetails.tr,
+          text: Strings.productDetails.tr,
         ),
         Gap(12.h),
         SizedBox(
-        //  height:130.h,
-          width:382.w,
+          //  height:130.h,
+          width: 382.w,
           child: Text(
             Strings.productDetailsDesc.tr,
-            style: TextStyleHelper.of(context)
-                .b_16
-                .copyWith(fontWeight: FontWeight.w400,color: ThemeClass.of(context).secondaryBlackColor.withOpacity(0.6)),
+            style: TextStyleHelper.of(context).b_16.copyWith(
+                fontWeight: FontWeight.w400,
+                color: ThemeClass.of(context)
+                    .secondaryBlackColor
+                    .withOpacity(0.6)),
           ),
         ),
       ],

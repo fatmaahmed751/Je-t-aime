@@ -14,7 +14,7 @@ class ChangePasswordController extends ControllerMVC {
   }
   static ChangePasswordController? _this;
   ChangePasswordController._();
-  bool loading=false,autoValidate = false;
+  bool loading = false, autoValidate = false;
   late TextEditingController newPasswordController;
   late TextEditingController oldPasswordController;
   late TextEditingController confirmNewPasswordController;
@@ -23,11 +23,12 @@ class ChangePasswordController extends ControllerMVC {
   bool repeatPassword = true;
   @override
   void initState() {
-    newPasswordController=TextEditingController();
-    oldPasswordController=TextEditingController();
-    confirmNewPasswordController=TextEditingController();
+    newPasswordController = TextEditingController();
+    oldPasswordController = TextEditingController();
+    confirmNewPasswordController = TextEditingController();
     super.initState();
   }
+
   @override
   void dispose() {
     newPasswordController.dispose();
@@ -36,17 +37,17 @@ class ChangePasswordController extends ControllerMVC {
     super.dispose();
   }
 
-   Future displayBottomSheet(BuildContext context) {
-     return showModalBottomSheet(
-       context: context,
+  Future displayBottomSheet(BuildContext context) {
+    return showModalBottomSheet(
+      context: context,
       // isScrollControlled: true,
-       shape: RoundedRectangleBorder(
-         borderRadius: BorderRadius.vertical(top: Radius.circular(30.r)),
-       ),
-       builder:(context)=> CustomBottomSheetWidget(
-         image:Assets.imagesSubmit,
-         text: Strings.doneChangePassword.tr,
-       ),
-     );
-   }
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(30.r)),
+      ),
+      builder: (context) => CustomBottomSheetWidget(
+        image: Assets.imagesSubmit,
+        text: Strings.doneChangePassword.tr,
+      ),
+    );
+  }
 }

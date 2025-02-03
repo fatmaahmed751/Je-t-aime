@@ -11,7 +11,7 @@ import '../../../Widgets/custom_button_widget.dart';
 import '../../../generated/assets.dart';
 import '../../Register/register_screen.dart';
 
-class NotLoginRewardsWidget extends StatefulWidget{
+class NotLoginRewardsWidget extends StatefulWidget {
   const NotLoginRewardsWidget({super.key});
 
   @override
@@ -28,32 +28,26 @@ class NotLoginRewardsWidgetState extends StateMVC<NotLoginRewardsWidget> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
-     body: Column(
-      //  mainAxisAlignment: MainAxisAlignment.start,
-     crossAxisAlignment: CrossAxisAlignment.start,
+      body: Column(
+        //  mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Gap(50.h),
           ContainerEmptyContentWidget(
-            image:Assets.imagesNoRewards ,
-            mainText:Strings.noRewards.tr ,
-            descText:Strings.noRewardsDesc.tr  ,
-            button:CustomButtonWidget.primary(
+            image: Assets.imagesNoRewards,
+            mainText: Strings.noRewards.tr,
+            descText: Strings.noRewardsDesc.tr,
+            button: CustomButtonWidget.primary(
                 height: 48.h,
                 width: 155.w,
                 radius: 30.r,
-                title:
-                   Strings.login.tr,
+                title: Strings.login.tr,
                 onTap: () {
-                  GoRouter.of(context)
-                        .pushNamed(RegisterScreen.routeName);
-
+                  GoRouter.of(context).pushNamed(RegisterScreen.routeName);
                 }),
-     ),
-
+          ),
         ],
-
-     ),
+      ),
     );
   }
 }

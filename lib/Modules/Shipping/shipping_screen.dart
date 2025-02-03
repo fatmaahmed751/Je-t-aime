@@ -53,10 +53,10 @@ class _ShippingScreenState extends StateMVC<ShippingScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-   //   backgroundColor: Colors.yellow,
-      appBar:PreferredSize(
-        preferredSize: Size(0,80.h),
-       // padding: const EdgeInsets.all(8.0),
+      //   backgroundColor: Colors.yellow,
+      appBar: PreferredSize(
+        preferredSize: Size(0, 80.h),
+        // padding: const EdgeInsets.all(8.0),
         child: CustomAppBarWidget.detailsScreen(
           title: Strings.shippingDetails.tr,
           icon: "",
@@ -70,11 +70,11 @@ class _ShippingScreenState extends StateMVC<ShippingScreen> {
               ? AutovalidateMode.always
               : AutovalidateMode.disabled,
           child: SafeArea(
-            child:  Padding(
-              padding: EdgeInsetsDirectional.only(start: 23.w,end: 23.w),
+            child: Padding(
+              padding: EdgeInsetsDirectional.only(start: 23.w, end: 23.w),
               child: ListView(
                 padding: EdgeInsets.zero,
-               physics: const BouncingScrollPhysics(),
+                physics: const BouncingScrollPhysics(),
                 //crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   CustomSideTextWidget(text: Strings.name.tr),
@@ -85,12 +85,11 @@ class _ShippingScreenState extends StateMVC<ShippingScreen> {
                         color: ThemeClass.of(context)
                             .secondaryBlackColor
                             .withOpacity(0.6)),
-                    prefixIcon:
-                    SvgPicture.asset(Assets.imagesProfileIcon),
+                    prefixIcon: SvgPicture.asset(Assets.imagesProfileIcon),
                     isDense: true,
                     insidePadding: EdgeInsets.symmetric(vertical: 10.h),
                     backGroundColor:
-                    ThemeClass.of(context).secondary.withOpacity(1),
+                        ThemeClass.of(context).secondary.withOpacity(1),
                     controller: con.nameController,
                     validator: (v) => Validate.validateFullName(v),
                   ),
@@ -107,7 +106,7 @@ class _ShippingScreenState extends StateMVC<ShippingScreen> {
                     isDense: true,
                     insidePadding: EdgeInsets.symmetric(vertical: 10.h),
                     backGroundColor:
-                    ThemeClass.of(context).secondary.withOpacity(1),
+                        ThemeClass.of(context).secondary.withOpacity(1),
                     controller: con.addressController,
                     validator: (v) => Validate.validateNormalAddress(v),
                   ),
@@ -125,7 +124,7 @@ class _ShippingScreenState extends StateMVC<ShippingScreen> {
                     isDense: true,
                     insidePadding: EdgeInsets.symmetric(vertical: 10.h),
                     backGroundColor:
-                    ThemeClass.of(context).secondary.withOpacity(1),
+                        ThemeClass.of(context).secondary.withOpacity(1),
                     controller: con.phoneController,
                     validator: (v) => Validate.validatePhone(v),
                   ),
@@ -135,22 +134,20 @@ class _ShippingScreenState extends StateMVC<ShippingScreen> {
                     height: 56.h,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(30.r),
-                      color:
-                      ThemeClass.of(context).secondary.withOpacity(1),
+                      color: ThemeClass.of(context).secondary.withOpacity(1),
                     ),
                     child: Padding(
-                      padding: EdgeInsetsDirectional.symmetric(horizontal:12.w),
+                      padding:
+                          EdgeInsetsDirectional.symmetric(horizontal: 12.w),
                       child: Row(
                         children: [
                           SvgPicture.asset(Assets.imagesDiscountShape),
                           Gap(10.w),
                           Text(
                             "115632",
-                            style: TextStyleHelper.of(context)
-                                .b_16
-                                .copyWith(
-                                color: ThemeClass.of(context)
-                                    .secondaryBlackColor),
+                            style: TextStyleHelper.of(context).b_16.copyWith(
+                                color:
+                                    ThemeClass.of(context).secondaryBlackColor),
                           ),
                           const Spacer(),
                           CustomButtonWidget.primary(
@@ -166,9 +163,9 @@ class _ShippingScreenState extends StateMVC<ShippingScreen> {
                     children: [
                       CustomHomeDetailsTextWidget(
                         text: "100 ${Strings.loyaltyPoints.tr}",
-                        style:TextStyleHelper.of(context).h_16.copyWith(
-                            color: ThemeClass.of(context).sideText
-                        ),
+                        style: TextStyleHelper.of(context)
+                            .h_16
+                            .copyWith(color: ThemeClass.of(context).sideText),
                       ),
                       const Spacer(),
                       GestureDetector(
@@ -186,41 +183,49 @@ class _ShippingScreenState extends StateMVC<ShippingScreen> {
                   ),
                   Gap(16.h),
                   Container(
-                  //  height: 154.h,
+                    //  height: 154.h,
                     padding: EdgeInsetsDirectional.symmetric(horizontal: 24.w),
                     decoration: BoxDecoration(
                       color: ThemeClass.of(context).background,
                       borderRadius: BorderRadius.circular(30.r),
                       border: Border.all(
-                        color: ThemeClass.of(context).secondaryBlackColor.withOpacity(0.15),
+                        color: ThemeClass.of(context)
+                            .secondaryBlackColor
+                            .withOpacity(0.15),
                       ),
                       boxShadow: [
                         BoxShadow(
-                            color: ThemeClass.of(context).secondaryBlackColor.withOpacity(0.15),
+                            color: ThemeClass.of(context)
+                                .secondaryBlackColor
+                                .withOpacity(0.15),
                             blurRadius: 1,
-                            spreadRadius: 0.5
-                        ),
+                            spreadRadius: 0.5),
                       ],
                     ),
                     child: Padding(
-                      padding: EdgeInsetsDirectional.only(top: 15.h,bottom: 10.h),
-                      child:
-                      Column(crossAxisAlignment: CrossAxisAlignment.start,
+                      padding:
+                          EdgeInsetsDirectional.only(top: 15.h, bottom: 10.h),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Row(
                             children: [
-                              Text(Strings.subTotal.tr,
+                              Text(
+                                Strings.subTotal.tr,
                                 style: TextStyleHelper.of(context)
                                     .b_16
-                                    .copyWith(color:  ThemeClass.of(context)
-                                    .secondaryBlackColor
-                                ),),
+                                    .copyWith(
+                                        color: ThemeClass.of(context)
+                                            .secondaryBlackColor),
+                              ),
                               const Spacer(),
                               Text(
                                 "200 ${Strings.jod.tr}",
                                 style: TextStyleHelper.of(context)
                                     .h_16
-                                    .copyWith(color: ThemeClass.of(context).mainBlack),
+                                    .copyWith(
+                                        color:
+                                            ThemeClass.of(context).mainBlack),
                               ),
                             ],
                           ),
@@ -231,49 +236,49 @@ class _ShippingScreenState extends StateMVC<ShippingScreen> {
                                 Strings.shippingCost.tr,
                                 style: TextStyleHelper.of(context)
                                     .b_16
-                                    .copyWith(color: ThemeClass.of(context)
-                                    .secondaryBlackColor
-                                ),),
+                                    .copyWith(
+                                        color: ThemeClass.of(context)
+                                            .secondaryBlackColor),
+                              ),
                               const Spacer(),
                               Text(
                                 "20 ${Strings.jod.tr}",
-                                style:TextStyleHelper.of(context)
+                                style: TextStyleHelper.of(context)
                                     .h_16
-                                    .copyWith(color: ThemeClass.of(context).mainBlack),
+                                    .copyWith(
+                                        color:
+                                            ThemeClass.of(context).mainBlack),
                               ),
                             ],
                           ),
                           Gap(8.h),
                           Divider(
                               thickness: 0.5,
-                              color:ThemeClass.of(context)
+                              color: ThemeClass.of(context)
                                   .secondaryBlackColor
-                                  .withOpacity(0.6)) ,
+                                  .withOpacity(0.6)),
                           Gap(8.h),
                           Row(children: [
                             Text(
                               Strings.total.tr,
-                              style: TextStyleHelper.of(context)
-                                  .b_16
-                                  .copyWith(color: ThemeClass.of(context)
-                                  .secondaryBlackColor
-                              ),),
-
+                              style: TextStyleHelper.of(context).b_16.copyWith(
+                                  color: ThemeClass.of(context)
+                                      .secondaryBlackColor),
+                            ),
                             const Spacer(),
                             Text(
                               "220 ${Strings.jod.tr} ",
-
-                              style: TextStyleHelper.of(context)
-                                  .b_16
-                                  .copyWith(color: ThemeClass.of(context)
-                                  .secondaryBlackColor, decoration: TextDecoration.lineThrough,
-                              ),),
+                              style: TextStyleHelper.of(context).b_16.copyWith(
+                                    color: ThemeClass.of(context)
+                                        .secondaryBlackColor,
+                                    decoration: TextDecoration.lineThrough,
+                                  ),
+                            ),
                             Gap(2.w),
                             Text(
                               "222 ${Strings.jod.tr}",
-                              style: TextStyleHelper.of(context)
-                                  .h_16
-                                  .copyWith(color: ThemeClass.of(context).mainBlack),
+                              style: TextStyleHelper.of(context).h_16.copyWith(
+                                  color: ThemeClass.of(context).mainBlack),
                             ),
                           ]),
                         ],
@@ -292,20 +297,19 @@ class _ShippingScreenState extends StateMVC<ShippingScreen> {
                       // }
                     },
                     child: Padding(
-                      padding:EdgeInsetsDirectional.symmetric(vertical:15.h),
+                      padding: EdgeInsetsDirectional.symmetric(vertical: 15.h),
                       child: CustomButtonWidget.primary(
                         title: Strings.continu.tr ?? '',
                       ),
                     ),
                   ),
-
                 ],
               ),
             ),
+          ),
+        ),
       ),
-    ),
-    ),
-  //  ),
+      //  ),
     );
   }
 }

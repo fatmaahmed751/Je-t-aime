@@ -12,16 +12,17 @@ class ShippingController extends ControllerMVC {
   }
   static ShippingController? _this;
   ShippingController._();
-  bool loading=false,autoValidate = false;
-  late TextEditingController nameController,addressController,phoneController;
+  bool loading = false, autoValidate = false;
+  late TextEditingController nameController, addressController, phoneController;
 
   @override
   void initState() {
-    nameController=TextEditingController();
-    addressController=TextEditingController();
-    phoneController=TextEditingController();
+    nameController = TextEditingController();
+    addressController = TextEditingController();
+    phoneController = TextEditingController();
     super.initState();
   }
+
   @override
   void dispose() {
     nameController.dispose();
@@ -30,7 +31,7 @@ class ShippingController extends ControllerMVC {
     super.dispose();
   }
 
-  reset(){
+  reset() {
     nameController.clear();
     addressController.clear();
     phoneController.clear();

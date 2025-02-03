@@ -38,8 +38,8 @@ class _ReviewsForProductScreenState extends StateMVC<ReviewsForProductScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar:PreferredSize(
-        preferredSize: Size(0,75.h),
+      appBar: PreferredSize(
+        preferredSize: Size(0, 75.h),
         child: CustomAppBarWidget.detailsScreen(
           title: Strings.reviews.tr,
           icon: "",
@@ -48,43 +48,41 @@ class _ReviewsForProductScreenState extends StateMVC<ReviewsForProductScreen> {
       body: LoadingScreen(
         loading: con.loading,
         child: SafeArea(
-          child: Padding(
-              padding: EdgeInsetsDirectional.symmetric(
-                  horizontal: 23.w, vertical: 5.h),
-              child: ListView(
-                physics: const BouncingScrollPhysics(),
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          "24 ${Strings.rate.tr}",
-                          style: TextStyleHelper.of(context).b_16.copyWith(
-                              decoration: TextDecoration.underline,
-                              color: ThemeClass.of(context)
-                                  .secondaryBlackColor
-                                  .withOpacity(0.6)),
-                        ),
-                        GestureDetector(
-                          onTap: () {
-                            con.writeRateForProduct(context);
-                          },
-                          child: SvgPicture.asset(Assets.imagesEdit),
-                        ),
-                      ],
-                    ),
+            child: Padding(
+          padding:
+              EdgeInsetsDirectional.symmetric(horizontal: 23.w, vertical: 5.h),
+          child: ListView(
+            physics: const BouncingScrollPhysics(),
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    "24 ${Strings.rate.tr}",
+                    style: TextStyleHelper.of(context).b_16.copyWith(
+                        decoration: TextDecoration.underline,
+                        color: ThemeClass.of(context)
+                            .secondaryBlackColor
+                            .withOpacity(0.6)),
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      con.writeRateForProduct(context);
+                    },
+                    child: SvgPicture.asset(Assets.imagesEdit),
+                  ),
+                ],
+              ),
               ListView.separated(
-               shrinkWrap: true,
+                  shrinkWrap: true,
                   physics: const NeverScrollableScrollPhysics(),
-                  itemBuilder:  (context,index)=> const ReviewsItem(),
-                  separatorBuilder: (context,index)=> Gap(8.h),
+                  itemBuilder: (context, index) => const ReviewsItem(),
+                  separatorBuilder: (context, index) => Gap(8.h),
                   itemCount: 5)
-                  ],
-                ),
-              )
-        ),
-        ),
-
+            ],
+          ),
+        )),
+      ),
     );
   }
 }

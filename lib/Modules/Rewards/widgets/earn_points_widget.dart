@@ -8,7 +8,6 @@ import '../../../../Utilities/text_style_helper.dart';
 import '../../../../Utilities/theme_helper.dart';
 import '../../../Utilities/format_date_helper.dart';
 
-
 class EarnPoints extends StatelessWidget {
   const EarnPoints({
     super.key,
@@ -27,57 +26,45 @@ class EarnPoints extends StatelessWidget {
         ),
         boxShadow: [
           BoxShadow(
-
             color: ThemeClass.of(context).secondaryBlackColor.withOpacity(0.15),
           ),
         ],
       ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.center,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Row(
             children: [
-              Row(
-                children: [
-                  Text(
-                    Strings.earnPoints.tr,
-              style: TextStyleHelper.of(context)
-                  .b_16
-                  .copyWith(color: ThemeClass.of(context).mainBlack)),
-
-                  const Spacer(),
-                  Text(
-                    "111 ${Strings.points.tr}",
-                    style: TextStyleHelper.of(context)
-                        .h_16
-                        .copyWith(color: ThemeClass.of(context).mainBlack)),
-
-                ],
+              Text(Strings.earnPoints.tr,
+                  style: TextStyleHelper.of(context)
+                      .b_16
+                      .copyWith(color: ThemeClass.of(context).mainBlack)),
+              const Spacer(),
+              Text("111 ${Strings.points.tr}",
+                  style: TextStyleHelper.of(context)
+                      .h_16
+                      .copyWith(color: ThemeClass.of(context).mainBlack)),
+            ],
+          ),
+          Gap(8.h),
+          Row(
+            children: [
+              Text(
+                "${Strings.numberOfOrder.tr} #11112",
+                style: TextStyleHelper.of(context).b_14.copyWith(
+                    color: ThemeClass.of(context).secondaryBlackColor),
               ),
-              Gap(8.h),
-              Row(
-                children: [
-                  Text(
-                    "${Strings.numberOfOrder.tr} #11112",
-                    style: TextStyleHelper.of(context)
-                        .b_14
-                        .copyWith(
-                        color:ThemeClass.of(context).secondaryBlackColor),
-                  ),
-                  const Spacer(),
-                  Text(
-                    FormatDateHelper.formatWalletDate.format(DateTime.now()),
-                    style: TextStyleHelper.of(context)
-                        .b_14
-                        .copyWith(
-                        color:ThemeClass.of(context).secondaryBlackColor),
-                  ),
-                ],
+              const Spacer(),
+              Text(
+                FormatDateHelper.formatWalletDate.format(DateTime.now()),
+                style: TextStyleHelper.of(context).b_14.copyWith(
+                    color: ThemeClass.of(context).secondaryBlackColor),
               ),
             ],
           ),
-        );
-
-
-
+        ],
+      ),
+    );
   }
 }
