@@ -19,7 +19,6 @@ import "../../Utilities/text_style_helper.dart";
 import "../../Utilities/theme_helper.dart";
 import "../../Widgets/custom_button_widget.dart";
 import "../../Widgets/custom_details_side_text.dart";
-import "../../Widgets/custom_product_container_widget.dart";
 import "../../generated/assets.dart";
 import "../Reviews/reviews_screen.dart";
 import "Widgets/product_details_widget.dart";
@@ -44,15 +43,13 @@ class _ProductDetailsScreenState extends StateMVC<ProductDetailsScreen> {
   late ProductDetailsController con;
   @override
   void initState() {
-    con.getProductDetails(productId: widget.popularProductsModel.id ?? 0);
     super.initState();
+    con.getProductDetails(productId: widget.popularProductsModel.id ?? 0);
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar:  CustomAppBarWidget.detailsScreen(),
-
       body: Stack(alignment: Alignment.bottomCenter, children: [
         Padding(
           padding:
@@ -97,6 +94,8 @@ class _ProductDetailsScreenState extends StateMVC<ProductDetailsScreen> {
               ),
               Gap(10.h),
                ProductDetailsWidget(model: con.productDetailsModel??ProductDetailsModel(), productsModel: widget.popularProductsModel,),
+
+
               // Row(
               // //  mainAxisAlignment: MainAxisAlignment.spaceBetween,
               //   children: [
@@ -133,7 +132,8 @@ class _ProductDetailsScreenState extends StateMVC<ProductDetailsScreen> {
                   ),
                   GestureDetector(
                     onTap: () {
-                      context.pushNamed(ReviewsForProductScreen.routeName);
+                      context.pushNamed(ReviewsForProductScreen.routeName,
+                      extra: widget.popularProductsModel);
                     },
                     child: Text(
                       Strings.viewAll.tr,

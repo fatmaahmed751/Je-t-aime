@@ -1,5 +1,4 @@
 import "package:dartz/dartz.dart";
-import "../../Models/cart_item_model.dart";
 import "../../Utilities/api_end_point.dart";
 import "../../core/API/generic_request.dart";
 import "../../core/API/request_method.dart";

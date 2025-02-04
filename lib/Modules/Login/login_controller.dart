@@ -1,15 +1,11 @@
-import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
-import 'package:mvc_pattern/mvc_pattern.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
-import '../../../Models/user_model.dart';
-import '../../../Utilities/api_end_point.dart';
-import '../../../Utilities/router_config.dart';
-import '../../../Utilities/shared_preferences.dart';
-import '../../Widgets/toast_helper.dart';
-import '../Home/home_screen.dart';
-import 'login_data_handler.dart';
+import "package:flutter/material.dart";
+import "package:go_router/go_router.dart";
+import "package:mvc_pattern/mvc_pattern.dart";
+import "../../../Utilities/router_config.dart";
+import "../../../Utilities/shared_preferences.dart";
+import "../../Widgets/toast_helper.dart";
+import "../Home/home_screen.dart";
+import "login_data_handler.dart";
 
 class LoginController extends ControllerMVC {
   // singleton

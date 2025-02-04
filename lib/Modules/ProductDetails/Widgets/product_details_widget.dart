@@ -15,9 +15,10 @@ import "../../../generated/assets.dart";
 import "../product_details_controller.dart";
 
 class ProductDetailsWidget extends StatefulWidget {
-final ProductDetailsModel model;
- final PopularProductsModel productsModel;
-  const ProductDetailsWidget({super.key, required this.model, required this.productsModel});
+  final ProductDetailsModel model;
+  final PopularProductsModel productsModel;
+  const ProductDetailsWidget(
+      {super.key, required this.model, required this.productsModel});
 
   @override
   createState() => _ProductDetailsWidgetState();
@@ -72,7 +73,8 @@ class _ProductDetailsWidgetState extends StateMVC<ProductDetailsWidget> {
                     ),
                   ),
                   Gap(20.h), // Spacing between images
-                  if (con.productDetailsModel != null && con.productDetailsModel!.images != null)
+                  if (con.productDetailsModel != null &&
+                      con.productDetailsModel!.images != null)
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: con.productDetailsModel!.images!.map((e) {
@@ -88,33 +90,31 @@ class _ProductDetailsWidgetState extends StateMVC<ProductDetailsWidget> {
                             ),
                           ),
                           child: Padding(
-                            padding: EdgeInsetsDirectional.symmetric(vertical: 8.h),
+                            padding:
+                                EdgeInsetsDirectional.symmetric(vertical: 8.h),
                             child: Image.network(
-                              e.toString() ?? "https://via.placeholder.com/150", // استخدام الصورة من القائمة
-                              fit: BoxFit.contain,
+                                e.toString() ??
+                                    "https://via.placeholder.com/150", // استخدام الصورة من القائمة
+                                fit: BoxFit.contain,
                                 errorBuilder: (context, error, stackTrace) {
-                                  // Fallback widget when the image fails to load
-                                  return Container(
-                                    color: Colors
-                                        .grey[300],
-                                    // Background color for the fallback
-                                    alignment: Alignment.center,
-                                    child: const Icon(
-                                      Icons.image,
-                                      // Built-in icon as a fallback
-                                      size: 50,
-                                      color: Colors.grey,
-                                    ),
-                                  );
-                                }
-                            ),
+                              // Fallback widget when the image fails to load
+                              return Container(
+                                color: Colors.grey[300],
+                                // Background color for the fallback
+                                alignment: Alignment.center,
+                                child: const Icon(
+                                  Icons.image,
+                                  // Built-in icon as a fallback
+                                  size: 50,
+                                  color: Colors.grey,
+                                ),
+                              );
+                            }),
                           ),
                         );
                       }).toList(),
                     )
                 ],
-
-
               ),
             ),
           ),
@@ -132,7 +132,7 @@ class _ProductDetailsWidgetState extends StateMVC<ProductDetailsWidget> {
             ),
             const Spacer(),
             Text(
-              widget.model.averageRating??"0",
+              con.productDetailsModel?.averageRating ?? "0",
               style: TextStyleHelper.of(context)
                   .b_16
                   .copyWith(color: ThemeClass.of(context).mainBlack),
@@ -145,14 +145,12 @@ class _ProductDetailsWidgetState extends StateMVC<ProductDetailsWidget> {
           ],
         ),
         Gap(10.h),
-        CustomDetailsSideTextWidget(
-          text: widget.model.title??""
-        ),
+        CustomDetailsSideTextWidget(text: con.productDetailsModel?.title ?? ""),
         Gap(16.h),
         Row(
           children: [
             Text(
-              "${widget.model.price} ${Strings.jod.tr}",
+              "${con.productDetailsModel?.price} ${Strings.jod.tr}",
               style: TextStyleHelper.of(context)
                   .h_16
                   .copyWith(color: ThemeClass.of(context).primaryColor),
@@ -211,7 +209,7 @@ class _ProductDetailsWidgetState extends StateMVC<ProductDetailsWidget> {
           //  height:130.h,
           width: 382.w,
           child: Text(
-            widget.model.desc??"",
+            con.productDetailsModel?.desc ?? "",
             style: TextStyleHelper.of(context).b_16.copyWith(
                 fontWeight: FontWeight.w400,
                 color: ThemeClass.of(context)

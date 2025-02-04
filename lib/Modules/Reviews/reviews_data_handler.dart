@@ -11,15 +11,19 @@ import "../../core/error/failures.dart";
 
 class ReviewsDataHandler {
   static Future<
-      Either<Failure, GenericPaginationModel<ReviewModel>>> reviewsForProduct(
-      {required GenericPaginationModel oldPagination, required int id}) async {
+      Either<Failure, GenericPaginationModel<ReviewModel>>> reviewsForProduct({
+    required GenericPaginationModel oldPagination,
+    required int id}
+      ) async {
     try {
-      Map<String, dynamic> body = {};
+       Map<String, dynamic> body = {};
       body.addAll(oldPagination.nextData);
       GenericPaginationModel<ReviewModel> response = await GenericRequest <
           GenericPaginationModel<ReviewModel>>(
         method: RequestApi.postJson(
-          url: APIEndPoint.getReviews(id), bodyJson: body,),
+          url: APIEndPoint.getReviews(id),
+         bodyJson: body,
+        ),
         fromMap: (_) =>
             GenericPaginationModel.fromJson(_, fromJson: ReviewModel.fromJson),
       ).getResponse();

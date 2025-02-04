@@ -2,17 +2,19 @@ import "package:flutter/material.dart";
 import "package:flutter_screenutil/flutter_screenutil.dart";
 import "package:gap/gap.dart";
 import "package:go_router/go_router.dart";
+import "package:je_t_aime/Models/popular_products_model.dart";
 import "package:je_t_aime/Modules/PopularProducts/popular_product_screen.dart";
 import "package:je_t_aime/core/Language/locales.dart";
 import "package:mvc_pattern/mvc_pattern.dart";
+import "../../Utilities/shared_preferences.dart";
 import "../../Utilities/strings.dart";
 import "../../Utilities/text_style_helper.dart";
 import "../../Utilities/theme_helper.dart";
 import "../../Widgets/bottom_navbar_widget.dart";
 import "../../Widgets/custom_app_bar_widget.dart";
 import "../../Widgets/custom_details_side_text.dart";
-import "../../Widgets/custom_product_container_widget.dart";
 import "../../Widgets/loading_screen.dart";
+import "../PopularProducts/Widgets/custom_product_container_widget.dart";
 import "Widgets/categories_widget.dart";
 import "Widgets/packages_widget.dart";
 import "home_screen_controller.dart";
@@ -123,8 +125,12 @@ class _HomeScreenState extends StateMVC<HomeScreen> {
                       text: Strings.popularProduct.tr,
                     ),
                     InkWell(
-                      onTap: () =>
-                          context.pushNamed(PopularProductsScreen.routeName),
+                      onTap: ()async {
+                        final List<PopularProductsModel> products = con.products;
+                        print("5555555555555555555555555555${con.products}");
+                       await context.pushNamed(PopularProductsScreen.routeName,
+                            extra: products);
+                      },
                       child: Text(
                         Strings.viewAll.tr,
                         style: TextStyleHelper.of(context).b_16.copyWith(
@@ -147,7 +153,29 @@ class _HomeScreenState extends StateMVC<HomeScreen> {
                             padding:
                                 EdgeInsetsDirectional.symmetric(vertical: 5.h),
                             child: CustomProductContainerWidget(
-                              productsModel: con.products[index],
+                              productsModel: con.products[index], onFavoritePressed:(){
+    if(con.products[index].isFavorite==0)
+    {
+    if(SharedPref.getCurrentUser()?.token!=null&&SharedPref.getCurrentUser()!.token!.isNotEmpty)
+    {
+    con.addFavorite(productId: con.products[index].id??0);
+    con.products[index].isFavorite=1;
+    }else{
+    //  con.unLoginForRatedPop(context);
+    }
+    }
+    else{
+    if(SharedPref.getCurrentUser()?.token!=null&&SharedPref.getCurrentUser()!.token!.isNotEmpty)
+    {
+    //con.deleteFavorite(productId: con.products[index].id??0);
+    con.products[index].isFavorite=0;
+    }else{
+    //con.unLoginForRatedPop(context);
+    }
+
+    }
+    }
+
                             ),
                           ),
                       separatorBuilder: (context, index) => Gap(10.w),

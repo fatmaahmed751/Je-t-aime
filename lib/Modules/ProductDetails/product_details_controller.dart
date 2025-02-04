@@ -20,12 +20,6 @@ class ProductDetailsController extends ControllerMVC {
   static ProductDetailsController? _this;
   bool isClick = false;
   ProductDetailsController._();
-  List list = [1, 2, 3, 4, 5];
-  List imageUrl = [
-    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQx1bJeWtv-CEwrlzO09wgwE3sDUETLh5ZOzg&s",
-    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQx1bJeWtv-CEwrlzO09wgwE3sDUETLh5ZOzg&s",
-    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQx1bJeWtv-CEwrlzO09wgwE3sDUETLh5ZOzg&s",
-  ];
   bool isExpanded = false;
   int activeIndex = 0;
   bool isSearch = false;

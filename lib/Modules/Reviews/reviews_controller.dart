@@ -61,7 +61,8 @@ class ReviewsForProductController extends ControllerMVC {
       setState(() {});
     }
     final result = await ReviewsDataHandler.reviewsForProduct(
-        oldPagination: reviews, id: id ?? 0);
+        oldPagination: reviews,
+        id: id ?? 0);
     result.fold((l) => null, (r) {
       final oldItems = reviews.data;
       reviews = r;

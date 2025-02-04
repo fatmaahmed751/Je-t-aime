@@ -53,10 +53,11 @@ class GoRouterConfig {
         name: ReviewsForProductScreen.routeName,
         path: "/${ReviewsForProductScreen.routeName}",
         pageBuilder: (_, GoRouterState state) {
+          final PopularProductsModel model = state.extra as PopularProductsModel;
           return getCustomTransitionPage(
             state: state,
             child:  ReviewsForProductScreen(
-              productsModel:state.extra as PopularProductsModel,
+              productsModel:model
             ),
           );
         },
@@ -109,9 +110,12 @@ class GoRouterConfig {
         name: PopularProductsScreen.routeName,
         path: "/${PopularProductsScreen.routeName}",
         pageBuilder: (_, GoRouterState state) {
+          final List<PopularProductsModel> products = state.extra as List<PopularProductsModel>;
           return getCustomTransitionPage(
             state: state,
-            child: const PopularProductsScreen(),
+            child:  PopularProductsScreen(
+              products: products,
+            ),
           );
         },
         routes: const <RouteBase>[],

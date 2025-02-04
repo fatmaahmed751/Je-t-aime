@@ -2,40 +2,33 @@ import "package:flutter/material.dart";
 import "package:flutter_screenutil/flutter_screenutil.dart";
 import "package:go_router/go_router.dart";
 import "package:je_t_aime/Models/popular_products_model.dart";
+import "package:je_t_aime/Modules/PopularProducts/popular_products_controller.dart";
+import "package:je_t_aime/Modules/PopularProducts/popular_products_controller.dart";
+import "package:je_t_aime/Modules/PopularProducts/popular_products_controller.dart";
 import "package:je_t_aime/Modules/ProductDetails/product_details_screen.dart";
-import "package:je_t_aime/Widgets/toast_helper.dart";
 import "package:je_t_aime/core/Language/locales.dart";
 import "package:mvc_pattern/mvc_pattern.dart";
-import "../../Utilities/text_style_helper.dart";
-import "../../Utilities/theme_helper.dart";
+import "../../../Utilities/strings.dart";
+import "../../../Utilities/text_style_helper.dart";
+import "../../../Utilities/theme_helper.dart";
+import "../../../generated/assets.dart";
+import "../../Home/home_screen_controller.dart";
 import "package:flutter_svg/svg.dart";
 import "package:gap/gap.dart";
-import "../Modules/Home/home_screen_controller.dart";
-import "../Utilities/strings.dart";
-import "../generated/assets.dart";
 
-class CustomProductContainerWidget extends StatefulWidget {
+
+class CustomProductContainerWidget extends StatelessWidget {
   final PopularProductsModel productsModel;
+  final Function() onFavoritePressed;
+  const CustomProductContainerWidget({super.key, required this.productsModel, required this.onFavoritePressed});
 
-  const CustomProductContainerWidget({super.key, required this.productsModel});
-
-  @override
-  createState() => _CustomProductContainerWidgetState();
-}
-
-class _CustomProductContainerWidgetState
-    extends StateMVC<CustomProductContainerWidget> {
-  _CustomProductContainerWidgetState() : super(HomeController()) {
-    con = HomeController();
-  }
-  late HomeController con;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
         context.pushNamed(ProductDetailsScreen.routeName,
-        extra:widget.productsModel );
+        extra:productsModel );
       },
       child: Container(
         height: 217.h,
@@ -72,7 +65,7 @@ class _CustomProductContainerWidgetState
                       height: 113.h,
                       width: 45.w,
                       child: Image.network(
-                        widget.productsModel.image ?? "", // Network image URL
+                        productsModel.image ?? "", // Network image URL
                         fit: BoxFit.cover,
                         width: 328.w,
                         height: 192.h, // Adjust height as needed
@@ -97,39 +90,8 @@ class _CustomProductContainerWidgetState
                       child: Padding(
                         padding: EdgeInsetsDirectional.only(bottom: 0.h),
                         child: GestureDetector(
-                            onTap: () {
-                              //   ToastHelper.showSuccess(
-                              //     context: context,
-                              //     message: Strings.addToFavoriteSuccess.tr,
-                              //     icon:SvgPicture.asset(Assets.imagesSubmit,width:60.w,
-                              //       height:50.h,
-                              //       fit: BoxFit.cover,),
-                              //
-                              //     backgroundColor: ThemeClass.of(context).primaryColor,
-                              //   );
-                              // }else{
-                              //   ToastHelper.showSuccess(
-                              //     context: context,
-                              //     message: Strings.removedFromFav.tr,
-                              //     icon:SvgPicture.asset(Assets.imagesSubmit,width:60.w,
-                              //       height:50.h,
-                              //       fit: BoxFit.cover,),
-                              //
-                              //     backgroundColor: ThemeClass.of(context).primaryColor,
-                              //   );
-                              //
-                              // }
-                            },
-                            //  ToastHelper.showSuccess(
-                            //    context: context,
-                            //    message: Strings.addToFavoriteSuccess.tr,
-                            // icon:SvgPicture.asset(Assets.imagesSubmit,width:60.w,
-                            // height:50.h,
-                            // fit: BoxFit.cover,),
-                            //
-                            //    backgroundColor: ThemeClass.of(context).primaryColor,
-                            //  );
-                            child: widget.productsModel.isFavorite == 1
+                            onTap:onFavoritePressed,
+                            child: productsModel.isFavorite == 1
                                 ? SvgPicture.asset(Assets.imagesFavoriteIcon)
                                 : SizedBox(
                                     height: 27.h,
@@ -145,7 +107,7 @@ class _CustomProductContainerWidgetState
               Gap(8.h),
               Padding(
                 padding: EdgeInsetsDirectional.only(start: 14.w),
-                child: Text(widget.productsModel.title ?? "",
+                child: Text(productsModel.title ?? "",
                     style: TextStyleHelper.of(context)
                         .b_14
                         .copyWith(color: ThemeClass.of(context).mainBlack)),
@@ -157,14 +119,14 @@ class _CustomProductContainerWidgetState
                   child: Row(
                     children: [
                       Text(
-                        "${widget.productsModel.price ?? 0} ${Strings.jod.tr}",
+                        "${productsModel.price ?? 0} ${Strings.jod.tr}",
                         style: TextStyleHelper.of(context).h_16.copyWith(
                             color: ThemeClass.of(context).primaryColor),
                       ),
                       const Spacer(),
                       GestureDetector(
                         onTap: () {
-                          con.addProductToCart();
+                         // con.addProductToCart();
                         },
                         child: Container(
                           width: 28.w,

@@ -4,7 +4,6 @@ import "package:flutter_screenutil/flutter_screenutil.dart";
 import "package:flutter_svg/svg.dart";
 import "package:je_t_aime/Models/cart_item_model.dart";
 import "package:je_t_aime/Models/category_model.dart";
-import "package:je_t_aime/Widgets/custom_product_container_widget.dart";
 import "package:je_t_aime/core/Language/locales.dart";
 import "package:mvc_pattern/mvc_pattern.dart";
 import "package:provider/provider.dart";
@@ -16,6 +15,7 @@ import "../../Utilities/theme_helper.dart";
 import "../../Widgets/toast_helper.dart";
 import "../../core/Language/app_languages.dart";
 import "../../generated/assets.dart";
+import "../PopularProducts/popular_products_data_handler.dart";
 import "home_data_handler.dart";
 
 class HomeController extends ControllerMVC {
@@ -112,7 +112,34 @@ addProductToCart()async{
     loading = false;
   });
 }
+  addFavorite({required int productId}) async {
+    setState(() {
+      loading = true;
+    });
 
+    final result = await PopularProductsDataHandler.addFavorite(
+        productId:productId);
+    result.fold((l) {
+      ToastHelper.showError(message: l.errorModel.statusMessage);
+    }, (r) {
+      ToastHelper.showSuccess(
+        context: currentContext_!,
+        message: Strings.addToFavoriteSuccess.tr,
+        icon: SvgPicture.asset(
+          Assets.imagesSubmit,
+          width: 60.w,
+          height: 50.h,
+          fit: BoxFit.cover,
+        ),
+        backgroundColor:
+        ThemeClass.of(currentContext_!).primaryColor,
+      );
+
+    });
+    setState(() {
+      loading = false;
+    });
+  }
   getHomeDetails() async {
     loading = true;
     setState(() {});
