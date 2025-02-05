@@ -62,27 +62,5 @@ class PopularProductsModel {
         "image": image,
       };
 
-PopularProductsModel copyWith({
-  int? id,
-  String? title,
-  int? categoryId,
-  int? subcategoryId,
-  int? stock,
-  int? price,
-  int? discount,
-  int? count,
-  int? isFavorite,
-  String? image,
-})  => PopularProductsModel(
-    id: id ?? this.id,
-    title: title ?? this.title,
-    categoryId: categoryId ?? this.categoryId,
-    subcategoryId: subcategoryId ?? this.subcategoryId,
-    stock: stock ?? this.stock,
-    price: price ?? this.price,
-    discount: discount ?? this.discount,
-    count: count ?? this.count,
-    isFavorite: isFavorite ?? this.isFavorite,
-    image: image ?? this.image,
-  );
+
 }

@@ -28,8 +28,8 @@ class LoginController extends ControllerMVC {
 
   @override
   void initState() {
-    emailController = TextEditingController();
-    passwordController = TextEditingController();
+    emailController = TextEditingController(text:"gayle304@audince.com");
+    passwordController = TextEditingController(text:"Nonabatta@202020");
     super.initState();
   }
 
@@ -52,8 +52,8 @@ class LoginController extends ControllerMVC {
     result.fold((l) {
       ToastHelper.showError(message: l.errorModel.statusMessage);
     }, (r) async {
-      // await SharedPref.saveCurrentUser(user: r);
-      print("token loginnnn ${SharedPref.getCurrentUser()?.token}");
+      await SharedPref.saveCurrentUser(user: r);
+     // print("token loginnnn ${SharedPref.getCurrentUser()?.token}");
       currentContext_?.pushNamed(
         HomeScreen.routeName,
       );

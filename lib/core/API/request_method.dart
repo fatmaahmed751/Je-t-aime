@@ -1,5 +1,6 @@
 import "dart:async";
 import "dart:convert";
+import "dart:developer";
 import "dart:io";
 import "package:ansicolor/ansicolor.dart";
 import "package:flutter/material.dart";
@@ -139,15 +140,16 @@ class _ApiBaseHelper {
   static Future<dynamic> httpSendRequest(
       http.BaseRequest request, RequestApi requestApi,
       {bool getResponseBytes = false}) async {
+    var token = SharedPref.getCurrentUser()?.token.toString();
     http.StreamedResponse response;
+    log("hhhhhhh${token}");
     try {
       request.headers.addAll({
          "Accept": "*/*",
         "content-type": "multipart/form-data",
         "access-language": SharedPref.getLanguage() ?? "en",
-        "Authorization": "Bearer ${SharedPref.getCurrentUser()?.token.toString()}",
+        "Authorization": "Bearer $token",
       });
-
       response = await request.send().timeout(const Duration(seconds: 180));
       AnsiPen pen = AnsiPen()..green(bold: true);
       debugPrint(pen("statusCode: ${response.statusCode}"));

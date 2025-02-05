@@ -85,24 +85,24 @@ class PopularProductsScreenState extends StateMVC<PopularProductsScreen> {
                   return CustomProductContainerWidget(
                     productsModel: con.products[index],
                     onFavoritePressed: () {
-                      if (SharedPref.getCurrentUser()?.token != null &&
-                          SharedPref.getCurrentUser()!.token!.isNotEmpty) {
-                        setState(() {
-                          // إنشاء نسخة جديدة مع تحديث isFavorite
-                          con.products[index] = con.products[index].copyWith(
-                            isFavorite: con.products[index].isFavorite == 0 ? 1 : 0,
-                          );
-                        });
-
-                        if (con.products[index].isFavorite == 1) {
-                          con.addFavorite(productId: con.products[index].id ?? 0);
-                        } else {
-                          con.deleteFavorite(productId: con.products[index].id ?? 0);
-                        }
-                      } else {
-                        // إذا لم يكن المستخدم مسجل الدخول، قم بإظهار رسالة أو نافذة تسجيل دخول
-                        // con.unLoginForRatedPop(context);
-                      }
+                      // if (SharedPref.getCurrentUser()?.token != null &&
+                      //     SharedPref.getCurrentUser()!.token!.isNotEmpty) {
+                      //   setState(() {
+                      //     // إنشاء نسخة جديدة مع تحديث isFavorite
+                      //     con.products[index] = con.products[index].copyWith(
+                      //       isFavorite: con.products[index].isFavorite == 0 ? 1 : 0,
+                      //     );
+                      //   });
+                      //
+                      //   if (con.products[index].isFavorite == 1) {
+                      //     con.addToFavorite(productId: con.products[index].id ?? 0);
+                      //   } else {
+                      //     con.deleteFavorite(productId: con.products[index].id ?? 0);
+                      //   }
+                      // } else {
+                      //   // إذا لم يكن المستخدم مسجل الدخول، قم بإظهار رسالة أو نافذة تسجيل دخول
+                      //   // con.unLoginForRatedPop(context);
+                     // }
                     },
                   );
                 },

@@ -112,7 +112,7 @@ addProductToCart()async{
     loading = false;
   });
 }
-  addFavorite({required int productId}) async {
+  addToFavorite({required int productId}) async {
     setState(() {
       loading = true;
     });

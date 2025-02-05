@@ -125,10 +125,11 @@ class _HomeScreenState extends StateMVC<HomeScreen> {
                       text: Strings.popularProduct.tr,
                     ),
                     InkWell(
-                      onTap: ()async {
-                        final List<PopularProductsModel> products = con.products;
+                      onTap: () async {
+                        final List<PopularProductsModel> products =
+                            con.products;
                         print("5555555555555555555555555555${con.products}");
-                       await context.pushNamed(PopularProductsScreen.routeName,
+                        await context.pushNamed(PopularProductsScreen.routeName,
                             extra: products);
                       },
                       child: Text(
@@ -153,30 +154,34 @@ class _HomeScreenState extends StateMVC<HomeScreen> {
                             padding:
                                 EdgeInsetsDirectional.symmetric(vertical: 5.h),
                             child: CustomProductContainerWidget(
-                              productsModel: con.products[index], onFavoritePressed:(){
-    if(con.products[index].isFavorite==0)
-    {
-    if(SharedPref.getCurrentUser()?.token!=null&&SharedPref.getCurrentUser()!.token!.isNotEmpty)
-    {
-    con.addFavorite(productId: con.products[index].id??0);
-    con.products[index].isFavorite=1;
-    }else{
-    //  con.unLoginForRatedPop(context);
-    }
-    }
-    else{
-    if(SharedPref.getCurrentUser()?.token!=null&&SharedPref.getCurrentUser()!.token!.isNotEmpty)
-    {
-    //con.deleteFavorite(productId: con.products[index].id??0);
-    con.products[index].isFavorite=0;
-    }else{
-    //con.unLoginForRatedPop(context);
-    }
-
-    }
-    }
-
-                            ),
+                                productsModel: con.products[index],
+                                onFavoritePressed: () {
+                                  if (con.products[index].isFavorite == 0) {
+                                    if (SharedPref.getCurrentUser()?.token !=
+                                            null &&
+                                        SharedPref.getCurrentUser()!
+                                            .token!
+                                            .isNotEmpty) {
+                                      con.addToFavorite(
+                                          productId:
+                                              con.products[index].id ?? 0);
+                                      con.products[index].isFavorite = 1;
+                                    } else {
+                                      //  con.unLoginForRatedPop(context);
+                                    }
+                                  } else {
+                                    if (SharedPref.getCurrentUser()?.token !=
+                                            null &&
+                                        SharedPref.getCurrentUser()!
+                                            .token!
+                                            .isNotEmpty) {
+                                      //con.deleteFavorite(productId: con.products[index].id??0);
+                                      con.products[index].isFavorite = 0;
+                                    } else {
+                                      //con.unLoginForRatedPop(context);
+                                    }
+                                  }
+                                }),
                           ),
                       separatorBuilder: (context, index) => Gap(10.w),
                       itemCount: con.products.length),

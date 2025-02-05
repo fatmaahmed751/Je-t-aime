@@ -31,7 +31,7 @@ class HomeDataHandler {
     try {
       Map<String, dynamic> response =
           await GenericRequest<Map<String, dynamic>>(
-        method: RequestApi.get(url: APIEndPoint.category),
+        method: RequestApi.get(url: APIEndPoint.home),
         fromMap: (_) => _,
       ).getResponse();
       return Right(response);

@@ -2,6 +2,7 @@ import "package:flutter/material.dart";
 import "package:flutter_screenutil/flutter_screenutil.dart";
 import "package:flutter_svg/svg.dart";
 import "package:gap/gap.dart";
+import "package:infinite_scroll_pagination/infinite_scroll_pagination.dart";
 import "package:je_t_aime/Models/category_model.dart";
 import "package:je_t_aime/Models/popular_products_model.dart";
 import "package:je_t_aime/Modules/AllCategories/widget/category_product_widget.dart";
@@ -35,70 +36,51 @@ class _AllCategoriesScreenState extends StateMVC<AllCategoriesScreen> {
   late AllCategoriesController con;
   @override
   void initState() {
-    con.init(categoryModel: widget.model! );
     super.initState();
+    con.init(categoryIdd: widget.model?.id??0);
+  }
+  @override
+  void dispose() {
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    if (widget.model == null) {
-      return const Scaffold(
-        body: Center(
-          child: Text('No category data available'),
-        ),
-      );
-    }
-
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: Size(0, 75.h),
         child: CustomAppBarWidget.detailsScreen(
-          title:widget.model?.title??"",
+          title: widget.model?.title ?? "",
           icon: "",
         ),
       ),
-      body: LoadingScreen(
+      body:  LoadingScreen(
         loading: con.loading,
-        child: Visibility(
-    visible:con.categoryProducts.data.isEmpty,
-          replacement: const Center(child: SizedBox()),
-          child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 15.w),
-            child: ListView(
-                physics: const BouncingScrollPhysics(),
-                padding: EdgeInsets.zero,
-                children: [
-                  Row(
-                    children: [
-                      SearchWidget(
-                          width: 300.w,
-                          backGroundColor:
-                              ThemeClass.of(context).secondary.withOpacity(1),
-                          onSearch: (String? text) {},
-                          isSearch: true,
-                          controller: con.searchController,
-                          onRemove: () {},
-                          onChange: (String? value) {}),
-                      Gap(10.w),
-                      GestureDetector(
-                          onTap: () {
-                            con.filterBottomSheet(context);
-                          },
-                          child: SvgPicture.asset(Assets.imagesFilterIcon))
-                    ],
+        child: Padding(
+          padding: EdgeInsets.symmetric(vertical: 15.h),
+          child: CustomScrollView(
+            slivers: [
+              SliverPadding(
+                padding: EdgeInsets.symmetric(horizontal: 15.w),
+                sliver: PagedSliverGrid<int, CategoryProductModel>(
+                  pagingController: con.pagingController,
+                  gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+                    maxCrossAxisExtent: 280, // Adjust as needed
+                    mainAxisSpacing: 12.h,
+                    crossAxisSpacing: 12.w,
+                    childAspectRatio: 0.8, // Adjust as needed
                   ),
-                  Padding(
-                    padding:EdgeInsets.symmetric(vertical: 24.h),
-                    child: Wrap(
-                      spacing: 12.w,
-                      runSpacing: 12.h,
-                      children:con.categoryProducts.data.map((e) {
-                        return CustomCategoryProductContainerWidget(categoryProductModel:widget.categoryProductModel,
-                        productsModel: PopularProductsModel(),);
-                      }).toList(),
-                    ),
+                  builderDelegate: PagedChildBuilderDelegate<CategoryProductModel>(
+                    itemBuilder: (context, category, index) {
+                      return CustomCategoryProductContainerWidget(
+                        categoryProductModel: category
+                       // productsModel: PopularProductsModel(),
+                      );
+                    },
                   ),
-                ]),
+                ),
+              ),
+            ],
           ),
         ),
       ),

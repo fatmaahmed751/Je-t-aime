@@ -11,33 +11,16 @@ import "../../core/error/exceptions.dart";
 import "../../core/error/failures.dart";
 
 class AllCategoriesDataHandler {
-  static Future<Either<Failure, List<CategoryModel>>> getAllCategories() async {
+  static Future<Either<Failure, List<CategoryProductModel>>> getAllCategories(int pageKey, int pageSize,int categoryId) async {
     try {
-      List<CategoryModel> response = await GenericRequest<CategoryModel>(
-        method: RequestApi.get(url: APIEndPoint.categories),
-        fromMap: CategoryModel.fromJson,
+      List<CategoryProductModel> response = await GenericRequest<CategoryProductModel>(
+        method: RequestApi.get(url: "${APIEndPoint.getCategoriesProduct(categoryId)}?page=$pageKey&pageSize=$pageSize"),
+        fromMap: CategoryProductModel.fromJson,
       ).getList();
       return Right(response);
     } on ServerException catch (failure) {
       return Left(ServerFailure(failure.errorMessageModel));
     }
   }
-  static Future<Either<Failure, GenericPaginationModel<CategoryProductModel>>> getAllCategoriesProduct(
-      {required GenericPaginationModel oldPagination, required int id}
-      ) async {
-    try {
-      Map<String, dynamic> body = {};
-      body.addAll(oldPagination.nextData);
-      GenericPaginationModel<CategoryProductModel> response = await GenericRequest <
-          GenericPaginationModel<CategoryProductModel>>(
-        method: RequestApi.postJson(
-          url: APIEndPoint.getCategoriesProduct(id), bodyJson: body,),
-        fromMap: (_) =>
-            GenericPaginationModel.fromJson(_, fromJson: CategoryProductModel.fromJson),
-      ).getResponse();
-      return Right(response);
-    } on ServerException catch (failure) {
-      return Left(ServerFailure(failure.errorMessageModel));
-    }
-  }
+
 }

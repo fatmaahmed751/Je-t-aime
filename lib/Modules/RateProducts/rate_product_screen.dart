@@ -15,13 +15,14 @@ import "../../../Utilities/validate.dart";
 import "../../../Widgets/custom_button_widget.dart";
 import "../../../Widgets/custom_textfield_widget.dart";
 import "../../../generated/assets.dart";
+import "../../Models/product_details_model.dart";
 import "../../Widgets/custom_home_details_text_widget.dart";
 import "../../Widgets/loading_screen.dart";
 
 class RateProductScreen extends StatefulWidget {
-
+  final int productId;
   const RateProductScreen({
-    super.key,
+    super.key, required this.productId,
   });
 
   @override

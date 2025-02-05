@@ -4,6 +4,7 @@ import "../../../core/error/failures.dart";
 import "../../../Utilities/api_end_point.dart";
 import "../../../core/API/request_method.dart";
 import "../../../core/error/exceptions.dart";
+import "../../Utilities/shared_preferences.dart";
 
 class RateProductDataHandler {
   static Future<Either<Failure, String>> rateProduct({
@@ -12,9 +13,21 @@ class RateProductDataHandler {
     required String comment,
   }) async {
     try {
+      String? token = SharedPref.getCurrentUser()?.token; // Get saved token
+
+      if (token == null || token.isEmpty) {
+        print("⚠️ Error: Missing Authentication Token");
+      }
+
+      print("🛠 Using Token: $token"); // Debug token before request
+
       var response = await GenericRequest<String>(
           method: RequestApi.post(
             url: APIEndPoint.postReview,
+            headers: {
+              "Authorization": "Bearer $token", // ✅ Correct header format
+              "Content-Type": "application/json",
+            },
             body: {
               "product_id": productId,
               "rate": rate,

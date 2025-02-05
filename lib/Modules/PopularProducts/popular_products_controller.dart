@@ -85,7 +85,7 @@ class PopularProductController extends ControllerMVC {
     });
   }
 
-   addFavorite({required int productId}) async {
+   addToFavorite({required int productId}) async {
     setState(() {
       loading = true;
     });

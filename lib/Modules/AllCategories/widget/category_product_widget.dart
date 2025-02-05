@@ -18,9 +18,9 @@ import "../../../generated/assets.dart";
 
 class CustomCategoryProductContainerWidget extends StatelessWidget {
   final CategoryProductModel categoryProductModel;
-  final PopularProductsModel productsModel;
+ // final PopularProductsModel productsModel;
 
-  const CustomCategoryProductContainerWidget({super.key, required this.categoryProductModel, required this.productsModel});
+  const CustomCategoryProductContainerWidget({super.key, required this.categoryProductModel});
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -29,7 +29,10 @@ class CustomCategoryProductContainerWidget extends StatelessWidget {
         extra:categoryProductModel );
       },
       child: Container(
-        height: 217.h,
+        constraints: BoxConstraints(
+          minHeight: 220.h,
+          maxHeight: double.infinity,
+        ),
         width: 175.w,
         decoration: BoxDecoration(
           color: ThemeClass.of(context).background,
@@ -47,7 +50,7 @@ class CustomCategoryProductContainerWidget extends StatelessWidget {
           ],
         ),
         child: Padding(
-          padding: EdgeInsetsDirectional.symmetric(vertical: 16.h),
+          padding: EdgeInsetsDirectional.symmetric(vertical: 15.h),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -62,22 +65,17 @@ class CustomCategoryProductContainerWidget extends StatelessWidget {
                     SizedBox(
                       height: 113.h,
                       width: 45.w,
-                      child: Image.network(
-                        categoryProductModel.image ?? "", // Network image URL
+                      child:Image.network (
+                        categoryProductModel.image??"", // Network image URL
                         fit: BoxFit.cover,
                         width: 328.w,
                         height: 192.h, // Adjust height as needed
                         errorBuilder: (context, error, stackTrace) {
                           // Fallback widget when the image fails to load
-                          return Container(
-                            color: Colors
-                                .grey[300], // Background color for the fallback
-                            alignment: Alignment.center,
-                            child: const Icon(
+                          return const Icon(
                               Icons.image, // Built-in icon as a fallback
                               size: 50,
                               color: Colors.grey,
-                            ),
                           );
                         },
                       ),
@@ -136,7 +134,7 @@ class CustomCategoryProductContainerWidget extends StatelessWidget {
               Gap(8.h),
               Padding(
                 padding: EdgeInsetsDirectional.only(start: 14.w),
-                child: Text(categoryProductModel.title ?? "",
+                child: Text(categoryProductModel.title??"",
                     style: TextStyleHelper.of(context)
                         .b_14
                         .copyWith(color: ThemeClass.of(context).mainBlack)),

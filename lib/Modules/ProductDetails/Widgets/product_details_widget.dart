@@ -98,16 +98,12 @@ class _ProductDetailsWidgetState extends StateMVC<ProductDetailsWidget> {
                                 fit: BoxFit.contain,
                                 errorBuilder: (context, error, stackTrace) {
                               // Fallback widget when the image fails to load
-                              return Container(
-                                color: Colors.grey[300],
-                                // Background color for the fallback
-                                alignment: Alignment.center,
-                                child: const Icon(
+                              return  const Icon(
                                   Icons.image,
                                   // Built-in icon as a fallback
                                   size: 50,
                                   color: Colors.grey,
-                                ),
+
                               );
                             }),
                           ),

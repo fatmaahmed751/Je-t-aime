@@ -1,17 +1,18 @@
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:go_router/go_router.dart';
-import 'package:je_t_aime/Models/popular_products_model.dart';
-import 'package:je_t_aime/Modules/RateProducts/rate_product_data_handler.dart';
-import 'package:mvc_pattern/mvc_pattern.dart';
+import "package:flutter/cupertino.dart";
+import "package:flutter/material.dart";
+import "package:flutter_screenutil/flutter_screenutil.dart";
+import "package:flutter_svg/svg.dart";
+import "package:go_router/go_router.dart";
+import "package:je_t_aime/Models/popular_products_model.dart";
+import "package:je_t_aime/Models/product_details_model.dart";
+import "package:je_t_aime/Modules/RateProducts/rate_product_data_handler.dart";
+import "package:mvc_pattern/mvc_pattern.dart";
 import "../../Models/review_model.dart";
-import '../../Utilities/router_config.dart';
-import '../../Utilities/strings.dart';
-import '../../Utilities/theme_helper.dart';
-import '../../Widgets/toast_helper.dart';
-import '../../generated/assets.dart';
+import "../../Utilities/router_config.dart";
+import "../../Utilities/strings.dart";
+import "../../Utilities/theme_helper.dart";
+import "../../Widgets/toast_helper.dart";
+import "../../generated/assets.dart";
 
 class RateProductController extends ControllerMVC {
   // singleton
@@ -28,7 +29,7 @@ class RateProductController extends ControllerMVC {
   late TextEditingController messageController = TextEditingController();
   double productRating = 0.0;
   ReviewModel? reviewModel;
-  PopularProductsModel? product;
+  PopularProductsModel?  product;
   @override
   void initState() {
     messageController = TextEditingController();
@@ -42,17 +43,30 @@ class RateProductController extends ControllerMVC {
   }
 
   postRatedSuccessfully() async {
+    print("🔍 Debug: Product ID Before API Call: ${product?.id}");
+
+    if (product?.id == null || product?.id == 0) {
+      print("⚠️ Error: Product ID is null or 0!");
+      ToastHelper.showError(message: "Invalid Product ID");
+      return;
+    }
+
     setState(() {
       loading = true;
     });
+    print("Product ID: ${product?.id}");
+
     final result = await RateProductDataHandler.rateProduct(
-        productId: product?.id ?? 0,
+        productId: product?.id??0,
         rate: productRating.toInt(),
         comment: messageController.text);
+    print("Product ID: ${product?.id}");
     result.fold((l) {
       setState(() {
         loading = false;
       });
+      print("Sending rating for Product ID: ${product?.id}");
+
       ToastHelper.showError(message: l.errorModel.statusMessage);
     }, (r) async {
       ToastHelper.showSuccess(
@@ -68,3 +82,4 @@ class RateProductController extends ControllerMVC {
     });
   }
 }
+
