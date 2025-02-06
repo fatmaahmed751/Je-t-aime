@@ -27,7 +27,7 @@ class ProductDetailsModel {
   final List<ProductImage>? images;
   final String? averageRating;
   final ReviewModel? reviews;
-  final List<RelatedProduct>? relatedProducts;
+  final List<RelatedProduct> relatedProducts;
 
   ProductDetailsModel({
     this.id,
@@ -46,8 +46,9 @@ class ProductDetailsModel {
     this.images,
     this.averageRating,
     this.reviews,
-    this.relatedProducts,
-  });
+   List<RelatedProduct>? relatedProducts, // ✅ Handle null lists
+  }) : relatedProducts = relatedProducts ?? [];
+
 
   factory ProductDetailsModel.fromJson(Map<String, dynamic> json) => ProductDetailsModel(
     id: json["id"],
@@ -86,7 +87,8 @@ class ProductDetailsModel {
     "images": images == null ? [] : List<dynamic>.from(images!.map((x) => x.toJson())),
     "average_rating": averageRating,
     "reviews": reviews?.toJson(),
-    "related_products": relatedProducts == null ? [] : List<dynamic>.from(relatedProducts!.map((x) => x.toJson())),
+    "related_products": relatedProducts.map((x) => x.toJson()).toList(),
+    //"related_products": relatedProducts == null ? [] : List<dynamic>.from(relatedProducts!.map((x) => x.toJson())),
   };
 }
 
@@ -98,7 +100,7 @@ class ProductImage {
   });
 
   factory ProductImage.fromJson(Map<String, dynamic> json) => ProductImage(
-    image: json["image"],
+    image: json["image"]??"",
   );
 
   Map<String, dynamic> toJson() => {

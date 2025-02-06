@@ -2,6 +2,7 @@ import "package:flutter/cupertino.dart";
 import "package:flutter/material.dart";
 import "package:flutter_screenutil/flutter_screenutil.dart";
 import "package:flutter_svg/svg.dart";
+import "package:infinite_scroll_pagination/infinite_scroll_pagination.dart";
 import "package:je_t_aime/Models/cart_item_model.dart";
 import "package:je_t_aime/Models/category_model.dart";
 import "package:je_t_aime/core/Language/locales.dart";
@@ -61,16 +62,32 @@ class HomeController extends ControllerMVC {
   int quyCount =1;
   PopularProductsModel? productsModel;
  CartModel? cartModel;
-  init() async {
-    loadCurrentLanguage(currentContext_!);
-    getHomeDetails();
-  }
+  static const pageSize =10;
+  final bool _isDisposed = false;
 
+  PagingController<int, PopularProductsModel> get pagingController => _pagingController;
+
+  final PagingController<int, PopularProductsModel> _pagingController =
+  PagingController(firstPageKey: 0);
   @override
   void initState() {
     searchController = TextEditingController();
+    _pagingController.addPageRequestListener((pageKey) {
+      getProducts(pageKey);
+    });
     super.initState();
   }
+  init() async {
+    loadCurrentLanguage(currentContext_!);
+    getHomeDetails();
+    if (_pagingController.itemList == null ||
+    _pagingController.itemList!.isEmpty) {
+    getProducts(_pagingController.firstPageKey);
+}
+
+  }
+
+
 
   @override
   void dispose() {
@@ -158,6 +175,38 @@ addProductToCart()async{
     setState(() {
       loading = false;
     });
+  }
+  Future<void> getProducts(int pageKey) async {
+    try {
+      final newItems = await PopularProductsDataHandler.getAllPopularProducts(
+        pageKey,
+        pageSize,
+      );
+      if (_isDisposed) return; // Cancel if disposed
+
+      newItems.fold(
+            (failure) {
+          if (!_isDisposed) { // Check if disposed
+            _pagingController.error = failure;
+          }
+        },
+            (products) {
+          if (!_isDisposed) { // Check if disposed
+            final isLastPage = products.length < pageSize;
+            if (isLastPage) {
+              _pagingController.appendLastPage(products);
+            } else {
+              final nextPageKey = pageKey + products.length;
+              _pagingController.appendPage(products, nextPageKey);
+            }
+          }
+        },
+      );
+    } catch (error) {
+      if (!_isDisposed) { // Check if disposed
+        _pagingController.error = error;
+      }
+    }
   }
 }
 // Future<void> _handlePermissionPermanentlyDenied() async {

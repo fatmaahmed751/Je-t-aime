@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import "package:je_t_aime/Models/product_details_model.dart";
 import 'package:je_t_aime/Widgets/custom_app_bar_widget.dart';
 import 'package:je_t_aime/core/Language/locales.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
@@ -82,7 +83,9 @@ class _FavoriteScreenState extends StateMVC<FavoriteScreen> {
                       Padding(
                         padding: EdgeInsetsDirectional.symmetric(
                             vertical: 24.h, horizontal: 12.w),
-                        child: const CustomProductsWidget(),
+                        child:  CustomProductsWidget(
+                          model: ProductDetailsModel(),
+                        ),
                       ),
                     ],
                   ),

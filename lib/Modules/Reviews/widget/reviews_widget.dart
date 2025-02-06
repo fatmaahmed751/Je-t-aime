@@ -3,33 +3,22 @@ import "package:flutter_rating_bar/flutter_rating_bar.dart";
 import "package:flutter_screenutil/flutter_screenutil.dart";
 import "package:flutter_svg/svg.dart";
 import "package:gap/gap.dart";
-import "package:je_t_aime/Modules/Reviews/reviews_controller.dart";
-import "package:je_t_aime/core/Language/locales.dart";
-import "package:mvc_pattern/mvc_pattern.dart";
 
 import "../../../Models/review_model.dart";
 import "../../../Utilities/format_date_helper.dart";
-import "../../../Utilities/strings.dart";
 import "../../../Utilities/text_style_helper.dart";
 import "../../../Utilities/theme_helper.dart";
 import "../../../generated/assets.dart";
 
-class ReviewsItem extends StatefulWidget {
+class ReviewsItem extends StatelessWidget {
   final ReviewModel reviewsModel;
   const ReviewsItem({super.key, required this.reviewsModel});
 
-  @override
-  createState() => _ReviewsItemState();
-}
 
-class _ReviewsItemState extends StateMVC<ReviewsItem> {
-  _ReviewsItemState() : super(ReviewsForProductController()) {
-    con = ReviewsForProductController();
-  }
-  late ReviewsForProductController con;
 
   @override
   Widget build(BuildContext context) {
+    print("***********${reviewsModel.userName}con");
     return Container(
       width: 382.w,
       //height: 154.h,
@@ -45,7 +34,7 @@ class _ReviewsItemState extends StateMVC<ReviewsItem> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  widget.reviewsModel.userName??"",
+                 reviewsModel.userName??"",
                   style: TextStyleHelper.of(context)
                       .h_19
                       .copyWith(color: ThemeClass.of(context).mainBlack),
@@ -64,9 +53,6 @@ class _ReviewsItemState extends StateMVC<ReviewsItem> {
                     Assets.imagesFilledStar,
                   ),
                   onRatingUpdate: (rating) {
-                    setState(() {
-                      con.productRating = rating;
-                    });
                   },
                 ),
               ],
@@ -76,7 +62,7 @@ class _ReviewsItemState extends StateMVC<ReviewsItem> {
               //height:130.h,
               width: 382.w,
               child: Text(
-                widget.reviewsModel.message??"",
+                reviewsModel.message??"",
                 style: TextStyleHelper.of(context).b_16.copyWith(
                     fontWeight: FontWeight.w400,
                     color: ThemeClass.of(context)

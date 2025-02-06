@@ -1,4 +1,5 @@
 import "package:dartz/dartz.dart";
+import "package:je_t_aime/Models/popular_products_model.dart";
 
 import "../../Utilities/api_end_point.dart";
 import "../../core/API/generic_request.dart";
@@ -18,6 +19,24 @@ class PopularProductsDataHandler {
 
       ).getResponse();
       print('jjjjjjjjjjjjjjjjjjjjjjj');
+      return Right(response);
+    } on ServerException catch (failure) {
+      return Left(ServerFailure(failure.errorMessageModel));
+    }
+  }
+  static Future<Either<Failure, List<PopularProductsModel>>> getAllPopularProducts(
+      int pageKey,
+      int pageSize,
+    ) async {
+    try {
+
+      List<PopularProductsModel> response = await GenericRequest <PopularProductsModel>(
+        method: RequestApi.get(
+            url: "${APIEndPoint.getPopularProduct}?page=$pageKey&pageSize=$pageSize"
+        ),
+        fromMap: PopularProductsModel.fromJson,
+
+      ).getList();
       return Right(response);
     } on ServerException catch (failure) {
       return Left(ServerFailure(failure.errorMessageModel));

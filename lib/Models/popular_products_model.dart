@@ -46,7 +46,7 @@ class PopularProductsModel {
         discount: json["discount"],
         count: json["count"],
         isFavorite: json["is_favorite"],
-        image: json["image"],
+        image: json["image"]??"",
       );
 
   Map<String, dynamic> toJson() => {

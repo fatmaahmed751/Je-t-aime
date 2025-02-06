@@ -2,6 +2,7 @@ import "package:flutter/material.dart";
 import "package:go_router/go_router.dart";
 import "package:je_t_aime/Models/category_model.dart";
 import "package:je_t_aime/Models/popular_products_model.dart";
+import "package:je_t_aime/Models/product_details_model.dart";
 import "package:je_t_aime/Modules/ChangePassword/change_password_screen.dart";
 import "package:je_t_aime/Modules/Favorite/favorite_screen.dart";
 import "package:je_t_aime/Modules/Notifications/notifications_screen.dart";
@@ -110,7 +111,7 @@ class GoRouterConfig {
         name: PopularProductsScreen.routeName,
         path: "/${PopularProductsScreen.routeName}",
         pageBuilder: (_, GoRouterState state) {
-          final List<PopularProductsModel> products = state.extra as List<PopularProductsModel>;
+         final List<PopularProductsModel> products = state.extra as List<PopularProductsModel>;
           return getCustomTransitionPage(
             state: state,
             child:  PopularProductsScreen(

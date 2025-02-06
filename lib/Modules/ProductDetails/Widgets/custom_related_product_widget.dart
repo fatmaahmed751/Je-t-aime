@@ -1,8 +1,5 @@
 import "package:flutter/material.dart";
 import "package:flutter_screenutil/flutter_screenutil.dart";
-import "package:go_router/go_router.dart";
-import "package:je_t_aime/Models/popular_products_model.dart";
-import "package:je_t_aime/Modules/ProductDetails/product_details_screen.dart";
 import "package:je_t_aime/core/Language/locales.dart";
 import "../../../Models/product_details_model.dart";
 import "../../../Utilities/strings.dart";
@@ -13,22 +10,22 @@ import "package:flutter_svg/svg.dart";
 import "package:gap/gap.dart";
 
 
-class CustomProductContainerWidget extends StatelessWidget {
-  final PopularProductsModel productsModel;
-  final ProductDetailsModel? model;
+class CustomRelatedProductWidget extends StatelessWidget {
+  final RelatedProduct productsModel;
+
   final Function() onFavoritePressed;
-  const CustomProductContainerWidget({super.key, required this.productsModel, required this.onFavoritePressed, this.model});
+  const CustomRelatedProductWidget({super.key, required this.productsModel, required this.onFavoritePressed});
 
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-         context.pushNamed(
-          ProductDetailsScreen.routeName,
-          extra: productsModel, // Ensure model is passed correctly
-        );
-            },
+        // context.pushNamed(
+        //   ProductDetailsScreen.routeName,
+        //   extra: productsModel, // Ensure model is passed correctly
+        // );
+      },
       child: Container(
         height: 217.h,
         width: 175.w,
@@ -71,9 +68,9 @@ class CustomProductContainerWidget extends StatelessWidget {
                         errorBuilder: (context, error, stackTrace) {
                           // Fallback widget when the image fails to load
                           return  const Icon(
-                              Icons.image, // Built-in icon as a fallback
-                              size: 50,
-                              color: Colors.grey,
+                            Icons.image, // Built-in icon as a fallback
+                            size: 50,
+                            color: Colors.grey,
 
                           );
                         },
@@ -89,11 +86,11 @@ class CustomProductContainerWidget extends StatelessWidget {
                             child: productsModel.isFavorite == 1
                                 ? SvgPicture.asset(Assets.imagesFavoriteIcon)
                                 : SizedBox(
-                                    height: 27.h,
-                                    child: SvgPicture.asset(
-                                      Assets.imagesHeartBroken,
-                                    ),
-                                  )),
+                              height: 27.h,
+                              child: SvgPicture.asset(
+                                Assets.imagesHeartBroken,
+                              ),
+                            )),
                       ),
                     ),
                   ],
@@ -121,7 +118,7 @@ class CustomProductContainerWidget extends StatelessWidget {
                       const Spacer(),
                       GestureDetector(
                         onTap: () {
-                         // con.addProductToCart();
+                          // con.addProductToCart();
                         },
                         child: Container(
                           width: 28.w,

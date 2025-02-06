@@ -2,7 +2,6 @@ import "package:flutter/material.dart";
 import "package:flutter_screenutil/flutter_screenutil.dart";
 import "package:gap/gap.dart";
 import "package:go_router/go_router.dart";
-import "package:je_t_aime/Models/popular_products_model.dart";
 import "package:je_t_aime/Modules/PopularProducts/popular_product_screen.dart";
 import "package:je_t_aime/core/Language/locales.dart";
 import "package:mvc_pattern/mvc_pattern.dart";
@@ -126,11 +125,15 @@ class _HomeScreenState extends StateMVC<HomeScreen> {
                     ),
                     InkWell(
                       onTap: () async {
-                        final List<PopularProductsModel> products =
-                            con.products;
-                        print("5555555555555555555555555555${con.products}");
-                        await context.pushNamed(PopularProductsScreen.routeName,
-                            extra: products);
+                        if (con.products.isEmpty) {
+                          // ✅ Wait until data is fetched
+                          print("impty${con.products}");
+                        }
+                        if (con.products.isNotEmpty) {
+                          await context.pushNamed(
+                              PopularProductsScreen.routeName,
+                              extra: con.products);
+                        }
                       },
                       child: Text(
                         Strings.viewAll.tr,
@@ -147,44 +150,48 @@ class _HomeScreenState extends StateMVC<HomeScreen> {
                 padding: EdgeInsetsDirectional.only(start: 16.w),
                 child: SizedBox(
                   height: 230.h,
-                  child: ListView.separated(
-                      physics: const BouncingScrollPhysics(),
-                      scrollDirection: Axis.horizontal,
-                      itemBuilder: (context, index) => Padding(
-                            padding:
-                                EdgeInsetsDirectional.symmetric(vertical: 5.h),
-                            child: CustomProductContainerWidget(
-                                productsModel: con.products[index],
-                                onFavoritePressed: () {
-                                  if (con.products[index].isFavorite == 0) {
-                                    if (SharedPref.getCurrentUser()?.token !=
-                                            null &&
-                                        SharedPref.getCurrentUser()!
-                                            .token!
-                                            .isNotEmpty) {
-                                      con.addToFavorite(
-                                          productId:
-                                              con.products[index].id ?? 0);
-                                      con.products[index].isFavorite = 1;
-                                    } else {
-                                      //  con.unLoginForRatedPop(context);
-                                    }
-                                  } else {
-                                    if (SharedPref.getCurrentUser()?.token !=
-                                            null &&
-                                        SharedPref.getCurrentUser()!
-                                            .token!
-                                            .isNotEmpty) {
-                                      //con.deleteFavorite(productId: con.products[index].id??0);
-                                      con.products[index].isFavorite = 0;
-                                    } else {
-                                      //con.unLoginForRatedPop(context);
-                                    }
-                                  }
-                                }),
-                          ),
-                      separatorBuilder: (context, index) => Gap(10.w),
-                      itemCount: con.products.length),
+                  child: con.products.isEmpty
+                      ? const Center(child: CircularProgressIndicator())
+                      : ListView.separated(
+                          physics: const BouncingScrollPhysics(),
+                          scrollDirection: Axis.horizontal,
+                          itemBuilder: (context, index) => Padding(
+                                padding: EdgeInsetsDirectional.symmetric(
+                                    vertical: 5.h),
+                                child: CustomProductContainerWidget(
+                                    productsModel: con.products[index],
+                                    onFavoritePressed: () {
+                                      if (con.products[index].isFavorite == 0) {
+                                        if (SharedPref.getCurrentUser()
+                                                    ?.token !=
+                                                null &&
+                                            SharedPref.getCurrentUser()!
+                                                .token!
+                                                .isNotEmpty) {
+                                          con.addToFavorite(
+                                              productId:
+                                                  con.products[index].id ?? 0);
+                                          con.products[index].isFavorite = 1;
+                                        } else {
+                                          //  con.unLoginForRatedPop(context);
+                                        }
+                                      } else {
+                                        if (SharedPref.getCurrentUser()
+                                                    ?.token !=
+                                                null &&
+                                            SharedPref.getCurrentUser()!
+                                                .token!
+                                                .isNotEmpty) {
+                                          //con.deleteFavorite(productId: con.products[index].id??0);
+                                          con.products[index].isFavorite = 0;
+                                        } else {
+                                          //con.unLoginForRatedPop(context);
+                                        }
+                                      }
+                                    }),
+                              ),
+                          separatorBuilder: (context, index) => Gap(10.w),
+                          itemCount: con.products.length),
                 ),
               ),
               Gap(20.h)

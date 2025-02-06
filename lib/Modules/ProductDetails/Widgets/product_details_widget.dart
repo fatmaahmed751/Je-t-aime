@@ -3,33 +3,20 @@ import "package:flutter_screenutil/flutter_screenutil.dart";
 import "package:flutter_svg/svg.dart";
 import "package:gap/gap.dart";
 import "package:je_t_aime/core/Language/locales.dart";
-import "package:mvc_pattern/mvc_pattern.dart";
 
-import "../../../Models/popular_products_model.dart";
 import "../../../Models/product_details_model.dart";
 import "../../../Utilities/strings.dart";
 import "../../../Utilities/text_style_helper.dart";
 import "../../../Utilities/theme_helper.dart";
 import "../../../Widgets/custom_details_side_text.dart";
 import "../../../generated/assets.dart";
-import "../product_details_controller.dart";
 
-class ProductDetailsWidget extends StatefulWidget {
+class ProductDetailsWidget extends StatelessWidget{
   final ProductDetailsModel model;
-  final PopularProductsModel productsModel;
+  final int counter;
   const ProductDetailsWidget(
-      {super.key, required this.model, required this.productsModel});
+      {super.key, required this.model, required this.counter});
 
-  @override
-  createState() => _ProductDetailsWidgetState();
-}
-
-class _ProductDetailsWidgetState extends StateMVC<ProductDetailsWidget> {
-  _ProductDetailsWidgetState() : super(ProductDetailsController()) {
-    con = ProductDetailsController();
-  }
-
-  late ProductDetailsController con;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -53,31 +40,28 @@ class _ProductDetailsWidgetState extends StateMVC<ProductDetailsWidget> {
                     width: 65.w,
                     height: 158.h,
                     child: Image.network(
-                      widget.productsModel.image ?? "", // Network image URL
+                      model.images?.isNotEmpty == true ? model.images!.first.image ?? "" : "",
+
+                     // widget.productsModel.image ?? "", // Network image URL
                       fit: BoxFit.cover,
                       width: 328.w,
                       height: 192.h, // Adjust height as needed
                       errorBuilder: (context, error, stackTrace) {
                         // Fallback widget when the image fails to load
-                        return Container(
-                          color: Colors
-                              .grey[300], // Background color for the fallback
-                          alignment: Alignment.center,
-                          child: const Icon(
+                        return  const Icon(
                             Icons.image, // Built-in icon as a fallback
                             size: 50,
                             color: Colors.grey,
-                          ),
                         );
                       },
                     ),
                   ),
                   Gap(20.h), // Spacing between images
-                  if (con.productDetailsModel != null &&
-                      con.productDetailsModel!.images != null)
+                  if (model.images!= null &&
+                      model.images!.isNotEmpty)
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
-                      children: con.productDetailsModel!.images!.map((e) {
+                      children: model.images!.map((e) {
                         return Container(
                           width: 60.w,
                           height: 60.h,
@@ -128,7 +112,7 @@ class _ProductDetailsWidgetState extends StateMVC<ProductDetailsWidget> {
             ),
             const Spacer(),
             Text(
-              con.productDetailsModel?.averageRating ?? "0",
+             model.averageRating ?? "0",
               style: TextStyleHelper.of(context)
                   .b_16
                   .copyWith(color: ThemeClass.of(context).mainBlack),
@@ -141,12 +125,12 @@ class _ProductDetailsWidgetState extends StateMVC<ProductDetailsWidget> {
           ],
         ),
         Gap(10.h),
-        CustomDetailsSideTextWidget(text: con.productDetailsModel?.title ?? ""),
+        CustomDetailsSideTextWidget(text: model.title ?? ""),
         Gap(16.h),
         Row(
           children: [
             Text(
-              "${con.productDetailsModel?.price} ${Strings.jod.tr}",
+              "${model.price} ${Strings.jod.tr}",
               style: TextStyleHelper.of(context)
                   .h_16
                   .copyWith(color: ThemeClass.of(context).primaryColor),
@@ -162,7 +146,7 @@ class _ProductDetailsWidgetState extends StateMVC<ProductDetailsWidget> {
               child: Center(
                 child: InkWell(
                     onTap: () {
-                      con.decrementCounter();
+                      //con.decrementCounter();
                     },
                     child: Icon(Icons.remove,
                         color: ThemeClass.of(context).secondaryBlackColor,
@@ -172,7 +156,7 @@ class _ProductDetailsWidgetState extends StateMVC<ProductDetailsWidget> {
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 16.w),
               child: Text(
-                "${con.counter}",
+              "$counter",
                 style: TextStyleHelper.of(context).b_16.copyWith(
                     color: ThemeClass.of(context).mainBlack,
                     fontWeight: FontWeight.w500),
@@ -188,7 +172,7 @@ class _ProductDetailsWidgetState extends StateMVC<ProductDetailsWidget> {
               child: Center(
                 child: InkWell(
                     onTap: () {
-                      con.incrementCounter();
+                     // con.incrementCounter();
                     },
                     child: Icon(Icons.add,
                         color: ThemeClass.of(context).background, size: 16)),
@@ -205,7 +189,7 @@ class _ProductDetailsWidgetState extends StateMVC<ProductDetailsWidget> {
           //  height:130.h,
           width: 382.w,
           child: Text(
-            con.productDetailsModel?.desc ?? "",
+          model.desc ?? "",
             style: TextStyleHelper.of(context).b_16.copyWith(
                 fontWeight: FontWeight.w400,
                 color: ThemeClass.of(context)

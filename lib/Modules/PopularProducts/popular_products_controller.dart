@@ -3,6 +3,7 @@ import "package:flutter/material.dart";
 import "package:flutter_screenutil/flutter_screenutil.dart";
 import "package:flutter_svg/svg.dart";
 import "package:go_router/go_router.dart";
+import "package:infinite_scroll_pagination/infinite_scroll_pagination.dart";
 import "package:je_t_aime/Modules/PopularProducts/Widgets/filter_bottom_sheet_widget.dart";
 import "package:je_t_aime/Modules/PopularProducts/popular_products_data_handler.dart";
 import "package:je_t_aime/core/Language/locales.dart";
@@ -36,11 +37,21 @@ class PopularProductController extends ControllerMVC {
   late TextEditingController startController;
   late TextEditingController endController;
   List<PopularProductsModel> products = [];
+  static const pageSize =10;
+  final bool _isDisposed = false;
+
+  PagingController<int, PopularProductsModel> get pagingController => _pagingController;
+
+  final PagingController<int, PopularProductsModel> _pagingController =
+  PagingController(firstPageKey: 0);
   @override
   void initState() {
     searchController = TextEditingController();
     startController = TextEditingController();
     endController = TextEditingController();
+    _pagingController.addPageRequestListener((pageKey) {
+      getProducts(pageKey);
+    });
     super.initState();
   }
 
@@ -53,7 +64,10 @@ class PopularProductController extends ControllerMVC {
   }
 
   init() {
-    getHomeDetails();
+    if (_pagingController.itemList == null ||
+        _pagingController.itemList!.isEmpty) {
+      getProducts(_pagingController.firstPageKey);
+    }
   }
 
   Future onSearchReq({String? search}) async {
@@ -79,11 +93,7 @@ class PopularProductController extends ControllerMVC {
     if (search == null || search.isEmpty) return;
   }
 
-  Future getProducts({bool refresh = false}) async {
-    setState(() {
-      loading = false;
-    });
-  }
+
 
    addToFavorite({required int productId}) async {
     setState(() {
@@ -133,7 +143,56 @@ class PopularProductController extends ControllerMVC {
       loading = false;
     });
   }
+  Future<void> getProducts(int pageKey) async {
+    final newItems = await PopularProductsDataHandler.getAllPopularProducts(pageKey, pageSize);
+    newItems.fold(
+          (failure) {
+        _pagingController.error = failure;
+      },
+          (products) {
+        final isLastPage = products.length < pageSize;
+        if (isLastPage) {
+          _pagingController.appendLastPage(products);
+        } else {
+          final nextPageKey = pageKey + products.length;
+          _pagingController.appendPage(products, nextPageKey);
+        }
+      },
+    );
+  }
 
+  // Future<void> getProducts(int pageKey) async {
+  //   try {
+  //     final newItems = await PopularProductsDataHandler.getAllPopularProducts(
+  //       pageKey,
+  //       pageSize,
+  //     );
+  //     if (_isDisposed) return; // Cancel if disposed
+  //
+  //     newItems.fold(
+  //           (failure) {
+  //         if (!_isDisposed) { // Check if disposed
+  //           _pagingController.error = failure;
+  //         }
+  //       },
+  //           (categories) {
+  //         if (!_isDisposed) { // Check if disposed
+  //           final isLastPage = products.length < pageSize;
+  //           if (isLastPage) {
+  //             _pagingController.appendLastPage(products);
+  //           } else {
+  //             final nextPageKey = pageKey + products.length;
+  //             _pagingController.appendPage(products, nextPageKey);
+  //           }
+  //         }
+  //       },
+  //     );
+  //   } catch (error) {
+  //     if (!_isDisposed) { // Check if disposed
+  //       _pagingController.error = error;
+  //     }
+  //   }
+  // }
   Future filterBottomSheet(BuildContext context) {
     return showModalBottomSheet(
       context: context,

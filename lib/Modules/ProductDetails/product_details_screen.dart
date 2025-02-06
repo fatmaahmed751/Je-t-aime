@@ -1,5 +1,4 @@
 import "package:flutter/material.dart";
-import "package:flutter_rating_bar/flutter_rating_bar.dart";
 import "package:flutter_screenutil/flutter_screenutil.dart";
 import "package:flutter_svg/svg.dart";
 import "package:gap/gap.dart";
@@ -10,9 +9,6 @@ import "package:je_t_aime/Modules/ProductDetails/product_details_controller.dart
 import "package:je_t_aime/core/Language/locales.dart";
 import "package:mvc_pattern/mvc_pattern.dart";
 
-import "../../Models/categories_product_model.dart";
-import "../../Models/review_model.dart";
-import "../../Utilities/format_date_helper.dart";
 import "../../Utilities/shared_preferences.dart";
 import "../../Utilities/strings.dart";
 import "../../Utilities/text_style_helper.dart";
@@ -21,15 +17,15 @@ import "../../Widgets/custom_button_widget.dart";
 import "../../Widgets/custom_details_side_text.dart";
 import "../../generated/assets.dart";
 import "../Reviews/reviews_screen.dart";
+import "../Reviews/widget/reviews_widget.dart";
+import "Widgets/custom_related_product_widget.dart";
 import "Widgets/product_details_widget.dart";
 
 class ProductDetailsScreen extends StatefulWidget {
   static const routeName = "ProductDetails";
   final PopularProductsModel popularProductsModel;
 
-  const ProductDetailsScreen({
-    super.key, required this.popularProductsModel,
-  });
+  const ProductDetailsScreen({super.key, required this.popularProductsModel});
 
   @override
   _ProductDetailsScreenState createState() => _ProductDetailsScreenState();
@@ -93,37 +89,12 @@ class _ProductDetailsScreenState extends StateMVC<ProductDetailsScreen> {
                 ],
               ),
               Gap(10.h),
-               ProductDetailsWidget(model: con.productDetailsModel??ProductDetailsModel(), productsModel: widget.popularProductsModel,),
+              ProductDetailsWidget(
+                  counter: con.counter,
+                  model: con.productDetailsModel ?? ProductDetailsModel()),
 
-
-              // Row(
-              // //  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              //   children: [
-              //
-              //     GestureDetector(
-              //       onTap: (){
-              //         con.toggleExpanded();
-              //       },
-              //       child: Text(
-              //         Strings.seeMore.tr,
-              //         style: TextStyleHelper.of(context).b_14.copyWith(
-              //             decoration: TextDecoration.underline,
-              //             color: ThemeClass.of(context).primaryColor),
-              //       ),
-              //     ),
-              //   ],
-              // ),
-              // Gap(16.h),
-              // Text(
-              //  '',
-              //   style: TextStyleHelper.of(context)
-              //       .b_16
-              //       .copyWith(color: ThemeClass.of(context).labelColor),
-              //   maxLines: con.isExpanded ? null : 4,
-              //   overflow:con. isExpanded ? TextOverflow.visible : TextOverflow.ellipsis,
-              // ),
               Gap(16.h),
-              // if(con.product!=null&&con.product!.reviews.isNotEmpty)
+              //if(con.productDetailsModel!=null&&con.productDetailsModel?.reviews!= null)
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -133,7 +104,8 @@ class _ProductDetailsScreenState extends StateMVC<ProductDetailsScreen> {
                   GestureDetector(
                     onTap: () {
                       context.pushNamed(ReviewsForProductScreen.routeName,
-                      extra: widget.popularProductsModel);
+                          extra: widget.popularProductsModel);
+                      //con.getProductDetails(productId: widget.popularProductsModel.id!);
                     },
                     child: Text(
                       Strings.viewAll.tr,
@@ -145,10 +117,10 @@ class _ProductDetailsScreenState extends StateMVC<ProductDetailsScreen> {
                 ],
               ),
               Gap(15.h),
-              // if(con.product!=null&&con.product!.reviews.isNotEmpty)
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
+                  ///TODO
                   Text(
                     "24 ${Strings.rate.tr}",
                     style: TextStyleHelper.of(context).b_16.copyWith(
@@ -166,25 +138,62 @@ class _ProductDetailsScreenState extends StateMVC<ProductDetailsScreen> {
                 ],
               ),
               Gap(8.h),
-             // const ReviewsItem(),
-              Gap(8.h),
-             // const ReviewsItem(),
+              if (con.productDetailsModel != null &&
+                  con.productDetailsModel!.reviews != null)
+                ReviewsItem(reviewsModel: con.productDetailsModel!.reviews!),
+
+              // SizedBox(
+              //   height: 300.h,
+              //   child: PagedListView<int, ReviewModel>(
+              //     pagingController: con.pagingController,
+              //     builderDelegate: PagedChildBuilderDelegate<ReviewModel>(
+              //       itemBuilder: (context, item, index) {
+              //         return ReviewsItem(reviewsModel: item);
+              //       },
+              //       firstPageProgressIndicatorBuilder: (context) {
+              //         return const Center(child: CircularProgressIndicator());
+              //       },
+              //       newPageProgressIndicatorBuilder: (context) {
+              //         return const Center(child: CircularProgressIndicator());
+              //       },
+              //       noItemsFoundIndicatorBuilder: (context) {
+              //         return const Center(child: Text("No reviews found"));
+              //       },
+              //       noMoreItemsIndicatorBuilder: (context) {
+              //         return const Center(child: Text("No more reviews"));
+              //       },
+              //       // errorIndicatorBuilder: (context) {
+              //       //   return Center(child: Text('Error loading reviews'));
+              //       // },
+              //     ),
+              //   ),
+              // ),
+
               Gap(8.h),
               CustomDetailsSideTextWidget(
                 text: Strings.relatedProduct.tr,
               ),
               Gap(16.h),
 
-              // SizedBox(
-              //   height: 220.h,
-              //   child: ListView.separated(
-              //       physics: const BouncingScrollPhysics(),
-              //       scrollDirection: Axis.horizontal,
-              //       itemBuilder: (context, index) => const CustomProductContainerWidget(
-              //       ),
-              //       separatorBuilder: (context, index) => Gap(10.w),
-              //       itemCount:5),
-              // ),
+              SizedBox(
+                height: 220.h,
+                child: con.productDetailsModel == null
+                    ? const Center(child: CircularProgressIndicator())
+                    : ListView.separated(
+                        physics: const BouncingScrollPhysics(),
+                        scrollDirection: Axis.horizontal,
+                        itemBuilder: (context, index) =>
+                            CustomRelatedProductWidget(
+                          onFavoritePressed: () {},
+                          productsModel:
+                              con.productDetailsModel!.relatedProducts[index],
+                        ),
+                        separatorBuilder: (context, index) => Gap(10.w),
+                        itemCount:
+                            con.productDetailsModel!.relatedProducts.length,
+                      ),
+              ),
+
               Gap(100.h)
             ],
           ),
@@ -208,5 +217,3 @@ class _ProductDetailsScreenState extends StateMVC<ProductDetailsScreen> {
     );
   }
 }
-
-
