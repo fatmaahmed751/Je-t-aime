@@ -111,7 +111,7 @@ class ProductDetailsController extends ControllerMVC {
     });
   }
 
-  Future writeRateForProduct(BuildContext context) {
+  Future writeRateForProduct(BuildContext context,int productId) {
     return showModalBottomSheet(
       context: context,
       // isScrollControlled: true,
@@ -119,7 +119,7 @@ class ProductDetailsController extends ControllerMVC {
         borderRadius: BorderRadius.vertical(top: Radius.circular(30.r)),
       ),
       builder: (context) =>  RateProductScreen(
-        productId:product?.id??0
+        productId:productId
       ),
     );
   }

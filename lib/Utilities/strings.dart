@@ -16,6 +16,9 @@ class Strings {
   static const String cancel = "cancel";
   static const String ok = "ok";
   static const String youHave = "youHave";
+  static const String noInternet = "noInternet";
+  static const String checkNet = "checkNet";
+  static const String reload = "reload";
   static const String wantToUsePoint = "wantToUsePoint";
   static const String noRewards = "noRewards";
   static const String noRewardsDesc = "noRewardsDesc";

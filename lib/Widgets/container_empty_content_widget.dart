@@ -36,6 +36,7 @@ class ContainerEmptyContentWidget extends StatelessWidget {
               child: SvgPicture.asset(
                 image,
                 fit: BoxFit.cover,
+                allowDrawingOutsideViewBox: true,
               ),
             ),
             Text(
@@ -59,7 +60,7 @@ class ContainerEmptyContentWidget extends StatelessWidget {
             ),
             Gap(30.h),
             button ?? const SizedBox(),
-            Gap(170.h)
+            Gap(120.h)
           ]),
     );
   }

@@ -5,13 +5,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import "package:flutter_svg/svg.dart";
 import 'package:gap/gap.dart';
 import 'package:provider/provider.dart';
 import 'Utilities/git_it.dart';
 import 'Utilities/router_config.dart';
 import 'Utilities/strings.dart';
+import "Utilities/text_style_helper.dart";
 import 'Utilities/theme_helper.dart';
 import 'Widgets/check_internet_connection.dart';
+import "Widgets/container_empty_content_widget.dart";
+import "Widgets/custom_button_widget.dart";
 import 'core/Font/font_provider.dart';
 import 'core/Language/app_languages.dart';
 import 'core/Language/locales.dart';
@@ -109,37 +113,65 @@ class ConnectivityWrapper extends StatelessWidget {
       return MaterialApp(
         debugShowCheckedModeBanner: false,
         home: Scaffold(
-          body: Padding(
-            padding: EdgeInsetsDirectional.symmetric(horizontal: 19.w),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Center(
-                  child: SizedBox(
-                    width: 350.w,
-                    height: 420.h,
-                    child: Column(
-                      children: [
-                        SizedBox(
-                            height: 300.h,
-                            width: 220.w,
-                            child: Image.asset(Assets.imagesLogout)),
-                        Gap(10.h),
-                        Text("No connection",
-                            style: const TextStyle(
-                                fontWeight: FontWeight.w600,
-                                fontSize: 24,
-                                fontFamily: "Poppins")),
-                        Gap(50.h)
-                      ],
-                    ),
-                  ),
-                ),
-              ],
-            ),
+          body:
+          Padding(
+          padding: EdgeInsetsDirectional.only(
+          start: 20.w,
+            end: 20.w,
           ),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Gap(190.h),
+              SizedBox(
+                height: 250.h,
+                width: double.infinity,
+                child: SvgPicture.asset(
+                 Assets.imagesNoInternet
+                 // fit: BoxFit.cover,
+                ),
+              ),
+              Text(
+                Strings.noInternet.tr,
+                textAlign: TextAlign.center,
+                style: TextStyleHelper.of(context)
+                    .h_20
+                    .copyWith(color: ThemeClass.of(context).mainBlack),
+              ),
+              Gap(20.h),
+              SizedBox(
+                //width: 382.w,
+                // height: 85.h,
+                child: Text(
+                  Strings.checkNet.tr,
+                  maxLines: 3,
+                  textAlign: TextAlign.center,
+                  style: TextStyleHelper.of(context).b_16.copyWith(
+                      color: ThemeClass.of(context).secondaryBlackColor),
+                ),
+              ),
+              Gap(30.h),
+              CustomButtonWidget.primary(
+                  height: 48.h,
+                  width: 155.w,
+                  radius: 30.r,
+                  title:  Strings.reload.tr,
+                  onTap: () {
+                    // SharedPref.getCurrentUser()!
+                    //     .token!
+                    //     .isNotEmpty
+                    //     ? GoRouter.of(context)
+                    //     .pushNamed(PopularProductsScreen.routeName,)
+                    //     : GoRouter.of(context).pushNamed(
+                    //     RegisterScreen.routeName);
+                  }),
+              Gap(120.h)
+          ]
+
         ),
+      ),
+    ),
       );
     }
 

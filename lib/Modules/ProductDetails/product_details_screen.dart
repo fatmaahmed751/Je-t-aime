@@ -131,7 +131,7 @@ class _ProductDetailsScreenState extends StateMVC<ProductDetailsScreen> {
                   ),
                   GestureDetector(
                     onTap: () {
-                      con.writeRateForProduct(context);
+                      con.writeRateForProduct(context,widget.popularProductsModel.id!);
                     },
                     child: SvgPicture.asset(Assets.imagesEdit),
                   ),

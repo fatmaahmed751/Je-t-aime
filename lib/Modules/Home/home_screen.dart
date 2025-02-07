@@ -163,8 +163,7 @@ class _HomeScreenState extends StateMVC<HomeScreen> {
                                     onFavoritePressed: () {
                                       if (con.products[index].isFavorite == 0) {
                                         if (SharedPref.getCurrentUser()
-                                                    ?.token !=
-                                                null &&
+                                                    ?.token != null &&
                                             SharedPref.getCurrentUser()!
                                                 .token!
                                                 .isNotEmpty) {

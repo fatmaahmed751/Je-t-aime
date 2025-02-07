@@ -1,6 +1,5 @@
 
 import "package:dartz/dartz.dart";
-
 import "../../Models/review_model.dart";
 import "../../Utilities/api_end_point.dart";
 import "../../core/API/generic_request.dart";
@@ -20,7 +19,6 @@ class ReviewsDataHandler {
           url: "${APIEndPoint.getReviews(reviewProductId)}?page=$pageKey&pageSize=$pageSize"
         ),
         fromMap: ReviewModel.fromJson,
-
       ).getList();
       return Right(response);
     } on ServerException catch (failure) {

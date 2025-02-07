@@ -58,38 +58,29 @@ class ReviewsForProductController extends ControllerMVC {
       getReviews(_pagingController.firstPageKey, reviewProductId);
     }
   }
-  Future<void> getReviews(int pageKey, int reviewProductId) async {
-    try {
-      final newItems = await ReviewsDataHandler.reviewsForProduct(
-        pageKey,
-        pageSize,
-        reviewProductId,
-      );
-      if (_isDisposed) return; // Cancel if disposed
 
-      newItems.fold(
+  Future<void> getReviews(int pageKey, int reviewProductId) async {
+    //try {
+    final newItems = await ReviewsDataHandler.reviewsForProduct(
+      pageKey,
+      pageSize,
+      reviewProductId,
+    );
+    newItems.fold(
             (failure) {
-          if (!_isDisposed) { // Check if disposed
-            _pagingController.error = failure;
-          }
+          _pagingController.error = failure;
         },
-            (categories) {
-          if (!_isDisposed) { // Check if disposed
-            final isLastPage = reviews.length < pageSize;
-            if (isLastPage) {
-              _pagingController.appendLastPage(reviews);
-            } else {
-              final nextPageKey = pageKey + reviews.length;
-              _pagingController.appendPage(reviews, nextPageKey);
-            }
+            (reviews) {
+          final isLastPage = reviews.length < pageSize;
+          if (isLastPage) {
+            _pagingController.appendLastPage(reviews);
+          } else {
+            final nextPageKey = pageKey + reviews.length;
+            _pagingController.appendPage(reviews, nextPageKey);
           }
-        },
-      );
-    } catch (error) {
-      if (!_isDisposed) { // Check if disposed
-        _pagingController.error = error;
-      }
-    }
+        }
+    );
+
   }
 
   postRatedSuccessfully() async {

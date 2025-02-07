@@ -8,7 +8,9 @@ import "../../core/error/exceptions.dart";
 import "../../core/error/failures.dart";
 
 class PopularProductsDataHandler {
-  static Future<Either<Failure, String>> addFavorite({required int productId}) async {
+  static Future<Either<Failure, String>> addFavorite({
+    required int productId
+  }) async {
     try {
       String response = await GenericRequest<String>(
         method: RequestApi.post(url: APIEndPoint.addFavorite,

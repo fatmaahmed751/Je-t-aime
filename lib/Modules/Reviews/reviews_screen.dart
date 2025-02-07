@@ -55,9 +55,9 @@ class _ReviewsForProductScreenState extends StateMVC<ReviewsForProductScreen> {
             child: Padding(
           padding:
               EdgeInsetsDirectional.symmetric(horizontal: 23.w, vertical: 5.h),
-          child:  ListView(
+          child:  Column(
 
-            physics: NeverScrollableScrollPhysics(),
+            //physics: NeverScrollableScrollPhysics(),
             children: [
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -78,9 +78,9 @@ class _ReviewsForProductScreenState extends StateMVC<ReviewsForProductScreen> {
                   ),
                 ],
               ),
-      SizedBox(
-        height: 500.h,
+      Expanded(
         child: PagedListView<int, ReviewModel>(
+          physics: const BouncingScrollPhysics(),
           pagingController: con.pagingController,
           builderDelegate: PagedChildBuilderDelegate<ReviewModel>(
             itemBuilder: (context, item, index) {
