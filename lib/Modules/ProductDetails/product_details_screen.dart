@@ -90,6 +90,8 @@ class _ProductDetailsScreenState extends StateMVC<ProductDetailsScreen> {
               ),
               Gap(10.h),
               ProductDetailsWidget(
+                decrement: con.decrementCounter,
+                  increment: con.incrementCounter,
                   counter: con.counter,
                   model: con.productDetailsModel ?? ProductDetailsModel()),
 
@@ -131,7 +133,7 @@ class _ProductDetailsScreenState extends StateMVC<ProductDetailsScreen> {
                   ),
                   GestureDetector(
                     onTap: () {
-                      con.writeRateForProduct(context,widget.popularProductsModel.id!);
+                      con.writeRateForProduct(context);
                     },
                     child: SvgPicture.asset(Assets.imagesEdit),
                   ),

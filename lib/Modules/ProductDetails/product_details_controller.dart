@@ -7,12 +7,18 @@ import "package:infinite_scroll_pagination/infinite_scroll_pagination.dart";
 import "package:je_t_aime/Models/popular_products_model.dart";
 import "package:je_t_aime/Models/product_details_model.dart";
 import "package:je_t_aime/Models/review_model.dart";
+import "package:je_t_aime/Modules/Cart/cart_screen.dart";
 import "package:je_t_aime/Modules/ProductDetails/product_details_data_handler.dart";
+import "package:je_t_aime/core/Language/locales.dart";
 import "package:mvc_pattern/mvc_pattern.dart";
+import "../../Models/cart_item_model.dart";
 import "../../Utilities/router_config.dart";
+import "../../Utilities/strings.dart";
 import "../../Utilities/theme_helper.dart";
 import "../../Widgets/toast_helper.dart";
 import "../../generated/assets.dart";
+import "../Cart/cart_data_handler.dart";
+import "../Home/home_data_handler.dart";
 import "../RateProducts/rate_product_data_handler.dart";
 import "../RateProducts/rate_product_screen.dart";
 import "../Reviews/reviews_data_handler.dart";
@@ -36,12 +42,16 @@ class ProductDetailsController extends ControllerMVC {
   bool loading = false;
   late TextEditingController messageController = TextEditingController();
   double productRating = 0.0;
+  List<CartModel> cartProducts=[];
   ProductDetailsModel? productDetailsModel;
+
   static const pageSize = 2;
+
   PagingController<int, ReviewModel> get pagingController => _pagingController;
 
   final PagingController<int, ReviewModel> _pagingController =
   PagingController(firstPageKey: 0);
+
   @override
   void initState() {
     messageController = TextEditingController();
@@ -97,7 +107,7 @@ class ProductDetailsController extends ControllerMVC {
   }
 
 
-  void decrementCounter() {
+  void  decrementCounter() {
     setState(() {
       if (counter > 1) {
         counter--;
@@ -111,56 +121,8 @@ class ProductDetailsController extends ControllerMVC {
     });
   }
 
-  Future writeRateForProduct(BuildContext context,int productId) {
-    return showModalBottomSheet(
-      context: context,
-      // isScrollControlled: true,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(30.r)),
-      ),
-      builder: (context) =>  RateProductScreen(
-        productId:productId
-      ),
-    );
-  }
-  postRatedSuccessfully() async {
-    print("🔍 Debug: Product ID Before API Call: ${product?.id}");
 
-    if (product?.id == null || product?.id == 0) {
-      print("⚠️ Error: Product ID is null or 0!");
-      ToastHelper.showError(message: "Invalid Product ID");
-      return;
-    }
 
-    setState(() {
-      loading = true;
-    });
-    print("Product ID: ${product?.id}");
-
-    final result = await RateProductDataHandler.rateProduct(
-        productId: product!.id!,
-        rate: productRating.toInt(),
-        comment: messageController.text);
-    result.fold((l) {
-      setState(() {
-        loading = false;
-      });
-      print("Sending rating for Product ID: ${product?.id}");
-
-      ToastHelper.showError(message: l.errorModel.statusMessage);
-    }, (r) async {
-      ToastHelper.showSuccess(
-          backgroundColor:ThemeClass.of(currentContext_!).primaryColor,
-          icon:SvgPicture.asset(Assets.imagesSubmit,width:60.w,
-            height:50.h,
-            fit: BoxFit.cover,),
-          message:"gooood", context: currentContext_!);
-      currentContext_!.pop();
-    });
-    setState(() {
-      loading = false;
-    });
-  }
   Future addToCartSheet(BuildContext context) {
     return showModalBottomSheet(
       context: context,
@@ -168,7 +130,57 @@ class ProductDetailsController extends ControllerMVC {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(30.r)),
       ),
-      builder: (context) => const AddToCartBottomSheetWidget(),
+      builder: (context) =>  AddToCartBottomSheetWidget(
+                   addThisToCart:() => addProductToCart(
+                       model:productDetailsModel??ProductDetailsModel(),
+                       context: context),
+      ),
+    );
+  }
+  addProductToCart({required ProductDetailsModel model,required BuildContext context})async{
+    setState(() {
+      loading = true;
+    });
+    print("Product ID: ${model.id}, Quantity: $counter");
+    final result = await CartDataHandler.addToCart(
+        productId: model.id??0,
+        quantity: counter);
+    result.fold((l) {
+      ToastHelper.showError(message: l.toString());
+    }, (r) {
+      ToastHelper.showSuccess(
+        context: context,
+        message: Strings.addToCartSuccess.tr,
+        icon: SvgPicture.asset(
+          Assets.imagesSubmit,
+          width: 60.w,
+          height: 50.h,
+          fit: BoxFit.cover,
+        ),
+        backgroundColor:
+        ThemeClass.of(context).primaryColor,
+      );
+      GoRouter.of(context).pushNamed(CartScreen.routeName,
+        //  extra:cartProducts
+      );
+      context.pop();
+      print("addddddd");
+    });
+    setState(() {
+      loading = false;
+    });
+  }
+
+  Future writeRateForProduct(BuildContext context) {
+    return showModalBottomSheet(
+      context: context,
+      // isScrollControlled: true,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(30.r)),
+      ),
+      builder: (context) =>  RateProductScreen(
+          product:productDetailsModel!
+      ),
     );
   }
   // Future addFavorite({required int productId}) async {

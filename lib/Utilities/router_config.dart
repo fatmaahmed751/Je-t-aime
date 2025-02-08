@@ -11,6 +11,7 @@ import "package:je_t_aime/Modules/Payment/payment_screen.dart";
 import "package:je_t_aime/Modules/Register/register_screen.dart";
 import "package:je_t_aime/Modules/Support/support_screen.dart";
 import "package:je_t_aime/Utilities/shared_preferences.dart";
+import "../Models/cart_item_model.dart";
 import "../Models/categories_product_model.dart";
 import "../Modules/AllCategories/all_categories_screen.dart";
 import "../Modules/Cart/cart_screen.dart";
@@ -125,9 +126,12 @@ class GoRouterConfig {
         name: CartScreen.routeName,
         path: "/${CartScreen.routeName}",
         pageBuilder: (_, GoRouterState state) {
+         // final List<CartModel> products = state.extra as List<CartModel>;
           return getCustomTransitionPage(
             state: state,
-            child: const CartScreen(),
+            child:  CartScreen(
+            //  products: products,
+            ),
           );
         },
         routes: const <RouteBase>[],

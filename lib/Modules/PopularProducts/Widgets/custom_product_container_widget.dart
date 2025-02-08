@@ -17,7 +17,8 @@ class CustomProductContainerWidget extends StatelessWidget {
   final PopularProductsModel productsModel;
   final ProductDetailsModel? model;
   final Function() onFavoritePressed;
-  const CustomProductContainerWidget({super.key, required this.productsModel, required this.onFavoritePressed, this.model});
+  final Function() addToCart;
+  const CustomProductContainerWidget({super.key, required this.productsModel, required this.onFavoritePressed, this.model, required this.addToCart});
 
 
   @override
@@ -120,9 +121,7 @@ class CustomProductContainerWidget extends StatelessWidget {
                       ),
                       const Spacer(),
                       GestureDetector(
-                        onTap: () {
-                         // con.addProductToCart();
-                        },
+                        onTap: addToCart,
                         child: Container(
                           width: 28.w,
                           height: 28.h,

@@ -20,9 +20,9 @@ import "../../Widgets/custom_home_details_text_widget.dart";
 import "../../Widgets/loading_screen.dart";
 
 class RateProductScreen extends StatefulWidget {
-  final int productId;
+  final ProductDetailsModel product;
   const RateProductScreen({
-    super.key, required this.productId,
+    super.key, required this.product,
   });
 
   @override
@@ -132,8 +132,11 @@ class _RateProductScreenState extends StateMVC<RateProductScreen> {
                 CustomButtonWidget.primary(
                     title: Strings.send.tr,
                     onTap: () {
-                      con.postRatedSuccessfully();
-                      //  context.pop();
+                      con.postRatedSuccessfully(
+                        context: context,
+                        product: widget.product
+                      );
+
                     }),
                 Gap(25.h),
               ],

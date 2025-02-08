@@ -142,7 +142,7 @@ class _ApiBaseHelper {
       {bool getResponseBytes = false}) async {
     var token = SharedPref.getCurrentUser()?.token.toString();
     http.StreamedResponse response;
-    log("hhhhhhh${token}");
+   // log("hhhhhhh${token}");
     try {
       request.headers.addAll({
          "Accept": "*/*",

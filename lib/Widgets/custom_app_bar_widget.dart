@@ -210,7 +210,7 @@ class MainAppBarWidget extends StatelessWidget {
                   Gap(8.w),
                   GestureDetector(
                     onTap: () {
-                      GoRouter.of(context).pushNamed(CartScreen.routeName);
+                     GoRouter.of(context).pushNamed(CartScreen.routeName);
                     },
                     child: Container(
                         width: 32.w,
@@ -377,7 +377,7 @@ class SecondaryAppBarWidgetState extends State<SecondaryAppBarWidget> {
                       Gap(8.w),
                       GestureDetector(
                         onTap: () {
-                          GoRouter.of(context).pushNamed(CartScreen.routeName);
+                       GoRouter.of(context).pushNamed(CartScreen.routeName);
                         },
                         child: Container(
                             width: 32.w,

@@ -14,6 +14,7 @@ class APIEndPoint {
   static const String postReview = "${_baseURL}store-review";
   static const String categories = "${_baseURL}categories";
   static const String addToCart = "${_baseURL}store-cart";
+  static const String getCartList = "${_baseURL}carts";
   static const String getPopularProduct = "${_baseURL}get-product-poplar";
   static const String getFavorites = "${_baseURL}favorite";
   static const String addFavorite = "${_baseURL}store-favorite";

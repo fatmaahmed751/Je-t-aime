@@ -14,7 +14,8 @@ import "../../../Widgets/custom_button_widget.dart";
 import "../../../generated/assets.dart";
 
 class AddToCartBottomSheetWidget extends StatelessWidget {
-  const AddToCartBottomSheetWidget({super.key});
+  final Function() addThisToCart;
+  const AddToCartBottomSheetWidget({super.key, required this.addThisToCart});
 
   @override
   Widget build(BuildContext context) {
@@ -61,10 +62,7 @@ class AddToCartBottomSheetWidget extends StatelessWidget {
             Gap(20.h),
             CustomButtonWidget.primary(
               title: Strings.goToCart.tr,
-              onTap: () {
-                GoRouter.of(context).pushNamed(CartScreen.routeName);
-                context.pop();
-              },
+              onTap:addThisToCart
             ),
             Gap(12.h),
             Center(

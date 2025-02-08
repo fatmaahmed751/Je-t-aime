@@ -14,11 +14,20 @@ import "../../../generated/assets.dart";
 class ProductDetailsWidget extends StatelessWidget{
   final ProductDetailsModel model;
   final int counter;
+  final void  Function() decrement;
+  final void  Function() increment;
   const ProductDetailsWidget(
-      {super.key, required this.model, required this.counter});
+      {super.key,
+        required this.model,
+        required this.counter,
+        required this.decrement,
+        required this.increment,
+       });
 
   @override
   Widget build(BuildContext context) {
+    final int totalPrice = (model.price ?? 0) * counter;
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -76,20 +85,12 @@ class ProductDetailsWidget extends StatelessWidget{
                           child: Padding(
                             padding:
                                 EdgeInsetsDirectional.symmetric(vertical: 8.h),
-                            child: Image.network(
-                                e.toString() ??
-                                    "https://via.placeholder.com/150", // استخدام الصورة من القائمة
-                                fit: BoxFit.contain,
-                                errorBuilder: (context, error, stackTrace) {
-                              // Fallback widget when the image fails to load
-                              return  const Icon(
-                                  Icons.image,
-                                  // Built-in icon as a fallback
-                                  size: 50,
-                                  color: Colors.grey,
+                            child: _buildImageWidget(
+                                e.toString()
+                                //    "https://via.placeholder.com/150",
+                        // استخدام الصورة من القائمة
 
-                              );
-                            }),
+                            ),
                           ),
                         );
                       }).toList(),
@@ -130,7 +131,8 @@ class ProductDetailsWidget extends StatelessWidget{
         Row(
           children: [
             Text(
-              "${model.price} ${Strings.jod.tr}",
+              "$totalPrice ${Strings.jod.tr}",
+              //"${model.price*counter}${Strings.jod.tr}",
               style: TextStyleHelper.of(context)
                   .h_16
                   .copyWith(color: ThemeClass.of(context).primaryColor),
@@ -145,9 +147,7 @@ class ProductDetailsWidget extends StatelessWidget{
               ),
               child: Center(
                 child: InkWell(
-                    onTap: () {
-                      //con.decrementCounter();
-                    },
+                    onTap: decrement,
                     child: Icon(Icons.remove,
                         color: ThemeClass.of(context).secondaryBlackColor,
                         size: 16)),
@@ -171,9 +171,8 @@ class ProductDetailsWidget extends StatelessWidget{
               ),
               child: Center(
                 child: InkWell(
-                    onTap: () {
-                     // con.incrementCounter();
-                    },
+                    onTap: increment,
+
                     child: Icon(Icons.add,
                         color: ThemeClass.of(context).background, size: 16)),
               ),
@@ -198,6 +197,35 @@ class ProductDetailsWidget extends StatelessWidget{
           ),
         ),
       ],
+    );
+  }
+  Widget _buildImageWidget(String? imageUrl) {
+    if (imageUrl == null || imageUrl.isEmpty) {
+      return const Icon(
+        Icons.image,
+        size: 50,
+        color: Colors.grey,
+      );
+    }
+
+    // Simple URL validation (you can use a more robust validation if needed)
+    if (!imageUrl.startsWith('http') && !imageUrl.startsWith('https')) {
+      return const Icon(
+        Icons.image,
+        size: 50,
+        color: Colors.grey,
+      );
+    }
+
+    return Image.network(
+      imageUrl,
+      errorBuilder: (context, error, stackTrace) {
+        return const Icon(
+          Icons.image,
+          size: 50,
+          color: Colors.grey,
+        );
+      },
     );
   }
 }

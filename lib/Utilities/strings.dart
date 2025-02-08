@@ -11,6 +11,7 @@ class Strings {
   static const String update = "update";
   static const String verificationSuccess = "verificationSuccess";
   static const String mainColor = "mainColor";
+  static const String rated = "rated";
   static const String secondaryColor = "secondaryColor";
   static const String selectColor = "selectColor";
   static const String cancel = "cancel";

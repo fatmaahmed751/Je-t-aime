@@ -1,10 +1,12 @@
 import "package:flutter/cupertino.dart";
 import "package:flutter/material.dart";
+import "package:flutter/widgets.dart";
 import "package:flutter_screenutil/flutter_screenutil.dart";
 import "package:flutter_svg/svg.dart";
 import "package:infinite_scroll_pagination/infinite_scroll_pagination.dart";
 import "package:je_t_aime/Models/cart_item_model.dart";
 import "package:je_t_aime/Models/category_model.dart";
+import "package:je_t_aime/Modules/Cart/cart_data_handler.dart";
 import "package:je_t_aime/core/Language/locales.dart";
 import "package:mvc_pattern/mvc_pattern.dart";
 import "package:provider/provider.dart";
@@ -101,18 +103,20 @@ class HomeController extends ControllerMVC {
     });
     activeIndex = index;
   }
-addProductToCart()async{
-  loading = true;
-  setState(() {});
-  print("Product ID: ${productsModel?.id}, Quantity: $quyCount");
-  final result = await HomeDataHandler.addToCart(
-      productId: productsModel?.id??0,
+addProductToCart({required BuildContext context, required PopularProductsModel product})async{
+
+  setState(() {
+    loading = true;
+  });
+  print("Product ID: ${product.id}, Quantity: $quyCount");
+  final result = await CartDataHandler.addToCart(
+      productId: product.id??0,
       quantity: quyCount);
   result.fold((l) {
     ToastHelper.showError(message: l.toString());
   }, (r) {
     ToastHelper.showSuccess(
-      context: currentContext_!,
+      context: context,
       message: Strings.addToCartSuccess.tr,
       icon: SvgPicture.asset(
         Assets.imagesSubmit,
@@ -121,7 +125,7 @@ addProductToCart()async{
         fit: BoxFit.cover,
       ),
       backgroundColor:
-      ThemeClass.of(currentContext_!).primaryColor,
+      ThemeClass.of(context).primaryColor,
     );
     print("addddddd");
 });
@@ -129,7 +133,7 @@ addProductToCart()async{
     loading = false;
   });
 }
-  addToFavorite({required int productId}) async {
+  addToFavorite({required int productId,required BuildContext context}) async {
     setState(() {
       loading = true;
     });
@@ -140,7 +144,7 @@ addProductToCart()async{
       ToastHelper.showError(message: l.errorModel.statusMessage);
     }, (r) {
       ToastHelper.showSuccess(
-        context: currentContext_!,
+        context: context,
         message: Strings.addToFavoriteSuccess.tr,
         icon: SvgPicture.asset(
           Assets.imagesSubmit,
@@ -149,7 +153,7 @@ addProductToCart()async{
           fit: BoxFit.cover,
         ),
         backgroundColor:
-        ThemeClass.of(currentContext_!).primaryColor,
+        ThemeClass.of(context).primaryColor,
       );
 
     });
@@ -213,7 +217,7 @@ addProductToCart()async{
 //   onPermanentDenied();
 // }
 // onPermanentDenied() async {
-//   DialogHelper.custom(context: currentContext_!).customDialog(
+//   DialogHelper.custom(context: context).customDialog(
 //       dialogWidget: AlertWarningWidget(
 //         des: Strings.deniedPermission.tr,
 //         onButtonAccept: () {

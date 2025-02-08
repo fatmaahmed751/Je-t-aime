@@ -5,6 +5,7 @@ import "package:go_router/go_router.dart";
 import "package:je_t_aime/Modules/PopularProducts/popular_product_screen.dart";
 import "package:je_t_aime/core/Language/locales.dart";
 import "package:mvc_pattern/mvc_pattern.dart";
+import "../../Models/popular_products_model.dart";
 import "../../Utilities/shared_preferences.dart";
 import "../../Utilities/strings.dart";
 import "../../Utilities/text_style_helper.dart";
@@ -159,6 +160,12 @@ class _HomeScreenState extends StateMVC<HomeScreen> {
                                 padding: EdgeInsetsDirectional.symmetric(
                                     vertical: 5.h),
                                 child: CustomProductContainerWidget(
+                                  addToCart: (){
+                                    con.addProductToCart(
+                                        context: context, product:
+                                    con.productsModel??PopularProductsModel()
+                                    );
+                                  },
                                     productsModel: con.products[index],
                                     onFavoritePressed: () {
                                       if (con.products[index].isFavorite == 0) {
@@ -168,6 +175,7 @@ class _HomeScreenState extends StateMVC<HomeScreen> {
                                                 .token!
                                                 .isNotEmpty) {
                                           con.addToFavorite(
+                                            context: context,
                                               productId:
                                                   con.products[index].id ?? 0);
                                           con.products[index].isFavorite = 1;

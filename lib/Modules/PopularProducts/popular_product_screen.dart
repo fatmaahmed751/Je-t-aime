@@ -94,6 +94,7 @@ class PopularProductsScreenState extends StateMVC<PopularProductsScreen> {
                           builderDelegate: PagedChildBuilderDelegate<PopularProductsModel>(
                             itemBuilder: (context, category, index) {
                               return CustomProductContainerWidget(
+                                addToCart: (){},
                                   productsModel: category,
                                 onFavoritePressed: (){},
                                 // productsModel: PopularProductsModel(),
