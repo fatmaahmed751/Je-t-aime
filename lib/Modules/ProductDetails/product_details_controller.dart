@@ -19,6 +19,7 @@ import "../../Widgets/toast_helper.dart";
 import "../../generated/assets.dart";
 import "../Cart/cart_data_handler.dart";
 import "../Home/home_data_handler.dart";
+import "../PopularProducts/popular_products_data_handler.dart";
 import "../RateProducts/rate_product_data_handler.dart";
 import "../RateProducts/rate_product_screen.dart";
 import "../Reviews/reviews_data_handler.dart";
@@ -65,6 +66,34 @@ class ProductDetailsController extends ControllerMVC {
   void dispose() {
     messageController.dispose();
     super.dispose();
+  }
+  addToFavorite({required int productId,required BuildContext context}) async {
+    setState(() {
+      loading = true;
+    });
+
+    final result = await PopularProductsDataHandler.addFavorite(
+        productId:productId);
+    result.fold((l) {
+      ToastHelper.showError(message: l.errorModel.statusMessage);
+    }, (r) {
+      ToastHelper.showSuccess(
+        context: context,
+        message: Strings.addToFavoriteSuccess.tr,
+        icon: SvgPicture.asset(
+          Assets.imagesSubmit,
+          width: 60.w,
+          height: 50.h,
+          fit: BoxFit.cover,
+        ),
+        backgroundColor:
+        ThemeClass.of(context).primaryColor,
+      );
+
+    });
+    setState(() {
+      loading = false;
+    });
   }
   Future<void> fetchPage(int pageKey) async {
     try {

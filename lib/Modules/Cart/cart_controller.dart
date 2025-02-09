@@ -13,85 +13,92 @@ import "../../Utilities/router_config.dart";
 import "../../Utilities/shared_preferences.dart";
 import "../../Utilities/strings.dart";
 import "alert_delete_item_widget.dart";
-
 class CartController extends ControllerMVC {
   // singleton
   factory CartController() {
     _this ??= CartController._();
     return _this!;
   }
+
   CartController._();
+
   bool loading = false;
 
-  double subtotal = 0;
   String token = "";
   bool isLike = true;
 
   late TextEditingController couponController;
-
   static CartController? _this;
-  List<CartModel> cartProducts =[];
-
-
   static const pageSize = 10;
-  PagingController<int, CartModel> get pagingController => _pagingController;
 
-  final PagingController<int, CartModel> _pagingController =
-  PagingController(firstPageKey: 0);
-  int counterValue = 1;
+  PagingController<int, CartModel>? _pagingController;
+  PagingController<int, CartModel> get pagingController {
+    // Ensure the controller is always initialized
+    _pagingController ??= PagingController(firstPageKey: 0);
+    return _pagingController!;
+  }
+  //int counterValue = 1;
+  List<CartModel> cartProducts = [];
 
   @override
-  void initState() {
+ void initState() {
+    super.initState();
     couponController = TextEditingController();
-    _pagingController.addPageRequestListener((pageKey) {
+    _initPagingController();
+
+  }
+  void init(PagingController<int, CartModel> pagingController) {
+    _pagingController = pagingController;
+    _pagingController!.addPageRequestListener((pageKey) {
       getCartList(pageKey);
     });
-    super.initState();
   }
-  init() {
-    if (_pagingController.itemList == null ||
-        _pagingController.itemList!.isEmpty) {
-      print("Fetching Cart List...");
-      getCartList(_pagingController.firstPageKey, );
-    }
-  }
-  @override
-  void dispose() {
-    couponController.dispose();
-    super.dispose();
+  void _initPagingController() {
+    _pagingController = PagingController(firstPageKey: 0);
+    _pagingController!.addPageRequestListener((pageKey) {
+      getCartList(pageKey);
+    });
+    getCartList(_pagingController!.firstPageKey);
   }
   Future<void> getCartList(int pageKey) async {
-    //try {
+    if (loading) return; // Avoid duplicate calls
+    loading = true;
+    notifyListeners();
     final newItems = await CartDataHandler.listOfCartProducts(
       pageKey,
       pageSize,
     );
     newItems.fold(
-            (failure) {
-          _pagingController.error = failure;
-        },
-
-            (cartProducts) {
-            //  print("Fetched Data: ${cartProducts['data']}");
-              print("Parsed Cart Products: ${cartProducts.length}");
-              print("PagingController Next Page Key: ${_pagingController.nextPageKey}");
-              print("PagingController Item List: ${_pagingController.itemList}");
-              print("Fetching Cart List${cartProducts.length}");
-             // cartProducts.addAll(cartProducts);
-             // setState(() {});
-          final isLastPage = cartProducts.length < pageSize;
-          if (isLastPage) {
-            _pagingController.appendLastPage(cartProducts);
-          } else {
-            final nextPageKey = pageKey + cartProducts.length;
-            _pagingController.appendPage(cartProducts, nextPageKey);
-          }
-           setState(() {});
-              print("PagingController Item List: ${_pagingController.itemList}");
-            }
+          (failure) {
+        _pagingController!.error = failure;
+      },
+          (cartProducts) {
+        print("Parsed Cart Products: ${cartProducts.length}");
+        final isLastPage = cartProducts.length < pageSize;
+        if (isLastPage) {
+          _pagingController!.appendLastPage(cartProducts);
+        } else {
+          final nextPageKey = pageKey + cartProducts.length;
+          _pagingController!.appendPage(cartProducts, nextPageKey);
+        }
+        // Update the cartProducts list
+        this.cartProducts = _pagingController!.itemList ?? [];
+        print("PagingController Item List: ${_pagingController!.itemList}");
+        loading = false;
+        notifyListeners();
+      },
     );
-
   }
+double calculateSubtotal(List<CartModel> cartProducts) {
+    double subtotal = 0.0;
+
+    for (var product in cartProducts) {
+      subtotal += (product.price ?? 0) * (product.count ?? 1);
+    }
+
+    return subtotal;
+  }
+
   Future deleteItemFromCart(BuildContext context) {
     return showModalBottomSheet(
       context: context,
@@ -99,57 +106,39 @@ class CartController extends ControllerMVC {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(30.r)),
       ),
-      builder: (context) => AlertDeleteItemWidget(
-        des: Strings.confirmDeleteItem.tr,
-        mainText: Strings.deleteItem.tr,
-        onButtonReject: currentContext_!.pop,
-        onButtonAccept: currentContext_!.pop,
-      ),
+      builder: (context) =>
+          AlertDeleteItemWidget(
+            des: Strings.confirmDeleteItem.tr,
+            mainText: Strings.deleteItem.tr,
+            onButtonReject: currentContext_!.pop,
+            onButtonAccept: currentContext_!.pop,
+          ),
     );
   }
-
-  void incrementCounter({required int counter}) {
-    setState(() {
-      counterValue++;
-    });
-    print("counter add $counterValue");
+  void incrementCounter(CartModel product) {
+    product.count = (product.count ?? 0) + 1;  // Ensure count is not null
+    updateSubtotal();
   }
 
-  onFilledPersonalData() async {
-    setState(() {
-      loading = true;
-    });
-    UserModel? currentUser = SharedPref.getCurrentUser();
-
-    await SharedPref.saveCurrentUser(user: currentUser!);
-    // showDialog(
-    //   context: currentContext_!,
-    //   builder: (context) => const ConfirmDataSaved(),
-    // );
-    print("Updated UserModel: $currentUser");
-    //  await Future.delayed(const Duration(seconds: 1));
-    // currentContext_!.pushNamed(HomeScreen.routeName);
-    // if (currentUser != null && nameController.text.isNotEmpty) {
-    //   currentContext_!.pushNamed(
-    //     UserProfileScreen.routeName,
-    //   );
-    // } else {
-    //   print("Error: currentUser is null");
-    // }
-
-    setState(() {
-      loading = false;
-    });
+  void decrementCounter(CartModel product) {
+    if ((product.count ?? 1) > 1) {
+      product.count = (product.count ?? 0) - 1;
+      updateSubtotal();
+    }
   }
 
-  void decrementCounter({required int counter}) {
-    setState(() {
-      if (counter > 1) {
-        counterValue--;
-      }
-    });
+  void updateSubtotal() {
+    notifyListeners();  // This will notify the UI to update
   }
+
 
   onRemoveWarning(BuildContext ctx) {}
 
+
+  @override
+  void dispose() {
+    couponController.dispose();
+  // _pagingController?.dispose(); // Dispose the PagingController
+    super.dispose();
+  }
 }

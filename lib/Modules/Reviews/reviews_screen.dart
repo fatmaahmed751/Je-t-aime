@@ -19,7 +19,8 @@ class ReviewsForProductScreen extends StatefulWidget {
   static const routeName = "reviewScreen";
   final PopularProductsModel productsModel;
   const ReviewsForProductScreen({
-    Key? key, required this.productsModel,
+    Key? key,
+    required this.productsModel,
   }) : super(key: key);
 
   @override
@@ -36,7 +37,13 @@ class _ReviewsForProductScreenState extends StateMVC<ReviewsForProductScreen> {
   @override
   void initState() {
     super.initState();
-    con.init( reviewProductId: widget.productsModel.id??0);
+    con.init(reviewProductId: widget.productsModel.id ?? 0);
+  }
+
+  @override
+  void dispose() {
+    con.pagingController.dispose();
+    super.dispose();
   }
 
   @override
@@ -52,67 +59,60 @@ class _ReviewsForProductScreenState extends StateMVC<ReviewsForProductScreen> {
       body: LoadingScreen(
         loading: con.loading,
         child: SafeArea(
-            child: Padding(
-          padding:
-              EdgeInsetsDirectional.symmetric(horizontal: 23.w, vertical: 5.h),
-          child:  Column(
-
-            //physics: NeverScrollableScrollPhysics(),
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          child: Padding(
+            padding: EdgeInsetsDirectional.symmetric(
+                horizontal: 23.w, vertical: 5.h),
+            child: Column(
                 children: [
-                  Text(
-                    "24 ${Strings.rate.tr}",
-                    style: TextStyleHelper.of(context).b_16.copyWith(
-                        decoration: TextDecoration.underline,
-                        color: ThemeClass.of(context)
-                            .secondaryBlackColor
-                            .withOpacity(0.6)),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        "24 ${Strings.rate.tr}",
+                        style: TextStyleHelper.of(context).b_16.copyWith(
+                            decoration: TextDecoration.underline,
+                            color: ThemeClass.of(context)
+                                .secondaryBlackColor
+                                .withOpacity(0.6)),
+                      ),
+                      GestureDetector(
+                        onTap: () {
+                          con.writeRateForProduct(context);
+                        },
+                        child: SvgPicture.asset(Assets.imagesEdit),
+                      ),
+                    ],
                   ),
-                  GestureDetector(
-                    onTap: () {
-                      con.postRatedSuccessfully();
-                    },
-                    child: SvgPicture.asset(Assets.imagesEdit),
+                  Expanded(
+                    child: PagedListView<int, ReviewModel>(
+                      physics: const BouncingScrollPhysics(),
+                      pagingController: con.pagingController,
+                      builderDelegate: PagedChildBuilderDelegate<ReviewModel>(
+                        itemBuilder: (context, item, index) {
+                          return ReviewsItem(reviewsModel: item);
+                        },
+                        firstPageProgressIndicatorBuilder: (context) {
+                          return const Center(
+                              child: CircularProgressIndicator());
+                        },
+                        newPageProgressIndicatorBuilder: (context) {
+                          return const Center(
+                              child: CircularProgressIndicator());
+                        },
+                        noItemsFoundIndicatorBuilder: (context) {
+                          return const Center(child: Text("No reviews found"));
+                        },
+                        noMoreItemsIndicatorBuilder: (context) {
+                          return const Center(child: Text("No more reviews"));
+                        },
+                        // errorIndicatorBuilder: (context) {
+                        //   return Center(child: Text('Error loading reviews'));
+                        // },
+                      ),
+                    ),
                   ),
-                ],
-              ),
-      Expanded(
-        child: PagedListView<int, ReviewModel>(
-          physics: const BouncingScrollPhysics(),
-          pagingController: con.pagingController,
-          builderDelegate: PagedChildBuilderDelegate<ReviewModel>(
-            itemBuilder: (context, item, index) {
-              return ReviewsItem(reviewsModel: item);
-            },
-            firstPageProgressIndicatorBuilder: (context) {
-              return const Center(child: CircularProgressIndicator());
-            },
-            newPageProgressIndicatorBuilder: (context) {
-              return const Center(child: CircularProgressIndicator());
-            },
-            noItemsFoundIndicatorBuilder: (context) {
-              return const Center(child: Text("No reviews found"));
-            },
-            noMoreItemsIndicatorBuilder: (context) {
-              return const Center(child: Text("No more reviews"));
-            },
-            // errorIndicatorBuilder: (context) {
-            //   return Center(child: Text('Error loading reviews'));
-            // },
+                ]),
           ),
-        ),
-      ),
-    ]
-
-              // if (con.reviews.isNotEmpty)
-              //   ...con.reviews.map((e) {
-              //     return ReviewsItem(reviewsModel: e);
-              //   }).toList(),
-
-              ),
-    ),
         ),
       ),
     );

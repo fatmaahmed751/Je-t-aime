@@ -71,11 +71,13 @@ class _ProductDetailsScreenState extends StateMVC<ProductDetailsScreen> {
                   const Spacer(),
                   GestureDetector(
                       onTap: () {
-                        setState(() {
-                          con.isClick = !con.isClick;
-                        });
+                        if (widget.popularProductsModel.isFavorite == 0) {
+                          con.addToFavorite(
+                              productId: widget.popularProductsModel.id ?? 0,
+                              context: context);
+                        }
                       },
-                      child: con.isClick
+                      child: widget.popularProductsModel.isFavorite == 1
                           ? SizedBox(
                               height: 26.h,
                               child:
@@ -90,7 +92,7 @@ class _ProductDetailsScreenState extends StateMVC<ProductDetailsScreen> {
               ),
               Gap(10.h),
               ProductDetailsWidget(
-                decrement: con.decrementCounter,
+                  decrement: con.decrementCounter,
                   increment: con.incrementCounter,
                   counter: con.counter,
                   model: con.productDetailsModel ?? ProductDetailsModel()),

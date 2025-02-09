@@ -6,12 +6,14 @@ import "package:infinite_scroll_pagination/infinite_scroll_pagination.dart";
 import "package:je_t_aime/Models/popular_products_model.dart";
 import "package:je_t_aime/Modules/Reviews/reviews_data_handler.dart";
 import 'package:mvc_pattern/mvc_pattern.dart';
+import "../../Models/product_details_model.dart";
 import "../../Models/review_model.dart";
 import "../../Utilities/router_config.dart";
 import "../../Utilities/theme_helper.dart";
 import "../../Widgets/toast_helper.dart";
 import "../../generated/assets.dart";
 import "../RateProducts/rate_product_data_handler.dart";
+import "../RateProducts/rate_product_screen.dart";
 
 class ReviewsForProductController extends ControllerMVC {
   // singleton
@@ -34,7 +36,7 @@ class ReviewsForProductController extends ControllerMVC {
   PopularProductsModel? model;
   static const pageSize = 10;
   PagingController<int, ReviewModel> get pagingController => _pagingController;
-
+  ProductDetailsModel? productDetailsModel;
   final PagingController<int, ReviewModel> _pagingController =
   PagingController(firstPageKey: 0);
   @override
@@ -83,33 +85,17 @@ class ReviewsForProductController extends ControllerMVC {
 
   }
 
-  postRatedSuccessfully() async {
-    setState(() {
-      loading = true;
-    });
-    final result = await RateProductDataHandler.rateProduct(
-        productId: productsModel?.id ?? 0,
-        rate: productRating.toInt(),
-        comment: messageController.text);
-    result.fold((l) {
-      setState(() {
-        loading = false;
-      });
-      ToastHelper.showError(message: l.errorModel.statusMessage);
-    }, (r) async {
-      ToastHelper.showSuccess(
-          backgroundColor: ThemeClass
-              .of(currentContext_!)
-              .primaryColor,
-          icon: SvgPicture.asset(Assets.imagesSubmit, width: 60.w,
-            height: 50.h,
-            fit: BoxFit.cover,),
-          message: "gooood", context: currentContext_!);
-      currentContext_!.pop();
-    });
-    setState(() {
-      loading = false;
-    });
+  Future writeRateForProduct(BuildContext context) {
+    return showModalBottomSheet(
+      context: context,
+      // isScrollControlled: true,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(30.r)),
+      ),
+      builder: (context) =>  RateProductScreen(
+          product:productDetailsModel??ProductDetailsModel()
+      ),
+    );
   }
 }
   // unLoginForRatedPop(BuildContext ctx) {

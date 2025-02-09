@@ -36,15 +36,23 @@ class _CartScreenState extends StateMVC<CartScreen> {
   }
 
   late CartController con;
+  late PagingController<int, CartModel> _pagingController;
+
   @override
   void initState() {
     super.initState();
-    con.init();
+    _pagingController = PagingController(firstPageKey: 0);
+    con.init(_pagingController); // Pass the PagingController to the controller
   }
 
   @override
+  void dispose() {
+    _pagingController.dispose(); // Dispose the PagingController here
+    super.dispose();
+  }
+  @override
   Widget build(BuildContext context) {
-    //  print("${con.cartProducts.first.price}");
+    double subtotal = con.calculateSubtotal(con.cartProducts);
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: Size(0, 75.h),
@@ -55,7 +63,9 @@ class _CartScreenState extends StateMVC<CartScreen> {
       ),
       body: LoadingScreen(
         loading: con.loading,
-        child: con.cartProducts.isEmpty
+        child: con.pagingController.itemList == null
+            ? const Center(child: CircularProgressIndicator())
+            : _pagingController.itemList!.isEmpty
               ? const EmptyCartWidget()
             :Padding(
                 padding: EdgeInsetsDirectional.symmetric(horizontal: 24.w),
@@ -74,22 +84,27 @@ class _CartScreenState extends StateMVC<CartScreen> {
                             builderDelegate:
                                 PagedChildBuilderDelegate<CartModel>(
                               itemBuilder: (context, item, index) {
-                                print(
-                                    "Building Item: ${item.title}"); // Debug print
+                                // print(
+                                //     "Building Item: ${item.title}"); // Debug print
                                 return ProductItem(
                                   cartModel: item,
                                   onRemoveWarning: () {
                                     con.deleteItemFromCart(context);
                                   },
                                   decrementCounter: () {
-                                    con.decrementCounter(
-                                        counter: con.counterValue);
+                                          setState(() {
+                                            con.decrementCounter(
+                                                item); // Pass the specific cart item
+                                          });
+
                                   },
-                                  incrementCounter: () async {
-                                    con.incrementCounter(
-                                        counter: con.counterValue);
+                                  incrementCounter: () {
+                                    setState(() {
+                                      con.incrementCounter(
+                                          item); // Pass the specific cart item
+                                    });
                                   },
-                                  counter: con.counterValue,
+                                  counter: item.count??1,
                                 );
                               },
                               firstPageProgressIndicatorBuilder: (context) {
@@ -111,27 +126,6 @@ class _CartScreenState extends StateMVC<CartScreen> {
                             ),
                           ),
                         ),
-                        // ListView.separated(
-                        //   shrinkWrap: true,
-                        //   physics: const NeverScrollableScrollPhysics(),
-                        //   itemBuilder: (context, index) {
-                        //     return ProductItem(
-                        //       cartModel:con.cartProducts[index] ,
-                        //       onRemoveWarning: () {
-                        //         con.deleteItemFromCart(context);
-                        //       },
-                        //       decrementCounter: () {
-                        //         con.decrementCounter(counter: con.counterValue);
-                        //       },
-                        //       incrementCounter: () async {
-                        //         con.incrementCounter(counter: con.counterValue);
-                        //       },
-                        //       counter: con.counterValue,
-                        //     );
-                        //   },
-                        //   separatorBuilder: (context, index) => Gap(10.h),
-                        //   itemCount: 5,
-                        // ),
                         Gap(150.h),
                       ],
                     ),
@@ -147,7 +141,7 @@ class _CartScreenState extends StateMVC<CartScreen> {
                                 borderRadius: BorderRadius.circular(30.r)),
                             child: Center(
                               child: Text(
-                                "${con.subtotal} ${Strings.jod.tr}",
+                                "${subtotal.toStringAsFixed(2)} ${Strings.jod.tr}",
                                 style: TextStyleHelper.of(context)
                                     .b_14
                                     .copyWith(
@@ -217,7 +211,6 @@ class ProductItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
      final int totalPrice = (cartModel.price ?? 0) * counter;
-    print("imagemoooooooodel ${cartModel.image}");
     return Container(
       // height: 140.h,
       decoration: BoxDecoration(

@@ -16,7 +16,7 @@ class CartModel {
   final int? stock;
   final int? price;
   final int? discount;
-  final int? count;
+   late int? count;
   final int? isFavorite;
   final String? image;
 
