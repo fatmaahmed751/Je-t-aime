@@ -1,38 +1,37 @@
-workflows:
-  jetaime_app:
-    name: Jetaime App
-    max_build_duration: 60
-    instance_type: mac_mini_m1
-    environment:
-      flutter: stable
-      xcode: latest
-    triggering:
-      events:
-        - push
-        - pull_request
-      branch_patterns:
-        - pattern: Fatma_Ahmed
-          include: true
-          source: true
-    scripts:
-      - name: Install dependencies
-        script: |
-          flutter pub get
-          cd ios
-          pod install --repo-update
-          cd ..
-      - name: Run tests
-        script: flutter test
-      - name: Build APK (Android)
-        script: flutter build apk --release
-      - name: Build iOS (Without Signing)
-        script: |
-          flutter build ios --no-codesign
-    artifacts:
-      - build/**/outputs/**/*.apk
-      - build/ios/iphoneos/*.app
-    publishing:
-      email:
-        recipients:
-          - fatmaahmed0008@gmail.com
- 
+jetaime_app:
+  name: Jetaime App
+  max_build_duration: 60
+  instance_type: mac_mini_m1
+  environment:
+    flutter: 3.27.0 # Specify your Flutter version explicitly
+    xcode: latest
+  triggering:
+    events:
+      - push
+      - pull_request
+    branch_patterns:
+      - pattern: Fatma_Ahmed
+        include: true
+        source: true
+  scripts:
+    - name: Install dependencies
+      script: |
+        flutter pub get
+        cd ios
+        pod install --repo-update
+        cd ..
+    - name: Run tests
+      script: flutter test
+    - name: Build APK (Android)
+      script: flutter build apk --release
+    - name: Build iOS (Without Signing)
+      script: |
+        flutter clean
+        flutter build ios --no-codesign
+  artifacts:
+    - build/**/outputs/**/*.apk
+    - build/ios/iphoneos/*.app
+  publishing:
+    email:
+      recipients:
+        - fatmaahmed0008@gmail.com
