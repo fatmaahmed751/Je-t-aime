@@ -47,11 +47,11 @@ class PaymentController extends ControllerMVC {
 
   void selectPaymentMethod(int method) {
     if (selectedMethod == method) {
-      selectedMethod = 0; // Deselect if already selected
+      selectedMethod = 0;
     } else {
-      selectedMethod = method; // Select the chosen method
+      selectedMethod = method;
     }
-    setState(() {}); // Trigger the UI to update
+    setState(() {});
   }
 
   init() {}

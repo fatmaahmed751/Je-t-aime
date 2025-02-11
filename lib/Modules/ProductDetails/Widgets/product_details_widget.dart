@@ -109,7 +109,7 @@ class ProductDetailsWidget extends StatelessWidget{
               style: TextStyleHelper.of(context).b_16.copyWith(
                   color: ThemeClass.of(context)
                       .secondaryBlackColor
-                      .withOpacity(0.8)),
+                      .withAlpha((0.8* 255).toInt())),
             ),
             const Spacer(),
             Text(
@@ -193,7 +193,7 @@ class ProductDetailsWidget extends StatelessWidget{
                 fontWeight: FontWeight.w400,
                 color: ThemeClass.of(context)
                     .secondaryBlackColor
-                    .withOpacity(0.6)),
+                    .withAlpha((0.8* 255).toInt())),
           ),
         ),
       ],

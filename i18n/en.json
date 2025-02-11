@@ -6,6 +6,8 @@
   "cancel": "Cancel",
   "rated": "Rated Successfully",
   "ok": "Ok",
+  "notAddToFav":"You must login or create an account if you don’t have an account for Add To Favorite",
+  "notRated": "You must login or create an account if you don’t have an account for write your review",
   "noInternet": "No Internet Connection",
   "checkNet": " Please check your internet connection",
   "reload": "Reload",

@@ -27,7 +27,7 @@ class LoadingScreen extends StatelessWidget {
             Positioned.fill(
               child: Container(
                 color:
-                    color ?? ThemeClass.of(context).mainBlack.withOpacity(.2),
+                    color ?? ThemeClass.of(context).mainBlack.withAlpha((0.2* 255).toInt()),
               ),
             ),
           if (loading)
@@ -36,7 +36,7 @@ class LoadingScreen extends StatelessWidget {
                 width: 100.w,
                 height: 100.h,
                 decoration: BoxDecoration(
-                  color: Colors.black.withOpacity(0.9),
+                  color: Colors.black.withAlpha((0.9* 255).toInt()),
                   borderRadius: BorderRadius.circular(10.r),
                 ),
                 alignment: Alignment.center,

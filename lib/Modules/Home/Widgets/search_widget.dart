@@ -80,26 +80,26 @@ class _SearchWidgetState extends State<SearchWidget> {
           Assets.imagesSearch,
           colorFilter: _isFocused
               ? ColorFilter.mode(
-                  ThemeClass.of(context).pinkColor.withOpacity(0.8),
+                  ThemeClass.of(context).pinkColor.withAlpha((0.8 * 255).toInt()),
                   BlendMode.srcIn,
                 )
               : ColorFilter.mode(
-                  ThemeClass.of(context).secondaryBlackColor.withOpacity(0.7),
+                  ThemeClass.of(context).secondaryBlackColor.withAlpha((0.7* 255).toInt()),
                   BlendMode.srcIn,
                 ),
         ),
-        //  colorFilter:_isFocused?  ColorFilter.mode(ThemeClass.of(context).pinkColor.withOpacity(0.8), BlendMode.srcIn):null,),
+        //  colorFilter:_isFocused?  ColorFilter.mode(ThemeClass.of(context).pinkColor.withValues(0.8), BlendMode.srcIn):null,),
         hint: Strings.searchHere.tr,
         backGroundColor: widget.backGroundColor ?? Colors.white,
-        // ThemeClass.of(context).secondary.withOpacity(1),
+        // ThemeClass.of(context).secondary.withValues(1),
         onchange: widget.onChange,
         hintStyle: _isFocused
             ? TextStyle(
-                color: ThemeClass.of(context).pinkColor.withOpacity(0.7))
+                color: ThemeClass.of(context).pinkColor.withAlpha((0.7 * 255).toInt()))
             : TextStyle(
                 color: ThemeClass.of(context)
                     .secondaryBlackColor
-                    .withOpacity(0.7)),
+                    .withAlpha((0.7 * 255).toInt())),
         validator: (v) => Validate.validateNormalString(v));
   }
 }

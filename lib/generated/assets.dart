@@ -58,6 +58,7 @@ class Assets {
   static const String imagesNoPersonalData = 'assets/images/noPersonalData.svg';
   static const String imagesNoRewards = 'assets/images/noRewards.svg';
   static const String imagesNotNav = 'assets/images/notNav.svg';
+  static const String imagesNotRated = 'assets/images/notRated.svg';
   static const String imagesNotificationIcon = 'assets/images/notificationIcon.svg';
   static const String imagesObsecureIcon = 'assets/images/obsecureIcon.svg';
   static const String imagesOnBoardingOne = 'assets/images/onBoardingOne.png';

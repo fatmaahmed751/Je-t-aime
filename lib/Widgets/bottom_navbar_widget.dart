@@ -79,7 +79,7 @@ class _BottomNavBarWidgetState extends StateMVC<BottomNavBarWidget> {
         boxShadow: [
           BoxShadow(
               color:
-                  ThemeClass.of(context).secondaryBlackColor.withOpacity(0.16),
+                  ThemeClass.of(context).secondaryBlackColor.withAlpha((0.16* 255).toInt()),
               blurRadius: 0.5,
               spreadRadius: 0.5),
         ],
@@ -95,7 +95,7 @@ class _BottomNavBarWidgetState extends StateMVC<BottomNavBarWidget> {
           type: BottomNavigationBarType.fixed,
           selectedItemColor: ThemeClass.of(context).primaryColor,
           unselectedItemColor:
-              ThemeClass.of(context).secondaryBlackColor.withOpacity(0.6),
+              ThemeClass.of(context).secondaryBlackColor.withAlpha((0.6* 255).toInt()),
           onTap: (index) {
             context.pushNamed(BottomNavBarItemModel.screens[index].routeName);
           },
@@ -140,7 +140,7 @@ class _BottomNavBarWidgetState extends StateMVC<BottomNavBarWidget> {
       child: SvgPicture.asset(
         item.iconPath,
         colorFilter: ColorFilter.mode(
-            ThemeClass.of(context).secondaryBlackColor.withOpacity(0.8),
+            ThemeClass.of(context).secondaryBlackColor.withAlpha((0.8* 255).toInt()),
             BlendMode.srcIn),
       ),
     );

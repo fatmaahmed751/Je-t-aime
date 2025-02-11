@@ -58,7 +58,7 @@ class AddToCartBottomSheetWidget extends StatelessWidget {
                 style: TextStyleHelper.of(context).b_16.copyWith(
                     color: ThemeClass.of(context)
                         .secondaryBlackColor
-                        .withOpacity(0.7))),
+                        .withAlpha((0.7* 255).toInt()))),
             Gap(20.h),
             CustomButtonWidget.primary(
               title: Strings.goToCart.tr,

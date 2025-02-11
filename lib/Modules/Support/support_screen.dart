@@ -65,9 +65,9 @@ class _SupportScreenState extends StateMVC<SupportScreen> {
                     hintStyle: TextStyle(
                         color: ThemeClass.of(context)
                             .secondaryBlackColor
-                            .withOpacity(0.7)),
+                            .withAlpha((0.7* 255).toInt())),
                     backGroundColor:
-                        ThemeClass.of(context).secondary.withOpacity(1),
+                        ThemeClass.of(context).secondary.withAlpha((1* 255).toInt()),
                     prefixIcon: SvgPicture.asset(Assets.imagesEmailIcon),
                     isDense: true,
                     insidePadding: EdgeInsets.symmetric(vertical: 10.h),
@@ -82,9 +82,9 @@ class _SupportScreenState extends StateMVC<SupportScreen> {
                     hintStyle: TextStyle(
                         color: ThemeClass.of(context)
                             .secondaryBlackColor
-                            .withOpacity(0.7)),
+                            .withAlpha((0.7* 255).toInt())),
                     backGroundColor:
-                        ThemeClass.of(context).secondary.withOpacity(1),
+                        ThemeClass.of(context).secondary.withAlpha((1* 255).toInt()),
                     prefixIcon: SvgPicture.asset(Assets.imagesProfileIcon),
                     isDense: true,
                     insidePadding: EdgeInsets.symmetric(vertical: 10.h),
@@ -100,9 +100,9 @@ class _SupportScreenState extends StateMVC<SupportScreen> {
                     hintStyle: TextStyle(
                         color: ThemeClass.of(context)
                             .secondaryBlackColor
-                            .withOpacity(0.7)),
+                            .withAlpha((0.7* 255).toInt())),
                     backGroundColor:
-                        ThemeClass.of(context).secondary.withOpacity(1),
+                        ThemeClass.of(context).secondary.withAlpha((1* 255).toInt()),
                     prefixIcon: SvgPicture.asset(Assets.imagesPhone),
                     isDense: true,
                     insidePadding: EdgeInsets.symmetric(vertical: 10.h),
@@ -127,9 +127,9 @@ class _SupportScreenState extends StateMVC<SupportScreen> {
                       hintStyle: TextStyle(
                           color: ThemeClass.of(context)
                               .secondaryBlackColor
-                              .withOpacity(0.7)),
+                              .withAlpha((0.7* 255).toInt())),
                       backGroundColor:
-                          ThemeClass.of(context).secondary.withOpacity(1),
+                          ThemeClass.of(context).secondary.withAlpha((1* 255).toInt()),
                       focusedBorderColor: Colors.transparent,
                       disableBorder: false,
                       validator: (v) => Validate.validateNormalString(v),

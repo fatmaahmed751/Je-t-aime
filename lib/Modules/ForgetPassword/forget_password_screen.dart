@@ -72,7 +72,7 @@ class _ForgetPasswordScreenState extends StateMVC<ForgetPasswordScreen> {
                   boxShadow: [
                     BoxShadow(
                       color: const Color(0xff33333326)
-                          .withOpacity(0.15), // Shadow color
+                          .withAlpha((0.15 * 255).toInt()), // Shadow color
                       spreadRadius: 0, // Spread radius
                       // blurRadius:1, // Blur radius for a soft shadow
                       offset: const Offset(
@@ -104,7 +104,7 @@ class _ForgetPasswordScreenState extends StateMVC<ForgetPasswordScreen> {
                           style: TextStyleHelper.of(context).b_16.copyWith(
                               color: ThemeClass.of(context)
                                   .secondaryBlackColor
-                                  .withOpacity(0.7)),
+                                  .withAlpha((0.7 * 255).toInt())),
                         ),
                       ),
                       Gap(15.h),
@@ -116,9 +116,9 @@ class _ForgetPasswordScreenState extends StateMVC<ForgetPasswordScreen> {
                         hintStyle: TextStyle(
                             color: ThemeClass.of(context)
                                 .secondaryBlackColor
-                                .withOpacity(0.7)),
+                                .withAlpha((0.7 * 255).toInt())),
                         backGroundColor:
-                            ThemeClass.of(context).secondary.withOpacity(1),
+                            ThemeClass.of(context).secondary.withAlpha((0.7 * 255).toInt()),
                         prefixIcon: SvgPicture.asset(Assets.imagesEmailIcon),
                         isDense: true,
                         insidePadding: EdgeInsets.symmetric(vertical: 10.h),

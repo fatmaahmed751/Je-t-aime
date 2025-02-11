@@ -75,11 +75,11 @@ class _FilterBottomSheetWidgetState extends State<FilterBottomSheetWidget> {
                         hintStyle: TextStyle(
                             color: ThemeClass.of(context)
                                 .secondaryBlackColor
-                                .withOpacity(0.6)),
+                                .withAlpha((0.6* 255).toInt())),
                         //isDense: true,
                         insidePadding: EdgeInsets.symmetric(vertical: 10.h),
                         backGroundColor:
-                            ThemeClass.of(context).secondary.withOpacity(1),
+                            ThemeClass.of(context).secondary.withAlpha((1* 255).toInt()),
                         controller: widget.startController,
                         //  validator: (v) => Validate.validateNormalFilterNumber(v),
                       ),
@@ -102,10 +102,10 @@ class _FilterBottomSheetWidgetState extends State<FilterBottomSheetWidget> {
                         hintStyle: TextStyle(
                             color: ThemeClass.of(context)
                                 .secondaryBlackColor
-                                .withOpacity(0.6)),
+                                .withAlpha((0.6* 255).toInt())),
                         insidePadding: EdgeInsets.symmetric(vertical: 10.h),
                         backGroundColor:
-                            ThemeClass.of(context).secondary.withOpacity(1),
+                            ThemeClass.of(context).secondary.withAlpha((1* 255).toInt()),
                         controller: widget.endController,
                         validator: (v) => Validate.validateFilterNumber(
                             v, widget.startController.text),
@@ -131,7 +131,7 @@ class _FilterBottomSheetWidgetState extends State<FilterBottomSheetWidget> {
                         trackHeight: 8.h,
                         activeTrackColor: ThemeClass.of(context).primaryColor,
                         inactiveTrackColor:
-                            ThemeClass.of(context).secondary.withOpacity(1),
+                            ThemeClass.of(context).secondary.withAlpha((1* 255).toInt()),
                         thumbColor: ThemeClass.of(context).primaryColor,
                         overlayShape: const RoundSliderOverlayShape(
                             overlayRadius: 10), // حجم الظل حول الكرة عند السحب
@@ -145,7 +145,7 @@ class _FilterBottomSheetWidgetState extends State<FilterBottomSheetWidget> {
                         },
                         activeColor: ThemeClass.of(context).primaryColor,
                         inactiveColor:
-                            ThemeClass.of(context).secondary.withOpacity(1),
+                            ThemeClass.of(context).secondary.withAlpha((1* 255).toInt()),
                         label: _sliderValue.toStringAsFixed(1),
                         onChanged: (double value) {
                           setState(() {
@@ -184,8 +184,8 @@ class _FilterBottomSheetWidgetState extends State<FilterBottomSheetWidget> {
                               color: ThemeClass.of(context).secondary),
                           borderRadius: BorderRadius.circular(30.r),
                           color:
-                              ThemeClass.of(context).secondary.withOpacity(1),
-                          // ThemeClass.of(context).background.withOpacity(0.20)
+                              ThemeClass.of(context).secondary.withAlpha((1* 255).toInt()),
+                          // ThemeClass.of(context).background.withValues(0.20)
                         ),
                         child: Center(
                           child: Text(
@@ -206,7 +206,7 @@ class _FilterBottomSheetWidgetState extends State<FilterBottomSheetWidget> {
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(30.r),
                             color: ThemeClass.of(context).primaryColor
-                            // ThemeClass.of(context).background.withOpacity(0.20)
+                            // ThemeClass.of(context).background.withValues(0.20)
                             ),
                         //  backgroundColor: ThemeClass.of(context).primaryColor,
                         child: Center(

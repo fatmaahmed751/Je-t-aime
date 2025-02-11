@@ -73,7 +73,7 @@ class _ReviewsForProductScreenState extends StateMVC<ReviewsForProductScreen> {
                             decoration: TextDecoration.underline,
                             color: ThemeClass.of(context)
                                 .secondaryBlackColor
-                                .withOpacity(0.6)),
+                                .withAlpha((0.6* 255).toInt())),
                       ),
                       GestureDetector(
                         onTap: () {

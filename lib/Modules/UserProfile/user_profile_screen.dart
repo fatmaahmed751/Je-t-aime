@@ -68,7 +68,7 @@ class _UserProfileScreenState extends StateMVC<UserProfileScreen> {
                         color: ThemeClass.of(context).background,
                         borderRadius: BorderRadius.circular(30.r),
                         //        border: Border.all(
-                        //          color: ThemeClass.of(context).secondaryBlackColor.withOpacity(0.15),
+                        //          color: ThemeClass.of(context).secondaryBlackColor.withValues(0.15),
                         //        ),
                         boxShadow: const [
                           BoxShadow(

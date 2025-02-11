@@ -74,7 +74,7 @@ class _OtpResendTimerState extends State<OtpResendTimer> {
             style: TextStyleHelper.of(context).b_16.copyWith(
                 color: ThemeClass.of(context)
                     .secondaryBlackColor
-                    .withOpacity(0.6)),
+                    .withAlpha((0.6* 255).toInt())),
           ),
         ),
         Text(

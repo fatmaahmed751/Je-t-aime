@@ -9,6 +9,8 @@ class Strings {
   static const String light = "light";
   static const String dark = "dark";
   static const String update = "update";
+  static const String notAddToFav = "notAddToFav";
+  static const String notRated = "notRated";
   static const String verificationSuccess = "verificationSuccess";
   static const String mainColor = "mainColor";
   static const String rated = "rated";

@@ -13,11 +13,11 @@ class ThemeProvider extends ChangeNotifier {
   ThemeModel _appTheme = ThemeModel.defaultTheme;
   ThemeModel get appTheme => _appTheme.copyWith(
         primaryColor: _primaryColor,
-        pTint1: _primaryColor?.withOpacity(0.5),
-        pTint2: _primaryColor?.withOpacity(0.4),
+        pTint1: _primaryColor?.withAlpha((0.5 * 255).toInt()),
+        pTint2: _primaryColor?.withAlpha((0.4* 255).toInt()),
         secondary: _secondaryColor,
-        sTint1: _secondaryColor?.withOpacity(0.75),
-        sTint2: _secondaryColor?.withOpacity(0.5),
+        sTint1: _secondaryColor?.withAlpha((0.75 * 255).toInt()),
+        sTint2: _secondaryColor?.withAlpha((4 * 255).toInt()),
       );
 
   void fetchTheme() {
@@ -40,7 +40,7 @@ class ThemeProvider extends ChangeNotifier {
           color: const Color(0xff0F0C13),
           shape: RoundedRectangleBorder(
             side: BorderSide(
-              color: Colors.white.withOpacity(0.18),
+              color: Colors.white.withAlpha((0.18* 255).toInt()),
               width: 1.r,
             ),
             borderRadius: BorderRadius.circular(12.r),
@@ -56,7 +56,7 @@ class ThemeProvider extends ChangeNotifier {
           color: const Color(0xff0F0C13),
           shape: RoundedRectangleBorder(
             side: BorderSide(
-              color: Colors.white.withOpacity(0.18),
+              color: Colors.white.withAlpha((0.18 * 255).toInt()),
               width: 1.r,
             ),
             borderRadius: BorderRadius.circular(12.r),

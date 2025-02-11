@@ -7,6 +7,7 @@ import "package:infinite_scroll_pagination/infinite_scroll_pagination.dart";
 import "package:je_t_aime/Models/cart_item_model.dart";
 import "package:je_t_aime/Models/category_model.dart";
 import "package:je_t_aime/Modules/Cart/cart_data_handler.dart";
+import "package:je_t_aime/Modules/Home/Widgets/un_login_widget.dart";
 import "package:je_t_aime/core/Language/locales.dart";
 import "package:mvc_pattern/mvc_pattern.dart";
 import "package:provider/provider.dart";
@@ -35,7 +36,9 @@ class HomeController extends ControllerMVC {
     await Provider.of<AppLanguage>(ctx, listen: false).fetchLocale(ctx);
 
     final currentLanguage =
-        Provider.of<AppLanguage>(ctx, listen: false).appLang;
+        Provider
+            .of<AppLanguage>(ctx, listen: false)
+            .appLang;
 
     print("Current language: $currentLanguage");
     setState(() {
@@ -61,16 +64,18 @@ class HomeController extends ControllerMVC {
   List<SliderModel> sliders = [];
   List<PopularProductsModel> products = [];
   bool isLiked = false;
-  int quyCount =1;
+  int quyCount = 1;
   PopularProductsModel? productsModel;
- CartModel? cartModel;
-  static const pageSize =10;
+  CartModel? cartModel;
+  static const pageSize = 10;
   final bool _isDisposed = false;
 
-  PagingController<int, PopularProductsModel> get pagingController => _pagingController;
+  PagingController<int, PopularProductsModel> get pagingController =>
+      _pagingController;
 
   final PagingController<int, PopularProductsModel> _pagingController =
   PagingController(firstPageKey: 0);
+
   @override
   void initState() {
     searchController = TextEditingController();
@@ -79,16 +84,15 @@ class HomeController extends ControllerMVC {
     });
     super.initState();
   }
+
   init() async {
     loadCurrentLanguage(currentContext_!);
     getHomeDetails();
     if (_pagingController.itemList == null ||
-    _pagingController.itemList!.isEmpty) {
-    getProducts(_pagingController.firstPageKey);
-}
-
+        _pagingController.itemList!.isEmpty) {
+      getProducts(_pagingController.firstPageKey);
+    }
   }
-
 
 
   @override
@@ -103,43 +107,47 @@ class HomeController extends ControllerMVC {
     });
     activeIndex = index;
   }
-addProductToCart({required BuildContext context, required PopularProductsModel product})async{
 
-  setState(() {
-    loading = true;
-  });
-  print("Product ID: ${product.id}, Quantity: $quyCount");
-  final result = await CartDataHandler.addToCart(
-      productId: product.id??0,
-      quantity: quyCount);
-  result.fold((l) {
-    ToastHelper.showError(message: l.toString());
-  }, (r) {
-    ToastHelper.showSuccess(
-      context: context,
-      message: Strings.addToCartSuccess.tr,
-      icon: SvgPicture.asset(
-        Assets.imagesSubmit,
-        width: 60.w,
-        height: 50.h,
-        fit: BoxFit.cover,
-      ),
-      backgroundColor:
-      ThemeClass.of(context).primaryColor,
-    );
-    print("addddddd");
-});
-  setState(() {
-    loading = false;
-  });
-}
-  addToFavorite({required int productId,required BuildContext context}) async {
+  addProductToCart(
+      {required BuildContext context, required PopularProductsModel product}) async {
+    setState(() {
+      loading = true;
+    });
+    print("Product ID: ${product.id}, Quantity: $quyCount");
+    final result = await CartDataHandler.addToCart(
+        productId: product.id ?? 0,
+        quantity: quyCount);
+    result.fold((l) {
+      ToastHelper.showError(message: l.toString());
+    }, (r) {
+      ToastHelper.showSuccess(
+        context: context,
+        message: Strings.addToCartSuccess.tr,
+        icon: SvgPicture.asset(
+          Assets.imagesSubmit,
+          width: 60.w,
+          height: 50.h,
+          fit: BoxFit.cover,
+        ),
+        backgroundColor:
+        ThemeClass
+            .of(context)
+            .primaryColor,
+      );
+      print("addddddd");
+    });
+    setState(() {
+      loading = false;
+    });
+  }
+
+  addToFavorite({required PopularProductsModel product, required BuildContext context}) async {
     setState(() {
       loading = true;
     });
 
     final result = await PopularProductsDataHandler.addFavorite(
-        productId:productId);
+        productId: product.id ?? 0);
     result.fold((l) {
       ToastHelper.showError(message: l.errorModel.statusMessage);
     }, (r) {
@@ -153,14 +161,16 @@ addProductToCart({required BuildContext context, required PopularProductsModel p
           fit: BoxFit.cover,
         ),
         backgroundColor:
-        ThemeClass.of(context).primaryColor,
+        ThemeClass
+            .of(context)
+            .primaryColor,
       );
-
     });
     setState(() {
       loading = false;
     });
   }
+
   getHomeDetails() async {
     loading = true;
     setState(() {});
@@ -180,6 +190,7 @@ addProductToCart({required BuildContext context, required PopularProductsModel p
       loading = false;
     });
   }
+
   Future<void> getProducts(int pageKey) async {
     try {
       final newItems = await PopularProductsDataHandler.getAllPopularProducts(
@@ -212,7 +223,7 @@ addProductToCart({required BuildContext context, required PopularProductsModel p
       }
     }
   }
-}
+
 // Future<void> _handlePermissionPermanentlyDenied() async {
 //   onPermanentDenied();
 // }
@@ -288,70 +299,21 @@ addProductToCart({required BuildContext context, required PopularProductsModel p
 //   );
 // }
 
-// Future getBanners() async {
-//   loading=true;
-//   setState(() { });
-//   final result = await HomeDataHandler.getBanners();
-//   result.fold((l) {
-//
-//     ToastHelper.showError(message: l.toString());},(r) {
-//     banners=r;
-//   });
-//   setState(() {loading=false;});
-// }
-//
-// Future getOffers({bool refresh=false}) async {
-//   if(refresh)offersPagination = GenericPaginationModel<BannerModel>();
-//   if(offersPagination.data.isEmpty){
-//     loading=true;
-//     setState(() { });
-//   }
-//   final result = await PopularProductsDataHandler.getProducts(oldPagination:offersPagination);
-//   result.fold((l) => null, (r) {
-//     final oldItems = offersPagination.data;
-//     offersPagination = r;
-//     print("pagination${offersPagination.data.length}");
-//     print("real pagination${r.data.length}");
-//     if(!refresh)offersPagination.data.insertAll(0, oldItems);
-//   });
-//   if (!offersPagination.hasNextPge) {
-//     offersRefreshController.loadNoData();
-//   } else {
-//     offersRefreshController.loadComplete();
-//   }
-//   if(refresh)offersRefreshController.refreshCompleted();
-//   setState(() {loading=false;});
-// }
-
-// Future getOffers() async {
-//   loading=true;
-//   setState(() { });
-//   final result = await HomeDataHandler.getOffers();
-//   result.fold((l){
-//     print('heyyy${l.errorModel.statusMessage}');
-//     },(r) {
-//     offers=r;
-//   });
-//   setState(() {loading=false;});
-// }
-
-// Future addFavorite({required int productId}) async {
-//   setState(() {
-//     loading = true;
-//   });
-//   final result = await PopularProductsDataHandler.addFavorite(
-//       productId:productId);
-//   result.fold((l) {
-//
-//     ToastHelper.showError(message: l.errorModel.statusMessage);
-//   }, (r) {
-//     ToastHelper.showSuccess(message: r);
-//
-//   });
-//   setState(() {
-//     loading = false;
-//   });
-// }
+  unLoginWidget(BuildContext context) {
+    return showModalBottomSheet(
+      context: context,
+      // isScrollControlled: true,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(30.r)),
+      ),
+      builder: (context) =>
+          UnLoginWidgetBottomSheet(
+            image: Assets.imagesNotRated,
+            text: Strings.notAddToFav.tr,
+          ),
+    );
+  }
+}
 // Future deleteFavorite({required int productId}) async {
 //   setState(() {
 //     loading = true;

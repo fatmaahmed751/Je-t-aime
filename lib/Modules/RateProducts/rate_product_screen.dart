@@ -106,7 +106,7 @@ class _RateProductScreenState extends StateMVC<RateProductScreen> {
                   ),
                   width: 382.w,
                   decoration: BoxDecoration(
-                    color: ThemeClass.of(context).secondary.withOpacity(1),
+                    color: ThemeClass.of(context).secondary.withAlpha((1* 255).toInt()),
                     borderRadius: BorderRadius.circular(30.r),
                   ),
                   child: CustomTextFieldWidget(
@@ -115,7 +115,7 @@ class _RateProductScreenState extends StateMVC<RateProductScreen> {
                     hintStyle: TextStyle(
                         color: ThemeClass.of(context)
                             .secondaryBlackColor
-                            .withOpacity(0.6)),
+                            .withAlpha((0.6* 255).toInt())),
                     hint: Strings.writeYourComment.tr,
                     borderColor: Colors.transparent,
                     focusedBorderColor: Colors.transparent,

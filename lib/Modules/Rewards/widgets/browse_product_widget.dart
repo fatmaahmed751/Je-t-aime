@@ -19,7 +19,7 @@
 //         borderRadius: BorderRadius.circular(20.r),
 //         boxShadow: [
 //           BoxShadow(
-//             color: ThemeClass.of(context).primaryColor.withOpacity(.15),
+//             color: ThemeClass.of(context).primaryColor.withValues(.15),
 //             offset: const Offset(2, 2),
 //             blurRadius: 4,
 //             spreadRadius: 0,

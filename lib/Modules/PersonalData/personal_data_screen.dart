@@ -78,13 +78,13 @@ class _PersonalDataScreenState extends StateMVC<PersonalDataScreen> {
                             hintStyle: TextStyle(
                                 color: ThemeClass.of(context)
                                     .secondaryBlackColor
-                                    .withOpacity(0.6)),
+                                    .withAlpha((0.6* 255).toInt())),
                             prefixIcon:
                                 SvgPicture.asset(Assets.imagesEmailIcon),
                             //  isDense: true,
                             insidePadding: EdgeInsets.symmetric(vertical: 10.h),
                             backGroundColor:
-                                ThemeClass.of(context).secondary.withOpacity(1),
+                                ThemeClass.of(context).secondary.withAlpha((1* 255).toInt()),
                             controller: con.emailController,
                             validator: (v) => Validate.validateEmail(v),
                           ),
@@ -97,13 +97,13 @@ class _PersonalDataScreenState extends StateMVC<PersonalDataScreen> {
                             hintStyle: TextStyle(
                                 color: ThemeClass.of(context)
                                     .secondaryBlackColor
-                                    .withOpacity(0.6)),
+                                    .withAlpha((0.6* 255).toInt())),
                             prefixIcon:
                                 SvgPicture.asset(Assets.imagesProfileIcon),
                             // isDense: true,
                             insidePadding: EdgeInsets.symmetric(vertical: 10.h),
                             backGroundColor:
-                                ThemeClass.of(context).secondary.withOpacity(1),
+                                ThemeClass.of(context).secondary.withAlpha((1* 255).toInt()),
                             controller: con.nameController,
                             validator: (v) => Validate.validateFullName(v),
                           ),
@@ -118,12 +118,12 @@ class _PersonalDataScreenState extends StateMVC<PersonalDataScreen> {
                             hintStyle: TextStyle(
                                 color: ThemeClass.of(context)
                                     .secondaryBlackColor
-                                    .withOpacity(0.6)),
+                                    .withAlpha((0.6* 255).toInt())),
                             prefixIcon: SvgPicture.asset(Assets.imagesPhone),
                             isDense: true,
                             insidePadding: EdgeInsets.symmetric(vertical: 10.h),
                             backGroundColor:
-                                ThemeClass.of(context).secondary.withOpacity(1),
+                                ThemeClass.of(context).secondary.withAlpha((1* 255).toInt()),
                             controller: con.phoneController,
                             validator: (v) => Validate.validatePhone(v),
                           ),
@@ -142,9 +142,9 @@ class _PersonalDataScreenState extends StateMVC<PersonalDataScreen> {
                             hintStyle: TextStyle(
                                 color: ThemeClass.of(context)
                                     .secondaryBlackColor
-                                    .withOpacity(0.6)),
+                                    .withAlpha((0.6* 255).toInt())),
                             backGroundColor:
-                                ThemeClass.of(context).secondary.withOpacity(1),
+                                ThemeClass.of(context).secondary.withAlpha((1* 255).toInt()),
                             controller: con.addressController,
                             validator: (v) => Validate.validateNormalAddress(v),
                           ),

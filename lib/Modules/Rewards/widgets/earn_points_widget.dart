@@ -22,11 +22,11 @@ class EarnPoints extends StatelessWidget {
         color: ThemeClass.of(context).background,
         borderRadius: BorderRadius.circular(30.r),
         border: Border.all(
-          color: ThemeClass.of(context).secondaryBlackColor.withOpacity(0.15),
+          color: ThemeClass.of(context).secondaryBlackColor.withAlpha((0.15* 255).toInt()),
         ),
         boxShadow: [
           BoxShadow(
-            color: ThemeClass.of(context).secondaryBlackColor.withOpacity(0.15),
+            color: ThemeClass.of(context).secondaryBlackColor.withAlpha((0.15* 255).toInt()),
           ),
         ],
       ),

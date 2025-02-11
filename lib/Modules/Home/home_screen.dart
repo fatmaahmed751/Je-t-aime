@@ -127,7 +127,6 @@ class _HomeScreenState extends StateMVC<HomeScreen> {
                     InkWell(
                       onTap: () async {
                         if (con.products.isEmpty) {
-                          // ✅ Wait until data is fetched
                           print("impty${con.products}");
                         }
                         if (con.products.isNotEmpty) {
@@ -163,7 +162,7 @@ class _HomeScreenState extends StateMVC<HomeScreen> {
                                   addToCart: (){
                                     con.addProductToCart(
                                         context: context, product:
-                                    con.productsModel??PopularProductsModel()
+                                    con.products[index]
                                     );
                                   },
                                     productsModel: con.products[index],
@@ -176,11 +175,11 @@ class _HomeScreenState extends StateMVC<HomeScreen> {
                                                 .isNotEmpty) {
                                           con.addToFavorite(
                                             context: context,
-                                              productId:
-                                                  con.products[index].id ?? 0);
-                                          con.products[index].isFavorite = 1;
+                                              product:
+                                                  con.products[index] );
+                                         // con.products[index].isFavorite = 1;
                                         } else {
-                                          //  con.unLoginForRatedPop(context);
+                                           con.unLoginWidget(context);
                                         }
                                       } else {
                                         if (SharedPref.getCurrentUser()

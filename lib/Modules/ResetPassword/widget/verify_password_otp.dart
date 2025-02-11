@@ -87,7 +87,7 @@ class _VerificationPasswordScreenState
                   boxShadow: [
                     BoxShadow(
                       color: const Color(0xff33333326)
-                          .withOpacity(0.15), // Shadow color
+                          .withAlpha((0.15* 255).toInt()), // Shadow color
                       spreadRadius: 0, // Spread radius
                       // blurRadius:1, // Blur radius for a soft shadow
                       offset: const Offset(
@@ -114,7 +114,7 @@ class _VerificationPasswordScreenState
                             style: TextStyleHelper.of(context).b_16.copyWith(
                                 color: ThemeClass.of(context)
                                     .secondaryBlackColor
-                                    .withOpacity(0.6))),
+                                    .withAlpha((0.6* 255).toInt()))),
                       ),
                       Gap(20.h),
                       Directionality(

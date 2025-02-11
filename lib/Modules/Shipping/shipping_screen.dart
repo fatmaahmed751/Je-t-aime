@@ -84,12 +84,12 @@ class _ShippingScreenState extends StateMVC<ShippingScreen> {
                     hintStyle: TextStyle(
                         color: ThemeClass.of(context)
                             .secondaryBlackColor
-                            .withOpacity(0.6)),
+                            .withAlpha((0.6* 255).toInt())),
                     prefixIcon: SvgPicture.asset(Assets.imagesProfileIcon),
                     isDense: true,
                     insidePadding: EdgeInsets.symmetric(vertical: 10.h),
                     backGroundColor:
-                        ThemeClass.of(context).secondary.withOpacity(1),
+                        ThemeClass.of(context).secondary.withAlpha((1* 255).toInt()),
                     controller: con.nameController,
                     validator: (v) => Validate.validateFullName(v),
                   ),
@@ -101,12 +101,12 @@ class _ShippingScreenState extends StateMVC<ShippingScreen> {
                     hintStyle: TextStyle(
                         color: ThemeClass.of(context)
                             .secondaryBlackColor
-                            .withOpacity(0.6)),
+                            .withAlpha((0.6* 255).toInt())),
                     prefixIcon: SvgPicture.asset(Assets.imagesLocation),
                     isDense: true,
                     insidePadding: EdgeInsets.symmetric(vertical: 10.h),
                     backGroundColor:
-                        ThemeClass.of(context).secondary.withOpacity(1),
+                        ThemeClass.of(context).secondary.withAlpha((1* 255).toInt()),
                     controller: con.addressController,
                     validator: (v) => Validate.validateNormalAddress(v),
                   ),
@@ -119,12 +119,12 @@ class _ShippingScreenState extends StateMVC<ShippingScreen> {
                     hintStyle: TextStyle(
                         color: ThemeClass.of(context)
                             .secondaryBlackColor
-                            .withOpacity(0.6)),
+                            .withAlpha((0.6* 255).toInt())),
                     prefixIcon: SvgPicture.asset(Assets.imagesPhone),
                     isDense: true,
                     insidePadding: EdgeInsets.symmetric(vertical: 10.h),
                     backGroundColor:
-                        ThemeClass.of(context).secondary.withOpacity(1),
+                        ThemeClass.of(context).secondary.withAlpha((1* 255).toInt()),
                     controller: con.phoneController,
                     validator: (v) => Validate.validatePhone(v),
                   ),
@@ -134,7 +134,7 @@ class _ShippingScreenState extends StateMVC<ShippingScreen> {
                     height: 56.h,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(30.r),
-                      color: ThemeClass.of(context).secondary.withOpacity(1),
+                      color: ThemeClass.of(context).secondary.withAlpha((1* 255).toInt()),
                     ),
                     child: Padding(
                       padding:
@@ -191,13 +191,13 @@ class _ShippingScreenState extends StateMVC<ShippingScreen> {
                       border: Border.all(
                         color: ThemeClass.of(context)
                             .secondaryBlackColor
-                            .withOpacity(0.15),
+                            .withAlpha((0.15* 255).toInt()),
                       ),
                       boxShadow: [
                         BoxShadow(
                             color: ThemeClass.of(context)
                                 .secondaryBlackColor
-                                .withOpacity(0.15),
+                                .withAlpha((0.15* 255).toInt()),
                             blurRadius: 1,
                             spreadRadius: 0.5),
                       ],
@@ -256,7 +256,7 @@ class _ShippingScreenState extends StateMVC<ShippingScreen> {
                               thickness: 0.5,
                               color: ThemeClass.of(context)
                                   .secondaryBlackColor
-                                  .withOpacity(0.6)),
+                                  .withAlpha((0.6* 255).toInt())),
                           Gap(8.h),
                           Row(children: [
                             Text(

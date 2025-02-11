@@ -27,14 +27,14 @@ class DetailsOfOrder extends StatelessWidget {
           color: ThemeClass.of(context).background,
           borderRadius: BorderRadius.circular(30.r),
           border: Border.all(
-            color: ThemeClass.of(context).secondaryBlackColor.withOpacity(0.15),
+            color: ThemeClass.of(context).secondaryBlackColor.withAlpha((0.15 * 255).toInt()),
           ),
           boxShadow: [
             BoxShadow(
                 offset: const Offset(0, 0),
                 color: ThemeClass.of(context)
                     .secondaryBlackColor
-                    .withOpacity(0.10),
+                    .withAlpha((0.10 * 255).toInt()),
                 blurRadius: 3,
                 spreadRadius: 0.3),
           ],

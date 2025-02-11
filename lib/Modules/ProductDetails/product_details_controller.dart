@@ -18,6 +18,7 @@ import "../../Utilities/theme_helper.dart";
 import "../../Widgets/toast_helper.dart";
 import "../../generated/assets.dart";
 import "../Cart/cart_data_handler.dart";
+import "../Home/Widgets/un_login_widget.dart";
 import "../Home/home_data_handler.dart";
 import "../PopularProducts/popular_products_data_handler.dart";
 import "../RateProducts/rate_product_data_handler.dart";
@@ -210,6 +211,20 @@ class ProductDetailsController extends ControllerMVC {
       builder: (context) =>  RateProductScreen(
           product:productDetailsModel!
       ),
+    );
+  }
+  unLoginWidget(BuildContext context) {
+    return showModalBottomSheet(
+      context: context,
+      // isScrollControlled: true,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(30.r)),
+      ),
+      builder: (context) =>
+          UnLoginWidgetBottomSheet(
+            image: Assets.imagesNotRated,
+            text: Strings.notRated.tr,
+          ),
     );
   }
   // Future addFavorite({required int productId}) async {

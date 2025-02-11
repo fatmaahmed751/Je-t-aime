@@ -68,7 +68,7 @@ class _ResetPasswordScreenState extends StateMVC<ResetPasswordScreen> {
                   boxShadow: [
                     BoxShadow(
                       color: const Color(0xff33333326)
-                          .withOpacity(0.15), // Shadow color
+                          .withAlpha((0.15* 255).toInt()), // Shadow color
                       spreadRadius: 0, // Spread radius
                       // blurRadius:1, // Blur radius for a soft shadow
                       offset: const Offset(
@@ -101,9 +101,9 @@ class _ResetPasswordScreenState extends StateMVC<ResetPasswordScreen> {
                         hintStyle: TextStyle(
                             color: ThemeClass.of(context)
                                 .secondaryBlackColor
-                                .withOpacity(0.7)),
+                                .withAlpha((0.15* 255).toInt())),
                         backGroundColor:
-                            ThemeClass.of(context).secondary.withOpacity(1),
+                            ThemeClass.of(context).secondary.withAlpha((1* 255).toInt()),
                         focusedBorderColor: ThemeClass.of(context).primaryColor,
                         hint: Strings.enterPassword.tr,
                         prefixIcon: SvgPicture.asset(Assets.imagesLockIcon),
@@ -127,9 +127,9 @@ class _ResetPasswordScreenState extends StateMVC<ResetPasswordScreen> {
                         hintStyle: TextStyle(
                             color: ThemeClass.of(context)
                                 .secondaryBlackColor
-                                .withOpacity(0.7)),
+                                .withAlpha((0.7* 255).toInt())),
                         backGroundColor:
-                            ThemeClass.of(context).secondary.withOpacity(1),
+                            ThemeClass.of(context).secondary.withAlpha((1* 255).toInt()),
                         focusedBorderColor: ThemeClass.of(context).primaryColor,
                         hint: Strings.enterPassword.tr,
                         prefixIcon: SvgPicture.asset(Assets.imagesLockIcon),

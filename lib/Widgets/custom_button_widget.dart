@@ -73,7 +73,7 @@ class CustomButtonWidget extends StatelessWidget {
     );
     final secondaryDecoration = BoxDecoration(
       color: backgroundColor ??
-          ThemeClass.of(context).mainSecondary.withOpacity(.16),
+          ThemeClass.of(context).mainSecondary.withAlpha((0.16* 255).toInt()),
       borderRadius: BorderRadius.circular(radius ?? _radius),
     );
     final outlinedDecoration = BoxDecoration(

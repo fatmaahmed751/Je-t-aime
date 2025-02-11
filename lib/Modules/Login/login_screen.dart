@@ -65,7 +65,7 @@ class _LoginScreenState extends StateMVC<LoginScreen> {
                     boxShadow: [
                       BoxShadow(
                         color: const Color(0xff33333326)
-                            .withOpacity(0.13), // Shadow color
+                            .withAlpha((0.13 * 255).toInt()), // Shadow color
                         spreadRadius: 0, // Spread radius
                         blurRadius: 1, // Blur radius for a soft shadow
                         offset: const Offset(
@@ -96,9 +96,9 @@ class _LoginScreenState extends StateMVC<LoginScreen> {
                           hintStyle: TextStyle(
                               color: ThemeClass.of(context)
                                   .secondaryBlackColor
-                                  .withOpacity(0.7)),
+                                  .withAlpha((0.7 * 255).toInt())),
                           backGroundColor:
-                              ThemeClass.of(context).secondary.withOpacity(1),
+                              ThemeClass.of(context).secondary.withAlpha((1 * 255).toInt()),
                           prefixIcon: SvgPicture.asset(Assets.imagesEmailIcon),
                           // isDense: true,
                           insidePadding: EdgeInsets.symmetric(vertical: 10.h),
@@ -112,9 +112,9 @@ class _LoginScreenState extends StateMVC<LoginScreen> {
                           hintStyle: TextStyle(
                               color: ThemeClass.of(context)
                                   .secondaryBlackColor
-                                  .withOpacity(0.7)),
+                                  .withAlpha((0.7 * 255).toInt())),
                           backGroundColor:
-                              ThemeClass.of(context).secondary.withOpacity(1),
+                              ThemeClass.of(context).secondary.withAlpha((0.1 * 255).toInt()),
                           obscure: con.isPassword,
                           focusedBorderColor:
                               ThemeClass.of(context).primaryColor,

@@ -58,7 +58,7 @@ class VisaPaymentMethodWidgetState extends StateMVC<VisaPaymentMethodWidget> {
                   style: TextStyleHelper.of(context).b_14.copyWith(
                       color: ThemeClass.of(context)
                           .secondaryBlackColor
-                          .withOpacity(0.6)),
+                          .withAlpha((0.6* 255).toInt())),
                 ),
                 Gap(10.h),
                 CustomTextFieldWidget(
@@ -66,11 +66,11 @@ class VisaPaymentMethodWidgetState extends StateMVC<VisaPaymentMethodWidget> {
                   hintStyle: TextStyle(
                       color: ThemeClass.of(context)
                           .secondaryBlackColor
-                          .withOpacity(0.6)),
+                          .withAlpha((0.6* 255).toInt())),
                   isDense: true,
                   insidePadding: EdgeInsets.symmetric(vertical: 10.h),
                   backGroundColor:
-                      ThemeClass.of(context).secondary.withOpacity(1),
+                      ThemeClass.of(context).secondary.withAlpha((1* 255).toInt()),
                   controller: con.cardNameController,
                   validator: (v) => Validate.validateNormalString(v),
                 ),
@@ -82,7 +82,7 @@ class VisaPaymentMethodWidgetState extends StateMVC<VisaPaymentMethodWidget> {
                   style: TextStyleHelper.of(context).b_14.copyWith(
                       color: ThemeClass.of(context)
                           .secondaryBlackColor
-                          .withOpacity(0.6)),
+                          .withAlpha((0.6* 255).toInt())),
                 ),
                 Gap(10.h),
                 CustomTextFieldWidget(
@@ -90,11 +90,11 @@ class VisaPaymentMethodWidgetState extends StateMVC<VisaPaymentMethodWidget> {
                   hintStyle: TextStyle(
                       color: ThemeClass.of(context)
                           .secondaryBlackColor
-                          .withOpacity(0.6)),
+                          .withAlpha((0.6* 255).toInt())),
                   isDense: true,
                   insidePadding: EdgeInsets.symmetric(vertical: 10.h),
                   backGroundColor:
-                      ThemeClass.of(context).secondary.withOpacity(1),
+                      ThemeClass.of(context).secondary.withAlpha((1* 255).toInt()),
                   controller: con.cardNumberController,
                   validator: (v) => Validate.validateNormalString(v),
                 ),
@@ -106,7 +106,7 @@ class VisaPaymentMethodWidgetState extends StateMVC<VisaPaymentMethodWidget> {
                   style: TextStyleHelper.of(context).b_14.copyWith(
                       color: ThemeClass.of(context)
                           .secondaryBlackColor
-                          .withOpacity(0.6)),
+                          .withAlpha((0.6* 255).toInt())),
                 ),
                 Gap(10.h),
                 CustomTextFieldWidget(
@@ -114,11 +114,11 @@ class VisaPaymentMethodWidgetState extends StateMVC<VisaPaymentMethodWidget> {
                   hintStyle: TextStyle(
                       color: ThemeClass.of(context)
                           .secondaryBlackColor
-                          .withOpacity(0.6)),
+                          .withAlpha((0.6* 255).toInt())),
                   isDense: true,
                   insidePadding: EdgeInsets.symmetric(vertical: 10.h),
                   backGroundColor:
-                      ThemeClass.of(context).secondary.withOpacity(1),
+                      ThemeClass.of(context).secondary.withAlpha((1* 255).toInt()),
                   controller: con.expirationDateController,
                   validator: (v) => Validate.validatePhone(v),
                 ),
@@ -130,7 +130,7 @@ class VisaPaymentMethodWidgetState extends StateMVC<VisaPaymentMethodWidget> {
                   style: TextStyleHelper.of(context).b_14.copyWith(
                       color: ThemeClass.of(context)
                           .secondaryBlackColor
-                          .withOpacity(0.6)),
+                          .withAlpha((0.6* 255).toInt())),
                 ),
                 Gap(10.h),
                 CustomTextFieldWidget(
@@ -139,11 +139,11 @@ class VisaPaymentMethodWidgetState extends StateMVC<VisaPaymentMethodWidget> {
                   hintStyle: TextStyle(
                       color: ThemeClass.of(context)
                           .secondaryBlackColor
-                          .withOpacity(0.6)),
+                          .withAlpha((0.6* 255).toInt())),
                   isDense: true,
                   insidePadding: EdgeInsets.symmetric(vertical: 10.h),
                   backGroundColor:
-                      ThemeClass.of(context).secondary.withOpacity(1),
+                      ThemeClass.of(context).secondary.withAlpha((1* 255).toInt()),
                   controller: con.cvvController,
                   validator: (v) => Validate.validatePhone(v),
                 ),

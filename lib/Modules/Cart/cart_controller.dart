@@ -128,7 +128,7 @@ double calculateSubtotal(List<CartModel> cartProducts) {
   }
 
   void updateSubtotal() {
-    notifyListeners();  // This will notify the UI to update
+    notifyListeners();
   }
 
 

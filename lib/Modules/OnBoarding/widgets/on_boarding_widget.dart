@@ -50,7 +50,7 @@ class OnBoardingWidget extends StatelessWidget {
             boxShadow: [
               BoxShadow(
                 color:
-                    const Color(0xff33333326).withOpacity(0.13), // Shadow color
+                    const Color(0xff33333326).withAlpha((0.13 * 255).toInt()), // Shadow color
                 spreadRadius: 0, // Spread radius
                 blurRadius: 1, // Blur radius for a soft shadow
                 offset: const Offset(

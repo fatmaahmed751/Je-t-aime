@@ -61,7 +61,7 @@ class PopularProductsScreenState extends StateMVC<PopularProductsScreen> {
                   SearchWidget(
                       width: 300.w,
                       backGroundColor:
-                          ThemeClass.of(context).secondary.withOpacity(1),
+                          ThemeClass.of(context).secondary.withAlpha((1* 255).toInt()),
                       onSearch: (String? text) {},
                       isSearch: true,
                       controller: con.searchController,

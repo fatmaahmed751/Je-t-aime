@@ -83,7 +83,7 @@ class PaymentScreenState extends StateMVC<PaymentScreen> {
                         ? Colors.transparent
                         : ThemeClass.of(context)
                             .secondaryBlackColor
-                            .withOpacity(0.6),
+                            .withAlpha((0.6* 255).toInt()),
                   ),
                   borderRadius: BorderRadius.circular(30.r)),
               clipBehavior: Clip.hardEdge,
@@ -93,7 +93,7 @@ class PaymentScreenState extends StateMVC<PaymentScreen> {
                     ? ThemeClass.of(context).background
                     : ThemeClass.of(context)
                         .secondaryBlackColor
-                        .withOpacity(0.6),
+                        .withAlpha((0.6* 255).toInt()),
               ),
             ),
           ),
@@ -119,7 +119,7 @@ class PaymentScreenState extends StateMVC<PaymentScreen> {
                       ? Colors.transparent
                       : ThemeClass.of(context)
                           .secondaryBlackColor
-                          .withOpacity(0.6),
+                          .withAlpha((0.6* 255).toInt()),
                 ),
               ),
               clipBehavior: Clip.hardEdge,
@@ -132,7 +132,7 @@ class PaymentScreenState extends StateMVC<PaymentScreen> {
                         ? ThemeClass.of(context).background
                         : ThemeClass.of(context)
                             .secondaryBlackColor
-                            .withOpacity(0.6),
+                            .withAlpha((0.6* 255).toInt()),
                     decoration: TextDecoration.none),
               ),
             ),

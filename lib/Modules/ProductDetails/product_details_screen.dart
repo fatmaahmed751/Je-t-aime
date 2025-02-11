@@ -131,11 +131,16 @@ class _ProductDetailsScreenState extends StateMVC<ProductDetailsScreen> {
                         decoration: TextDecoration.underline,
                         color: ThemeClass.of(context)
                             .secondaryBlackColor
-                            .withOpacity(0.6)),
+                            .withAlpha((0.6 * 255).toInt())),
                   ),
                   GestureDetector(
                     onTap: () {
-                      con.writeRateForProduct(context);
+                      if (SharedPref.getCurrentUser()?.token != null &&
+                          SharedPref.getCurrentUser()!.token!.isNotEmpty) {
+                        con.writeRateForProduct(context);
+                      } else {
+                        con.unLoginWidget(context);
+                      }
                     },
                     child: SvgPicture.asset(Assets.imagesEdit),
                   ),

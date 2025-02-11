@@ -64,7 +64,7 @@ class AlertDeleteItemWidget extends StatelessWidget {
                             Border.all(color: ThemeClass.of(context).secondary),
                         borderRadius: BorderRadius.circular(30.r),
                         color: ThemeClass.of(context).secondary
-                        // ThemeClass.of(context).background.withOpacity(0.20)
+                        // ThemeClass.of(context).background.withValues(0.20)
                         ),
                     //  backgroundColor: ThemeClass.of(context).primaryColor,
                     child: Center(
@@ -85,7 +85,7 @@ class AlertDeleteItemWidget extends StatelessWidget {
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(30.r),
                         color: ThemeClass.of(context).cancel
-                        // ThemeClass.of(context).background.withOpacity(0.20)
+                        // ThemeClass.of(context).background.withValues(0.20)
                         ),
                     //  backgroundColor: ThemeClass.of(context).primaryColor,
                     child: Center(

@@ -67,7 +67,7 @@ class ReviewsItem extends StatelessWidget {
                     fontWeight: FontWeight.w400,
                     color: ThemeClass.of(context)
                         .secondaryBlackColor
-                        .withOpacity(0.6)),
+                        .withAlpha((0.6* 255).toInt())),
               ),
             ),
             Gap(16.h),

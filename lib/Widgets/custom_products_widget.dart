@@ -36,13 +36,13 @@ class CustomProductsWidget extends StatelessWidget {
               border: Border.all(
                 color: ThemeClass.of(context)
                     .secondaryBlackColor
-                    .withOpacity(0.15),
+                    .withAlpha((0.15* 255).toInt()),
               ),
               boxShadow: [
                 BoxShadow(
                     color: ThemeClass.of(context)
                         .secondaryBlackColor
-                        .withOpacity(0.15),
+                        .withAlpha((0.15* 255).toInt()),
                     blurRadius: 1,
                     spreadRadius: 0.5),
               ],
