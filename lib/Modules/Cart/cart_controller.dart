@@ -8,6 +8,7 @@ import "package:je_t_aime/Models/cart_item_model.dart";
 import "package:je_t_aime/Modules/Cart/cart_data_handler.dart";
 import "package:je_t_aime/core/Language/locales.dart";
 import "package:mvc_pattern/mvc_pattern.dart";
+import "package:shared_preferences/shared_preferences.dart";
 import "../../Models/user_model.dart";
 import "../../Utilities/router_config.dart";
 import "../../Utilities/shared_preferences.dart";
@@ -34,7 +35,7 @@ class CartController extends ControllerMVC {
   PagingController<int, CartModel>? _pagingController;
   PagingController<int, CartModel> get pagingController {
     // Ensure the controller is always initialized
-    _pagingController ??= PagingController(firstPageKey: 0);
+    _pagingController ??= PagingController(firstPageKey:0);
     return _pagingController!;
   }
   //int counterValue = 1;
@@ -52,6 +53,7 @@ class CartController extends ControllerMVC {
     _pagingController!.addPageRequestListener((pageKey) {
       getCartList(pageKey);
     });
+    loadCart();
   }
   void _initPagingController() {
     _pagingController = PagingController(firstPageKey: 0);
@@ -60,20 +62,23 @@ class CartController extends ControllerMVC {
     });
     getCartList(_pagingController!.firstPageKey);
   }
+  Future<void> loadCart() async {
+    cartProducts = await SharedPref.getCart();
+    notifyListeners();
+  }
+
   Future<void> getCartList(int pageKey) async {
     if (loading) return; // Avoid duplicate calls
     loading = true;
     notifyListeners();
-    final newItems = await CartDataHandler.listOfCartProducts(
-      pageKey,
-      pageSize,
-    );
+
+    final newItems = await CartDataHandler.listOfCartProducts(pageKey, pageSize);
+
     newItems.fold(
           (failure) {
         _pagingController!.error = failure;
       },
           (cartProducts) {
-        print("Parsed Cart Products: ${cartProducts.length}");
         final isLastPage = cartProducts.length < pageSize;
         if (isLastPage) {
           _pagingController!.appendLastPage(cartProducts);
@@ -81,14 +86,55 @@ class CartController extends ControllerMVC {
           final nextPageKey = pageKey + cartProducts.length;
           _pagingController!.appendPage(cartProducts, nextPageKey);
         }
-        // Update the cartProducts list
+
+        // Update the local cartProducts list
         this.cartProducts = _pagingController!.itemList ?? [];
-        print("PagingController Item List: ${_pagingController!.itemList}");
+        SharedPref.saveCart(this.cartProducts); // Save to SharedPreferences
+
         loading = false;
         notifyListeners();
       },
     );
   }
+
+  Future<void> clearCart() async {
+    cartProducts.clear();
+    await SharedPref.clearCart();
+    notifyListeners();
+  }
+  // Future<void> getCartList(int pageKey) async {
+  //   if (loading) return; // Avoid duplicate calls
+  //   loading = true;
+  //   notifyListeners();
+  //   final newItems = await CartDataHandler.listOfCartProducts(
+  //     pageKey,
+  //     pageSize,
+  //   );
+  //   newItems.fold(
+  //         (failure) {
+  //       _pagingController!.error = failure;
+  //     },
+  //         (cartProducts) {
+  //       print("Parsed Cart Products: ${cartProducts.length}");
+  //       final isLastPage = cartProducts.length < pageSize;
+  //       if (isLastPage) {
+  //         _pagingController!.appendLastPage(cartProducts);
+  //       } else {
+  //         final nextPageKey = pageKey + cartProducts.length;
+  //         _pagingController!.appendPage(cartProducts, nextPageKey);
+  //       }
+  //       // Update the cartProducts list
+  //       this.cartProducts = _pagingController!.itemList ?? [];
+  //       print("PagingController Item List: ${_pagingController!.itemList}");
+  //       loading = false;
+  //       notifyListeners();
+  //     },
+  //   );
+  // }
+
+  // double calculateSubtotal() {
+  //   return cartProducts.fold(0, (sum, item) => sum + (item.price * item.quantity));
+  // }
 double calculateSubtotal(List<CartModel> cartProducts) {
     double subtotal = 0.0;
 
@@ -118,12 +164,14 @@ double calculateSubtotal(List<CartModel> cartProducts) {
   void incrementCounter(CartModel product) {
     product.count = (product.count ?? 0) + 1;  // Ensure count is not null
     updateSubtotal();
+    SharedPref.saveCart(cartProducts);
   }
 
   void decrementCounter(CartModel product) {
     if ((product.count ?? 1) > 1) {
       product.count = (product.count ?? 0) - 1;
       updateSubtotal();
+      SharedPref.saveCart(cartProducts);
     }
   }
 

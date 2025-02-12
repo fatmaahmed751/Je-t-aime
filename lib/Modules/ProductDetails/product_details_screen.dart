@@ -15,6 +15,7 @@ import "../../Utilities/text_style_helper.dart";
 import "../../Utilities/theme_helper.dart";
 import "../../Widgets/custom_button_widget.dart";
 import "../../Widgets/custom_details_side_text.dart";
+import "../../Widgets/toast_helper.dart";
 import "../../generated/assets.dart";
 import "../Reviews/reviews_screen.dart";
 import "../Reviews/widget/reviews_widget.dart";
@@ -51,6 +52,7 @@ class _ProductDetailsScreenState extends StateMVC<ProductDetailsScreen> {
           padding:
               EdgeInsetsDirectional.only(start: 20.w, end: 24.w, top: 15.h),
           child: ListView(
+            physics: const BouncingScrollPhysics(),
             children: [
               Row(
                 mainAxisAlignment: MainAxisAlignment.start,
@@ -210,16 +212,56 @@ class _ProductDetailsScreenState extends StateMVC<ProductDetailsScreen> {
         Padding(
           padding:
               EdgeInsetsDirectional.symmetric(horizontal: 24.w, vertical: 20.h),
-          child: CustomButtonWidget.primary(
-            onTap: () {
+          // child: CustomButtonWidget.primary(
+          //   onTap: ()async {
+          //     if (con.productDetailsModel == null) {
+          //       ToastHelper.showError(message: "Product details are not available");
+          //       return;
+          //     }
+          //     bool isProductInCart = con.cartProducts.any((cartProduct) => cartProduct.id == con.productDetailsModel!.id);
+          //
+          //     if (isProductInCart) {
+          //       // Product is already in the cart, show a message or handle accordingly
+          //       ToastHelper.showError(message: "Product is already in the cart");
+          //       setState(() {
+          //         con.loading = false;
+          //       });
+          //       return;
+          //     }
+          //     con.addToCartSheet(context);
+          //   },
+          //   width: 382.w,
+          //   height: 54.h,
+          //   title: Strings.addToCart.tr,
+          //   textStyle: TextStyleHelper.of(context).h_20.copyWith(
+          //         color: ThemeClass.of(context).background,
+          //       ),
+          // ),
+          child:CustomButtonWidget.primary(
+            onTap: () async {
+              if (con.productDetailsModel == null) {
+                ToastHelper.showError(message: "Product details are not available");
+                return;
+              }
+
+              // Fetch the cart data from SharedPreferences
+              final isProductInCart = await con.isProductInCart(con.productDetailsModel!.id??0);
+
+              if (isProductInCart) {
+                // Product is already in the cart, show a message
+                ToastHelper.showError(message: "Product is already in the cart");
+                return;
+              }
+
+              // Open the bottom sheet to confirm adding the product
               con.addToCartSheet(context);
             },
             width: 382.w,
             height: 54.h,
             title: Strings.addToCart.tr,
             textStyle: TextStyleHelper.of(context).h_20.copyWith(
-                  color: ThemeClass.of(context).background,
-                ),
+              color: ThemeClass.of(context).background,
+            ),
           ),
         ),
       ]),

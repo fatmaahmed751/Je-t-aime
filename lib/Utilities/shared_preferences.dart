@@ -1,17 +1,19 @@
-import 'dart:convert';
-import 'package:flutter/material.dart';
-import 'package:get_it/get_it.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import '../core/Font/font_provider.dart';
-import '../core/Language/app_languages.dart';
-import '../core/Theme/theme_model.dart';
-import '../Models/user_model.dart';
+import "dart:convert";
+import "package:flutter/material.dart";
+import "package:get_it/get_it.dart";
+import "package:shared_preferences/shared_preferences.dart";
+import "../Models/cart_item_model.dart";
+import "../core/Font/font_provider.dart";
+import "../core/Language/app_languages.dart";
+import "../core/Theme/theme_model.dart";
+import "../Models/user_model.dart";
 
 class SharedPref {
   static SharedPreferences get prefs => GetIt.instance.get<SharedPreferences>();
   static const String _language = "language_code";
   static const String _currentUserKey = "currentUser";
   static const String _themeKey = "theme";
+  static const String _cartKey = "cartProducts";
   static const String _fontSizeKey = "fontSize";
   static const String _fontFamilyKey = "fontFamily";
   static const String _secondaryColor = "secondaryColor";
@@ -38,7 +40,25 @@ class SharedPref {
   static Future<void> setTheme({required ThemeModel theme}) async {
     await prefs.setString(_themeKey, json.encode(theme.toJson()));
   }
+  //My code
 
+  static Future<void> saveCart(List<CartModel> cartProducts) async {
+    final cartJson = cartProducts.map((item) => item.toJson()).toList();
+    final cartString = jsonEncode(cartJson);
+    await prefs.setString(_cartKey, cartString);
+  }
+  static Future<List<CartModel>> getCart() async {
+    final cartString = prefs.getString(_cartKey);
+    if (cartString == null) return [];
+    final cartJson = jsonDecode(cartString) as List<dynamic>;
+    return cartJson.map((item) => CartModel.fromJson(item)).toList();
+  }
+
+  static Future<void> clearCart() async {
+    await prefs.remove(_cartKey);
+  }
+
+//
   static double? getFontSizeScale() {
     return prefs.getDouble(_fontSizeKey);
   }

@@ -13,6 +13,7 @@ import "package:je_t_aime/core/Language/locales.dart";
 import "package:mvc_pattern/mvc_pattern.dart";
 import "../../Models/cart_item_model.dart";
 import "../../Utilities/router_config.dart";
+import "../../Utilities/shared_preferences.dart";
 import "../../Utilities/strings.dart";
 import "../../Utilities/theme_helper.dart";
 import "../../Widgets/toast_helper.dart";
@@ -61,12 +62,26 @@ class ProductDetailsController extends ControllerMVC {
       fetchPage(pageKey);
     });
     super.initState();
+    loadCart(); // Load cart from SharedPreferences
   }
+
 
   @override
   void dispose() {
     messageController.dispose();
     super.dispose();
+  }
+
+  // Load cart from SharedPreferences
+  Future<void> loadCart() async {
+    cartProducts = await SharedPref.getCart();
+    notifyListeners();
+  }
+
+  // Check if a product is already in the cart
+  Future<bool> isProductInCart(int productId) async {
+    final cartProducts = await SharedPref.getCart();
+    return cartProducts.any((cartProduct) => cartProduct.id == productId);
   }
   addToFavorite({required int productId,required BuildContext context}) async {
     setState(() {
@@ -101,7 +116,7 @@ class ProductDetailsController extends ControllerMVC {
       // Fetch data from your API or data source
       final newItems = await fetchReviews(pageKey);
 
-      final isLastPage = newItems.length < 10; // Adjust based on your API's pagination logic
+      final isLastPage = newItems.length < 10;
       if (isLastPage) {
         pagingController.appendLastPage(newItems);
       } else {
@@ -167,39 +182,117 @@ class ProductDetailsController extends ControllerMVC {
       ),
     );
   }
-  addProductToCart({required ProductDetailsModel model,required BuildContext context})async{
+  Future<void> addProductToCart({
+    required ProductDetailsModel model,
+    required BuildContext context,
+  }) async {
     setState(() {
       loading = true;
     });
+
     print("Product ID: ${model.id}, Quantity: $counter");
+
+    // Add the product to the cart via the API
     final result = await CartDataHandler.addToCart(
-        productId: model.id??0,
-        quantity: counter);
+      productId: model.id ?? 0,
+      quantity: counter,
+    );
+
     result.fold((l) {
+      // Handle error
       ToastHelper.showError(message: l.toString());
-    }, (r) {
-      ToastHelper.showSuccess(
-        context: context,
-        message: Strings.addToCartSuccess.tr,
-        icon: SvgPicture.asset(
-          Assets.imagesSubmit,
-          width: 60.w,
-          height: 50.h,
-          fit: BoxFit.cover,
-        ),
-        backgroundColor:
-        ThemeClass.of(context).primaryColor,
-      );
-      GoRouter.of(context).pushNamed(CartScreen.routeName,
-        //  extra:cartProducts
-      );
-      context.pop();
-      print("addddddd");
+    }, (r) async {
+      // Fetch the updated cart data from the API
+      final updatedCartResult = await CartDataHandler.listOfCartProducts(0, pageSize);
+
+      updatedCartResult.fold((l) {
+        // Handle error
+        ToastHelper.showError(message: l.toString());
+      }, (updatedCart) async {
+        // Update the local cartProducts list with the new data
+        setState(() {
+          cartProducts = updatedCart;
+        });
+
+        // Save the updated cart to SharedPreferences
+        await SharedPref.saveCart(cartProducts);
+
+        // Show success message
+        ToastHelper.showSuccess(
+          context: context,
+          message: Strings.addToCartSuccess.tr,
+          icon: SvgPicture.asset(
+            Assets.imagesSubmit,
+            width: 60.w,
+            height: 50.h,
+            fit: BoxFit.cover,
+          ),
+          backgroundColor: ThemeClass.of(context).primaryColor,
+        );
+
+        // Navigate to the cart screen
+        GoRouter.of(context).pushNamed(CartScreen.routeName);
+        context.pop();
+      });
     });
+
     setState(() {
       loading = false;
     });
   }
+  // addProductToCart({required ProductDetailsModel model,required BuildContext context})async{
+  //   setState(() {
+  //     loading = true;
+  //   });
+  //
+  //   print("Product ID: ${model.id}, Quantity: $counter");
+  //   final result = await CartDataHandler.addToCart(
+  //       productId: model.id??0,
+  //       quantity: counter);
+  //   result.fold((l) {
+  //     ToastHelper.showError(message: l.toString());
+  //   }, (r)async {
+  //     final updatedCartResult = await CartDataHandler.listOfCartProducts(
+  //         0, 10);
+  //
+  //     updatedCartResult.fold((l) {
+  //       // Handle error
+  //       ToastHelper.showError(message: l.toString());
+  //     }, (updatedCart) {
+  //       // Update the local cartProducts list with the new data
+  //       setState(() {
+  //         cartProducts = updatedCart;
+  //       });
+  //
+  //       // cartProducts.add(CartModel(
+  //       //   id: model.id,
+  //       //   // Add other necessary fields from the model
+  //       // ));
+  //       ToastHelper.showSuccess(
+  //         context: context,
+  //         message: Strings.addToCartSuccess.tr,
+  //         icon: SvgPicture.asset(
+  //           Assets.imagesSubmit,
+  //           width: 60.w,
+  //           height: 50.h,
+  //           fit: BoxFit.cover,
+  //         ),
+  //         backgroundColor:
+  //         ThemeClass
+  //             .of(context)
+  //             .primaryColor,
+  //       );
+  //       GoRouter.of(context).pushNamed(CartScreen.routeName,);
+  //       //  extra:cartProducts);
+  //       //context.pop();
+  //       print("addddddd");
+  //     });
+  //     setState(() {
+  //       loading = false;
+  //     });
+  //   });
+  // }
+
 
   Future writeRateForProduct(BuildContext context) {
     return showModalBottomSheet(
