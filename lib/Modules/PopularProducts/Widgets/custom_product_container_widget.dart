@@ -15,10 +15,10 @@ import "package:gap/gap.dart";
 
 class CustomProductContainerWidget extends StatelessWidget {
   final PopularProductsModel productsModel;
-  final ProductDetailsModel? model;
+  //final ProductDetailsModel? model;
   final Function() onFavoritePressed;
   final Function() addToCart;
-  const CustomProductContainerWidget({super.key, required this.productsModel, required this.onFavoritePressed, this.model, required this.addToCart});
+  const CustomProductContainerWidget({super.key, required this.productsModel, required this.onFavoritePressed, required this.addToCart});
 
 
   @override
@@ -27,7 +27,7 @@ class CustomProductContainerWidget extends StatelessWidget {
       onTap: () {
          context.pushNamed(
           ProductDetailsScreen.routeName,
-          extra: productsModel, // Ensure model is passed correctly
+          extra: productsModel.id, // Ensure model is passed correctly
         );
             },
       child: Container(

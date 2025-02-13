@@ -34,58 +34,112 @@ class ReviewsForProductController extends ControllerMVC {
   final bool _isDisposed = false;
   List<ReviewModel>reviews=[];
   PopularProductsModel? model;
-  static const pageSize = 10;
-  PagingController<int, ReviewModel> get pagingController => _pagingController;
   ProductDetailsModel? productDetailsModel;
-  final PagingController<int, ReviewModel> _pagingController =
-  PagingController(firstPageKey: 0);
+  static const pageSize = 10;
+  PagingController<int, ReviewModel>? _pagingController;
+  PagingController<int, ReviewModel> get pagingController {
+    // Ensure the controller is always initialized
+    _pagingController ??= PagingController(firstPageKey: 0);
+    return _pagingController!;
+  }
+
   @override
   void initState() {
-    messageController = TextEditingController();
-    _pagingController.addPageRequestListener((pageKey) {
-      getReviews(pageKey, model?.id??0);
-    });
     super.initState();
+    _initPagingController();
   }
 
-  @override
-  void dispose() {
-    messageController.dispose();
-    super.dispose();
+  void init(PagingController<int, ReviewModel> pagingController, int productId) {
+    _pagingController = pagingController;
+    _pagingController!.addPageRequestListener((pageKey) {
+      getReviews(pageKey, productId);
+    });
+    getReviews(_pagingController!.firstPageKey, productId);
   }
 
-  init({required int reviewProductId}) {
-    if (_pagingController.itemList == null ||
-        _pagingController.itemList!.isEmpty) {
-      getReviews(_pagingController.firstPageKey, reviewProductId);
-    }
+  void _initPagingController() {
+    _pagingController = PagingController(firstPageKey: 0);
+    _pagingController!.addPageRequestListener((pageKey) {
+      // This will be overridden in the `init` method
+    });
   }
 
-  Future<void> getReviews(int pageKey, int reviewProductId) async {
-    //try {
+  // @override
+  // void initState() {
+  //   messageController = TextEditingController();
+  //   _pagingController.addPageRequestListener((pageKey) {
+  //     getReviews(pageKey, model?.id??0);
+  //   });
+  //   super.initState();
+  // }
+  //
+  // @override
+  // void dispose() {
+  //   messageController.dispose();
+  //   super.dispose();
+  // }
+  //
+  // init({required int reviewProductId}) {
+  //   if (_pagingController.itemList == null ||
+  //       _pagingController.itemList!.isEmpty) {
+  //     getReviews(_pagingController.firstPageKey, reviewProductId);
+  //   }
+  // }
+  Future<void> getReviews(int pageKey, int productId) async {
+    if (loading) return; // Avoid duplicate calls
+    loading = true;
+    notifyListeners();
+
     final newItems = await ReviewsDataHandler.reviewsForProduct(
       pageKey,
       pageSize,
-      reviewProductId,
-    );
-    newItems.fold(
-            (failure) {
-          _pagingController.error = failure;
-        },
-            (reviews) {
-          final isLastPage = reviews.length < pageSize;
-          if (isLastPage) {
-            _pagingController.appendLastPage(reviews);
-          } else {
-            final nextPageKey = pageKey + reviews.length;
-            _pagingController.appendPage(reviews, nextPageKey);
-          }
-        }
+      productId,
     );
 
+    newItems.fold(
+          (failure) {
+        _pagingController!.error = failure;
+      },
+          (reviews) {
+        final isLastPage = reviews.length < pageSize;
+        if (isLastPage) {
+          _pagingController!.appendLastPage(reviews);
+        } else {
+          final nextPageKey = pageKey + reviews.length;
+          _pagingController!.appendPage(reviews, nextPageKey);
+        }
+
+        loading = false;
+        notifyListeners();
+      },
+    );
   }
 
-  Future writeRateForProduct(BuildContext context) {
+  // Future<void> getReviews(int pageKey, int reviewProductId) async {
+  //   //try {
+  //   final newItems = await ReviewsDataHandler.reviewsForProduct(
+  //     pageKey,
+  //     pageSize,
+  //     reviewProductId,
+  //   );
+  //   newItems.fold(
+  //           (failure) {
+  //         _pagingController.error = failure;
+  //       },
+  //           (reviews) {
+  //         final isLastPage = reviews.length < pageSize;
+  //         if (isLastPage) {
+  //           _pagingController.appendLastPage(reviews);
+  //         } else {
+  //           final nextPageKey = pageKey + reviews.length;
+  //           _pagingController.appendPage(reviews, nextPageKey);
+  //         }
+  //       }
+  //   );
+  //
+  // }
+
+  Future writeRateForProduct(BuildContext context,int productId) {
     return showModalBottomSheet(
       context: context,
       // isScrollControlled: true,
@@ -93,7 +147,7 @@ class ReviewsForProductController extends ControllerMVC {
         borderRadius: BorderRadius.vertical(top: Radius.circular(30.r)),
       ),
       builder: (context) =>  RateProductScreen(
-          product:productDetailsModel??ProductDetailsModel()
+          productId:productId
       ),
     );
   }

@@ -24,16 +24,17 @@ import "Widgets/product_details_widget.dart";
 
 class ProductDetailsScreen extends StatefulWidget {
   static const routeName = "ProductDetails";
-  final PopularProductsModel popularProductsModel;
-
-  const ProductDetailsScreen({super.key, required this.popularProductsModel});
+  //final PopularProductsModel popularProductsModel;
+  final int productId;
+  const ProductDetailsScreen({super.key, required this.productId});
+//  const ProductDetailsScreen({super.key, required this.popularProductsModel});
 
   @override
-  _ProductDetailsScreenState createState() => _ProductDetailsScreenState();
+  ProductDetailsScreenState createState() => ProductDetailsScreenState();
 }
 
-class _ProductDetailsScreenState extends StateMVC<ProductDetailsScreen> {
-  _ProductDetailsScreenState() : super(ProductDetailsController()) {
+class ProductDetailsScreenState extends StateMVC<ProductDetailsScreen> {
+  ProductDetailsScreenState() : super(ProductDetailsController()) {
     con = ProductDetailsController();
   }
 
@@ -41,7 +42,8 @@ class _ProductDetailsScreenState extends StateMVC<ProductDetailsScreen> {
   @override
   void initState() {
     super.initState();
-    con.getProductDetails(productId: widget.popularProductsModel.id ?? 0);
+    con.getProductDetails(productId: widget.productId);
+   // con.getProductDetails(productId: widget.popularProductsModel.id ?? 0);
   }
 
   @override
@@ -71,25 +73,47 @@ class _ProductDetailsScreenState extends StateMVC<ProductDetailsScreen> {
                     ),
                   ),
                   const Spacer(),
+                  // GestureDetector(
+                  //     onTap: () {
+                  //       if (widget.popularProductsModel.isFavorite == 0) {
+                  //         con.addToFavorite(
+                  //             productId: widget.popularProductsModel.id ?? 0,
+                  //             context: context);
+                  //       }
+                  //     },
+                  //     child: widget.popularProductsModel.isFavorite == 1
+                  //         ? SizedBox(
+                  //             height: 26.h,
+                  //             child:
+                  //                 SvgPicture.asset(Assets.imagesFavoriteIcon))
+                  //         : SizedBox(
+                  //             height: 26.h,
+                  //             child: SvgPicture.asset(
+                  //               Assets.imagesHeartBroken,
+                  //             ),
+                  //           )),
+
+               // ],
+             // ),
                   GestureDetector(
                       onTap: () {
-                        if (widget.popularProductsModel.isFavorite == 0) {
+                        if (con.productDetailsModel?.isFavorite == 0) {
                           con.addToFavorite(
-                              productId: widget.popularProductsModel.id ?? 0,
+                              productId: con.productDetailsModel?.id ?? 0,
                               context: context);
                         }
                       },
-                      child: widget.popularProductsModel.isFavorite == 1
+                      child: con.productDetailsModel?.isFavorite == 1
                           ? SizedBox(
-                              height: 26.h,
-                              child:
-                                  SvgPicture.asset(Assets.imagesFavoriteIcon))
+                          height: 26.h,
+                          child:
+                          SvgPicture.asset(Assets.imagesFavoriteIcon))
                           : SizedBox(
-                              height: 26.h,
-                              child: SvgPicture.asset(
-                                Assets.imagesHeartBroken,
-                              ),
-                            )),
+                        height: 26.h,
+                        child: SvgPicture.asset(
+                          Assets.imagesHeartBroken,
+                        ),
+                      )),
                 ],
               ),
               Gap(10.h),
@@ -110,7 +134,7 @@ class _ProductDetailsScreenState extends StateMVC<ProductDetailsScreen> {
                   GestureDetector(
                     onTap: () {
                       context.pushNamed(ReviewsForProductScreen.routeName,
-                          extra: widget.popularProductsModel);
+                          extra: widget.productId);
                       //con.getProductDetails(productId: widget.popularProductsModel.id!);
                     },
                     child: Text(
@@ -139,7 +163,7 @@ class _ProductDetailsScreenState extends StateMVC<ProductDetailsScreen> {
                     onTap: () {
                       if (SharedPref.getCurrentUser()?.token != null &&
                           SharedPref.getCurrentUser()!.token!.isNotEmpty) {
-                        con.writeRateForProduct(context);
+                        con.writeRateForProduct(context,widget.productId);
                       } else {
                         con.unLoginWidget(context);
                       }
@@ -152,34 +176,6 @@ class _ProductDetailsScreenState extends StateMVC<ProductDetailsScreen> {
               if (con.productDetailsModel != null &&
                   con.productDetailsModel!.reviews != null)
                 ReviewsItem(reviewsModel: con.productDetailsModel!.reviews!),
-
-              // SizedBox(
-              //   height: 300.h,
-              //   child: PagedListView<int, ReviewModel>(
-              //     pagingController: con.pagingController,
-              //     builderDelegate: PagedChildBuilderDelegate<ReviewModel>(
-              //       itemBuilder: (context, item, index) {
-              //         return ReviewsItem(reviewsModel: item);
-              //       },
-              //       firstPageProgressIndicatorBuilder: (context) {
-              //         return const Center(child: CircularProgressIndicator());
-              //       },
-              //       newPageProgressIndicatorBuilder: (context) {
-              //         return const Center(child: CircularProgressIndicator());
-              //       },
-              //       noItemsFoundIndicatorBuilder: (context) {
-              //         return const Center(child: Text("No reviews found"));
-              //       },
-              //       noMoreItemsIndicatorBuilder: (context) {
-              //         return const Center(child: Text("No more reviews"));
-              //       },
-              //       // errorIndicatorBuilder: (context) {
-              //       //   return Center(child: Text('Error loading reviews'));
-              //       // },
-              //     ),
-              //   ),
-              // ),
-
               Gap(8.h),
               CustomDetailsSideTextWidget(
                 text: Strings.relatedProduct.tr,
@@ -212,31 +208,6 @@ class _ProductDetailsScreenState extends StateMVC<ProductDetailsScreen> {
         Padding(
           padding:
               EdgeInsetsDirectional.symmetric(horizontal: 24.w, vertical: 20.h),
-          // child: CustomButtonWidget.primary(
-          //   onTap: ()async {
-          //     if (con.productDetailsModel == null) {
-          //       ToastHelper.showError(message: "Product details are not available");
-          //       return;
-          //     }
-          //     bool isProductInCart = con.cartProducts.any((cartProduct) => cartProduct.id == con.productDetailsModel!.id);
-          //
-          //     if (isProductInCart) {
-          //       // Product is already in the cart, show a message or handle accordingly
-          //       ToastHelper.showError(message: "Product is already in the cart");
-          //       setState(() {
-          //         con.loading = false;
-          //       });
-          //       return;
-          //     }
-          //     con.addToCartSheet(context);
-          //   },
-          //   width: 382.w,
-          //   height: 54.h,
-          //   title: Strings.addToCart.tr,
-          //   textStyle: TextStyleHelper.of(context).h_20.copyWith(
-          //         color: ThemeClass.of(context).background,
-          //       ),
-          // ),
           child:CustomButtonWidget.primary(
             onTap: () async {
               if (con.productDetailsModel == null) {

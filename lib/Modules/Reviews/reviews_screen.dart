@@ -17,10 +17,11 @@ import "../../generated/assets.dart";
 
 class ReviewsForProductScreen extends StatefulWidget {
   static const routeName = "reviewScreen";
-  final PopularProductsModel productsModel;
+  //final PopularProductsModel productsModel;
+  final int productId;
   const ReviewsForProductScreen({
-    Key? key,
-    required this.productsModel,
+    Key? key, required this.productId,
+   // required this.productsModel,
   }) : super(key: key);
 
   @override
@@ -33,18 +34,21 @@ class _ReviewsForProductScreenState extends StateMVC<ReviewsForProductScreen> {
   }
   late ReviewsForProductController con;
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+  late PagingController<int, ReviewModel> _pagingController;
 
   @override
   void initState() {
     super.initState();
-    con.init(reviewProductId: widget.productsModel.id ?? 0);
+    _pagingController = PagingController(firstPageKey: 0);
+    con.init(_pagingController, widget.productId); // Pass the PagingController and productId
   }
 
   @override
   void dispose() {
-    con.pagingController.dispose();
+    _pagingController.dispose(); // Dispose the PagingController here
     super.dispose();
   }
+
 
   @override
   Widget build(BuildContext context) {
@@ -76,8 +80,9 @@ class _ReviewsForProductScreenState extends StateMVC<ReviewsForProductScreen> {
                                 .withAlpha((0.6* 255).toInt())),
                       ),
                       GestureDetector(
+                        ///TODO
                         onTap: () {
-                          con.writeRateForProduct(context);
+                          con.writeRateForProduct(context,widget.productId);
                         },
                         child: SvgPicture.asset(Assets.imagesEdit),
                       ),
@@ -86,7 +91,7 @@ class _ReviewsForProductScreenState extends StateMVC<ReviewsForProductScreen> {
                   Expanded(
                     child: PagedListView<int, ReviewModel>(
                       physics: const BouncingScrollPhysics(),
-                      pagingController: con.pagingController,
+                      pagingController: _pagingController,
                       builderDelegate: PagedChildBuilderDelegate<ReviewModel>(
                         itemBuilder: (context, item, index) {
                           return ReviewsItem(reviewsModel: item);

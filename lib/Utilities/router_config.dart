@@ -51,20 +51,7 @@ class GoRouterConfig {
         },
         routes: const <RouteBase>[],
       ),
-      GoRoute(
-        name: ReviewsForProductScreen.routeName,
-        path: "/${ReviewsForProductScreen.routeName}",
-        pageBuilder: (_, GoRouterState state) {
-          final PopularProductsModel model = state.extra as PopularProductsModel;
-          return getCustomTransitionPage(
-            state: state,
-            child:  ReviewsForProductScreen(
-              productsModel:model
-            ),
-          );
-        },
-        routes: const <RouteBase>[],
-      ),
+
       GoRoute(
         name: AllCategoriesScreen.routeName,
         path: "/${AllCategoriesScreen.routeName}",
@@ -148,14 +135,30 @@ class GoRouterConfig {
         routes: const <RouteBase>[],
       ),
       GoRoute(
+        name: ReviewsForProductScreen.routeName,
+        path: "/${ReviewsForProductScreen.routeName}",
+        pageBuilder: (_, GoRouterState state) {
+          final int productId = state.extra as int;
+         // final PopularProductsModel model = state.extra as PopularProductsModel;
+          return getCustomTransitionPage(
+            state: state,
+            child:  ReviewsForProductScreen(
+             productId: productId,
+            ),
+          );
+        },
+        routes: const <RouteBase>[],
+      ),
+      GoRoute(
         name: ProductDetailsScreen.routeName,
         path: "/${ProductDetailsScreen.routeName}",
         pageBuilder: (_, GoRouterState state) {
-          final PopularProductsModel model = state.extra as PopularProductsModel;
+          final int productId = state.extra as int;
+         // final PopularProductsModel model = state.extra as PopularProductsModel;
           return getCustomTransitionPage(
             state: state,
             child:  ProductDetailsScreen(
-              popularProductsModel: model,
+              productId: productId,
 
             ),
           );

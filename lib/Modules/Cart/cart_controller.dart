@@ -62,10 +62,7 @@ class CartController extends ControllerMVC {
     });
     getCartList(_pagingController!.firstPageKey);
   }
-  Future<void> loadCart() async {
-    cartProducts = await SharedPref.getCart();
-    notifyListeners();
-  }
+
 
   Future<void> getCartList(int pageKey) async {
     if (loading) return; // Avoid duplicate calls
@@ -96,7 +93,10 @@ class CartController extends ControllerMVC {
       },
     );
   }
-
+  Future<void> loadCart() async {
+    cartProducts = await SharedPref.getCart();
+    notifyListeners();
+  }
   Future<void> clearCart() async {
     cartProducts.clear();
     await SharedPref.clearCart();

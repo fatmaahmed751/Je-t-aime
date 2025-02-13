@@ -43,11 +43,13 @@ class RateProductController extends ControllerMVC {
     super.dispose();
   }
 
-  postRatedSuccessfully(
-      {required ProductDetailsModel product, required BuildContext context}) async {
-    print("🔍 Debug: Product ID Before API Call: ${product.id}");
+  postRatedSuccessfully({
+    //required ProductDetailsModel product,
+    required int productId,
+        required BuildContext context}) async {
+    print("🔍 Debug: Product ID Before API Call: $productId");
 
-    if (product.id == null || product.id == 0) {
+    if (productId == 0) {
       print("⚠️ Error: Product ID is null or 0!");
       ToastHelper.showError(message: "Invalid Product ID");
       return;
@@ -56,17 +58,17 @@ class RateProductController extends ControllerMVC {
     setState(() {
       loading = true;
     });
-    print("Product ID: ${product.id}");
+    print("Product ID: ${productId}");
 
     final result = await RateProductDataHandler.rateProduct(
-        productId: product.id ?? 0,
+        productId: productId,
         rate: productRating.toInt(),
         comment: messageController.text);
     result.fold((l) {
       setState(() {
         loading = false;
       });
-      print("Sending rating for Product ID: ${product.id}");
+      print("Sending rating for Product ID: ${productId}");
 
       ToastHelper.showError(message: l.errorModel.statusMessage);
     }, (r) async {

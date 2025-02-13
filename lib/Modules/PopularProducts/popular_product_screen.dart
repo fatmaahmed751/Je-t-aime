@@ -92,10 +92,10 @@ class PopularProductsScreenState extends StateMVC<PopularProductsScreen> {
                             childAspectRatio: 0.8, // Adjust as needed
                           ),
                           builderDelegate: PagedChildBuilderDelegate<PopularProductsModel>(
-                            itemBuilder: (context, category, index) {
+                            itemBuilder: (context, item, index) {
                               return CustomProductContainerWidget(
                                 addToCart: (){},
-                                  productsModel: category,
+                                  productsModel: item,
                                 onFavoritePressed: (){},
                                 // productsModel: PopularProductsModel(),
                               );

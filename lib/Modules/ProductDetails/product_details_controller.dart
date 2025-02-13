@@ -111,6 +111,10 @@ class ProductDetailsController extends ControllerMVC {
       loading = false;
     });
   }
+
+
+
+
   Future<void> fetchPage(int pageKey) async {
     try {
       // Fetch data from your API or data source
@@ -138,6 +142,9 @@ class ProductDetailsController extends ControllerMVC {
     );
     return [];
         }
+
+
+
   onPageChange(int index) {
     setState(() {
       activeIndex = index;
@@ -182,6 +189,8 @@ class ProductDetailsController extends ControllerMVC {
       ),
     );
   }
+
+
   Future<void> addProductToCart({
     required ProductDetailsModel model,
     required BuildContext context,
@@ -240,61 +249,8 @@ class ProductDetailsController extends ControllerMVC {
       loading = false;
     });
   }
-  // addProductToCart({required ProductDetailsModel model,required BuildContext context})async{
-  //   setState(() {
-  //     loading = true;
-  //   });
-  //
-  //   print("Product ID: ${model.id}, Quantity: $counter");
-  //   final result = await CartDataHandler.addToCart(
-  //       productId: model.id??0,
-  //       quantity: counter);
-  //   result.fold((l) {
-  //     ToastHelper.showError(message: l.toString());
-  //   }, (r)async {
-  //     final updatedCartResult = await CartDataHandler.listOfCartProducts(
-  //         0, 10);
-  //
-  //     updatedCartResult.fold((l) {
-  //       // Handle error
-  //       ToastHelper.showError(message: l.toString());
-  //     }, (updatedCart) {
-  //       // Update the local cartProducts list with the new data
-  //       setState(() {
-  //         cartProducts = updatedCart;
-  //       });
-  //
-  //       // cartProducts.add(CartModel(
-  //       //   id: model.id,
-  //       //   // Add other necessary fields from the model
-  //       // ));
-  //       ToastHelper.showSuccess(
-  //         context: context,
-  //         message: Strings.addToCartSuccess.tr,
-  //         icon: SvgPicture.asset(
-  //           Assets.imagesSubmit,
-  //           width: 60.w,
-  //           height: 50.h,
-  //           fit: BoxFit.cover,
-  //         ),
-  //         backgroundColor:
-  //         ThemeClass
-  //             .of(context)
-  //             .primaryColor,
-  //       );
-  //       GoRouter.of(context).pushNamed(CartScreen.routeName,);
-  //       //  extra:cartProducts);
-  //       //context.pop();
-  //       print("addddddd");
-  //     });
-  //     setState(() {
-  //       loading = false;
-  //     });
-  //   });
-  // }
 
-
-  Future writeRateForProduct(BuildContext context) {
+  Future writeRateForProduct(BuildContext context,int productId) {
     return showModalBottomSheet(
       context: context,
       // isScrollControlled: true,
@@ -302,7 +258,7 @@ class ProductDetailsController extends ControllerMVC {
         borderRadius: BorderRadius.vertical(top: Radius.circular(30.r)),
       ),
       builder: (context) =>  RateProductScreen(
-          product:productDetailsModel!
+          productId:productId
       ),
     );
   }

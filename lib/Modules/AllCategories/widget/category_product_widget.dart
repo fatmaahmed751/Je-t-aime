@@ -26,7 +26,7 @@ class CustomCategoryProductContainerWidget extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         context.pushNamed(ProductDetailsScreen.routeName,
-        extra:categoryProductModel );
+        extra:categoryProductModel.id );
       },
       child: Container(
         constraints: BoxConstraints(
