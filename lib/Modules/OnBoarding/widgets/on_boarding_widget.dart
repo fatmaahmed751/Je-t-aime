@@ -6,6 +6,7 @@ import 'package:je_t_aime/Modules/ForgetPassword/forget_password_screen.dart';
 import '../../../../Utilities/text_style_helper.dart';
 import '../../../../Utilities/theme_helper.dart';
 import '../../../Models/on_boarding_model.dart';
+import "../../../Utilities/shared_preferences.dart";
 import '../../Home/home_screen.dart';
 import '../../Login/login_screen.dart';
 import '../onboarding_controller.dart';
@@ -27,6 +28,9 @@ class OnBoardingWidget extends StatelessWidget {
             child: TextButton(
                 onPressed: () {
                   GoRouter.of(context).goNamed(HomeScreen.routeName);
+                  if(!SharedPref.isLogin()){
+                    SharedPref.prefs.clear();
+                  }
                 },
                 child: Text(
                   model.skipText,
@@ -40,7 +44,7 @@ class OnBoardingWidget extends StatelessWidget {
           child: Image.asset(
             model.imageName,
             width: model.id == 0 ? 212.w : 382.w,
-            height: model.id == 0 ? 268.h : 460.h,
+            height: model.id == 0 ? 268.h : 455.h,
           ),
         ),
         Gap(model.id == 0 ? 90.h : 30.h),

@@ -21,32 +21,13 @@ class SplashController extends ControllerMVC {
   SplashController._();
 
 
-  void showNoInternetDialog() {
-    showDialog(
-      context: currentContext_!,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: Text("No Internet Connection"),
-          content: Text("Please check your internet connection and try again."),
-          actions: <Widget>[
-            TextButton(
-              child: Text("OK"),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-            ),
-          ],
-        );
-      },
-    );
-  }
 
   Future init(BuildContext context) async {
     // await checkInternetConnection();
     await SplashDataHandler.getCurrentUser();
     await Future.delayed(const Duration(seconds: 2));
     if (context.mounted) {
-      GoRouter.of(context).goNamed(HomeScreen.routeName);
+      GoRouter.of(context).goNamed(OnBoardingScreen.routeName);
     }
     if (SharedPref.isLogin()) {
       // Handle logged-in state

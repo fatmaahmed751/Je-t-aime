@@ -30,7 +30,7 @@ class SharedPref {
 
   static bool isLogin() => prefs.getString(_currentUserKey) != null;
 
-  static Future<void> logout() async => await prefs.remove(_currentUserKey);
+
 
   static ThemeModel? getTheme() {
     if (prefs.getString(_themeKey) == null) return null;
@@ -41,6 +41,10 @@ class SharedPref {
     await prefs.setString(_themeKey, json.encode(theme.toJson()));
   }
   //My code
+  static Future<void> logout() async {
+    await prefs.remove("userToken");
+    await prefs.remove(_currentUserKey);
+  }
 
   static Future<void> saveCart(List<CartModel> cartProducts) async {
     final cartJson = cartProducts.map((item) => item.toJson()).toList();
