@@ -1,5 +1,5 @@
 import "package:dartz/dartz.dart";
-import "package:je_t_aime/Models/popular_products_model.dart";
+import "../../Models/popular_products_model.dart";
 import "../../Utilities/api_end_point.dart";
 import "../../core/API/generic_request.dart";
 import "../../core/API/request_method.dart";

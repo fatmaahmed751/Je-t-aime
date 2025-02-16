@@ -6,6 +6,9 @@ import 'dart:convert';
 
 import "package:je_t_aime/Models/review_model.dart";
 
+
+
+
 ProductDetailsModel productDetailsModelFromJson(String str) => ProductDetailsModel.fromJson(json.decode(str));
 
 String productDetailsModelToJson(ProductDetailsModel data) => json.encode(data.toJson());

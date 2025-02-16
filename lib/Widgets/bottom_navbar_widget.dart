@@ -2,17 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
-import 'package:je_t_aime/Modules/Favorite/favorite_screen.dart';
-import 'package:je_t_aime/Modules/Home/home_screen.dart';
-import 'package:je_t_aime/Modules/UserProfile/user_profile_screen.dart';
-import 'package:je_t_aime/core/Language/app_languages.dart';
-import 'package:je_t_aime/core/Language/locales.dart';
+import "package:je_t_aime/core/Language/locales.dart";
 import 'package:mvc_pattern/mvc_pattern.dart';
 import 'package:provider/provider.dart';
 
+import "../Modules/Favorite/favorite_screen.dart";
+import "../Modules/Home/home_screen.dart";
 import '../Modules/Notifications/notifications_screen.dart';
+import "../Modules/UserProfile/user_profile_screen.dart";
 import '../Utilities/strings.dart';
 import '../Utilities/theme_helper.dart';
+import "../core/Language/app_languages.dart";
 import '../generated/assets.dart';
 
 class BottomNavBarWidget extends StatefulWidget {

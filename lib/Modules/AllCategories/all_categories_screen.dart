@@ -3,12 +3,11 @@ import "package:flutter_screenutil/flutter_screenutil.dart";
 import "package:flutter_svg/svg.dart";
 import "package:gap/gap.dart";
 import "package:infinite_scroll_pagination/infinite_scroll_pagination.dart";
-import "package:je_t_aime/Models/category_model.dart";
-import "package:je_t_aime/Models/popular_products_model.dart";
 import "package:je_t_aime/Modules/AllCategories/widget/category_product_widget.dart";
 import "package:mvc_pattern/mvc_pattern.dart";
 
 import "../../Models/categories_product_model.dart";
+import "../../Models/category_model.dart";
 import "../../Utilities/theme_helper.dart";
 import "../../Widgets/custom_app_bar_widget.dart";
 import "../../Widgets/loading_screen.dart";

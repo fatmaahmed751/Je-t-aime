@@ -4,8 +4,8 @@
 
 import 'dart:convert';
 
-import 'package:je_t_aime/Models/popular_products_model.dart';
-import 'package:je_t_aime/Models/slider_model.dart';
+import "package:je_t_aime/Models/popular_products_model.dart";
+import "package:je_t_aime/Models/slider_model.dart";
 
 import 'category_model.dart';
 

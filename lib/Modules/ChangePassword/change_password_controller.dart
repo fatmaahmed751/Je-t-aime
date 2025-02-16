@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:je_t_aime/Widgets/custom_bottom_sheet_widget.dart';
-import 'package:je_t_aime/core/Language/locales.dart';
+import "package:je_t_aime/core/Language/locales.dart";
 import 'package:mvc_pattern/mvc_pattern.dart';
 import '../../Utilities/strings.dart';
+import "../../Widgets/custom_bottom_sheet_widget.dart";
 import '../../generated/assets.dart';
 
 class ChangePasswordController extends ControllerMVC {

@@ -4,7 +4,6 @@ import "package:flutter_svg/svg.dart";
 import "package:gap/gap.dart";
 import "package:go_router/go_router.dart";
 import "package:infinite_scroll_pagination/infinite_scroll_pagination.dart";
-import "package:je_t_aime/Modules/Shipping/shipping_screen.dart";
 import "package:je_t_aime/core/Language/locales.dart";
 import "package:mvc_pattern/mvc_pattern.dart";
 import "../../Models/cart_item_model.dart";
@@ -16,6 +15,7 @@ import "../../Widgets/custom_button_widget.dart";
 import "../../Widgets/empty_cart_widget.dart";
 import "../../Widgets/loading_screen.dart";
 import "../../generated/assets.dart";
+import "../Shipping/shipping_screen.dart";
 import "cart_controller.dart";
 
 class CartScreen extends StatefulWidget {

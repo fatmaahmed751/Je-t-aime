@@ -3,17 +3,16 @@ import "package:flutter/material.dart";
 import "package:flutter_screenutil/flutter_screenutil.dart";
 import "package:go_router/go_router.dart";
 import "package:infinite_scroll_pagination/infinite_scroll_pagination.dart";
-import "package:je_t_aime/Models/cart_item_model.dart";
-import "package:je_t_aime/Models/cart_item_model.dart";
-import "package:je_t_aime/Modules/Cart/cart_data_handler.dart";
 import "package:je_t_aime/core/Language/locales.dart";
 import "package:mvc_pattern/mvc_pattern.dart";
 import "package:shared_preferences/shared_preferences.dart";
+import "../../Models/cart_item_model.dart";
 import "../../Models/user_model.dart";
 import "../../Utilities/router_config.dart";
 import "../../Utilities/shared_preferences.dart";
 import "../../Utilities/strings.dart";
 import "alert_delete_item_widget.dart";
+import "cart_data_handler.dart";
 class CartController extends ControllerMVC {
   // singleton
   factory CartController() {
