@@ -48,9 +48,9 @@ android {
     defaultConfig {
         applicationId "com.example.jetaime"
         minSdkVersion 21
-        targetSdkVersion 34
-        versionCode flutterVersionCode.toInteger()
-        versionName flutterVersionName
+        targetSdkVersion 30
+        versionCode 1
+        versionName "1.0"
         multiDexEnabled true
     }
 

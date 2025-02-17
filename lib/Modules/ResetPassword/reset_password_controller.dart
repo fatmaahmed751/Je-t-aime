@@ -44,7 +44,7 @@ class ResetPasswordController extends ControllerMVC {
     confirmNewPasswordController = TextEditingController();
     pinController = TextEditingController();
     focusNode = FocusNode();
-    smsRetriever = SmsRetrieverImpl(SmartAuth.instance);
+   // smsRetriever = SmsRetrieverImpl(SmartAuth.instance);
     userId = SharedPref.getCurrentUser()?.user?.id;
     String? email;
   }

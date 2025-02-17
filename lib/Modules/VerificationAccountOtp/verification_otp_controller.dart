@@ -27,7 +27,7 @@ class VerificationOtpController extends ControllerMVC {
     // Initialize fields in the constructor
     pinController = TextEditingController();
     focusNode = FocusNode();
-    smsRetriever = SmsRetrieverImpl(SmartAuth.instance);
+   // smsRetriever = SmsRetriever();
   }
 
   bool loading = false, autoValidate = false;
