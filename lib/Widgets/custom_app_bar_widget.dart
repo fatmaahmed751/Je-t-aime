@@ -120,9 +120,7 @@ class CustomAppBarWidget extends StatelessWidget
           function: onPressed,
           controller: TextEditingController(),
         );
-      default:
-        return Container();
-    }
+      }
   }
 
 //
@@ -232,19 +230,6 @@ class MainAppBarWidget extends StatelessWidget {
           ),
         ],
       ),
-      // child: Row(
-      //   mainAxisAlignment: MainAxisAlignment.start,
-      //   children: [
-      //     //const SizedBox(width: 15,),
-      //
-      //     CustomAppBarMainTextWidget(
-      //         text: Strings.hello.tr),
-      //     SvgPicture.asset(Assets.imagesSmillingFace),
-      //     const Spacer(),
-      //
-      //
-      //   ],
-      // ),
     );
   }
 }

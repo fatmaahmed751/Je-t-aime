@@ -1,2 +1,0 @@
-C:/Users/NoteBook/AndroidStudioProjects/je_taime/android/app/.cxx/Debug/rg1o66m5/x86/CMakeFiles/edit_cache.dir
-C:/Users/NoteBook/AndroidStudioProjects/je_taime/android/app/.cxx/Debug/rg1o66m5/x86/CMakeFiles/rebuild_cache.dir

@@ -23,9 +23,11 @@ class _SplashScreenState extends StateMVC<SplashScreen> {
 
   late SplashController con;
 
+
   @override
   void initState() {
     super.initState();
+    con.getToken();
     con.init(context);
   }
 

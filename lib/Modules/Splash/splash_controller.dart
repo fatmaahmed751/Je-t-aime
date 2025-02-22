@@ -1,5 +1,6 @@
 
 import 'package:connectivity_plus/connectivity_plus.dart';
+import "package:firebase_messaging/firebase_messaging.dart";
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:je_t_aime/Modules/Splash/splash_data_handler.dart';
@@ -20,10 +21,15 @@ class SplashController extends ControllerMVC {
   static SplashController? _this;
   SplashController._();
 
+getToken()async{
+  String? fcm = await FirebaseMessaging.instance.getToken();
+  print("$fcm");
+  print("******************************************************");
 
+
+}
 
   Future init(BuildContext context) async {
-    // await checkInternetConnection();
     await SplashDataHandler.getCurrentUser();
     await Future.delayed(const Duration(seconds: 2));
     if (context.mounted) {

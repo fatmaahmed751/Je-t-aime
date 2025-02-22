@@ -194,40 +194,65 @@ class _VerificationOtpScreenState extends StateMVC<VerificationOtpScreen> {
     ));
   }
 }
-
 class SmsRetrieverImpl implements SmsRetriever {
   const SmsRetrieverImpl(this.smartAuth);
 
   final SmartAuth smartAuth;
 
-  // @override
-  // Future<void> dispose() {
-  //   return smartAuth.removeSmsRetrieverApiListener();
-  // }
+  @override
+  Future<void> dispose() {
+    return smartAuth.removeSmsListener();
+  }
 
-  // @override
-  // Future<String?> getSmsCode() async {
-  //   final signature = await smartAuth.getAppSignature();
-  //   debugPrint('App Signature: $signature');
-  //   final res = await smartAuth.getSmsWithRetrieverApi();
-  //   if (res.hasData && res.requireData.code != null) {
-  //     return res.requireData.code;
-  //   }
-  //   return null;
-  // }
+  @override
+  Future<String?> getSmsCode() async {
+    final signature = await smartAuth.getAppSignature();
+    debugPrint('App Signature: $signature');
+    final res = await smartAuth.getSmsCode(
+      useUserConsentApi: true,
+    );
+    if (res.succeed && res.codeFound) {
+      return res.code!;
+    }
+    return null;
+  }
 
   @override
   bool get listenForMultipleSms => false;
-
-  @override
-  Future<void> dispose() {
-    // TODO: implement dispose
-    throw UnimplementedError();
-  }
-
-  @override
-  Future<String?> getSmsCode() {
-    // TODO: implement getSmsCode
-    throw UnimplementedError();
-  }
 }
+// class SmsRetrieverImpl implements SmsRetriever {
+//   const SmsRetrieverImpl(this.smartAuth);
+//
+//   final SmartAuth smartAuth;
+//
+//   // @override
+//   // Future<void> dispose() {
+//   //   return smartAuth.removeSmsRetrieverApiListener();
+//   // }
+//
+//   // @override
+//   // Future<String?> getSmsCode() async {
+//   //   final signature = await smartAuth.getAppSignature();
+//   //   debugPrint('App Signature: $signature');
+//   //   final res = await smartAuth.getSmsWithRetrieverApi();
+//   //   if (res.hasData && res.requireData.code != null) {
+//   //     return res.requireData.code;
+//   //   }
+//   //   return null;
+//   // }
+//
+//   @override
+//   bool get listenForMultipleSms => false;
+//
+//   @override
+//   Future<void> dispose() {
+//     // TODO: implement dispose
+//     throw UnimplementedError();
+//   }
+//
+//   @override
+//   Future<String?> getSmsCode() {
+//     // TODO: implement getSmsCode
+//     throw UnimplementedError();
+//   }
+// }

@@ -207,15 +207,31 @@ class SmsRetrieverImpl implements SmsRetriever {
     return smartAuth.removeSmsListener();
   }
 
+//   @override
+//   Future<String?> getSmsCode() async {
+//     final signature = await smartAuth.getSmsCode();
+//     debugPrint('App Signature: $signature');
+//     final res = await smartAuth.getSmsCode();
+//     if (res.succeed) {
+//       debugPrint('SMS: ${res.code}');
+//     } else {
+//       debugPrint('SMS Failure:');
+//     }
+//     return null;
+//   }
+//
+//   @override
+//   bool get listenForMultipleSms => false;
+// }
   @override
   Future<String?> getSmsCode() async {
-    final signature = await smartAuth.getSmsCode();
+    final signature = await smartAuth.getAppSignature();
     debugPrint('App Signature: $signature');
-    final res = await smartAuth.getSmsCode();
-    if (res.succeed) {
-      debugPrint('SMS: ${res.code}');
-    } else {
-      debugPrint('SMS Failure:');
+    final res = await smartAuth.getSmsCode(
+      useUserConsentApi: true,
+    );
+    if (res.succeed && res.codeFound) {
+      return res.code!;
     }
     return null;
   }

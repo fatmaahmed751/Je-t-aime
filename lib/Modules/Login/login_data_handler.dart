@@ -1,5 +1,7 @@
 import "Package:dartz/dartz.dart";
 
+import "package:firebase_messaging/firebase_messaging.dart";
+
 import "../../Models/user_model.dart";
 import "../../Utilities/api_end_point.dart";
 import "../../core/API/generic_request.dart";
@@ -16,6 +18,11 @@ class LoginDataHandler {
     required String password,
   }) async {
     try {
+        // String? fcm = await FirebaseMessaging.instance.getToken();
+        // print("$fcm");
+        // print("******************************************************");
+
+
       UserModel response = await GenericRequest<UserModel>(
         method: RequestApi.post(url: APIEndPoint.login, body: {
           "email": email,

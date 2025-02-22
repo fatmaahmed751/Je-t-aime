@@ -1,4 +1,6 @@
 import 'dart:io';
+import "package:firebase_core/firebase_core.dart";
+import "package:firebase_messaging/firebase_messaging.dart";
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -7,6 +9,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import "package:flutter_svg/svg.dart";
 import 'package:gap/gap.dart';
+import "package:je_t_aime/Utilities/fire_base_permissions.dart";
 import 'package:provider/provider.dart';
 import 'Utilities/git_it.dart';
 import 'Utilities/router_config.dart';
@@ -20,6 +23,7 @@ import 'core/Font/font_provider.dart';
 import 'core/Language/app_languages.dart';
 import 'core/Language/locales.dart';
 import 'core/Theme/theme_provider.dart';
+import "firebase_options.dart";
 import 'generated/assets.dart';
 
 class MyHttpOverrides extends HttpOverrides {
@@ -32,14 +36,23 @@ class MyHttpOverrides extends HttpOverrides {
 }
 
 Future<void> main() async {
+ SystemChrome.setSystemUIOverlayStyle(
+   SystemUiOverlayStyle(
+    statusBarColor: Colors.transparent,
+ ));
+SystemChrome.setEnabledSystemUIMode(
+    SystemUiMode.manual, overlays: [SystemUiOverlay.bottom]);
+ // SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
   WidgetsFlutterBinding.ensureInitialized();
-
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform,name: "Je-taime");
+ await FireBasePermission.myRequestPermission();
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
   ]);
 
   await GitIt.initGitIt();
+
   final ConnectivityService connectivityService = ConnectivityService();
   bool isConnected = await connectivityService.checkInternetConnection();
   print("Initial Connectivity Status: $isConnected");
@@ -59,17 +72,18 @@ Future<void> main() async {
       child: const ConnectivityWrapper(child: EntryPoint()),
     ),
   );
+
+
 }
-// child: StreamProvider<bool>(
-//   create: (_) => connectivityService.connectivityStream,
-//   initialData: true,
-//   child: const ConnectivityWrapper(child: EntryPoint()),
-// )));
+
 
 class EntryPoint extends StatelessWidget {
   const EntryPoint({Key? key}) : super(key: key);
+
+
   @override
   Widget build(BuildContext context) {
+ //   SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
     final appLan = Provider.of<AppLanguage>(context);
     final appTheme = Provider.of<ThemeProvider>(context);
     appLan.fetchLocale(context);
@@ -158,13 +172,6 @@ class ConnectivityWrapper extends StatelessWidget {
                   radius: 30.r,
                   title:  Strings.reload.tr,
                   onTap: () {
-                    // SharedPref.getCurrentUser()!
-                    //     .token!
-                    //     .isNotEmpty
-                    //     ? GoRouter.of(context)
-                    //     .pushNamed(PopularProductsScreen.routeName,)
-                    //     : GoRouter.of(context).pushNamed(
-                    //     RegisterScreen.routeName);
                   }),
               Gap(120.h)
           ]
