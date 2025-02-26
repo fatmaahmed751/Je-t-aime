@@ -3,10 +3,12 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
+import "package:je_t_aime/Models/shipping_model.dart";
 import 'package:je_t_aime/Modules/Payment/payment_screen.dart';
 import 'package:je_t_aime/Modules/Shipping/shipping_controller.dart';
 import 'package:je_t_aime/core/Language/locales.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
+import "../../Models/cart_item_model.dart";
 import '../../Utilities/strings.dart';
 import '../../Utilities/text_style_helper.dart';
 import '../../Utilities/theme_helper.dart';
@@ -21,10 +23,11 @@ import '../../generated/assets.dart';
 
 class ShippingScreen extends StatefulWidget {
   static const routeName = "ShippingScreen";
-  // final double subtotal;
+  final double subtotal;
+  final List<CartModel> products;
 
-  ShippingScreen({
-    super.key,
+  const ShippingScreen({
+    super.key, required this.subtotal, required this.products,
   });
 
   @override
@@ -220,7 +223,7 @@ class _ShippingScreenState extends StateMVC<ShippingScreen> {
                               ),
                               const Spacer(),
                               Text(
-                                "200 ${Strings.jod.tr}",
+                                "${widget.subtotal} ${Strings.jod.tr}",
                                 style: TextStyleHelper.of(context)
                                     .h_16
                                     .copyWith(
@@ -267,7 +270,7 @@ class _ShippingScreenState extends StateMVC<ShippingScreen> {
                             ),
                             const Spacer(),
                             Text(
-                              "220 ${Strings.jod.tr} ",
+                            "${widget.subtotal+(20)} ${Strings.jod.tr} ",
                               style: TextStyleHelper.of(context).b_16.copyWith(
                                     color: ThemeClass.of(context)
                                         .secondaryBlackColor,
@@ -276,7 +279,7 @@ class _ShippingScreenState extends StateMVC<ShippingScreen> {
                             ),
                             Gap(2.w),
                             Text(
-                              "222 ${Strings.jod.tr}",
+                              " ${widget.subtotal} ${Strings.jod.tr}",
                               style: TextStyleHelper.of(context).h_16.copyWith(
                                   color: ThemeClass.of(context).mainBlack),
                             ),
@@ -288,13 +291,21 @@ class _ShippingScreenState extends StateMVC<ShippingScreen> {
                   Gap(20.h),
                   InkWell(
                     onTap: () {
-                      context.pushNamed(PaymentScreen.routeName);
-                      // if (_formKey.currentState!.validate()) {
-                      // } else {
-                      //   setState(() {
-                      //     con.autoValidate = true;
-                      //   });
-                      // }
+                     if (_formKey.currentState!.validate()) {
+                       context.pushNamed(PaymentScreen.routeName,
+                           extra:ShippingModel(
+                           name: con.nameController.text,
+                           phone: con.phoneController.text,
+                           address: con.addressController.text,
+
+                     // products: widget.products,
+                      ));
+
+                      } else {
+                        setState(() {
+                          con.autoValidate = true;
+                        });
+                      }
                     },
                     child: Padding(
                       padding: EdgeInsetsDirectional.symmetric(vertical: 15.h),

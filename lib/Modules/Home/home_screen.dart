@@ -56,7 +56,12 @@ class _HomeScreenState extends StateMVC<HomeScreen> {
   int selected = 0;
   @override
   Widget build(BuildContext context) {
-    // print(SharedPref.getCurrentUser()?.token);
+    String? token = SharedPref.getCurrentUser()?.token; // Get saved token
+
+    if (token == null || token.isEmpty) {
+      print("⚠️ Error: Missing Authentication Token");
+    }
+    print(token);
     return Scaffold(
       appBar: PreferredSize(
           preferredSize: Size(double.infinity, 180.h),

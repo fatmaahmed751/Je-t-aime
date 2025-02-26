@@ -13,12 +13,17 @@ class APIEndPoint {
   static const String newPassword = "${_baseURL}new-password";
   static const String postReview = "${_baseURL}store-review";
   static const String categories = "${_baseURL}categories";
+  static const String getOrdersList = "${_baseURL}orders";
   static const String addToCart = "${_baseURL}store-cart";
   static const String getCartList = "${_baseURL}carts";
   static const String getPopularProduct = "${_baseURL}get-product-poplar";
   static const String getFavorites = "${_baseURL}favorite";
   static const String addFavorite = "${_baseURL}store-favorite";
+  static const String shippingForOrder = "${_baseURL}shipping-details";
+  static const String getShippingDetails = "${_baseURL}get-shipping-details";
+  static String getOrderDetails(int orderId) => "${_baseURL}order/$orderId";
   static String getProductDetails(int productId) => "${_baseURL}show/$productId";
+  static String deleteProductFromCart(int productId) => "${_baseURL}delete-cart/$productId";
   static  String getCategoriesProduct(int categoryProductId) => "${_baseURL}get-product-by-category/$categoryProductId";
   static String getReviews(int productId) =>
       "${_baseURL}get-reviews/$productId";

@@ -3,19 +3,21 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:je_t_aime/core/Language/locales.dart';
 
+import "../../../Models/order_model.dart";
 import '../../../Utilities/format_date_helper.dart';
 import '../../../Utilities/strings.dart';
 import '../../../Utilities/text_style_helper.dart';
 import '../../../Utilities/theme_helper.dart';
 
 class DetailsOfOrder extends StatelessWidget {
+  final OrderModel orderModel;
   const DetailsOfOrder({
-    super.key,
+    super.key, required this.orderModel,
   });
 
   @override
   Widget build(BuildContext context) {
-    // print(orderModel.toString());
+   print(orderModel.toString());
     return GestureDetector(
       onTap: () {
         //  context.pushNamed(TrackOrderScreen.routeName,extra:orderModel);
@@ -51,7 +53,7 @@ class DetailsOfOrder extends StatelessWidget {
                         .copyWith(color: ThemeClass.of(context).mainBlack)),
                 const Spacer(),
                 Text(
-                  "#11111",
+                  orderModel.id.toString()??"",
                   style: TextStyleHelper.of(context)
                       .h_16
                       .copyWith(color: ThemeClass.of(context).mainBlack),
@@ -69,7 +71,7 @@ class DetailsOfOrder extends StatelessWidget {
                 ),
                 const Spacer(),
                 Text(
-                  "Visa",
+                  orderModel.paymentMethod??"",
                   style: TextStyleHelper.of(context)
                       .h_16
                       .copyWith(color: ThemeClass.of(context).mainBlack),
@@ -86,7 +88,7 @@ class DetailsOfOrder extends StatelessWidget {
               ),
               const Spacer(),
               Text(
-                FormatDateHelper.formatWalletDate.format(DateTime.now()),
+                FormatDateHelper.formatWalletDate.format(orderModel.orderDate ?? DateTime.now()),
                 style: TextStyleHelper.of(context)
                     .h_16
                     .copyWith(color: ThemeClass.of(context).mainBlack),

@@ -36,12 +36,12 @@ class MyHttpOverrides extends HttpOverrides {
 }
 
 Future<void> main() async {
- SystemChrome.setSystemUIOverlayStyle(
-   SystemUiOverlayStyle(
-    statusBarColor: Colors.transparent,
- ));
-SystemChrome.setEnabledSystemUIMode(
-    SystemUiMode.manual, overlays: [SystemUiOverlay.bottom]);
+ // SystemChrome.setSystemUIOverlayStyle(
+ //   SystemUiOverlayStyle(
+ //    statusBarColor: Colors.transparent,
+ // ));
+// SystemChrome.setEnabledSystemUIMode(
+//     SystemUiMode.manual, overlays: [SystemUiOverlay.bottom]);
  // SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform,name: "Je-taime");

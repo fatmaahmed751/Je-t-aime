@@ -7,6 +7,7 @@ import "package:infinite_scroll_pagination/infinite_scroll_pagination.dart";
 import "package:je_t_aime/core/Language/locales.dart";
 import "package:mvc_pattern/mvc_pattern.dart";
 import "../../Models/cart_item_model.dart";
+import "../../Utilities/shared_preferences.dart";
 import "../../Utilities/strings.dart";
 import "../../Utilities/text_style_helper.dart";
 import "../../Utilities/theme_helper.dart";
@@ -42,7 +43,8 @@ class _CartScreenState extends StateMVC<CartScreen> {
   void initState() {
     super.initState();
     _pagingController = PagingController(firstPageKey: 0);
-    con.init(_pagingController); // Pass the PagingController to the controller
+    con.init(_pagingController);
+   // con.loadCart();// Pass the PagingController to the controller
   }
 
   @override
@@ -61,116 +63,106 @@ class _CartScreenState extends StateMVC<CartScreen> {
           icon: "",
         ),
       ),
-      body: LoadingScreen(
-        loading: con.loading,
-        child: con.pagingController.itemList == null
-            ? const Center(child: CircularProgressIndicator())
-            : _pagingController.itemList!.isEmpty
-              ? const EmptyCartWidget()
-            :Padding(
-                padding: EdgeInsetsDirectional.symmetric(horizontal: 24.w),
-                child: Stack(
-                  alignment: Alignment.bottomCenter,
-                  children: [
-                    ListView(
-                      physics: const BouncingScrollPhysics(),
-                      // alignment: Alignment.bottomCenter,
-                      children: [
-                        SizedBox(
-                          height: MediaQuery.sizeOf(context).height,
-                          child: PagedListView<int, CartModel>(
-                            physics: const NeverScrollableScrollPhysics(),
-                            pagingController: con.pagingController,
-                            builderDelegate:
-                                PagedChildBuilderDelegate<CartModel>(
-                              itemBuilder: (context, item, index) {
-                                // print(
-                                //     "Building Item: ${item.title}"); // Debug print
-                                return ProductItem(
-                                  cartModel: item,
-                                  onRemoveWarning: () {
-                                    con.deleteItemFromCart(context);
-                                  },
-                                  decrementCounter: () {
-                                          setState(() {
-                                            con.decrementCounter(
-                                                item); // Pass the specific cart item
-                                          });
-
-                                  },
-                                  incrementCounter: () {
-                                    setState(() {
-                                      con.incrementCounter(
-                                          item); // Pass the specific cart item
-                                    });
-                                  },
-                                  counter: item.count??1,
-                                );
-                              },
-                              firstPageProgressIndicatorBuilder: (context) {
-                                return const Center(
-                                    child: CircularProgressIndicator());
-                              },
-                              newPageProgressIndicatorBuilder: (context) {
-                                return const Center(
-                                    child: CircularProgressIndicator());
-                              },
-                              noItemsFoundIndicatorBuilder: (context) {
-                                return const Center(
-                                    child: Text("No items found"));
-                              },
-                              noMoreItemsIndicatorBuilder: (context) {
-                                return const Center(
-                                    child: Text("No more products"));
-                              },
-                            ),
-                          ),
-                        ),
-                        Gap(150.h),
-                      ],
-                    ),
-                    Padding(
-                      padding: EdgeInsetsDirectional.symmetric(vertical: 20.h),
-                      child: Row(
+      body: SafeArea(
+        child: LoadingScreen(
+          loading: con.loading,
+          child: con.pagingController.itemList == null
+              ? const Center(child: CircularProgressIndicator())
+              : _pagingController.itemList!.isEmpty
+                ? const EmptyCartWidget()
+              :Padding(
+                  padding: EdgeInsetsDirectional.symmetric(horizontal: 24.w),
+                  child: Stack(
+                    alignment: Alignment.bottomCenter,
+                    children: [
+                      ListView(
+                        physics: const BouncingScrollPhysics(),
+                        // alignment: Alignment.bottomCenter,
                         children: [
-                          Container(
-                            width: 90.w,
-                            height: 54.h,
-                            decoration: BoxDecoration(
-                                color: ThemeClass.of(context).mainSecondary,
-                                borderRadius: BorderRadius.circular(30.r)),
-                            child: Center(
-                              child: Text(
-                                "${subtotal.toStringAsFixed(2)} ${Strings.jod.tr}",
-                                style: TextStyleHelper.of(context)
-                                    .b_14
-                                    .copyWith(
-                                        color:
-                                            ThemeClass.of(context).mainBlack),
+                          SizedBox(
+                            height: MediaQuery.sizeOf(context).height,
+                            child: PagedListView<int, CartModel>(
+                              physics: const NeverScrollableScrollPhysics(),
+                              pagingController: con.pagingController,
+                              builderDelegate:
+                                  PagedChildBuilderDelegate<CartModel>(
+                                itemBuilder: (context, item, index) {
+                                  // print(
+                                  //     "Building Item: ${item.title}"); // Debug print
+                                  return ProductItem(
+                                    cartModel: item,
+                                    onRemoveWarning: () {
+                                      con.deleteItemFromCart(context,item.id??0);
+                                    },
+                                    decrementCounter: () {
+                                            setState(() {
+                                              con.decrementCounter(
+                                                  item); // Pass the specific cart item
+                                            });
+
+                                    },
+                                    incrementCounter: () {
+                                      setState(() {
+                                        con.incrementCounter(
+                                            item); // Pass the specific cart item
+                                      });
+                                    },
+                                    counter: item.count??1,
+                                  );
+                                },
+                                firstPageProgressIndicatorBuilder: (context) {
+                                  return const Center(
+                                      child: CircularProgressIndicator());
+                                },
+                                newPageProgressIndicatorBuilder: (context) {
+                                  return const Center(
+                                      child: CircularProgressIndicator());
+                                },
+                                noItemsFoundIndicatorBuilder: (context) {
+                                  return const Center(
+                                      child: Text("No items found"));
+                                },
+                                noMoreItemsIndicatorBuilder: (context) {
+                                  return const Center(
+                                      child: Text("No more products"));
+                                },
                               ),
                             ),
                           ),
-                          Gap(6.w),
-                          InkWell(
-                            onTap: () {
-                              // // SharedPref.saveObjectList(list: []);
-                              //  SharedPref.saveObjectList(list: con.fromShared??[]);
-                              //  context.pushNamed(
-                              //    ShippingScreen.routeName,
-                              //      extra: {
-                              //        'subtotal': con.subtotal,
-                              //        'products':con.fromShared,
-
-                              // queryParameters: {
-                              //   "subtotal":con.subtotal .toString(),
-                              //   "products":con.fromShared as List<BannerModel>
-                              // },
-                              // );
-                              //ShippingScreen.routeName,extra: con.subtotal
-                            },
-                            child: CustomButtonWidget.primary(
-                              onTap: () {
-                                context.pushNamed(ShippingScreen.routeName);
+                          Gap(150.h),
+                        ],
+                      ),
+                      Padding(
+                        padding: EdgeInsetsDirectional.symmetric(vertical: 20.h),
+                        child: Row(
+                          children: [
+                            Container(
+                              width: 90.w,
+                              height: 54.h,
+                              decoration: BoxDecoration(
+                                  color: ThemeClass.of(context).mainSecondary,
+                                  borderRadius: BorderRadius.circular(30.r)),
+                              child: Center(
+                                child: Text(
+                                  "${subtotal.toStringAsFixed(2)} ${Strings.jod.tr}",
+                                  style: TextStyleHelper.of(context)
+                                      .b_14
+                                      .copyWith(
+                                          color:
+                                              ThemeClass.of(context).mainBlack),
+                                ),
+                              ),
+                            ),
+                            Gap(6.w),
+                            CustomButtonWidget.primary(
+                              onTap: ()async {
+                              await SharedPref.saveCart(con.cartProducts);
+                                context.pushNamed(ShippingScreen.routeName,
+                                extra: {
+                              "subtotal": subtotal,
+                              "products":con.cartProducts,
+                              },
+                                );
                               },
                               width: 248.w,
                               height: 54.h,
@@ -181,14 +173,14 @@ class _CartScreenState extends StateMVC<CartScreen> {
                                     color: ThemeClass.of(context).background,
                                   ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
-                    ),
-                  ],
-                ),
-              )
+                    ],
+                  ),
+                )
 
+        ),
       ),
     );
   }

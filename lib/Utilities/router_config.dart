@@ -127,9 +127,13 @@ class GoRouterConfig {
         name: ShippingScreen.routeName,
         path: "/${ShippingScreen.routeName}",
         pageBuilder: (_, GoRouterState state) {
+          final args = state.extra as Map<String, dynamic>;
           return getCustomTransitionPage(
             state: state,
-            child: ShippingScreen(),
+            child: ShippingScreen(
+                subtotal: args['subtotal'] as double,
+
+                products:args['products'] as List<CartModel>)
           );
         },
         routes: const <RouteBase>[],

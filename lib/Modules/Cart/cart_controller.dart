@@ -1,6 +1,7 @@
 import "package:flutter/cupertino.dart";
 import "package:flutter/material.dart";
 import "package:flutter_screenutil/flutter_screenutil.dart";
+import "package:flutter_svg/svg.dart";
 import "package:go_router/go_router.dart";
 import "package:infinite_scroll_pagination/infinite_scroll_pagination.dart";
 import "package:je_t_aime/core/Language/locales.dart";
@@ -11,6 +12,9 @@ import "../../Models/user_model.dart";
 import "../../Utilities/router_config.dart";
 import "../../Utilities/shared_preferences.dart";
 import "../../Utilities/strings.dart";
+import "../../Utilities/theme_helper.dart";
+import "../../Widgets/toast_helper.dart";
+import "../../generated/assets.dart";
 import "alert_delete_item_widget.dart";
 import "cart_data_handler.dart";
 class CartController extends ControllerMVC {
@@ -26,7 +30,7 @@ class CartController extends ControllerMVC {
 
   String token = "";
   bool isLike = true;
-
+  int counter = 1;
   late TextEditingController couponController;
   static CartController? _this;
   static const pageSize = 10;
@@ -61,7 +65,6 @@ class CartController extends ControllerMVC {
     });
     getCartList(_pagingController!.firstPageKey);
   }
-
 
   Future<void> getCartList(int pageKey) async {
     if (loading) return; // Avoid duplicate calls
@@ -101,39 +104,6 @@ class CartController extends ControllerMVC {
     await SharedPref.clearCart();
     notifyListeners();
   }
-  // Future<void> getCartList(int pageKey) async {
-  //   if (loading) return; // Avoid duplicate calls
-  //   loading = true;
-  //   notifyListeners();
-  //   final newItems = await CartDataHandler.listOfCartProducts(
-  //     pageKey,
-  //     pageSize,
-  //   );
-  //   newItems.fold(
-  //         (failure) {
-  //       _pagingController!.error = failure;
-  //     },
-  //         (cartProducts) {
-  //       print("Parsed Cart Products: ${cartProducts.length}");
-  //       final isLastPage = cartProducts.length < pageSize;
-  //       if (isLastPage) {
-  //         _pagingController!.appendLastPage(cartProducts);
-  //       } else {
-  //         final nextPageKey = pageKey + cartProducts.length;
-  //         _pagingController!.appendPage(cartProducts, nextPageKey);
-  //       }
-  //       // Update the cartProducts list
-  //       this.cartProducts = _pagingController!.itemList ?? [];
-  //       print("PagingController Item List: ${_pagingController!.itemList}");
-  //       loading = false;
-  //       notifyListeners();
-  //     },
-  //   );
-  // }
-
-  // double calculateSubtotal() {
-  //   return cartProducts.fold(0, (sum, item) => sum + (item.price * item.quantity));
-  // }
 double calculateSubtotal(List<CartModel> cartProducts) {
     double subtotal = 0.0;
 
@@ -144,7 +114,7 @@ double calculateSubtotal(List<CartModel> cartProducts) {
     return subtotal;
   }
 
-  Future deleteItemFromCart(BuildContext context) {
+   deleteItemFromCart(BuildContext context,int productId) {
     return showModalBottomSheet(
       context: context,
       // isScrollControlled: true,
@@ -156,10 +126,45 @@ double calculateSubtotal(List<CartModel> cartProducts) {
             des: Strings.confirmDeleteItem.tr,
             mainText: Strings.deleteItem.tr,
             onButtonReject: currentContext_!.pop,
-            onButtonAccept: currentContext_!.pop,
+            onButtonAccept: () async {
+     await deleteProduct(context: context, productId: productId);
+     }
           ),
     );
   }
+
+  Future<void> deleteProduct({required int productId, required BuildContext context}) async {
+    final result = await CartDataHandler.deleteProduct(
+      productId: productId,
+      quantity: counter,
+    );
+    result.fold(
+          (l) {
+        ToastHelper.showError(message: l.errorModel.statusMessage);
+      },
+          (r) {
+        ToastHelper.showSuccess(
+          context: context,
+          message: Strings.delete.tr,
+          icon: SvgPicture.asset(
+            Assets.imagesSubmit,
+            width: 60.w,
+            height: 50.h,
+            fit: BoxFit.cover,
+          ),
+          backgroundColor: ThemeClass.of(context).primaryColor,
+        );
+        cartProducts.removeWhere((item) => item.id == productId);
+
+        // Save the updated list to SharedPreferences
+        SharedPref.saveCart(cartProducts);
+        notifyListeners();
+        context.pop();
+      },
+    );
+  }
+
+
   void incrementCounter(CartModel product) {
     product.count = (product.count ?? 0) + 1;  // Ensure count is not null
     updateSubtotal();

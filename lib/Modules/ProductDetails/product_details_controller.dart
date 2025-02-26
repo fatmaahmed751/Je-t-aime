@@ -22,7 +22,6 @@ import "../Cart/cart_data_handler.dart";
 import "../Home/Widgets/un_login_widget.dart";
 import "../Home/home_data_handler.dart";
 import "../PopularProducts/popular_products_data_handler.dart";
-import "../RateProducts/rate_product_data_handler.dart";
 import "../RateProducts/rate_product_screen.dart";
 import "../Reviews/reviews_data_handler.dart";
 import "Widgets/add_to_cart_bottom_sheet.dart";
@@ -212,6 +211,7 @@ class ProductDetailsController extends ControllerMVC {
       ToastHelper.showError(message: l.toString());
     }, (r) async {
       // Fetch the updated cart data from the API
+      ///TODO
       final updatedCartResult = await CartDataHandler.listOfCartProducts(0, pageSize);
 
       updatedCartResult.fold((l) {

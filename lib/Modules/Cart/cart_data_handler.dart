@@ -42,6 +42,26 @@ class CartDataHandler {
       return Left(ServerFailure(failure.errorMessageModel));
     }
   }
+  static Future<Either<Failure, String>> deleteProduct({
+    required int productId,
+    required int quantity,
+  }) async {
+    try {
+      String response = await GenericRequest<String>(
+        method: RequestApi.post(
+          body: {"product_id": productId, "qty": quantity},
+          url: APIEndPoint.deleteProductFromCart(productId),
+        ),
+        fromMap: (_) => _["message"],
+      ).getResponse();
+      print("API Response: $response");
+      return Right(response);
+    } on ServerException catch (failure) {
+      print(failure.toString().toString());
+      print("heeeeeeeeeeeeeeeeeljjjjjjjj");
+      return Left(ServerFailure(failure.errorMessageModel));
+    }
+  }
 
   static Future<Either<Failure, List<CartModel>>> listOfCartProducts(
   int pageKey,

@@ -33,7 +33,7 @@ getToken()async{
     await SplashDataHandler.getCurrentUser();
     await Future.delayed(const Duration(seconds: 2));
     if (context.mounted) {
-      GoRouter.of(context).goNamed(OnBoardingScreen.routeName);
+      GoRouter.of(context).goNamed(HomeScreen.routeName);
     }
     if (SharedPref.isLogin()) {
       // Handle logged-in state
