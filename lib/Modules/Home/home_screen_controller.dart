@@ -107,7 +107,20 @@ class HomeController extends ControllerMVC {
     });
     activeIndex = index;
   }
-
+  unLoginWidget(BuildContext context) {
+    return showModalBottomSheet(
+      context: context,
+      // isScrollControlled: true,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(30.r)),
+      ),
+      builder: (context) =>
+          UnLoginWidgetBottomSheet(
+            image: Assets.imagesNotRated,
+            text: Strings.notRated.tr,
+          ),
+    );
+  }
   addProductToCart(
       {required BuildContext context, required PopularProductsModel product}) async {
     setState(() {
@@ -299,20 +312,7 @@ class HomeController extends ControllerMVC {
 //   );
 // }
 
-  unLoginWidget(BuildContext context) {
-    return showModalBottomSheet(
-      context: context,
-      // isScrollControlled: true,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(30.r)),
-      ),
-      builder: (context) =>
-          UnLoginWidgetBottomSheet(
-            image: Assets.imagesNotRated,
-            text: Strings.notAddToFav.tr,
-          ),
-    );
-  }
+
 }
 // Future deleteFavorite({required int productId}) async {
 //   setState(() {

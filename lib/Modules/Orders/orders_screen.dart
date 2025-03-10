@@ -38,6 +38,7 @@ class _OrdersScreenState extends StateMVC<OrdersScreen> {
   late PagingController<int, OrderModel> _pagingController;
   @override
   void initState() {
+
     super.initState();
     _pagingController = PagingController(firstPageKey: 0);
     con.init(_pagingController);
@@ -66,7 +67,8 @@ class _OrdersScreenState extends StateMVC<OrdersScreen> {
       body: SafeArea(
         child: LoadingScreen(
           loading: con.loading,
-          child: con.pagingController.itemList == null
+          child:
+          con.pagingController.itemList == null
               ? const Center(child: CircularProgressIndicator())
               : (con.pagingController.itemList?.isEmpty ?? true)
                   ? ContainerEmptyContentWidget(

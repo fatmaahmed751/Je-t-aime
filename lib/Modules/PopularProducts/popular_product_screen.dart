@@ -8,10 +8,12 @@ import "package:je_t_aime/Modules/Home/Widgets/search_widget.dart";
 import "package:je_t_aime/Modules/PopularProducts/popular_products_controller.dart";
 import "package:je_t_aime/core/Language/locales.dart";
 import "package:mvc_pattern/mvc_pattern.dart";
+import "../../Utilities/shared_preferences.dart";
 import "../../Utilities/strings.dart";
 import "../../Utilities/theme_helper.dart";
 import "../../Widgets/custom_app_bar_widget.dart";
 import "../../Widgets/loading_screen.dart";
+import "../../Widgets/toast_helper.dart";
 import "../../generated/assets.dart";
 import "../AllCategories/widget/category_product_widget.dart";
 import "Widgets/custom_product_container_widget.dart";
@@ -77,7 +79,7 @@ class PopularProductsScreenState extends StateMVC<PopularProductsScreen> {
               ),
               Expanded(
                 child: Padding(
-                  padding: EdgeInsets.symmetric(vertical: 15.h),
+                  padding: EdgeInsets.symmetric(vertical: 20.h),
                   child: CustomScrollView(
                     physics: const NeverScrollableScrollPhysics(),
                     slivers: [
@@ -96,7 +98,54 @@ class PopularProductsScreenState extends StateMVC<PopularProductsScreen> {
                               return CustomProductContainerWidget(
                                 addToCart: (){},
                                   productsModel: item,
-                                onFavoritePressed: (){},
+                                onFavoritePressed: () async {
+                                  if (con.products[index].isFavorite == 0) {
+                                    if (SharedPref.getCurrentUser()
+                                        ?.token !=
+                                        null &&
+                                        SharedPref.getCurrentUser()!
+                                            .token!
+                                            .isNotEmpty) {
+                                      await con.addToFavorite(
+                                          context: context,
+                                          product: con.products[index]);
+                                      setState(() {
+                                        con.products[index].isFavorite = 1;
+                                      });
+                                      //con.products[index].isFavorite = 1;
+                                    } else {
+                                      con.unLoginWidget(context);
+                                    }
+                                  } else {
+                                    if (SharedPref.getCurrentUser()
+                                        ?.token !=
+                                        null &&
+                                        SharedPref.getCurrentUser()!
+                                            .token!
+                                            .isNotEmpty) {
+                                      setState(() {
+                                        con.products[index].isFavorite = 0;
+                                      });
+                                      // con.products[index].isFavorite = 0;
+                                      // con.deleteFavorite(productId: con.products[index].id??0);
+                                      ToastHelper.showSuccess(
+                                        context: context,
+                                        message: Strings.delete.tr,
+                                        icon: SvgPicture.asset(
+                                          Assets.imagesSubmit,
+                                          width: 60.w,
+                                          height: 50.h,
+                                          fit: BoxFit.cover,
+                                        ),
+                                        backgroundColor:
+                                        ThemeClass.of(context)
+                                            .primaryColor,
+                                      );
+                                    } else {
+                                      con.unLoginWidget(context);
+                                    }
+                                  }
+                                },
                                 // productsModel: PopularProductsModel(),
                               );
                             },

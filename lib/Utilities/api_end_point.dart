@@ -20,6 +20,7 @@ class APIEndPoint {
   static const String getFavorites = "${_baseURL}favorite";
   static const String addFavorite = "${_baseURL}store-favorite";
   static const String shippingForOrder = "${_baseURL}shipping-details";
+  static const String checkOutCart = "${_baseURL}cart-detail";
   static const String getShippingDetails = "${_baseURL}get-shipping-details";
   static String getOrderDetails(int orderId) => "${_baseURL}order/$orderId";
   static String getProductDetails(int productId) => "${_baseURL}show/$productId";

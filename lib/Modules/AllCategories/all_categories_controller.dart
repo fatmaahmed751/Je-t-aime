@@ -118,11 +118,20 @@
 //   // }
 // }
 import "package:flutter/material.dart";
+import "package:flutter_screenutil/flutter_screenutil.dart";
+import "package:flutter_svg/svg.dart";
 import "package:infinite_scroll_pagination/infinite_scroll_pagination.dart";
+import "package:je_t_aime/core/Language/locales.dart";
 import "package:mvc_pattern/mvc_pattern.dart";
 
 import "../../Models/categories_product_model.dart";
 import "../../Models/category_model.dart";
+import "../../Utilities/strings.dart";
+import "../../Utilities/theme_helper.dart";
+import "../../Widgets/toast_helper.dart";
+import "../../generated/assets.dart";
+import "../Home/Widgets/un_login_widget.dart";
+import "../PopularProducts/popular_products_data_handler.dart";
 import "all_categories_data_handler.dart";
 
 class AllCategoriesController extends ControllerMVC {
@@ -142,23 +151,26 @@ class AllCategoriesController extends ControllerMVC {
   late TextEditingController searchController;
   List<CategoryProductModel> categories = [];
   CategoryModel? categoryProductModel;
-   int? categoryId; // Add this field
-  bool _isDisposed = false; // Custom flag to track disposal
+  int? categoryId; // Add this field
+// Custom flag to track disposal
   AllCategoriesController._(); // Update constructor
   static const pageSize = 10;
-  PagingController<int, CategoryProductModel> get pagingController => _pagingController;
+  PagingController<int, CategoryProductModel> get pagingController =>
+      _pagingController;
 
   final PagingController<int, CategoryProductModel> _pagingController =
-  PagingController(firstPageKey: 0);
+      PagingController(firstPageKey: 0);
 
   @override
   void initState() {
     searchController = TextEditingController();
     startController = TextEditingController();
     endController = TextEditingController();
-    searchText= TextEditingController();
+    searchText = TextEditingController();
     _pagingController.addPageRequestListener((pageKey) {
-      getCategories(pageKey, categoryProductModel?.id??0); // Use the categoryId from the controller
+      getCategories(
+          pageKey,
+          categoryProductModel?.id ?? 1); // Use the categoryId from the controller
     });
     super.initState();
   }
@@ -179,36 +191,109 @@ class AllCategoriesController extends ControllerMVC {
   }
 
   Future<void> getCategories(int pageKey, int categoryProductId) async {
-    try {
-      final newItems = await AllCategoriesDataHandler.getAllCategories(
-        pageKey,
-        pageSize,
-        categoryProductId,
-      );
-      if (_isDisposed) return; // Cancel if disposed
+    if (loading) return; // Avoid duplicate calls
+    loading = true;
+    notifyListeners();
+    final newItems = await AllCategoriesDataHandler.getAllCategories(
+      pageKey,
+      pageSize,
+      categoryProductId,
+    );
+    newItems.fold(
+      (failure) {
+        _pagingController.error = failure;
+      },
+      (categories) {
+        final isLastPage = categories.length < pageSize;
+        print("Categobbbbbbriesvvvvvvvv Length: ${categories.length}");
+        print("Fetching products for category ID: $categoryProductId");
 
-      newItems.fold(
-            (failure) {
-          if (!_isDisposed) { // Check if disposed
-            _pagingController.error = failure;
-          }
-        },
-            (categories) {
-          if (!_isDisposed) { // Check if disposed
-            final isLastPage = categories.length < pageSize;
-            if (isLastPage) {
-              _pagingController.appendLastPage(categories);
-            } else {
-              final nextPageKey = pageKey + categories.length;
-              _pagingController.appendPage(categories, nextPageKey);
-            }
-          }
-        },
-      );
-    } catch (error) {
-      if (!_isDisposed) { // Check if disposed
-        _pagingController.error = error;
-      }
-    }
+        if (isLastPage) {
+          _pagingController.appendLastPage(categories);
+        } else {
+          final nextPageKey = pageKey + categories.length;
+          _pagingController.appendPage(categories, nextPageKey);
+        }
+        loading = false;
+        notifyListeners();
+      },
+    );
   }
+
+  addToFavorite(
+      {required CategoryProductModel product,
+      required BuildContext context}) async {
+    setState(() {
+      loading = true;
+    });
+
+    final result = await PopularProductsDataHandler.addFavorite(
+        productId: product.id ?? 0);
+    result.fold((l) {
+      ToastHelper.showError(message: l.errorModel.statusMessage);
+    }, (r) {
+      ToastHelper.showSuccess(
+        context: context,
+        message: Strings.addToFavoriteSuccess.tr,
+        icon: SvgPicture.asset(
+          Assets.imagesSubmit,
+          width: 60.w,
+          height: 50.h,
+          fit: BoxFit.cover,
+        ),
+        backgroundColor: ThemeClass.of(context).primaryColor,
+      );
+    });
+    setState(() {
+      loading = false;
+    });
+  }
+
+  unLoginWidget(BuildContext context) {
+    return showModalBottomSheet(
+      context: context,
+      // isScrollControlled: true,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(30.r)),
+      ),
+      builder: (context) => UnLoginWidgetBottomSheet(
+        image: Assets.imagesNotRated,
+        text: Strings.notRated.tr,
+      ),
+    );
+  }
+
+  // Future<void> getCategories(int pageKey, int categoryProductId) async {
+  //   try {
+  //     final newItems = await AllCategoriesDataHandler.getAllCategories(
+  //       pageKey,
+  //       pageSize,
+  //       categoryProductId,
+  //     );
+  //     if (_isDisposed) return; // Cancel if disposed
+  //
+  //     newItems.fold(
+  //           (failure) {
+  //         if (!_isDisposed) { // Check if disposed
+  //           _pagingController.error = failure;
+  //         }
+  //       },
+  //           (categories) {
+  //         if (!_isDisposed) { // Check if disposed
+  //           final isLastPage = categories.length < pageSize;
+  //           if (isLastPage) {
+  //             _pagingController.appendLastPage(categories);
+  //           } else {
+  //             final nextPageKey = pageKey + categories.length;
+  //             _pagingController.appendPage(categories, nextPageKey);
+  //           }
+  //         }
+  //       },
+  //     );
+  //   } catch (error) {
+  //     if (!_isDisposed) { // Check if disposed
+  //       _pagingController.error = error;
+  //     }
+  //   }
+  // }
 }

@@ -16,6 +16,7 @@ import "../../Utilities/theme_helper.dart";
 import "../../Widgets/custom_home_details_text_widget.dart";
 import "../../Widgets/toast_helper.dart";
 import "../../generated/assets.dart";
+import "../Home/Widgets/un_login_widget.dart";
 import "../Home/home_data_handler.dart";
 import "../ProductDetails/Widgets/custom_check_box_widget.dart";
 
@@ -69,7 +70,49 @@ class PopularProductController extends ControllerMVC {
       getProducts(_pagingController.firstPageKey);
     }
   }
+  unLoginWidget(BuildContext context) {
+    return showModalBottomSheet(
+      context: context,
+      // isScrollControlled: true,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(30.r)),
+      ),
+      builder: (context) =>
+          UnLoginWidgetBottomSheet(
+            image: Assets.imagesNotRated,
+            text: Strings.notRated.tr,
+          ),
+    );
+  }
+  addToFavorite({required PopularProductsModel product, required BuildContext context}) async {
+    setState(() {
+      loading = true;
+    });
 
+    final result = await PopularProductsDataHandler.addFavorite(
+        productId: product.id ?? 0);
+    result.fold((l) {
+      ToastHelper.showError(message: l.errorModel.statusMessage);
+    }, (r) {
+      ToastHelper.showSuccess(
+        context: context,
+        message: Strings.addToFavoriteSuccess.tr,
+        icon: SvgPicture.asset(
+          Assets.imagesSubmit,
+          width: 60.w,
+          height: 50.h,
+          fit: BoxFit.cover,
+        ),
+        backgroundColor:
+        ThemeClass
+            .of(context)
+            .primaryColor,
+      );
+    });
+    setState(() {
+      loading = false;
+    });
+  }
   Future onSearchReq({String? search}) async {
     loading = true;
 
@@ -93,36 +136,6 @@ class PopularProductController extends ControllerMVC {
     if (search == null || search.isEmpty) return;
   }
 
-
-
-   addToFavorite({required int productId}) async {
-    setState(() {
-      loading = true;
-    });
-
-    final result = await PopularProductsDataHandler.addFavorite(
-        productId:productId);
-    result.fold((l) {
-      ToastHelper.showError(message: l.errorModel.statusMessage);
-    }, (r) {
-      ToastHelper.showSuccess(
-        context: currentContext_!,
-        message: Strings.addToFavoriteSuccess.tr,
-        icon: SvgPicture.asset(
-          Assets.imagesSubmit,
-          width: 60.w,
-          height: 50.h,
-          fit: BoxFit.cover,
-        ),
-        backgroundColor:
-        ThemeClass.of(currentContext_!).primaryColor,
-      );
-
-    });
-    setState(() {
-      loading = false;
-    });
-  }
 
   Future getCategoryProducts({required int categoryId}) async {
     loading = true;

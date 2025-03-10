@@ -6,6 +6,7 @@ import "package:go_router/go_router.dart";
 import "package:infinite_scroll_pagination/infinite_scroll_pagination.dart";
 import "package:je_t_aime/core/Language/locales.dart";
 import "package:mvc_pattern/mvc_pattern.dart";
+import "../../Models/cart_details_model.dart";
 import "../../Models/cart_item_model.dart";
 import "../../Utilities/shared_preferences.dart";
 import "../../Utilities/strings.dart";
@@ -44,7 +45,7 @@ class _CartScreenState extends StateMVC<CartScreen> {
     super.initState();
     _pagingController = PagingController(firstPageKey: 0);
     con.init(_pagingController);
-   // con.loadCart();// Pass the PagingController to the controller
+    con.products;// Pass the PagingController to the controller
   }
 
   @override
@@ -157,12 +158,21 @@ class _CartScreenState extends StateMVC<CartScreen> {
                             CustomButtonWidget.primary(
                               onTap: ()async {
                               await SharedPref.saveCart(con.cartProducts);
-                                context.pushNamed(ShippingScreen.routeName,
-                                extra: {
-                              "subtotal": subtotal,
-                              "products":con.cartProducts,
-                              },
-                                );
+                             await con.getCartDetails(con.product??Product(), context);
+                              //   context.pushNamed(ShippingScreen.routeName,
+                              //   extra: {
+                              // "subtotal": con.cartDetailsModel?.totalPrice,
+                              //     "shippingCost":con.cartDetailsModel?.shippingCost,
+                              //     "cartProducts": con.cartProducts,
+                              //   },
+                              //   );
+                              // GoRouter.of(context).pushNamed(ShippingScreen.routeName,
+                              //   extra:{
+                              //
+                              //     "subtotal": cartDetailsModel?.totalPrice ?? 0,
+                              //     "shippingCost": cartDetailsModel?.shippingCost ?? 0,
+                              //     "cartProducts": cartDetailsModel?.products ?? [],
+                              //   },);
                               },
                               width: 248.w,
                               height: 54.h,

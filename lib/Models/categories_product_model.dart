@@ -17,7 +17,7 @@ class CategoryProductModel {
   final int? price;
   final int? discount;
   final int? count;
-  final int? isFavorite;
+   int? isFavorite;
   final String? image;
 
   CategoryProductModel({

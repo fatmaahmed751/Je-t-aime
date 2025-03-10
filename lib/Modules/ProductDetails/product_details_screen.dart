@@ -43,7 +43,7 @@ class ProductDetailsScreenState extends StateMVC<ProductDetailsScreen> {
   void initState() {
     super.initState();
     con.getProductDetails(productId: widget.productId);
-   // con.getProductDetails(productId: widget.popularProductsModel.id ?? 0);
+    // con.getProductDetails(productId: widget.popularProductsModel.id ?? 0);
   }
 
   @override
@@ -73,47 +73,56 @@ class ProductDetailsScreenState extends StateMVC<ProductDetailsScreen> {
                     ),
                   ),
                   const Spacer(),
-                  // GestureDetector(
-                  //     onTap: () {
-                  //       if (widget.popularProductsModel.isFavorite == 0) {
-                  //         con.addToFavorite(
-                  //             productId: widget.popularProductsModel.id ?? 0,
-                  //             context: context);
-                  //       }
-                  //     },
-                  //     child: widget.popularProductsModel.isFavorite == 1
-                  //         ? SizedBox(
-                  //             height: 26.h,
-                  //             child:
-                  //                 SvgPicture.asset(Assets.imagesFavoriteIcon))
-                  //         : SizedBox(
-                  //             height: 26.h,
-                  //             child: SvgPicture.asset(
-                  //               Assets.imagesHeartBroken,
-                  //             ),
-                  //           )),
-
-               // ],
-             // ),
                   GestureDetector(
-                      onTap: () {
+                      onTap: () async {
                         if (con.productDetailsModel?.isFavorite == 0) {
-                          con.addToFavorite(
-                              productId: con.productDetailsModel?.id ?? 0,
-                              context: context);
+                          if (SharedPref.getCurrentUser()?.token != null &&
+                              SharedPref.getCurrentUser()!.token!.isNotEmpty) {
+                            await con.addToFavorite(
+                                productId: con.productDetailsModel?.id ?? 0,
+                                context: context);
+                            setState(() {
+                              con.productDetailsModel?.isFavorite = 1;
+                            });
+                            //con.products[index].isFavorite = 1;
+                          } else {
+                            con.unLoginWidget(context);
+                          }
+                        } else {
+                          if (SharedPref.getCurrentUser()?.token != null &&
+                              SharedPref.getCurrentUser()!.token!.isNotEmpty) {
+                            setState(() {
+                              con.productDetailsModel?.isFavorite = 0;
+                            });
+
+                            ToastHelper.showSuccess(
+                              context: context,
+                              message: Strings.delete.tr,
+                              icon: SvgPicture.asset(
+                                Assets.imagesSubmit,
+                                width: 60.w,
+                                height: 50.h,
+                                fit: BoxFit.cover,
+                              ),
+                              backgroundColor:
+                                  ThemeClass.of(context).primaryColor,
+                            );
+                          } else {
+                            con.unLoginWidget(context);
+                          }
                         }
                       },
                       child: con.productDetailsModel?.isFavorite == 1
                           ? SizedBox(
-                          height: 26.h,
-                          child:
-                          SvgPicture.asset(Assets.imagesFavoriteIcon))
+                              height: 26.h,
+                              child:
+                                  SvgPicture.asset(Assets.imagesFavoriteIcon))
                           : SizedBox(
-                        height: 26.h,
-                        child: SvgPicture.asset(
-                          Assets.imagesHeartBroken,
-                        ),
-                      )),
+                              height: 26.h,
+                              child: SvgPicture.asset(
+                                Assets.imagesHeartBroken,
+                              ),
+                            )),
                 ],
               ),
               Gap(10.h),
@@ -163,7 +172,7 @@ class ProductDetailsScreenState extends StateMVC<ProductDetailsScreen> {
                     onTap: () {
                       if (SharedPref.getCurrentUser()?.token != null &&
                           SharedPref.getCurrentUser()!.token!.isNotEmpty) {
-                        con.writeRateForProduct(context,widget.productId);
+                        con.writeRateForProduct(context, widget.productId);
                       } else {
                         con.unLoginWidget(context);
                       }
@@ -208,31 +217,33 @@ class ProductDetailsScreenState extends StateMVC<ProductDetailsScreen> {
         Padding(
           padding:
               EdgeInsetsDirectional.symmetric(horizontal: 24.w, vertical: 20.h),
-          child:CustomButtonWidget.primary(
+          child: CustomButtonWidget.primary(
             onTap: () async {
               if (con.productDetailsModel == null) {
-                ToastHelper.showError(message: "Product details are not available");
+                ToastHelper.showError(
+                    message: "Product details are not available");
                 return;
               }
 
               // Fetch the cart data from SharedPreferences
-              final isProductInCart = await con.isProductInCart(con.productDetailsModel!.id??0);
+              final isProductInCart =
+                  await con.isProductInCart(con.productDetailsModel!.id ?? 0);
 
               if (isProductInCart) {
                 // Product is already in the cart, show a message
-                ToastHelper.showError(message: "Product is already in the cart");
+                ToastHelper.showError(
+                    message: "Product is already in the cart");
                 return;
               }
-
-              // Open the bottom sheet to confirm adding the product
               con.addToCartSheet(context);
+              // Open the bottom sheet to confirm adding the product
             },
             width: 382.w,
             height: 54.h,
             title: Strings.addToCart.tr,
             textStyle: TextStyleHelper.of(context).h_20.copyWith(
-              color: ThemeClass.of(context).background,
-            ),
+                  color: ThemeClass.of(context).background,
+                ),
           ),
         ),
       ]),

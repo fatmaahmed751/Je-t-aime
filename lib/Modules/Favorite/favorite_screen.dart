@@ -79,6 +79,7 @@ class _FavoriteScreenState extends StateMVC<FavoriteScreen> {
                           SharedPref.getCurrentUser()!.token!.isNotEmpty
                               ? GoRouter.of(context).pushNamed(
                                   PopularProductsScreen.routeName,
+                              extra: con.products
                                 )
                               : GoRouter.of(context)
                                   .pushNamed(RegisterScreen.routeName);

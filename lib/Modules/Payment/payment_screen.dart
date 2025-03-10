@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
+import "package:je_t_aime/Models/shipping_product_model.dart";
 import 'package:je_t_aime/Modules/Payment/payment_controller.dart';
 import 'package:je_t_aime/core/Language/locales.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
@@ -17,7 +18,10 @@ import '../../../Utilities/theme_helper.dart';
 
 class PaymentScreen extends StatefulWidget {
   static const routeName = "PaymentScreen";
-  const PaymentScreen({super.key});
+ // final ShippingProductModel shippingProductModel;
+  const PaymentScreen({super.key,
+   // required this.shippingProductModel
+  });
 
   @override
   createState() => PaymentScreenState();

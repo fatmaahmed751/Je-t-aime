@@ -1,8 +1,5 @@
 
 import "package:dartz/dartz.dart";
-
-import "../../Models/category_model.dart";
-import "../../Models/generic_pagination_model.dart";
 import "../../Models/categories_product_model.dart";
 import "../../Utilities/api_end_point.dart";
 import "../../core/API/generic_request.dart";

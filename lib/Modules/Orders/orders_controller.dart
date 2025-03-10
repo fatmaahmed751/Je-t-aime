@@ -4,6 +4,7 @@ import 'package:mvc_pattern/mvc_pattern.dart';
 
 import "../../Models/order_model.dart";
 import "../../Utilities/shared_preferences.dart";
+import "../../Widgets/toast_helper.dart";
 
 class OrdersController extends ControllerMVC {
   // singleton
@@ -30,9 +31,10 @@ class OrdersController extends ControllerMVC {
   @override
   void initState() {
     super.initState();
-    _initPagingController();
+  _initPagingController();
 
   }
+
   void init(PagingController<int, OrderModel> pagingController) {
     _pagingController = pagingController;
     _pagingController!.addPageRequestListener((pageKey) {

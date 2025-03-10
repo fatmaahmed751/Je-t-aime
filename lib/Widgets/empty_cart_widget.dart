@@ -4,6 +4,9 @@ import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:je_t_aime/core/Language/locales.dart';
+import "../Modules/Home/home_screen.dart";
+import "../Modules/Register/register_screen.dart";
+import "../Utilities/shared_preferences.dart";
 import '../Utilities/strings.dart';
 import '../Utilities/text_style_helper.dart';
 import '../generated/assets.dart';
@@ -25,13 +28,13 @@ class EmptyCartWidget extends StatelessWidget {
           radius: 30.r,
           title: Strings.browseProducts.tr,
           onTap: () {
-            // SharedPref.getCurrentUser()!
-            //         .token!
-            //         .isNotEmpty
-            //     ? GoRouter.of(context)
-            //         .pushNamed(PopularProductsScreen.routeName,)
-            //     : GoRouter.of(context).pushNamed(
-            //         RegisterScreen.routeName);
+            SharedPref.getCurrentUser()!
+                    .token!
+                    .isNotEmpty
+                ? GoRouter.of(context)
+                    .pushNamed(HomeScreen.routeName,)
+                : GoRouter.of(context).pushNamed(
+                    RegisterScreen.routeName);
           }),
     );
   }

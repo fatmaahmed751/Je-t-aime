@@ -1,5 +1,6 @@
 import "package:flutter/material.dart";
 import "package:flutter_screenutil/flutter_screenutil.dart";
+import "package:flutter_svg/svg.dart";
 import "package:gap/gap.dart";
 import "package:go_router/go_router.dart";
 import "package:je_t_aime/Modules/PopularProducts/popular_product_screen.dart";
@@ -14,6 +15,8 @@ import "../../Widgets/bottom_navbar_widget.dart";
 import "../../Widgets/custom_app_bar_widget.dart";
 import "../../Widgets/custom_details_side_text.dart";
 import "../../Widgets/loading_screen.dart";
+import "../../Widgets/toast_helper.dart";
+import "../../generated/assets.dart";
 import "../PopularProducts/Widgets/custom_product_container_widget.dart";
 import "Widgets/categories_widget.dart";
 import "Widgets/packages_widget.dart";
@@ -164,27 +167,29 @@ class _HomeScreenState extends StateMVC<HomeScreen> {
                                 padding: EdgeInsetsDirectional.symmetric(
                                     vertical: 5.h),
                                 child: CustomProductContainerWidget(
-                                  addToCart: (){
-                                    con.addProductToCart(
-                                        context: context, product:
-                                    con.products[index]
-                                    );
-                                  },
+                                    addToCart: () {
+                                      con.addProductToCart(
+                                          context: context,
+                                          product: con.products[index]);
+                                    },
                                     productsModel: con.products[index],
-                                    onFavoritePressed: () {
+                                    onFavoritePressed: () async {
                                       if (con.products[index].isFavorite == 0) {
                                         if (SharedPref.getCurrentUser()
-                                                    ?.token != null &&
+                                                    ?.token !=
+                                                null &&
                                             SharedPref.getCurrentUser()!
                                                 .token!
                                                 .isNotEmpty) {
-                                          con.addToFavorite(
-                                            context: context,
-                                              product:
-                                                  con.products[index] );
-                                         // con.products[index].isFavorite = 1;
+                                          await con.addToFavorite(
+                                              context: context,
+                                              product: con.products[index]);
+                                          setState(() {
+                                            con.products[index].isFavorite = 1;
+                                          });
+                                          //con.products[index].isFavorite = 1;
                                         } else {
-                                           con.unLoginWidget(context);
+                                          con.unLoginWidget(context);
                                         }
                                       } else {
                                         if (SharedPref.getCurrentUser()
@@ -193,10 +198,26 @@ class _HomeScreenState extends StateMVC<HomeScreen> {
                                             SharedPref.getCurrentUser()!
                                                 .token!
                                                 .isNotEmpty) {
-                                          //con.deleteFavorite(productId: con.products[index].id??0);
-                                          con.products[index].isFavorite = 0;
+                                          setState(() {
+                                            con.products[index].isFavorite = 0;
+                                          });
+                                          // con.products[index].isFavorite = 0;
+                                          // con.deleteFavorite(productId: con.products[index].id??0);
+                                          ToastHelper.showSuccess(
+                                            context: context,
+                                            message: Strings.delete.tr,
+                                            icon: SvgPicture.asset(
+                                              Assets.imagesSubmit,
+                                              width: 60.w,
+                                              height: 50.h,
+                                              fit: BoxFit.cover,
+                                            ),
+                                            backgroundColor:
+                                                ThemeClass.of(context)
+                                                    .primaryColor,
+                                          );
                                         } else {
-                                          //con.unLoginForRatedPop(context);
+                                          con.unLoginWidget(context);
                                         }
                                       }
                                     }),

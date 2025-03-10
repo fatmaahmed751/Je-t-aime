@@ -21,7 +21,7 @@ class ProductDetailsModel {
   final String? slug;
   final int? subcategoryId;
   final String? subcategoryName;
-  final int? isFavorite;
+  int? isFavorite;
   final String? title;
   final String? desc;
   final int? stock;

@@ -1,8 +1,11 @@
 import "package:flutter/material.dart";
 import "package:go_router/go_router.dart";
+import "package:je_t_aime/Models/cart_details_model.dart";
 import "package:je_t_aime/Models/category_model.dart";
 import "package:je_t_aime/Models/popular_products_model.dart";
 import "package:je_t_aime/Models/product_details_model.dart";
+import "package:je_t_aime/Models/shipping_product_model.dart";
+import "package:je_t_aime/Models/shipping_product_model.dart";
 import "package:je_t_aime/Modules/ChangePassword/change_password_screen.dart";
 import "package:je_t_aime/Modules/Favorite/favorite_screen.dart";
 import "package:je_t_aime/Modules/Notifications/notifications_screen.dart";
@@ -131,9 +134,11 @@ class GoRouterConfig {
           return getCustomTransitionPage(
             state: state,
             child: ShippingScreen(
-                subtotal: args['subtotal'] as double,
-
-                products:args['products'] as List<CartModel>)
+                subtotal: (args["subtotal"] as int).toDouble(), // Convert int to double
+                shippingCost: (args["shippingCost"] as int).toDouble(),
+                // subtotal: args["subtotal"] ,
+                // shippingCost: args["shippingCost"] ,
+                products:args["products"] as List<CartModel>)
           );
         },
         routes: const <RouteBase>[],
@@ -173,9 +178,12 @@ class GoRouterConfig {
         name: PaymentScreen.routeName,
         path: "/${PaymentScreen.routeName}",
         pageBuilder: (_, GoRouterState state) {
+       //  final ShippingProductModel model = state.extra as ShippingProductModel;
           return getCustomTransitionPage(
             state: state,
-            child: const PaymentScreen(),
+            child:  PaymentScreen(
+              //shippingProductModel: model,
+            ),
           );
         },
         routes: const <RouteBase>[],

@@ -13,18 +13,19 @@ class ShippingDataHandler{
         required String name,
         required String phone,
         required String address,
-    required int totalPrice
+       required double totalPrice
       }) async {
     try {
       Map<String, dynamic> body = {
         "name": name,
-        "totalPrice":totalPrice,
         "phone": phone,
         "address": address,
+        "totalPrice":totalPrice,
+
       };
       if (items.isNotEmpty && items != []) {
         for (var product in items) {
-          body["items[${items.indexOf(product)}][id]"] = product.id.toString();
+          body["items[${items.indexOf(product)}][product_id]"] = product.id.toString();
           body["items[${items.indexOf(product)}][qty]"] = product.count.toString();
           body["items[${items.indexOf(product)}][price]"] = product.price.toString();
         }

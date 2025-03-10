@@ -13,7 +13,6 @@ class OrdersDataHandler{
       int pageSize,
       ) async {
     try {
-
       List<OrderModel> response = await GenericRequest <OrderModel>(
         method: RequestApi.get(
             url:APIEndPoint.getOrdersList

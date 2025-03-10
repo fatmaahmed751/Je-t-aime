@@ -18,9 +18,14 @@ import "../../ProductDetails/product_details_screen.dart";
 
 class CustomCategoryProductContainerWidget extends StatelessWidget {
   final CategoryProductModel categoryProductModel;
+  final Function() onFavoritePressed;
+  final Function() addToCart;
  // final PopularProductsModel productsModel;
 
-  const CustomCategoryProductContainerWidget({super.key, required this.categoryProductModel});
+  const CustomCategoryProductContainerWidget({
+    super.key, required this.categoryProductModel,
+    required this.onFavoritePressed,
+    required this.addToCart});
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -86,38 +91,7 @@ class CustomCategoryProductContainerWidget extends StatelessWidget {
                       child: Padding(
                         padding: EdgeInsetsDirectional.only(bottom: 0.h),
                         child: GestureDetector(
-                            onTap: () {
-                              //   ToastHelper.showSuccess(
-                              //     context: context,
-                              //     message: Strings.addToFavoriteSuccess.tr,
-                              //     icon:SvgPicture.asset(Assets.imagesSubmit,width:60.w,
-                              //       height:50.h,
-                              //       fit: BoxFit.cover,),
-                              //
-                              //     backgroundColor: ThemeClass.of(context).primaryColor,
-                              //   );
-                              // }else{
-                              //   ToastHelper.showSuccess(
-                              //     context: context,
-                              //     message: Strings.removedFromFav.tr,
-                              //     icon:SvgPicture.asset(Assets.imagesSubmit,width:60.w,
-                              //       height:50.h,
-                              //       fit: BoxFit.cover,),
-                              //
-                              //     backgroundColor: ThemeClass.of(context).primaryColor,
-                              //   );
-                              //
-                              // }
-                            },
-                            //  ToastHelper.showSuccess(
-                            //    context: context,
-                            //    message: Strings.addToFavoriteSuccess.tr,
-                            // icon:SvgPicture.asset(Assets.imagesSubmit,width:60.w,
-                            // height:50.h,
-                            // fit: BoxFit.cover,),
-                            //
-                            //    backgroundColor: ThemeClass.of(context).primaryColor,
-                            //  );
+                            onTap:onFavoritePressed,
                             child: categoryProductModel.isFavorite == 1
                                 ? SvgPicture.asset(Assets.imagesFavoriteIcon)
                                 : SizedBox(
