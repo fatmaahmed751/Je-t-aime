@@ -24,7 +24,23 @@ class OrdersDataHandler{
     } on ServerException catch (failure) {
       return Left(ServerFailure(failure.errorMessageModel));
     }
-
   }
 
+
+  static Future<Either<Failure, OrderModel>> showOrderDetails({
+    required int orderId,
+  })async {
+    try {
+      OrderModel response = await GenericRequest <OrderModel>(
+        method: RequestApi.get(
+            url:APIEndPoint.showOrder(orderId)
+        ),
+        fromMap: OrderModel.fromJson,
+      ).getObject();
+      print("API Response: ${response.toString()}");
+      return Right(response);
+    } on ServerException catch (failure) {
+      return Left(ServerFailure(failure.errorMessageModel));
+    }
+  }
 }

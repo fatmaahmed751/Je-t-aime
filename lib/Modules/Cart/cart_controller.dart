@@ -45,7 +45,6 @@ class CartController extends ControllerMVC {
     return _pagingController!;
   }
 
-  //int counterValue = 1;
   List<CartModel> cartProducts = [];
   List<Product> products = [];
   Product? product;
@@ -58,11 +57,12 @@ class CartController extends ControllerMVC {
   }
 
   void init(PagingController<int, CartModel> pagingController) {
+    loadCart();
     _pagingController = pagingController;
     _pagingController!.addPageRequestListener((pageKey) {
       getCartList(pageKey);
     });
-    loadCart();
+
   }
 
   void _initPagingController() {
@@ -72,39 +72,6 @@ class CartController extends ControllerMVC {
     });
     getCartList(_pagingController!.firstPageKey);
   }
-
-getCartDetails(Product model,BuildContext context)async{
-  final result = await CartDataHandler.checkOutCartDetails(
-      items: products,
-      id: model.id??0,
-      price:  model.price??0,
-      qty:  model.qty??0,
-      isSelected:  model.isSelected??0
-
-  );
-  result.fold((l) {
-        ToastHelper.showError(message: l.errorModel.statusMessage);
-      },
-          (r) {
-            cartDetailsModel = r;
-            notifyListeners();
-            print(cartDetailsModel);
-            ToastHelper.showSuccess(
-              context: context,
-              message: Strings.delete.tr,
-              icon: SvgPicture.asset(
-                Assets.imagesSubmit,
-                width: 60.w,
-                height: 50.h,
-                fit: BoxFit.cover,
-              ),
-              backgroundColor: ThemeClass
-                  .of(context)
-                  .primaryColor,
-            );
-          });
-
-}
 
   Future<void> getCartList(int pageKey) async {
     if (loading) return; // Avoid duplicate calls
@@ -230,7 +197,8 @@ double calculateSubtotal(List<CartModel> cartProducts) {
   @override
   void dispose() {
     couponController.dispose();
-  // _pagingController?.dispose(); // Dispose the PagingController
+    SharedPref.saveCart(cartProducts);
+    // _pagingController?.dispose(); // Dispose the PagingController
     super.dispose();
   }
 }

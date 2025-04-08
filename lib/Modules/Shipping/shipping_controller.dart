@@ -31,8 +31,7 @@ class ShippingController extends ControllerMVC {
 
   ShippingController._();
 
-  bool loading = false,
-      autoValidate = false;
+  bool loading = false, autoValidate = false;
   late TextEditingController nameController, addressController, phoneController;
   static const pageSize = 10;
   List<CartModel> cart = [];
@@ -43,7 +42,21 @@ class ShippingController extends ControllerMVC {
     nameController = TextEditingController();
     addressController = TextEditingController();
     phoneController = TextEditingController();
+    // nameController = TextEditingController(text:"${shippingModel?.name}"??"");
+    // addressController = TextEditingController(text:"${shippingModel?.address}"??"");
+    // phoneController = TextEditingController(text:"${shippingModel?.phone}"??"");
     super.initState();
+  }
+
+  init(BuildContext context) {
+    // getShippingData(context);
+    getShippingData(context).then((_) {
+      if (shippingModel != null) {
+        nameController.text = shippingModel!.name ?? "";
+        addressController.text = shippingModel!.address ?? "";
+        phoneController.text = shippingModel!.phone ?? "";
+      }
+    });
   }
 
   @override
@@ -80,6 +93,39 @@ class ShippingController extends ControllerMVC {
         builder: (context) => const UsePointWidget());
   }
 
+  getShippingData(BuildContext context) async {
+    setState(() {
+      loading = true;
+    });
+    final result = await ShippingDataHandler.getDetailsOfShipping();
+
+    result.fold((l) {
+      // Handle error
+      ToastHelper.showError(message: l.toString());
+    }, (r) async {
+      shippingModel = r;
+      setState(() {
+        nameController.text = shippingModel!.name ?? "";
+        addressController.text = shippingModel!.address ?? "";
+        phoneController.text = shippingModel!.phone ?? "";
+      });
+      ToastHelper.showSuccess(
+        context: context,
+        message: "shipping",
+        icon: SvgPicture.asset(
+          Assets.imagesSubmit,
+          width: 60.w,
+          height: 50.h,
+          fit: BoxFit.cover,
+        ),
+        backgroundColor: ThemeClass.of(context).primaryColor,
+      );
+    });
+    setState(() {
+      loading = false;
+    });
+  }
+
   finishShipping({required BuildContext context}) async {
     setState(() {
       loading = true;
@@ -105,16 +151,14 @@ class ShippingController extends ControllerMVC {
           height: 50.h,
           fit: BoxFit.cover,
         ),
-        backgroundColor:
-        ThemeClass
-            .of(context)
-            .primaryColor,
+        backgroundColor: ThemeClass.of(context).primaryColor,
       );
     });
     setState(() {
       loading = false;
     });
-    context.pushNamed(PaymentScreen.routeName,
+    context.pushNamed(
+      PaymentScreen.routeName,
       // extra: shippingProductModel??ShippingProductModel()
     );
     // }

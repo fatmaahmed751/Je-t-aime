@@ -1,0 +1,15 @@
+flutter_native_splash:
+  android: true
+  ios: true
+  web: true
+
+#  image: assets/images/splashScreen.png
+#  fullscreen: true
+  color: "#D88F8F"  # Fallback background color
+#
+  android_12:
+#    image: assets/images/splashScreen.png
+    color: "#D88F8F"
+#
+   # Ensures full-screen coverage on all devices
+

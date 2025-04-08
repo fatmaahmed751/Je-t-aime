@@ -10,6 +10,10 @@ class Strings {
   static const String dark = "dark";
   static const String update = "update";
   static const String notAddToFav = "notAddToFav";
+  static const String orderPlaced = "orderPlaced";
+  static const String shipping ="shipping";
+  static const String unKnown = "unKnown";
+  static const String waitingForDelivery = "waitingForDelivery";
   static const String notRated = "notRated";
   static const String verificationSuccess = "verificationSuccess";
   static const String mainColor = "mainColor";
@@ -216,6 +220,7 @@ class Strings {
   static const String orderStatus = "orderStatus";
   static const String inProgress = "inProgress";
   static const String delivery = "delivery";
+  static const String orderDetails = "orderDetails";
   static const String exploreProducts = "exploreProducts";
   static const String doneChangePassword = "doneChangePassword";
   static const String exploreProduct = "exploreProduct";

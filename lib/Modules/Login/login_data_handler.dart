@@ -1,3 +1,4 @@
+import "../../Widgets/location_services.dart";
 import "Package:dartz/dartz.dart";
 
 import "package:firebase_messaging/firebase_messaging.dart";
@@ -10,23 +11,23 @@ import "../../core/error/exceptions.dart";
 import "../../core/error/failures.dart";
 
 class LoginDataHandler {
-  // final GenericRequest<UserModel> genericRequest;
-  //
-  // LoginDataHandler({required this.genericRequest});
   static Future<Either<Failure, UserModel>> login({
     required String email,
     required String password,
   }) async {
     try {
-        // String? fcm = await FirebaseMessaging.instance.getToken();
-        // print("$fcm");
-        // print("******************************************************");
+        String? fcm = await FirebaseMessaging.instance.getToken();
+        print("$fcm");
+        print("******************************************************");
 
-
+        String? locationText = await LocationService().getCurrentLocationAndAddress();
+        print("User location: $locationText");
       UserModel response = await GenericRequest<UserModel>(
         method: RequestApi.post(url: APIEndPoint.login, body: {
           "email": email,
           "password": password,
+          "fcm_token":fcm,
+          "location": locationText ?? "Unknown Location",
         }),
         fromMap: UserModel.fromJson,
       ).getObject();

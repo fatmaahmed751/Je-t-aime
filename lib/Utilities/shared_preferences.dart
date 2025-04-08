@@ -17,7 +17,9 @@ class SharedPref {
   static const String _fontSizeKey = "fontSize";
   static const String _fontFamilyKey = "fontFamily";
   static const String _secondaryColor = "secondaryColor";
+  static const String _chatCount = "chatCount";
   static const String _primaryColor = "primaryColor";
+  static const String _notifStatus = 'notificationStatus';
 
   static UserModel? getCurrentUser() {
     if (prefs.getString(_currentUserKey) == null) return null;
@@ -35,6 +37,15 @@ class SharedPref {
   static ThemeModel? getTheme() {
     if (prefs.getString(_themeKey) == null) return null;
     return ThemeModel.fromJson(json.decode(prefs.getString(_themeKey)!));
+  }
+  static int? getChatCount(){
+    return prefs.getInt(_chatCount);
+  }
+  static Future<bool> saveTotalChatCount({required int chatCount}) async {
+    return await prefs.setInt(_chatCount, chatCount);
+  }
+  static int? getTotalChatCount(){
+    return prefs.getInt(_chatCount);
   }
 
   static Future<void> setTheme({required ThemeModel theme}) async {

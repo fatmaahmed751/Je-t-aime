@@ -12,6 +12,7 @@ import '../../../generated/assets.dart';
 import '../../Utilities/shared_preferences.dart';
 import '../../Widgets/bottom_navbar_widget.dart';
 import '../../Widgets/custom_app_bar_widget.dart';
+import "../Login/login_screen.dart";
 import '../Orders/orders_screen.dart';
 import '../PersonalData/personal_data_screen.dart';
 import '../Policies/policies_screen.dart';
@@ -61,8 +62,8 @@ class _UserProfileScreenState extends StateMVC<UserProfileScreen> {
           child: Padding(
               padding: EdgeInsetsDirectional.only(
                   end: 24.w, start: 24.w, bottom: 20.h, top: 25.h),
-              child: con.isLogin
-                  ? Container(
+              child:SharedPref.getCurrentUser()?.token!=null&&SharedPref.getCurrentUser()!.token!.isNotEmpty?
+              Container(
                       height: 490.h,
                       decoration: BoxDecoration(
                         color: ThemeClass.of(context).background,
@@ -181,7 +182,7 @@ class _UserProfileScreenState extends StateMVC<UserProfileScreen> {
                             ),
                             GestureDetector(
                               onTap: () {
-                                con.userLogOutPop(context);
+                               con.userLogOutPop(context);
                               },
                               child: UserProfileContainerWidget(
                                 image: (Assets.imagesLogout),
@@ -239,17 +240,19 @@ class _UserProfileScreenState extends StateMVC<UserProfileScreen> {
                               text: Strings.policy.tr,
                             ),
                           ),
-                          // GestureDetector(
-                          //   onTap: () {
-                          //     GoRouter.of(context)
-                          //         .pushNamed(LoginScreen.routeName);
-                          //   },
-                          //   child: UserProfileContainerWidget(
-                          //     image: (Assets.imageslo),
-                          //     text: Strings.login.tr,
-                          //   ),
-                          // ),
-                        ])),
+                          GestureDetector(
+                            onTap: () {
+                              GoRouter.of(context)
+                                  .pushNamed(LoginScreen.routeName);
+                            },
+                            child: UserProfileContainerWidget(
+                              image: (Assets.imagesLogout),
+                              text: Strings.logOut.tr,
+                            ),
+                          ),
+                        ]
+              )
+          ),
         ),
       ),
     );

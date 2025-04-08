@@ -28,6 +28,8 @@ class LoginController extends ControllerMVC {
 
   @override
   void initState() {
+    // emailController = TextEditingController();
+    // passwordController = TextEditingController();
     emailController = TextEditingController(text:"gayle304@audince.com");
     passwordController = TextEditingController(text:"Nonabatta@202020");
     super.initState();

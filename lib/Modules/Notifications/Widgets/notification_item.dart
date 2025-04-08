@@ -1,19 +1,28 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:gap/gap.dart';
-import 'package:je_t_aime/core/Language/locales.dart';
-import 'package:mvc_pattern/mvc_pattern.dart';
-import '../../../../Utilities/text_style_helper.dart';
-import '../../../../Utilities/theme_helper.dart';
+import "package:flutter/material.dart";
+import "package:flutter_screenutil/flutter_screenutil.dart";
+import "package:flutter_svg/svg.dart";
+import "package:gap/gap.dart";
+import "package:go_router/go_router.dart";
+import "package:je_t_aime/core/Language/locales.dart";
+import "package:mvc_pattern/mvc_pattern.dart";
+import "package:provider/provider.dart";
+import "../../../../Utilities/text_style_helper.dart";
+import "../../../../Utilities/theme_helper.dart";
 
-import '../../../Utilities/strings.dart';
-import '../../../generated/assets.dart';
-import '../notifications_controller.dart';
+import "../../../Models/notification_model.dart";
+import "../../../Models/order_model.dart";
+import "../../../Utilities/strings.dart";
+import "../../../Widgets/toast_helper.dart";
+import "../../../generated/assets.dart";
+import "../../ShowOrderDetails/show_order_screen.dart";
+import "../notification_count_provider.dart";
+import "../notifications_controller.dart";
 
 class ShowNotificationItem extends StatefulWidget {
+  final NotificationModel notificationModel;
+  final OrderModel orderModel;
   const ShowNotificationItem({
-    super.key,
+    super.key, required this.notificationModel, required this.orderModel,
   });
 
   @override
@@ -26,38 +35,46 @@ class ShowNotificationItemState extends StateMVC<ShowNotificationItem> {
   }
 
   late NotificationsController con;
-  bool notificationIsRead = false;
+  int notificationIsRead = 0;
 
   @override
   void initState() {
     super.initState();
-    notificationIsRead = notificationIsRead;
+    notificationIsRead = widget.notificationModel.isRead!;
   }
 
   Future<void> markNotificationAsRead() async {
-    if (!notificationIsRead) {
+    if (notificationIsRead==0) {
       setState(() {
-        notificationIsRead = true;
-        notificationIsRead = true;
+        notificationIsRead = 1;
+        widget.notificationModel.isRead = 1;
       });
+      await con.allReadNotifications(orderId: widget.orderModel.id??0,
+          notificationId: widget.notificationModel.id??"" );
+      final notificationProvider = Provider.of<NotificationCountProvider>(context, listen: false);
+      await notificationProvider.decrementChatTotalCount(singleCount: 1);
     }
   }
 
   @override
   Widget build(BuildContext context) {
     // print("Rendering notification: ${widget.notificationModel.id}");
-    // print("isss reaaad${isRead}");
+    print("isss reaaad${notificationIsRead}");
     return GestureDetector(
       onTap: () async {
-        // print("OrderInfoModel before navigating: ${widget.orderModel.toJson()}");
         await markNotificationAsRead();
+        if (widget.orderModel.id != null) {
+          // Only navigate if we have a valid order
+          await con.showOrderDetails(orderInfoId: widget.orderModel.id!);
+        }
+
       },
       child: Padding(
         padding: EdgeInsetsDirectional.symmetric(vertical: 5.h),
         child: Container(
           height: 80.h,
           decoration: BoxDecoration(
-              color: notificationIsRead
+              color: notificationIsRead==1
                   ? ThemeClass.of(context).labelColor
                   : ThemeClass.of(context).mainSecondary,
               borderRadius: BorderRadius.circular(30.r)),
@@ -90,7 +107,7 @@ class ShowNotificationItemState extends StateMVC<ShowNotificationItem> {
                   //height: 80.h,
                   child: Center(
                     child: Text(
-                      Strings.notificationText.tr,
+                      "${widget.notificationModel.description}",
                       style: TextStyleHelper.of(context)
                           .b_16
                           .copyWith(color: ThemeClass.of(context).mainBlack),

@@ -16,6 +16,7 @@ import "package:je_t_aime/Modules/Support/support_screen.dart";
 import "package:je_t_aime/Utilities/shared_preferences.dart";
 import "../Models/cart_item_model.dart";
 import "../Models/categories_product_model.dart";
+import "../Models/order_model.dart";
 import "../Modules/AllCategories/all_categories_screen.dart";
 import "../Modules/Cart/cart_screen.dart";
 import "../Modules/ForgetPassword/forget_password_screen.dart";
@@ -23,6 +24,7 @@ import "../Modules/Home/SearchSccreen/search_screen.dart";
 import "../Modules/Home/home_screen.dart";
 import "../Modules/Login/login_screen.dart";
 import "../Modules/OnBoarding/onboarding_screen.dart";
+import "../Modules/ShowOrderDetails/show_order_screen.dart";
 import "../Modules/PersonalData/personal_data_screen.dart";
 import "../Modules/Policies/policies_screen.dart";
 import "../Modules/PopularProducts/popular_product_screen.dart";
@@ -72,6 +74,19 @@ class GoRouterConfig {
           );
         },
 
+        routes: const <RouteBase>[],
+      ),
+      GoRoute(
+        name: ShowOrderWidget.routeName,
+        path: "/${ShowOrderWidget.routeName}",
+        pageBuilder: (_, GoRouterState state) {
+          final OrderModel model = state.extra as OrderModel;
+          return getCustomTransitionPage(
+            state: state,
+            child:  ShowOrderWidget(
+              orderModel: model),
+          );
+        },
         routes: const <RouteBase>[],
       ),
       GoRoute(
@@ -134,11 +149,13 @@ class GoRouterConfig {
           return getCustomTransitionPage(
             state: state,
             child: ShippingScreen(
-                subtotal: (args["subtotal"] as int).toDouble(), // Convert int to double
-                shippingCost: (args["shippingCost"] as int).toDouble(),
-                // subtotal: args["subtotal"] ,
-                // shippingCost: args["shippingCost"] ,
-                products:args["products"] as List<CartModel>)
+                subtotal: args['subtotal'] as double,
+                products:args['products'] as List<CartModel>)
+                // subtotal: (args["subtotal"] as int).toDouble(), // Convert int to double
+                // shippingCost: (args["shippingCost"] as int).toDouble(),
+                // // subtotal: args["subtotal"] ,
+                // // shippingCost: args["shippingCost"] ,
+                // products:args["products"] as List<CartModel>)
           );
         },
         routes: const <RouteBase>[],
@@ -349,9 +366,13 @@ class GoRouterConfig {
         name: NotificationsScreen.routeName,
         path: "/${NotificationsScreen.routeName}",
         pageBuilder: (_, GoRouterState state) {
+       //   final OrderModel model = state.extra as OrderModel;
           return getCustomTransitionPage(
             state: state,
-            child: const NotificationsScreen(),
+            child:  NotificationsScreen(
+              orderModel: state.extra as OrderModel? ?? OrderModel(),
+           //   model,
+            ),
           );
         },
         routes: const <RouteBase>[],

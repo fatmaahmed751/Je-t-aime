@@ -25,11 +25,13 @@ import "../../generated/assets.dart";
 class ShippingScreen extends StatefulWidget {
   static const routeName = "ShippingScreen";
   final double subtotal;
-  final double shippingCost;
-final List<CartModel> products;
+  final List<CartModel> products;
+//   final double subtotal;
+//   final double shippingCost;
+// final List<CartModel> products;
 
   const ShippingScreen({
-    super.key, required this.subtotal, required this.shippingCost,
+    super.key, required this.subtotal,
    required this.products,
   });
 
@@ -47,11 +49,11 @@ class _ShippingScreenState extends StateMVC<ShippingScreen> {
   @override
   void initState() {
     super.initState();
+    con.init(context);
   }
 
   @override
   void dispose() {
-    // TODO: implement dispose
     con.reset();
     super.dispose();
   }
@@ -248,7 +250,7 @@ class _ShippingScreenState extends StateMVC<ShippingScreen> {
                               ),
                               const Spacer(),
                               Text(
-                                "${widget.shippingCost} ${Strings.jod.tr}",
+                                "${20} ${Strings.jod.tr}",
                                 style: TextStyleHelper.of(context)
                                     .h_16
                                     .copyWith(
@@ -273,7 +275,7 @@ class _ShippingScreenState extends StateMVC<ShippingScreen> {
                             ),
                             const Spacer(),
                             Text(
-                            "${widget.subtotal+widget.shippingCost} ${Strings.jod.tr} ",
+                            "${widget.subtotal+(20)} ${Strings.jod.tr} ",
                               style: TextStyleHelper.of(context).b_16.copyWith(
                                     color: ThemeClass.of(context)
                                         .secondaryBlackColor,

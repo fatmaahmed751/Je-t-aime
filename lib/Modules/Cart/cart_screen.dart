@@ -158,21 +158,12 @@ class _CartScreenState extends StateMVC<CartScreen> {
                             CustomButtonWidget.primary(
                               onTap: ()async {
                               await SharedPref.saveCart(con.cartProducts);
-                             await con.getCartDetails(con.product??Product(), context);
-                              //   context.pushNamed(ShippingScreen.routeName,
-                              //   extra: {
-                              // "subtotal": con.cartDetailsModel?.totalPrice,
-                              //     "shippingCost":con.cartDetailsModel?.shippingCost,
-                              //     "cartProducts": con.cartProducts,
-                              //   },
-                              //   );
-                              // GoRouter.of(context).pushNamed(ShippingScreen.routeName,
-                              //   extra:{
-                              //
-                              //     "subtotal": cartDetailsModel?.totalPrice ?? 0,
-                              //     "shippingCost": cartDetailsModel?.shippingCost ?? 0,
-                              //     "cartProducts": cartDetailsModel?.products ?? [],
-                              //   },);
+                                context.pushNamed(ShippingScreen.routeName,
+                                extra: {
+                               "subtotal":  subtotal,
+                                  "products":con.cartProducts,
+                                },
+                                );
                               },
                               width: 248.w,
                               height: 54.h,

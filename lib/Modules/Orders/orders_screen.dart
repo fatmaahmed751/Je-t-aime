@@ -38,7 +38,6 @@ class _OrdersScreenState extends StateMVC<OrdersScreen> {
   late PagingController<int, OrderModel> _pagingController;
   @override
   void initState() {
-
     super.initState();
     _pagingController = PagingController(firstPageKey: 0);
     con.init(_pagingController);
@@ -97,7 +96,7 @@ class _OrdersScreenState extends StateMVC<OrdersScreen> {
                       child: SizedBox(
                         height: MediaQuery.sizeOf(context).height,
                         child: PagedListView<int, OrderModel>(
-                          physics: const NeverScrollableScrollPhysics(),
+                          physics: const BouncingScrollPhysics(),
                           pagingController: con.pagingController,
                           builderDelegate:
                               PagedChildBuilderDelegate<OrderModel>(

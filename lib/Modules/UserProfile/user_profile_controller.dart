@@ -2,14 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:je_t_aime/Modules/Login/login_screen.dart';
+import "package:je_t_aime/Modules/UserProfile/user_profile_data_handler.dart";
 import 'package:je_t_aime/core/Language/locales.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 import 'package:provider/provider.dart';
 import '../../../Utilities/strings.dart';
 import '../../../core/Language/app_languages.dart';
+import "../../Models/user_model.dart";
 import '../../Utilities/router_config.dart';
+import "../../Utilities/shared_preferences.dart";
 import '../../Widgets/alert_dialoge_widget.dart';
 import '../../Widgets/custom_bottom_sheet_widget.dart';
+import "../Register/register_screen.dart";
 import 'Widget/change_languages_widget.dart';
 
 class UserProfileController extends ControllerMVC {
@@ -78,15 +82,18 @@ class UserProfileController extends ControllerMVC {
         des: Strings.confirmLogout.tr,
         secondButtonText: Strings.logOut.tr,
         mainText: Strings.deleteLogOutSide.tr,
-        onButtonReject: currentContext_!.pop,
-        onButtonAccept: () {
-          GoRouter.of(context).pushNamed(LoginScreen.routeName);
-        },
+        onButtonReject:context.pop,
+        onButtonAccept: ()async {
+    context.pop();
+    await isUserLogOut();
+    setState(() {});
+    },
+
       ),
     );
   }
 
-  Future deleteUserAccountPop(BuildContext context) {
+  deleteUserAccountPop(BuildContext context) {
     return showModalBottomSheet(
       context: context,
       shape: RoundedRectangleBorder(
@@ -98,12 +105,44 @@ class UserProfileController extends ControllerMVC {
         mainText: Strings.deleteAccountSide.tr,
         onButtonReject: currentContext_!.pop,
         onButtonAccept: () {
-          GoRouter.of(context).pushNamed(LoginScreen.routeName);
+          isUserDeleteAccount();
+          GoRouter.of(context).pushNamed(RegisterScreen.routeName);
         },
       ),
     );
   }
-
+  isUserDeleteAccount() async {
+    setState(() {
+      loading = true;
+    });
+    final result = await UserProfileDataHandler.deleteAccount();
+    result.fold((l) {
+    }, (r)async {
+      SharedPref.logout();
+      SharedPref.saveCurrentUser(user:UserModel());
+      GoRouter.of(currentContext_!).pushNamed(LoginScreen.routeName);
+    });
+    await Future.delayed(const Duration(seconds: 2));
+    setState(() {
+      loading = false;
+    });
+  }
+  isUserLogOut() async {
+    setState(() {
+      loading = true;
+    });
+    final result = await UserProfileDataHandler.userLogOut();
+    result.fold((l) {
+    }, (r)async {
+      SharedPref.logout();
+      SharedPref.saveCurrentUser(user:UserModel());
+      GoRouter.of(currentContext_!).pushNamed(LoginScreen.routeName);
+    });
+    await Future.delayed(const Duration(seconds: 2));
+    setState(() {
+      loading = false;
+    });
+  }
   changeLanguageOfApp(BuildContext context) async {
     await loadCurrentLanguage(context);
     showModalBottomSheet(

@@ -39,5 +39,19 @@ class ShippingDataHandler{
       return Left(ServerFailure(failure.errorMessageModel));
     }
   }
+
+  static Future<Either<Failure, ShippingModel>> getDetailsOfShipping(
+  ) async {
+    try {
+
+      ShippingModel response = await GenericRequest<ShippingModel>(
+        method: RequestApi.get(url: APIEndPoint.getShippingDetails,),
+        fromMap:ShippingModel.fromJson
+      ).getObject();
+      return Right(response);
+    } on ServerException catch (failure) {
+      return Left(ServerFailure(failure.errorMessageModel));
+    }
+  }
 }
 

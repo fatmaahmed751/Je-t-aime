@@ -18,17 +18,23 @@ class SplashScreen extends StatefulWidget {
 
 class _SplashScreenState extends StateMVC<SplashScreen> {
   _SplashScreenState() : super(SplashController()) {
-    con = SplashController();
+   con = SplashController();
   }
 
-  late SplashController con;
+late SplashController con;
+ //SplashController get con => controller is SplashController ? controller as SplashController : SplashController();
 
 
   @override
   void initState() {
     super.initState();
-    con.getToken();
-    con.init(context);
+    Future.delayed(const Duration(seconds: 2), () {
+      con.getToken();
+      con.init(context);
+      // Navigate to the next screen
+    });
+    // con.getToken();
+    // con.init(context);
   }
 
   @override
