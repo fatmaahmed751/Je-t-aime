@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 
+import "../../Models/user_model.dart";
+import "../../Utilities/shared_preferences.dart";
+
 class PersonalDataController extends ControllerMVC {
   // singleton
   factory PersonalDataController() {
@@ -17,14 +20,15 @@ class PersonalDataController extends ControllerMVC {
       phoneController,
       addressController,
       emailController;
+  User? user;
 
   @override
   void initState() {
     //controller = CustomPopupMenuController();
-    nameController = TextEditingController();
-    phoneController = TextEditingController();
+    nameController = TextEditingController(text:"${SharedPref.getCurrentUser()?.user?.name}"??"");
+    phoneController = TextEditingController(text:"${SharedPref.getCurrentUser()?.user?.phone}"??"");
     addressController = TextEditingController();
-    emailController = TextEditingController();
+    emailController = TextEditingController(text:"${SharedPref.getCurrentUser()?.user?.email}"??"");
     super.initState();
   }
 

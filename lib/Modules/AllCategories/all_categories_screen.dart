@@ -38,7 +38,7 @@ class _AllCategoriesScreenState extends StateMVC<AllCategoriesScreen> {
   @override
   void initState() {
     super.initState();
-    con.init(categoryIdd: widget.model?.id ??1);
+    con.init(categoryIdd: widget.model?.id ?? 1);
   }
 
   @override
@@ -59,79 +59,115 @@ class _AllCategoriesScreenState extends StateMVC<AllCategoriesScreen> {
       body: LoadingScreen(
         loading: con.loading,
         child: Padding(
-          padding: EdgeInsets.symmetric(vertical: 15.h),
-          child: CustomScrollView(
-            slivers: [
-              SliverPadding(
-                padding: EdgeInsets.symmetric(horizontal: 15.w),
-                sliver: PagedSliverGrid<int, CategoryProductModel>(
-                  pagingController: con.pagingController,
-                  gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-                    maxCrossAxisExtent: 280, // Adjust as needed
-                    mainAxisSpacing: 12.h,
-                    crossAxisSpacing: 12.w,
-                    childAspectRatio: 0.8, // Adjust as needed
-                  ),
-                  builderDelegate:
-                      PagedChildBuilderDelegate<CategoryProductModel>(
-                    itemBuilder: (context, category, index) {
-                      print("Category Length: ${con.pagingController.itemList?.length ?? 0}");
-                      print("Attempting to access index: $index");
-                      return CustomCategoryProductContainerWidget(
-                          categoryProductModel: category,
-                          addToCart: () {
-                            print("heeeeeeeeeeel");
-                          },
-                          onFavoritePressed: () async {
-                            print("Categories Length: ${con.pagingController.itemList?.length ?? 0}");
-                            print("Attempting to access index: $index");
+          padding: EdgeInsets.symmetric(horizontal: 15.w),
+          child: Column(
+            children: [
+              Row(
+                children: [
+                  SearchWidget(
+                      width: 300.w,
+                      backGroundColor: ThemeClass.of(context)
+                          .secondary
+                          .withAlpha((1 * 255).toInt()),
+                      onSearch: (String? text) {},
+                      isSearch: true,
+                      controller: con.searchController,
+                      onRemove: () {},
+                      onChange: (String? value) {}),
+                  Gap(10.w),
+                  GestureDetector(
+                      onTap: () {
+                        con.filterBottomSheet(context);
+                      },
+                      child: SvgPicture.asset(Assets.imagesFilterIcon))
+                ],
+              ),
+              Expanded(
+                child: Padding(
+                  padding: EdgeInsets.symmetric(vertical: 16.h),
+                  child: CustomScrollView(
+                    slivers: [
+                      SliverPadding(
+                        padding: EdgeInsets.symmetric(horizontal: 5.w),
+                        sliver: PagedSliverGrid<int, CategoryProductModel>(
+                          pagingController: con.pagingController,
+                          gridDelegate:
+                              SliverGridDelegateWithMaxCrossAxisExtent(
+                            maxCrossAxisExtent: 280, // Adjust as needed
+                            mainAxisSpacing: 12.h,
+                            crossAxisSpacing: 12.w,
+                            childAspectRatio: 0.8, // Adjust as needed
+                          ),
+                          builderDelegate:
+                              PagedChildBuilderDelegate<CategoryProductModel>(
+                            itemBuilder: (context, category, index) {
+                              print(
+                                  "Category Length: ${con.pagingController.itemList?.length ?? 0}");
+                              print("Attempting to access index: $index");
+                              return CustomCategoryProductContainerWidget(
+                                  categoryProductModel: category,
+                                  addToCart: () {
+                                    con.addProductToCart(
+                                        context: context,
+                                        category: con.categories[index]);
+                                  },
+                                  onFavoritePressed: () async {
+                                    print(
+                                        "Categories Length: ${con.pagingController.itemList?.length ?? 0}");
+                                    print("Attempting to access index: $index");
 
-
-                            if (category.isFavorite == 0) {
-                              if (SharedPref.getCurrentUser()?.token != null &&
-                                  SharedPref.getCurrentUser()!
-                                      .token!
-                                      .isNotEmpty) {
-                                await con.addToFavorite(
-                                    context: context,
-                                    product: category);
-                                setState(() {
-                                  category.isFavorite = 1;
-                                });
-                                //con.categories[index].isFavorite = 1;
-                              } else {
-                                con.unLoginWidget(context);
-                              }
-                            } else {
-                              if (SharedPref.getCurrentUser()?.token != null &&
-                                  SharedPref.getCurrentUser()!
-                                      .token!
-                                      .isNotEmpty) {
-                                setState(() {
-                                  category.isFavorite = 0;
-                                });
-                                // con.products[index].isFavorite = 0;
-                                // con.deleteFavorite(productId: con.products[index].id??0);
-                                ToastHelper.showSuccess(
-                                  context: context,
-                                  message: Strings.delete.tr,
-                                  icon: SvgPicture.asset(
-                                    Assets.imagesSubmit,
-                                    width: 60.w,
-                                    height: 50.h,
-                                    fit: BoxFit.cover,
-                                  ),
-                                  backgroundColor:
-                                      ThemeClass.of(context).primaryColor,
-                                );
-                              } else {
-                                con.unLoginWidget(context);
-                              }
-                            }
-                          }
-                          // productsModel: PopularProductsModel(),
-                          );
-                    },
+                                    if (category.isFavorite == 0) {
+                                      if (SharedPref.getCurrentUser()?.token !=
+                                              null &&
+                                          SharedPref.getCurrentUser()!
+                                              .token!
+                                              .isNotEmpty) {
+                                        await con.addToFavorite(
+                                            context: context,
+                                            product: category);
+                                        setState(() {
+                                          category.isFavorite = 1;
+                                        });
+                                        //con.categories[index].isFavorite = 1;
+                                      } else {
+                                        con.unLoginWidget(context);
+                                      }
+                                    } else {
+                                      if (SharedPref.getCurrentUser()?.token !=
+                                              null &&
+                                          SharedPref.getCurrentUser()!
+                                              .token!
+                                              .isNotEmpty) {
+                                        setState(() {
+                                          category.isFavorite = 0;
+                                        });
+                                        // con.products[index].isFavorite = 0;
+                                        // con.deleteFavorite(productId: con.products[index].id??0);
+                                        ToastHelper.showSuccess(
+                                          context: context,
+                                          message: Strings.delete.tr,
+                                          icon: SvgPicture.asset(
+                                            Assets.imagesSubmit,
+                                            width: 60.w,
+                                            height: 50.h,
+                                            fit: BoxFit.cover,
+                                          ),
+                                          backgroundColor:
+                                              ThemeClass.of(context)
+                                                  .primaryColor,
+                                        );
+                                      } else {
+                                        con.unLoginWidget(context);
+                                      }
+                                    }
+                                  }
+                                  // productsModel: PopularProductsModel(),
+                                  );
+                            },
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
               ),

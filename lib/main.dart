@@ -85,7 +85,11 @@ Future<void> main() async {
           initialData: isConnected, // Use the initial connectivity status
         ),
       ],
-      child: const ConnectivityWrapper(child: EntryPoint()),
+      child:EntryPoint()
+      // const ConnectivityWrapper(
+      //     child:
+      //     EntryPoint()
+      // ),
     ),
   );
 }
@@ -103,7 +107,7 @@ class _EntryPointState extends State<EntryPoint> {
   @override
   void initState() {
     super.initState();
-    Future.delayed(const Duration(seconds: 4), () {
+    Future.delayed(const Duration(milliseconds: 100), () {
       FlutterNativeSplash.remove(); // Remove native splash
       setState(() {
         showMainApp = true;

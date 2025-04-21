@@ -250,7 +250,7 @@ class MainDetailsAppBarWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsetsDirectional.only(top: 20.h),
+      padding: EdgeInsetsDirectional.only(top: 30.h),
       child: Container(
         // color: Colors.red,
         child: Row(

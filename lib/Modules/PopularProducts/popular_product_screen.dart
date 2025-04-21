@@ -79,7 +79,7 @@ class PopularProductsScreenState extends StateMVC<PopularProductsScreen> {
               ),
               Expanded(
                 child: Padding(
-                  padding: EdgeInsets.symmetric(vertical: 20.h),
+                  padding: EdgeInsets.symmetric(vertical:16.h),
                   child: CustomScrollView(
                     physics: const NeverScrollableScrollPhysics(),
                     slivers: [
@@ -96,7 +96,11 @@ class PopularProductsScreenState extends StateMVC<PopularProductsScreen> {
                           builderDelegate: PagedChildBuilderDelegate<PopularProductsModel>(
                             itemBuilder: (context, item, index) {
                               return CustomProductContainerWidget(
-                                addToCart: (){},
+                                addToCart: () {
+                                  con.addProductToCart(
+                                      context: context,
+                                      product: con.products[index]);
+                                },
                                   productsModel: item,
                                 onFavoritePressed: () async {
                                   if (con.products[index].isFavorite == 0) {

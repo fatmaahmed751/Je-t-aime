@@ -39,12 +39,12 @@ class ShippingController extends ControllerMVC {
 
   @override
   void initState() {
-    nameController = TextEditingController();
-    addressController = TextEditingController();
-    phoneController = TextEditingController();
-    // nameController = TextEditingController(text:"${shippingModel?.name}"??"");
-    // addressController = TextEditingController(text:"${shippingModel?.address}"??"");
-    // phoneController = TextEditingController(text:"${shippingModel?.phone}"??"");
+    // nameController = TextEditingController();
+    // addressController = TextEditingController();
+    // phoneController = TextEditingController();
+    nameController = TextEditingController(text:"${shippingModel?.name}"??"");
+    addressController = TextEditingController(text:"${shippingModel?.address}"??"");
+    phoneController = TextEditingController(text:"${shippingModel?.phone}"??"");
     super.initState();
   }
 

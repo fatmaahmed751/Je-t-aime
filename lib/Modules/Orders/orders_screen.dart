@@ -96,6 +96,7 @@ class _OrdersScreenState extends StateMVC<OrdersScreen> {
                       child: SizedBox(
                         height: MediaQuery.sizeOf(context).height,
                         child: PagedListView<int, OrderModel>(
+                          padding: EdgeInsets.zero,
                           physics: const BouncingScrollPhysics(),
                           pagingController: con.pagingController,
                           builderDelegate:

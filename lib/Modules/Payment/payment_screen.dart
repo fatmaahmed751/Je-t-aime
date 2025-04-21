@@ -1,20 +1,20 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:gap/gap.dart';
+import "package:flutter/material.dart";
+import "package:flutter_screenutil/flutter_screenutil.dart";
+import "package:flutter_svg/svg.dart";
+import "package:gap/gap.dart";
 import "package:je_t_aime/Models/shipping_product_model.dart";
-import 'package:je_t_aime/Modules/Payment/payment_controller.dart';
-import 'package:je_t_aime/core/Language/locales.dart';
-import 'package:mvc_pattern/mvc_pattern.dart';
-import '../../Utilities/strings.dart';
-import '../../Widgets/custom_app_bar_widget.dart';
-import '../../Widgets/loading_screen.dart';
-import '../../generated/assets.dart';
-import 'Widgets/cash_payment_method_widget.dart';
-import 'Widgets/visa_payment_method_widget.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import '../../../Utilities/text_style_helper.dart';
-import '../../../Utilities/theme_helper.dart';
+import "package:je_t_aime/Modules/Payment/payment_controller.dart";
+import "package:je_t_aime/core/Language/locales.dart";
+import "package:mvc_pattern/mvc_pattern.dart";
+import "../../Utilities/strings.dart";
+import "../../Widgets/custom_app_bar_widget.dart";
+import "../../Widgets/loading_screen.dart";
+import "../../generated/assets.dart";
+import "Widgets/cash_payment_method_widget.dart";
+import "Widgets/visa_payment_method_widget.dart";
+import "package:flutter_svg/flutter_svg.dart";
+import "../../../Utilities/text_style_helper.dart";
+import "../../../Utilities/theme_helper.dart";
 
 class PaymentScreen extends StatefulWidget {
   static const routeName = "PaymentScreen";
@@ -110,7 +110,7 @@ class PaymentScreenState extends StateMVC<PaymentScreen> {
             },
             child: Container(
               padding: EdgeInsetsDirectional.symmetric(
-                  horizontal: 16.w, vertical: 13.h),
+                  horizontal: 16.w, vertical: 16.h),
               width: 170.w,
               height: 56.h,
               decoration: BoxDecoration(

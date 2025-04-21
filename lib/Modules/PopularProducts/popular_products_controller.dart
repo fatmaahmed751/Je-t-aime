@@ -16,6 +16,7 @@ import "../../Utilities/theme_helper.dart";
 import "../../Widgets/custom_home_details_text_widget.dart";
 import "../../Widgets/toast_helper.dart";
 import "../../generated/assets.dart";
+import "../Cart/cart_data_handler.dart";
 import "../Home/Widgets/un_login_widget.dart";
 import "../Home/home_data_handler.dart";
 import "../ProductDetails/Widgets/custom_check_box_widget.dart";
@@ -39,6 +40,7 @@ class PopularProductController extends ControllerMVC {
   late TextEditingController endController;
   List<PopularProductsModel> products = [];
   static const pageSize =10;
+  int quyCount = 1;
   final bool _isDisposed = false;
 
   PagingController<int, PopularProductsModel> get pagingController => _pagingController;
@@ -174,38 +176,7 @@ class PopularProductController extends ControllerMVC {
     );
   }
 
-  // Future<void> getProducts(int pageKey) async {
-  //   try {
-  //     final newItems = await PopularProductsDataHandler.getAllPopularProducts(
-  //       pageKey,
-  //       pageSize,
-  //     );
-  //     if (_isDisposed) return; // Cancel if disposed
-  //
-  //     newItems.fold(
-  //           (failure) {
-  //         if (!_isDisposed) { // Check if disposed
-  //           _pagingController.error = failure;
-  //         }
-  //       },
-  //           (categories) {
-  //         if (!_isDisposed) { // Check if disposed
-  //           final isLastPage = products.length < pageSize;
-  //           if (isLastPage) {
-  //             _pagingController.appendLastPage(products);
-  //           } else {
-  //             final nextPageKey = pageKey + products.length;
-  //             _pagingController.appendPage(products, nextPageKey);
-  //           }
-  //         }
-  //       },
-  //     );
-  //   } catch (error) {
-  //     if (!_isDisposed) { // Check if disposed
-  //       _pagingController.error = error;
-  //     }
-  //   }
-  // }
+
   Future filterBottomSheet(BuildContext context) {
     return showModalBottomSheet(
       context: context,
@@ -230,6 +201,39 @@ class PopularProductController extends ControllerMVC {
     );
   }
 
+  addProductToCart({
+    required BuildContext context, required PopularProductsModel product})
+  async {
+    setState(() {
+      loading = true;
+    });
+    print("Product ID: ${product.id}, Quantity: $quyCount");
+    final result = await CartDataHandler.addToCart(
+        productId: product.id ?? 0,
+        quantity: quyCount);
+    result.fold((l) {
+      ToastHelper.showError(message: l.toString());
+    }, (r) {
+      ToastHelper.showSuccess(
+        context: context,
+        message: Strings.addToCartSuccess.tr,
+        icon: SvgPicture.asset(
+          Assets.imagesSubmit,
+          width: 60.w,
+          height: 50.h,
+          fit: BoxFit.cover,
+        ),
+        backgroundColor:
+        ThemeClass
+            .of(context)
+            .primaryColor,
+      );
+      print("addddddd");
+    });
+    setState(() {
+      loading = false;
+    });
+  }
 
   getHomeDetails() async {
     loading = true;

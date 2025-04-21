@@ -69,12 +69,12 @@ class UserModel {
   });
 
   // Empty instance
-  factory UserModel.empty() {
-    return UserModel(
-      user: User.empty(),
-      token: '',
-    );
-  }
+  // factory UserModel.empty() {
+  //   return UserModel(
+  //     user: User.empty(),
+  //     token: '',
+  //   );
+  // }
 
   factory UserModel.fromJson(Map<String, dynamic> json) => UserModel(
     user: json["user"] == null ? null : User.fromJson(json["user"]),
@@ -103,15 +103,15 @@ class User {
   });
 
   // Empty instance
-  factory User.empty() {
-    return User(
-      id: 0,
-      name: '',
-      email: '',
-      phone: '',
-      image: '',
-    );
-  }
+  // factory User.empty() {
+  //   return User(
+  //     id: 0,
+  //     name: '',
+  //     email: '',
+  //     phone: '',
+  //     image: '',
+  //   );
+  // }
 
   factory User.fromJson(Map<String, dynamic> json) => User(
     id: json["id"],

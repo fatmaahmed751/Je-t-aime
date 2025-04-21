@@ -219,6 +219,7 @@ class Strings {
   static const String totalPrice = "totalPrice";
   static const String orderStatus = "orderStatus";
   static const String inProgress = "inProgress";
+  static const String viewDetails = "viewDetails";
   static const String delivery = "delivery";
   static const String orderDetails = "orderDetails";
   static const String exploreProducts = "exploreProducts";

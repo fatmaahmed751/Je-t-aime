@@ -121,8 +121,7 @@ class HomeController extends ControllerMVC {
           ),
     );
   }
-  addProductToCart(
-      {required BuildContext context, required PopularProductsModel product}) async {
+  addProductToCart({required BuildContext context, required PopularProductsModel product}) async {
     setState(() {
       loading = true;
     });

@@ -34,11 +34,13 @@ class CustomCategoryProductContainerWidget extends StatelessWidget {
         extra:categoryProductModel.id );
       },
       child: Container(
-        constraints: BoxConstraints(
-          minHeight: 220.h,
-          maxHeight: double.infinity,
-        ),
+        height: 217.h,
         width: 175.w,
+        // constraints: BoxConstraints(
+        //   minHeight: 220.h,
+        //   maxHeight: double.infinity,
+        // ),
+        // width: 175.w,
         decoration: BoxDecoration(
           color: ThemeClass.of(context).background,
           borderRadius: BorderRadius.circular(30.r),

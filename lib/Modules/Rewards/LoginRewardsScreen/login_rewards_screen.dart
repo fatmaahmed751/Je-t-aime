@@ -1,19 +1,19 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:gap/gap.dart';
-import 'package:je_t_aime/core/Language/locales.dart';
-import 'package:mvc_pattern/mvc_pattern.dart';
-import '../../../../Utilities/text_style_helper.dart';
-import '../../../../Utilities/theme_helper.dart';
-import '../../../../Widgets/loading_screen.dart';
-import '../../../Utilities/shared_preferences.dart';
-import '../../../Utilities/strings.dart';
-import '../../../Widgets/custom_app_bar_widget.dart';
-import '../../../Widgets/custom_details_side_text.dart';
-import '../../../generated/assets.dart';
-import '../widgets/earn_points_widget.dart';
-import 'login_reward_controller.dart';
+import "package:flutter/material.dart";
+import "package:flutter_screenutil/flutter_screenutil.dart";
+import "package:flutter_svg/flutter_svg.dart";
+import "package:gap/gap.dart";
+import "package:je_t_aime/core/Language/locales.dart";
+import "package:mvc_pattern/mvc_pattern.dart";
+import "../../../../Utilities/text_style_helper.dart";
+import "../../../../Utilities/theme_helper.dart";
+import "../../../../Widgets/loading_screen.dart";
+import "../../../Utilities/shared_preferences.dart";
+import "../../../Utilities/strings.dart";
+import "../../../Widgets/custom_app_bar_widget.dart";
+import "../../../Widgets/custom_details_side_text.dart";
+import "../../../generated/assets.dart";
+import "../widgets/earn_points_widget.dart";
+import "login_reward_controller.dart";
 
 class LoginRewardsScreen extends StatefulWidget {
   static const routeName = "LoginRewards";
@@ -38,18 +38,19 @@ class _LoginRewardsScreenState extends StateMVC<LoginRewardsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: PreferredSize(
-        preferredSize: Size(0, 75.h),
+        preferredSize: Size(0, 70.h),
         child: CustomAppBarWidget.detailsScreen(
           title: Strings.rewards.tr,
           icon: "",
         ),
       ),
-      body: LoadingScreen(
-        loading: con.loading,
-        child: SafeArea(
+      body: SafeArea(
+        child: LoadingScreen(
+          loading: con.loading,
           child: Padding(
             padding: EdgeInsetsDirectional.symmetric(horizontal: 24.w),
             child: ListView(
+              padding: EdgeInsets.zero,
               physics: const BouncingScrollPhysics(),
               children: [
                 Stack(
@@ -88,7 +89,7 @@ class _LoginRewardsScreenState extends StateMVC<LoginRewardsScreen> {
                     ),
                   ],
                 ),
-                Gap(24.h),
+                Gap(16.h),
                 CustomDetailsSideTextWidget(text: Strings.transactions.tr),
                 Gap(16.h),
                 ListView.separated(
@@ -130,7 +131,6 @@ class _LoginRewardsScreenState extends StateMVC<LoginRewardsScreen> {
               ],
             ),
           ),
-          // const NotLoginRewardsWidget()
         ),
       ),
     );

@@ -41,21 +41,7 @@ class _HomeScreenState extends StateMVC<HomeScreen> {
     super.initState();
   }
 
-//     HomeController().controller.addListener(_updateView);
-// }
-//   @override
-//   void dispose() {
-//     // Remove the listener when the screen is disposed
-//     HomeController().controller.removeListener(_updateView);
-//     super.dispose();
-//   }
-//   void _updateView() {
-//     // Define what should happen when the controller state changes
-//     setState(() {
-//       // Update the UI or trigger some action here
-//     });
-//
-//   }
+
   int selected = 0;
   @override
   Widget build(BuildContext context) {
