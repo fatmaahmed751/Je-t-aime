@@ -10,6 +10,7 @@ import "package:je_t_aime/core/Language/locales.dart";
 import "package:mvc_pattern/mvc_pattern.dart";
 import "../../Models/popular_products_model.dart";
 import "../../Utilities/router_config.dart";
+import "../../Utilities/shared_preferences.dart";
 import "../../Utilities/strings.dart";
 import "../../Utilities/text_style_helper.dart";
 import "../../Utilities/theme_helper.dart";
@@ -39,14 +40,15 @@ class PopularProductController extends ControllerMVC {
   late TextEditingController startController;
   late TextEditingController endController;
   List<PopularProductsModel> products = [];
-  static const pageSize =10;
+  static const pageSize = 10;
   int quyCount = 1;
   final bool _isDisposed = false;
 
-  PagingController<int, PopularProductsModel> get pagingController => _pagingController;
+  PagingController<int, PopularProductsModel> get pagingController =>
+      _pagingController;
 
   final PagingController<int, PopularProductsModel> _pagingController =
-  PagingController(firstPageKey: 0);
+      PagingController(firstPageKey: 0);
   @override
   void initState() {
     searchController = TextEditingController();
@@ -69,9 +71,39 @@ class PopularProductController extends ControllerMVC {
   init() {
     if (_pagingController.itemList == null ||
         _pagingController.itemList!.isEmpty) {
+      _pagingController.refresh();
       getProducts(_pagingController.firstPageKey);
     }
   }
+
+  Future<void> getProducts(int pageKey) async {
+    final newItems = await PopularProductsDataHandler.getAllPopularProducts(
+        pageKey, pageSize);
+    newItems.fold(
+          (failure) {
+        _pagingController.error = failure;
+      },
+          (products) {
+        final uniqueProducts = products.where((product) {
+      // Use an empty list if _pagingController.itemList is null
+      final itemList = _pagingController.itemList ?? [];
+      return !itemList.any((existingProduct) {
+        return existingProduct.id == product.id; // Assuming `id` is unique
+      });
+    }).toList();
+        final isLastPage = products.length < pageSize;
+        if (isLastPage) {
+          _pagingController.appendLastPage(uniqueProducts);
+        } else {
+          final nextPageKey = pageKey + products.length;
+          _pagingController.appendPage(uniqueProducts, nextPageKey);
+        }
+      },
+    );
+  }
+
+
+
   unLoginWidget(BuildContext context) {
     return showModalBottomSheet(
       context: context,
@@ -79,14 +111,16 @@ class PopularProductController extends ControllerMVC {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(30.r)),
       ),
-      builder: (context) =>
-          UnLoginWidgetBottomSheet(
-            image: Assets.imagesNotRated,
-            text: Strings.notRated.tr,
-          ),
+      builder: (context) => UnLoginWidgetBottomSheet(
+        image: Assets.imagesNotRated,
+        text: Strings.notRated.tr,
+      ),
     );
   }
-  addToFavorite({required PopularProductsModel product, required BuildContext context}) async {
+
+  addToFavorite(
+      {required PopularProductsModel product,
+      required BuildContext context}) async {
     setState(() {
       loading = true;
     });
@@ -105,16 +139,14 @@ class PopularProductController extends ControllerMVC {
           height: 50.h,
           fit: BoxFit.cover,
         ),
-        backgroundColor:
-        ThemeClass
-            .of(context)
-            .primaryColor,
+        backgroundColor: ThemeClass.of(context).primaryColor,
       );
     });
     setState(() {
       loading = false;
     });
   }
+
   Future onSearchReq({String? search}) async {
     loading = true;
 
@@ -138,7 +170,6 @@ class PopularProductController extends ControllerMVC {
     if (search == null || search.isEmpty) return;
   }
 
-
   Future getCategoryProducts({required int categoryId}) async {
     loading = true;
 
@@ -158,23 +189,7 @@ class PopularProductController extends ControllerMVC {
       loading = false;
     });
   }
-  Future<void> getProducts(int pageKey) async {
-    final newItems = await PopularProductsDataHandler.getAllPopularProducts(pageKey, pageSize);
-    newItems.fold(
-          (failure) {
-        _pagingController.error = failure;
-      },
-          (products) {
-        final isLastPage = products.length < pageSize;
-        if (isLastPage) {
-          _pagingController.appendLastPage(products);
-        } else {
-          final nextPageKey = pageKey + products.length;
-          _pagingController.appendPage(products, nextPageKey);
-        }
-      },
-    );
-  }
+
 
 
   Future filterBottomSheet(BuildContext context) {
@@ -200,17 +215,20 @@ class PopularProductController extends ControllerMVC {
           endController: endController),
     );
   }
-
-  addProductToCart({
-    required BuildContext context, required PopularProductsModel product})
-  async {
+  Future<bool> isProductInCart(int productId) async {
+    final cartProducts = await SharedPref.getCart();
+    return cartProducts.any((cartProduct) => cartProduct.id == productId);
+  }
+  addProductToCart(
+      {required BuildContext context,
+      required PopularProductsModel product}) async {
     setState(() {
       loading = true;
     });
+
     print("Product ID: ${product.id}, Quantity: $quyCount");
     final result = await CartDataHandler.addToCart(
-        productId: product.id ?? 0,
-        quantity: quyCount);
+        productId: product.id ?? 0, quantity: quyCount);
     result.fold((l) {
       ToastHelper.showError(message: l.toString());
     }, (r) {
@@ -223,10 +241,7 @@ class PopularProductController extends ControllerMVC {
           height: 50.h,
           fit: BoxFit.cover,
         ),
-        backgroundColor:
-        ThemeClass
-            .of(context)
-            .primaryColor,
+        backgroundColor: ThemeClass.of(context).primaryColor,
       );
       print("addddddd");
     });

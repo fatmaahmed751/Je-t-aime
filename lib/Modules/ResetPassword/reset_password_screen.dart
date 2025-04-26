@@ -17,8 +17,8 @@ import 'reset_password_controller.dart';
 
 class ResetPasswordScreen extends StatefulWidget {
   static const routeName = "ResetPassword";
-  const ResetPasswordScreen({Key? key, required this.id}) : super(key: key);
-  final int id;
+  const ResetPasswordScreen({Key? key, required this.email}) : super(key: key);
+  final String email;
   @override
   createState() => _ResetPasswordScreenState();
 }
@@ -33,8 +33,8 @@ class _ResetPasswordScreenState extends StateMVC<ResetPasswordScreen> {
   @override
   void initState() {
     super.initState();
-    con.userId = widget.id;
-    print("User ID in ResetPassword${widget.id}");
+    con.email = widget.email;
+    print("User ID in ResetPassword${widget.email}");
   }
 
   @override

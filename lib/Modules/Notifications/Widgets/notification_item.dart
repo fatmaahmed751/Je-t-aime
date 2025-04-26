@@ -49,7 +49,7 @@ class ShowNotificationItemState extends StateMVC<ShowNotificationItem> {
         notificationIsRead = 1;
         widget.notificationModel.isRead = 1;
       });
-      await con.allReadNotifications(orderId: widget.orderModel.id??0,
+      await con.allReadNotifications(orderId: widget.notificationModel.typeId??0,
           notificationId: widget.notificationModel.id??"" );
       final notificationProvider = Provider.of<NotificationCountProvider>(context, listen: false);
       await notificationProvider.decrementChatTotalCount(singleCount: 1);
@@ -58,15 +58,10 @@ class ShowNotificationItemState extends StateMVC<ShowNotificationItem> {
 
   @override
   Widget build(BuildContext context) {
-    // print("Rendering notification: ${widget.notificationModel.id}");
     print("isss reaaad${notificationIsRead}");
     return GestureDetector(
       onTap: () async {
-        await markNotificationAsRead();
-        if (widget.orderModel.id != null) {
-          // Only navigate if we have a valid order
-          await con.showOrderDetails(orderInfoId: widget.orderModel.id!);
-        }
+       await markNotificationAsRead();
 
       },
       child: Padding(

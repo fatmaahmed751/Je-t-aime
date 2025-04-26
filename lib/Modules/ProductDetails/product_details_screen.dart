@@ -232,7 +232,7 @@ class ProductDetailsScreenState extends StateMVC<ProductDetailsScreen> {
               if (isProductInCart) {
                 // Product is already in the cart, show a message
                 ToastHelper.showError(
-                    message: "Product is already in the cart");
+                    message: Strings.productInCart.tr);
                 return;
               }
               con.addToCartSheet(context);

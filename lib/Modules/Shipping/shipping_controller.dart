@@ -19,6 +19,7 @@ import "../../Utilities/theme_helper.dart";
 import "../../Widgets/toast_helper.dart";
 import "../../generated/assets.dart";
 import "../Cart/cart_data_handler.dart";
+import "../Home/Widgets/un_login_widget.dart";
 
 class ShippingController extends ControllerMVC {
   // singleton
@@ -125,7 +126,19 @@ class ShippingController extends ControllerMVC {
       loading = false;
     });
   }
-
+  unLoginWidget(BuildContext context) {
+    return showModalBottomSheet(
+      context: context,
+      // isScrollControlled: true,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(30.r)),
+      ),
+      builder: (context) => UnLoginWidgetBottomSheet(
+        image: Assets.imagesNotRated,
+        text: Strings.notLogin.tr,
+      ),
+    );
+  }
   finishShipping({required BuildContext context}) async {
     setState(() {
       loading = true;

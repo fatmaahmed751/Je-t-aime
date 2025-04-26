@@ -204,125 +204,128 @@ class ProductItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
      final int totalPrice = (cartModel.price ?? 0) * counter;
-    return Container(
-      // height: 140.h,
-      decoration: BoxDecoration(
-        color: ThemeClass.of(context).background,
-        borderRadius: BorderRadius.circular(30.r),
-        border: Border.all(
-          color: ThemeClass.of(context).secondaryBlackColor.withAlpha((0.15 * 255).toInt()),
+    return Padding(
+      padding:  EdgeInsetsDirectional.symmetric(vertical: 4.h),
+      child: Container(
+        // height: 140.h,
+        decoration: BoxDecoration(
+          color: ThemeClass.of(context).background,
+          borderRadius: BorderRadius.circular(30.r),
+          border: Border.all(
+            color: ThemeClass.of(context).secondaryBlackColor.withAlpha((0.15 * 255).toInt()),
+          ),
+          boxShadow: [
+            BoxShadow(
+                color:
+                    ThemeClass.of(context).secondaryBlackColor.withAlpha((0.15 * 255).toInt()),
+                blurRadius: 1,
+                spreadRadius: 0.5),
+          ],
         ),
-        boxShadow: [
-          BoxShadow(
-              color:
-                  ThemeClass.of(context).secondaryBlackColor.withAlpha((0.15 * 255).toInt()),
-              blurRadius: 1,
-              spreadRadius: 0.5),
-        ],
-      ),
-      child: Padding(
-        padding: EdgeInsetsDirectional.only(
-          start: 12.w,
-          top: 8.h,
-          bottom: 8.h,
-        ),
-        child: Row(
-          children: [
-            Container(
-              width: 96.w,
-              height: 96.h,
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(14.r),
-                  color: ThemeClass.of(context).containerColor),
-              child: Padding(
-                padding: EdgeInsetsDirectional.symmetric(vertical: 8.h),
-                child: _buildImageWidget(cartModel.image),
+        child: Padding(
+          padding: EdgeInsetsDirectional.only(
+            start: 12.w,
+            top: 8.h,
+            bottom: 8.h,
+          ),
+          child: Row(
+            children: [
+              Container(
+                width: 96.w,
+                height: 96.h,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(14.r),
+                    color: ThemeClass.of(context).containerColor),
+                child: Padding(
+                  padding: EdgeInsetsDirectional.symmetric(vertical: 8.h),
+                  child: _buildImageWidget(cartModel.image),
+                ),
               ),
-            ),
-            Gap(8.w),
-            Expanded(
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                // mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  SizedBox(
-                    height: 38.h,
-                    child: Row(
-                      // mainAxisSize: MainAxisSize.min,
+              Gap(8.w),
+              Expanded(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    SizedBox(
+                      height: 38.h,
+                      child: Row(
+                        // mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Text(
+                            cartModel.title??"",
+                            style: TextStyleHelper.of(context).b_16.copyWith(
+                                color: ThemeClass.of(context).mainBlack),
+                          ),
+                          const Spacer(), // Moves the delete icon to the end of the row
+                          IconButton(
+                              icon: SvgPicture.asset(Assets.imagesClose),
+                              onPressed:
+                              onRemoveWarning,
+                              ),
+                        ],
+                      ),
+                    ),
+                    Text(
+                         "$totalPrice ${Strings.jod.tr}",
+                        style: TextStyleHelper.of(context).h_16.copyWith(
+                              color: ThemeClass.of(context).primaryColor,
+                            )),
+                    Gap(8.h),
+                    Row(
                       children: [
-                        Text(
-                          Strings.productDesc.tr,
-                          style: TextStyleHelper.of(context).b_16.copyWith(
-                              color: ThemeClass.of(context).mainBlack),
+                        Container(
+                          width: 32.w,
+                          height: 32.h,
+                          decoration: BoxDecoration(
+                            color: ThemeClass.of(context).secondary,
+                            shape: BoxShape.circle,
+                          ),
+                          child: Center(
+                            child: InkWell(
+                                onTap:
+                                decrementCounter,
+                                child: Icon(Icons.remove,
+                                    color: ThemeClass.of(context)
+                                        .secondaryBlackColor,
+                                    size: 16)),
+                          ),
                         ),
-                        const Spacer(), // Moves the delete icon to the end of the row
-                        IconButton(
-                            icon: SvgPicture.asset(Assets.imagesClose),
-                            onPressed:
-                            onRemoveWarning,
-                            ),
+                        Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 16.w),
+                          child: Text(
+
+                           "$counter", // Display the counter value
+                            style: TextStyleHelper.of(context).b_16.copyWith(
+                                color: ThemeClass.of(context).mainBlack,
+                                fontWeight: FontWeight.w500),
+                          ),
+                        ),
+                        Container(
+                          width: 32.w,
+                          height: 32.h,
+                          decoration: BoxDecoration(
+                            color: ThemeClass.of(context).primaryColor,
+                            shape: BoxShape.circle,
+                          ),
+                          child: Center(
+                            child: InkWell(
+                                onTap:
+                                incrementCounter,
+                                child: Icon(Icons.add,
+                                    color: ThemeClass.of(context).background,
+                                    size: 16)),
+                          ),
+                        ),
                       ],
                     ),
-                  ),
-                  Text(
-                       "$totalPrice ${Strings.jod.tr}",
-                      style: TextStyleHelper.of(context).h_16.copyWith(
-                            color: ThemeClass.of(context).primaryColor,
-                          )),
-                  Gap(8.h),
-                  Row(
-                    children: [
-                      Container(
-                        width: 32.w,
-                        height: 32.h,
-                        decoration: BoxDecoration(
-                          color: ThemeClass.of(context).secondary,
-                          shape: BoxShape.circle,
-                        ),
-                        child: Center(
-                          child: InkWell(
-                              onTap:
-                              decrementCounter,
-                              child: Icon(Icons.remove,
-                                  color: ThemeClass.of(context)
-                                      .secondaryBlackColor,
-                                  size: 16)),
-                        ),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 16.w),
-                        child: Text(
-
-                         "$counter", // Display the counter value
-                          style: TextStyleHelper.of(context).b_16.copyWith(
-                              color: ThemeClass.of(context).mainBlack,
-                              fontWeight: FontWeight.w500),
-                        ),
-                      ),
-                      Container(
-                        width: 32.w,
-                        height: 32.h,
-                        decoration: BoxDecoration(
-                          color: ThemeClass.of(context).primaryColor,
-                          shape: BoxShape.circle,
-                        ),
-                        child: Center(
-                          child: InkWell(
-                              onTap:
-                              incrementCounter,
-                              child: Icon(Icons.add,
-                                  color: ThemeClass.of(context).background,
-                                  size: 16)),
-                        ),
-                      ),
-                    ],
-                  ),
-                  Gap(3.h)
-                ],
+                    Gap(3.h)
+                  ],
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
@@ -336,8 +339,6 @@ class ProductItem extends StatelessWidget {
         color: Colors.grey,
       );
     }
-
-    // Simple URL validation (you can use a more robust validation if needed)
     if (!imageUrl.startsWith('http') && !imageUrl.startsWith('https')) {
       return const Icon(
         Icons.image,
@@ -345,6 +346,28 @@ class ProductItem extends StatelessWidget {
         color: Colors.grey,
       );
     }
+    if (imageUrl.toLowerCase().endsWith('.svg')) {
+      return SvgPicture.network(
+        imageUrl,
+        width: 50,
+        height: 50,
+        placeholderBuilder: (BuildContext context) => const Icon(
+          Icons.image,
+          size: 50,
+          color: Colors.grey,
+        ),
+        errorBuilder: (context, error, stackTrace) {
+          print("Error loading SVG: $error");
+          return const Icon(
+            Icons.image,
+            size: 50,
+            color: Colors.grey,
+          );
+        },
+      );
+    }
+    // Simple URL validation (you can use a more robust validation if needed)
+
 
     return Image.network(
       imageUrl,

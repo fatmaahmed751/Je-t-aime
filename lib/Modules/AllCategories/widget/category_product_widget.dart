@@ -128,20 +128,21 @@ class CustomCategoryProductContainerWidget extends StatelessWidget {
                       ),
                       const Spacer(),
                       GestureDetector(
-                        onTap: () {
-                          ToastHelper.showSuccess(
-                            context: context,
-                            message: Strings.addToCartSuccess.tr,
-                            icon: SvgPicture.asset(
-                              Assets.imagesSubmit,
-                              width: 60.w,
-                              height: 50.h,
-                              fit: BoxFit.cover,
-                            ),
-                            backgroundColor:
-                            ThemeClass.of(context).primaryColor,
-                          );
-                        },
+                        onTap: addToCart,
+                        // onTap: () {
+                        //   ToastHelper.showSuccess(
+                        //     context: context,
+                        //     message: Strings.addToCartSuccess.tr,
+                        //     icon: SvgPicture.asset(
+                        //       Assets.imagesSubmit,
+                        //       width: 60.w,
+                        //       height: 50.h,
+                        //       fit: BoxFit.cover,
+                        //     ),
+                        //     backgroundColor:
+                        //     ThemeClass.of(context).primaryColor,
+                        //   );
+                        // },
                         child: Container(
                           width: 28.w,
                           height: 28.h,

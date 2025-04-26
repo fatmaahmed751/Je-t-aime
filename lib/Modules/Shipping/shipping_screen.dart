@@ -10,6 +10,7 @@ import "package:je_t_aime/Modules/Shipping/shipping_controller.dart";
 import "package:je_t_aime/core/Language/locales.dart";
 import "package:mvc_pattern/mvc_pattern.dart";
 import "../../Models/cart_item_model.dart";
+import "../../Utilities/shared_preferences.dart";
 import "../../Utilities/strings.dart";
 import "../../Utilities/text_style_helper.dart";
 import "../../Utilities/theme_helper.dart";
@@ -31,8 +32,9 @@ class ShippingScreen extends StatefulWidget {
 // final List<CartModel> products;
 
   const ShippingScreen({
-    super.key, required this.subtotal,
-   required this.products,
+    super.key,
+    required this.subtotal,
+    required this.products,
   });
 
   @override
@@ -92,12 +94,13 @@ class _ShippingScreenState extends StateMVC<ShippingScreen> {
                     hintStyle: TextStyle(
                         color: ThemeClass.of(context)
                             .secondaryBlackColor
-                            .withAlpha((0.6* 255).toInt())),
+                            .withAlpha((0.6 * 255).toInt())),
                     prefixIcon: SvgPicture.asset(Assets.imagesProfileIcon),
                     isDense: true,
                     insidePadding: EdgeInsets.symmetric(vertical: 10.h),
-                    backGroundColor:
-                        ThemeClass.of(context).secondary.withAlpha((1* 255).toInt()),
+                    backGroundColor: ThemeClass.of(context)
+                        .secondary
+                        .withAlpha((1 * 255).toInt()),
                     controller: con.nameController,
                     validator: (v) => Validate.validateFullName(v),
                   ),
@@ -109,12 +112,13 @@ class _ShippingScreenState extends StateMVC<ShippingScreen> {
                     hintStyle: TextStyle(
                         color: ThemeClass.of(context)
                             .secondaryBlackColor
-                            .withAlpha((0.6* 255).toInt())),
+                            .withAlpha((0.6 * 255).toInt())),
                     prefixIcon: SvgPicture.asset(Assets.imagesLocation),
                     isDense: true,
                     insidePadding: EdgeInsets.symmetric(vertical: 10.h),
-                    backGroundColor:
-                        ThemeClass.of(context).secondary.withAlpha((1* 255).toInt()),
+                    backGroundColor: ThemeClass.of(context)
+                        .secondary
+                        .withAlpha((1 * 255).toInt()),
                     controller: con.addressController,
                     validator: (v) => Validate.validateNormalAddress(v),
                   ),
@@ -127,12 +131,13 @@ class _ShippingScreenState extends StateMVC<ShippingScreen> {
                     hintStyle: TextStyle(
                         color: ThemeClass.of(context)
                             .secondaryBlackColor
-                            .withAlpha((0.6* 255).toInt())),
+                            .withAlpha((0.6 * 255).toInt())),
                     prefixIcon: SvgPicture.asset(Assets.imagesPhone),
                     isDense: true,
                     insidePadding: EdgeInsets.symmetric(vertical: 10.h),
-                    backGroundColor:
-                        ThemeClass.of(context).secondary.withAlpha((1* 255).toInt()),
+                    backGroundColor: ThemeClass.of(context)
+                        .secondary
+                        .withAlpha((1 * 255).toInt()),
                     controller: con.phoneController,
                     validator: (v) => Validate.validatePhone(v),
                   ),
@@ -142,7 +147,9 @@ class _ShippingScreenState extends StateMVC<ShippingScreen> {
                     height: 56.h,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(30.r),
-                      color: ThemeClass.of(context).secondary.withAlpha((1* 255).toInt()),
+                      color: ThemeClass.of(context)
+                          .secondary
+                          .withAlpha((1 * 255).toInt()),
                     ),
                     child: Padding(
                       padding:
@@ -199,13 +206,13 @@ class _ShippingScreenState extends StateMVC<ShippingScreen> {
                       border: Border.all(
                         color: ThemeClass.of(context)
                             .secondaryBlackColor
-                            .withAlpha((0.15* 255).toInt()),
+                            .withAlpha((0.15 * 255).toInt()),
                       ),
                       boxShadow: [
                         BoxShadow(
                             color: ThemeClass.of(context)
                                 .secondaryBlackColor
-                                .withAlpha((0.15* 255).toInt()),
+                                .withAlpha((0.15 * 255).toInt()),
                             blurRadius: 1,
                             spreadRadius: 0.5),
                       ],
@@ -264,7 +271,7 @@ class _ShippingScreenState extends StateMVC<ShippingScreen> {
                               thickness: 0.5,
                               color: ThemeClass.of(context)
                                   .secondaryBlackColor
-                                  .withAlpha((0.6* 255).toInt())),
+                                  .withAlpha((0.6 * 255).toInt())),
                           Gap(8.h),
                           Row(children: [
                             Text(
@@ -275,7 +282,7 @@ class _ShippingScreenState extends StateMVC<ShippingScreen> {
                             ),
                             const Spacer(),
                             Text(
-                            "${widget.subtotal+(20)} ${Strings.jod.tr} ",
+                              "${widget.subtotal + (20)} ${Strings.jod.tr} ",
                               style: TextStyleHelper.of(context).b_16.copyWith(
                                     color: ThemeClass.of(context)
                                         .secondaryBlackColor,
@@ -296,10 +303,18 @@ class _ShippingScreenState extends StateMVC<ShippingScreen> {
                   Gap(20.h),
                   InkWell(
                     onTap: () {
-                     if (_formKey.currentState!.validate()) {
-                       con.finishShipping(context: context);
-
+                      if (_formKey.currentState!.validate()) {
+                        if (SharedPref.getCurrentUser()?.token != null &&
+                            SharedPref.getCurrentUser()!.token!.isNotEmpty) {
+                          con.finishShipping(context: context);
+                        } else {
+                          con.unLoginWidget(context);
+                          setState(() {
+                            con.autoValidate = true;
+                          });
+                        }
                       } else {
+                        // Form validation failed, enable auto-validation to show errors
                         setState(() {
                           con.autoValidate = true;
                         });

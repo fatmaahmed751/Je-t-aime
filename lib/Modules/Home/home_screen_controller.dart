@@ -12,6 +12,7 @@ import "package:je_t_aime/core/Language/locales.dart";
 import "package:mvc_pattern/mvc_pattern.dart";
 import "package:provider/provider.dart";
 import "../../Models/popular_products_model.dart";
+import "../../Models/search_model.dart";
 import "../../Models/slider_model.dart";
 import "../../Utilities/router_config.dart";
 import "../../Utilities/strings.dart";
@@ -69,6 +70,7 @@ class HomeController extends ControllerMVC {
   CartModel? cartModel;
   static const pageSize = 10;
   final bool _isDisposed = false;
+  List<SearchModel>searchModels=[];
 
   PagingController<int, PopularProductsModel> get pagingController =>
       _pagingController;
@@ -235,97 +237,22 @@ class HomeController extends ControllerMVC {
       }
     }
   }
+  Future onSearchReq( String? search) async {
+    loading = true;
+    setState(() {});
 
-// Future<void> _handlePermissionPermanentlyDenied() async {
-//   onPermanentDenied();
-// }
-// onPermanentDenied() async {
-//   DialogHelper.custom(context: context).customDialog(
-//       dialogWidget: AlertWarningWidget(
-//         des: Strings.deniedPermission.tr,
-//         onButtonAccept: () {
-//           currentContext_!.pop();
-//           openAppSettings();
-//         },
-//         onButtonReject: () {
-//           currentContext_!.pop();
-//         },
-//         titleButtonAccept: Strings.settings.tr,
-//         titleButtonReject: Strings.cancel.tr,
-//       ),
-//       dismiss: false);
-// }
-// Future<void> _handlePermissionDenied() async {
-//   PermissionStatus newStatus = await Permission.notification.request();
-//   switch (newStatus) {
-//     case PermissionStatus.granted:
-//       await handlePermissionGranted();
-//       break;
-//
-//     case PermissionStatus.permanentlyDenied:
-//       await _handlePermissionPermanentlyDenied();
-//       break;
-//
-//     case PermissionStatus.denied:
-//       onPermanentDenied();
-//       break;
-//     default:
-//       ToastHelper.showError(message:Strings.unhandeledNotification.tr);
-//   }
-// }
-// Future addDevice() async {
-//   try{
-//
-//     PermissionStatus status = await Permission.notification.status;
-//     switch (status) {
-//       case PermissionStatus.granted:
-//         await handlePermissionGranted();
-//         break;
-//
-//       case PermissionStatus.denied:
-//         await _handlePermissionDenied();
-//         break;
-//
-//       case PermissionStatus.permanentlyDenied:
-//         await _handlePermissionPermanentlyDenied();
-//         break;
-//
-//       default:
-//         ToastHelper.showError(message: "Unhandled notification permission status");
-//     }
-//
-//   }catch(e){
-//     ToastHelper.showError(message: e.toString());
-//   }
-//
-// }
-// Future<void> handlePermissionGranted() async {
-//   final result = await HomeDataHandler.addDevice();
-//   result.fold(
-//           (l){
-//
-//             ToastHelper.showError(message: l.toString());},
-//           (r) {
-//         //ToastHelper.showSuccess(message: "doneee");
-//       }
-//   );
-// }
-
+    final result = await HomeDataHandler.getSearchItem(text: search ?? "",);
+    result.fold((l) {
+      ToastHelper.showError(message: l.toString());
+    }, (r) {
+      searchModels = r;
+      print(searchModels);
+      setState(() {
+        loading = false;
+      });
+      notifyListeners();
+    });
+  }
 
 }
-// Future deleteFavorite({required int productId}) async {
-//   setState(() {
-//     loading = true;
-//   });
-//   final result = await PopularProductsDataHandler.deleteFavorite(
-//       productId:productId);
-//   result.fold((l) {
-//     ToastHelper.showError(message: l.errorModel.statusMessage);
-//   }, (r) {
-//     ToastHelper.showSuccess(message: r);
-//
-//   });
-//   setState(() {
-//     loading = false;
-//   });
-// }
+

@@ -42,6 +42,7 @@ class ProductDetailsController extends ControllerMVC {
   int activeIndex = 0;
   bool isSearch = false;
   bool loading = false;
+  List<PopularProductsModel> products=[];
   late TextEditingController messageController = TextEditingController();
   double productRating = 0.0;
   List<CartModel> cartProducts=[];
@@ -182,6 +183,7 @@ class ProductDetailsController extends ControllerMVC {
         borderRadius: BorderRadius.vertical(top: Radius.circular(30.r)),
       ),
       builder: (context) =>  AddToCartBottomSheetWidget(
+        products: products,
                    addThisToCart:() => addProductToCart(
                        model:productDetailsModel??ProductDetailsModel(),
                        context: context),

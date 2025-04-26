@@ -6,9 +6,11 @@ import "package:infinite_scroll_pagination/infinite_scroll_pagination.dart";
 import "package:je_t_aime/core/Language/locales.dart";
 import "package:mvc_pattern/mvc_pattern.dart";
 
+import "../../Models/cart_item_model.dart";
 import "../../Models/categories_product_model.dart";
 import "../../Models/category_model.dart";
 import "../../Models/popular_products_model.dart";
+import "../../Utilities/shared_preferences.dart";
 import "../../Utilities/strings.dart";
 import "../../Utilities/text_style_helper.dart";
 import "../../Utilities/theme_helper.dart";
@@ -19,6 +21,7 @@ import "../Cart/cart_data_handler.dart";
 import "../Home/Widgets/un_login_widget.dart";
 import "../PopularProducts/Widgets/filter_bottom_sheet_widget.dart";
 import "../PopularProducts/popular_products_data_handler.dart";
+import "../ProductDetails/Widgets/add_to_cart_bottom_sheet.dart";
 import "../ProductDetails/Widgets/custom_check_box_widget.dart";
 import "all_categories_data_handler.dart";
 
@@ -39,6 +42,8 @@ class AllCategoriesController extends ControllerMVC {
   late TextEditingController searchController;
   List<CategoryProductModel> categories = [];
   CategoryModel? categoryProductModel;
+  List<CartModel> cartProducts=[];
+  CategoryProductModel?category;
   int quyCount = 1;
 
   int? categoryId; // Add this field
@@ -79,7 +84,10 @@ class AllCategoriesController extends ControllerMVC {
       getCategories(_pagingController.firstPageKey, categoryIdd);
     }
   }
-
+  Future<bool> isProductInCart(int productId) async {
+    final cartProducts = await SharedPref.getCart();
+    return cartProducts.any((cartProduct) => cartProduct.id == productId);
+  }
   addProductToCart({
     required BuildContext context, required CategoryProductModel category})
   async {
@@ -92,7 +100,8 @@ class AllCategoriesController extends ControllerMVC {
         quantity: quyCount);
     result.fold((l) {
       ToastHelper.showError(message: l.toString());
-    }, (r) {
+    }, (r)async {
+      print("adddddddddddd");
       ToastHelper.showSuccess(
         context: context,
         message: Strings.addToCartSuccess.tr,
@@ -102,17 +111,30 @@ class AllCategoriesController extends ControllerMVC {
           height: 50.h,
           fit: BoxFit.cover,
         ),
-        backgroundColor:
-        ThemeClass
-            .of(context)
-            .primaryColor,
+        backgroundColor: ThemeClass.of(context).primaryColor,
       );
-      print("addddddd");
+      setState(() {
+        loading = false;
+      });
     });
-    setState(() {
-      loading = false;
-    });
+
   }
+
+  // Future addToCartSheet(BuildContext context) {
+  //   return showModalBottomSheet(
+  //     context: context,
+  //     // isScrollControlled: true,
+  //     shape: RoundedRectangleBorder(
+  //       borderRadius: BorderRadius.vertical(top: Radius.circular(30.r)),
+  //     ),
+  //     builder: (context) =>  AddToCartBottomSheetWidget(
+  //       products: [],
+  //       addThisToCart:() => addProductToCart(
+  //           category:category??CategoryProductModel(),
+  //           context: context),
+  //     ),
+  //   );
+  // }
 
 
   Future filterBottomSheet(BuildContext context) {

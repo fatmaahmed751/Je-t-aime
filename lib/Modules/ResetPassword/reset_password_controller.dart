@@ -32,7 +32,7 @@ class ResetPasswordController extends ControllerMVC {
   late SmsRetriever smsRetriever;
   late TextEditingController pinController;
   late FocusNode focusNode;
-  String? email;
+  String? email = SharedPref.getCurrentUser()?.user?.email;
   int? userId;
   bool isPassword = true;
   bool repeatPassword = true;
@@ -115,20 +115,20 @@ class ResetPasswordController extends ControllerMVC {
     setState(() {
       loading = true;
     });
-    final loggedInUserId = SharedPref.getCurrentUser()?.user?.id;
+   // final email = SharedPref.getCurrentUser()?.user?.id;
+    //
+    // // Verify the userId matches the logged-in user's ID
+    // if (userId == null || loggedInUserId != userId) {
+    //   print("mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm.");
+    //   ToastHelper.showError(message: "vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv.");
+    //   return;
+    // }
 
-    // Verify the userId matches the logged-in user's ID
-    if (userId == null || loggedInUserId != userId) {
-      print("mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm.");
-      ToastHelper.showError(message: "vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv.");
-      return;
-    }
-
-    if (email == null) {
-      print("Error: email or code is null");
-      ToastHelper.showError(message: "Email or code is missing.");
-      return;
-    }
+    // if (email == null) {
+    //   print("Error: email or code is null");
+    //   ToastHelper.showError(message: "Email or code is missing.");
+    //   return;
+    // }
     if (pinController.text.isEmpty) {
       ToastHelper.showError(message: "The code is not correct.");
       return;
@@ -156,7 +156,7 @@ class ResetPasswordController extends ControllerMVC {
         backgroundColor: ThemeClass.of(currentContext_!).primaryColor,
       );
       currentContext_?.pushNamed(ResetPasswordScreen.routeName,
-          extra: loggedInUserId.toString());
+          extra: email);
     });
     setState(() {
       loading = false;
@@ -167,32 +167,32 @@ class ResetPasswordController extends ControllerMVC {
     setState(() {
       loading = true;
     });
-    print("PIN Value: ${pinController.text}");
-
-    // Check if the PIN is empty
-    if (pinController.text.isEmpty) {
-      print("Error: PIN is empty.");
-      ToastHelper.showError(message: "Please enter your PIN.");
-      setState(() {
-        loading = false;
-      });
-      return;
-    }
-    final loggedInUserId = SharedPref.getCurrentUser()?.user?.id;
-    print("Logged In User ID: $loggedInUserId");
-    print("User ID: $userId");
-
-    if (userId == null || loggedInUserId != userId) {
-      print("Error: User ID is null or does not match logged-in user ID.");
-      ToastHelper.showError(message: "Invalid user ID.");
-      return;
-    }
-
-    if (pinController.text.isEmpty) {
-      print("Error: PIN is empty.");
-      ToastHelper.showError(message: "Please enter your PIN.");
-      return;
-    }
+    // print("PIN Value: ${pinController.text}");
+    //
+    // // Check if the PIN is empty
+    // if (pinController.text.isEmpty) {
+    //   print("Error: PIN is empty.");
+    //   ToastHelper.showError(message: "Please enter your PIN.");
+    //   setState(() {
+    //     loading = false;
+    //   });
+    //   return;
+    // }
+    // final loggedInUserId = SharedPref.getCurrentUser()?.user?.id;
+    // print("Logged In User ID: $loggedInUserId");
+    // print("User ID: $userId");
+    //
+    // if (userId == null || loggedInUserId != userId) {
+    //   print("Error: User ID is null or does not match logged-in user ID.");
+    //   ToastHelper.showError(message: "Invalid user ID.");
+    //   return;
+    // }
+    //
+    // if (pinController.text.isEmpty) {
+    //   print("Error: PIN is empty.");
+    //   ToastHelper.showError(message: "Please enter your PIN.");
+    //   return;
+    // }
 
     if (newPasswordController.text.isEmpty ||
         confirmNewPasswordController.text.isEmpty) {

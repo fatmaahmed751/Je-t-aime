@@ -22,6 +22,7 @@ class CustomAppBarWidget extends StatelessWidget
   final _AppBarType _appBarType;
   final String screenName;
   final List<Widget>? actions;
+
   final String title;
   final String icon;
   // final TextEditingController? controller;
@@ -276,6 +277,7 @@ class MainDetailsAppBarWidget extends StatelessWidget {
 class SecondaryAppBarWidget extends StatefulWidget {
   final String title;
   final String? icon;
+
   final TextEditingController controller;
   final void Function()? function;
 
@@ -381,14 +383,17 @@ class SecondaryAppBarWidgetState extends State<SecondaryAppBarWidget> {
                     ],
                   ),
                   Gap(30.h),
-                  SearchWidget(
-                      width: 382.w,
-                      backGroundColor: ThemeClass.of(context).background,
-                      onSearch: (String? text) {},
-                      isSearch: true,
-                      controller: widget.controller,
-                      onRemove: () {},
-                      onChange: (String? value) {}),
+
+                  // SearchWidget(
+                  //     width: 382.w,
+                  //     backGroundColor: ThemeClass.of(context).background,
+                  //     onSearch: (String? text) {},
+                  //     isSearch: true,
+                  //     controller: widget.controller,
+                  //     onRemove: () {},
+                  //     onChange: (String? value) {
+                  //
+                  //     }),
 
                   // CustomTextFieldWidget(
                   //   height: 45.h,

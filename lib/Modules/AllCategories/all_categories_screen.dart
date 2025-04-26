@@ -106,10 +106,21 @@ class _AllCategoriesScreenState extends StateMVC<AllCategoriesScreen> {
                               print("Attempting to access index: $index");
                               return CustomCategoryProductContainerWidget(
                                   categoryProductModel: category,
-                                  addToCart: () {
-                                    con.addProductToCart(
-                                        context: context,
-                                        category: con.categories[index]);
+                                  addToCart: () async {
+                                    final isProductInCart = await con
+                                        .isProductInCart(category.id ?? 0);
+
+                                    if (isProductInCart) {
+                                      // Product is already in the cart, show a message
+                                      ToastHelper.showError(
+                                          message: Strings.productInCart.tr);
+                                      return;
+                                    } else {
+                                      // con.addToCartSheet(context);
+                                      con.addProductToCart(
+                                          context: context,
+                                          category: con.pagingController.itemList![index]);
+                                    }
                                   },
                                   onFavoritePressed: () async {
                                     print(

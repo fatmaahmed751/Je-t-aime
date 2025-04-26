@@ -19,13 +19,16 @@ class APIEndPoint {
   static const String getOrdersList = "${_baseURL}orders";
   static const String addToCart = "${_baseURL}store-cart";
   static const String getCartList = "${_baseURL}carts";
+  static const String support = "${_baseURL}store-technicalSupport";
   static const String getPopularProduct = "${_baseURL}get-product-poplar";
   static const String getFavorites = "${_baseURL}favorite";
   static const String addFavorite = "${_baseURL}store-favorite";
   static const String shippingForOrder = "${_baseURL}shipping-details";
   static const String checkOutCart = "${_baseURL}cart-detail";
+  static const String policies = "${_baseURL}policies";
   static const String getShippingDetails = "${_baseURL}get-shipping-details";
   static String showOrder(int orderId) => "${_baseURL}order/$orderId";
+  static String searchItem(String item) => "${_baseURL}search?query=$item";
   static String readNotification(String notificationId) => "${_baseURL}read-notification/$notificationId";
   static String getOrderDetails(int orderId) => "${_baseURL}order/$orderId";
   static String getProductDetails(int productId) => "${_baseURL}show/$productId";

@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import "package:go_router/go_router.dart";
 import "package:infinite_scroll_pagination/infinite_scroll_pagination.dart";
+import "package:je_t_aime/Modules/Favorite/widgets/custom_favorite_widget.dart";
 import "package:je_t_aime/core/Language/locales.dart";
 import 'package:mvc_pattern/mvc_pattern.dart';
+import "../../Models/favorite_model.dart";
 import "../../Models/popular_products_model.dart";
 import "../../Utilities/shared_preferences.dart";
 import '../../Utilities/strings.dart';
@@ -14,6 +16,7 @@ import '../../Widgets/custom_button_widget.dart';
 import '../../Widgets/custom_products_widget.dart';
 import '../../Widgets/loading_screen.dart';
 
+import "../../Widgets/toast_helper.dart";
 import '../../generated/assets.dart';
 
 import "../PopularProducts/popular_product_screen.dart";
@@ -37,13 +40,14 @@ class _FavoriteScreenState extends StateMVC<FavoriteScreen> {
 
   @override
   void initState() {
+    con.init();
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: con.isUserHaveFavorites
+        appBar: con.pagingController.itemList != null
             ? PreferredSize(
                 preferredSize: Size(double.infinity, 180.h),
                 child: const CustomAppBarWidget.secondaryAppBar(
@@ -60,9 +64,9 @@ class _FavoriteScreenState extends StateMVC<FavoriteScreen> {
         body: LoadingScreen(
           loading: con.loading,
           child: SafeArea(
-            child: con.products.isEmpty
+            child: con.pagingController.itemList==null
                 ? Padding(
-                  padding: EdgeInsetsDirectional.only(top: 60.h),
+                  padding: EdgeInsetsDirectional.only(top: 50.h),
                   child: ContainerEmptyContentWidget(
                     image: Assets.imagesNoFavoriteProduct,
                     mainText: Strings.noFavorites.tr,
@@ -86,26 +90,45 @@ class _FavoriteScreenState extends StateMVC<FavoriteScreen> {
                         }),
                   ),
                 )
-                : Expanded(
-                    child: PagedListView<int, PopularProductsModel>(
-                      physics: const BouncingScrollPhysics(),
-                      pagingController: con.pagingController,
-                      builderDelegate:
-                          PagedChildBuilderDelegate<PopularProductsModel>(
-                        itemBuilder: (context, item, index) {
-                          return CustomProductsWidget(model: item);
-                        },
-                        firstPageProgressIndicatorBuilder: (context) {
-                          return const Center(
-                              child: CircularProgressIndicator());
-                        },
-                        newPageProgressIndicatorBuilder: (context) {
-                          return const Center(
-                              child: CircularProgressIndicator());
-                        },
-                      ),
+                : Padding(
+                  padding:  EdgeInsetsDirectional.only(top: 16.h,start: 12.w),
+                  child: PagedListView<int, FavoriteModel>(
+                    physics: const BouncingScrollPhysics(),
+                    pagingController: con.pagingController,
+                    builderDelegate:
+                        PagedChildBuilderDelegate<FavoriteModel>(
+                      itemBuilder: (context, item, index) {
+                        return CustomFavoriteWidget(model: item,
+                          addToCart: () async {
+                            final isProductInCart = await con
+                                .isProductInCart(item.id ?? 0);
+
+                            if (isProductInCart) {
+                              // Product is already in the cart, show a message
+                              ToastHelper.showError(
+                                  message: Strings.productInCart.tr);
+                              return;
+                            } else {
+                              // con.addToCartSheet(context);
+                              con.addProductToCart(
+                                  context: context,
+                                  model: con.pagingController
+                                      .itemList![index]);
+                            }
+                          },
+                        );
+                      },
+                      firstPageProgressIndicatorBuilder: (context) {
+                        return const Center(
+                            child: CircularProgressIndicator());
+                      },
+                      newPageProgressIndicatorBuilder: (context) {
+                        return const Center(
+                            child: CircularProgressIndicator());
+                      },
                     ),
                   ),
+                ),
           ),
         ),
     );

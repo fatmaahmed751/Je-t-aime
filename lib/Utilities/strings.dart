@@ -11,6 +11,8 @@ class Strings {
   static const String update = "update";
   static const String notAddToFav = "notAddToFav";
   static const String orderPlaced = "orderPlaced";
+  static const String productInCart = "productInCart";
+  static const String notLogin = "notLogin";
   static const String shipping ="shipping";
   static const String unKnown = "unKnown";
   static const String waitingForDelivery = "waitingForDelivery";

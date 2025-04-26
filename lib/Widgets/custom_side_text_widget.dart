@@ -1,7 +1,7 @@
-import 'package:flutter/material.dart';
+import "package:flutter/material.dart";
 
-import '../Utilities/text_style_helper.dart';
-import '../Utilities/theme_helper.dart';
+import "../Utilities/text_style_helper.dart";
+import "../Utilities/theme_helper.dart";
 
 class CustomSideTextWidget extends StatelessWidget {
   final String text;

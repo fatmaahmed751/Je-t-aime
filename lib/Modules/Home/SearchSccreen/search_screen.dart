@@ -24,7 +24,6 @@ class _SearchScreenState extends StateMVC<SearchScreen> {
   }
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     con.controller.text = widget.search;
   }
@@ -32,9 +31,8 @@ class _SearchScreenState extends StateMVC<SearchScreen> {
   late SearchScreenController con;
   @override
   void dispose() {
-    // TODO: implement dispose
     super.dispose();
-    //  con.searchController.dispose();
+    // con.searchController.dispose();
   }
 
   @override

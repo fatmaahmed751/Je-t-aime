@@ -7,6 +7,7 @@ import "package:je_t_aime/Modules/Cart/cart_screen.dart";
 import "package:je_t_aime/Modules/PopularProducts/popular_product_screen.dart";
 import "package:je_t_aime/core/Language/locales.dart";
 
+import "../../../Models/popular_products_model.dart";
 import "../../../Utilities/strings.dart";
 import "../../../Utilities/text_style_helper.dart";
 import "../../../Utilities/theme_helper.dart";
@@ -15,7 +16,8 @@ import "../../../generated/assets.dart";
 
 class AddToCartBottomSheetWidget extends StatelessWidget {
   final Function() addThisToCart;
-  const AddToCartBottomSheetWidget({super.key, required this.addThisToCart});
+  final List<PopularProductsModel> products;
+  const AddToCartBottomSheetWidget({super.key, required this.addThisToCart, required this.products});
 
   @override
   Widget build(BuildContext context) {
@@ -69,7 +71,8 @@ class AddToCartBottomSheetWidget extends StatelessWidget {
               child: TextButton(
                   onPressed: () {
                     GoRouter.of(context)
-                        .pushNamed(PopularProductsScreen.routeName);
+                        .pushNamed(PopularProductsScreen.routeName,
+                    extra:products );
                     context.pop();
                   },
                   child: Text(

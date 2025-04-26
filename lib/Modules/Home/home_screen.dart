@@ -12,14 +12,19 @@ import "../../Utilities/strings.dart";
 import "../../Utilities/text_style_helper.dart";
 import "../../Utilities/theme_helper.dart";
 import "../../Widgets/bottom_navbar_widget.dart";
+import "../../Widgets/custom_app_bar_text_widget.dart";
 import "../../Widgets/custom_app_bar_widget.dart";
 import "../../Widgets/custom_details_side_text.dart";
 import "../../Widgets/loading_screen.dart";
 import "../../Widgets/toast_helper.dart";
 import "../../generated/assets.dart";
+import "../Cart/cart_screen.dart";
 import "../PopularProducts/Widgets/custom_product_container_widget.dart";
+import "../Rewards/LoginRewardsScreen/login_rewards_screen.dart";
+import "SearchSccreen/search_screen.dart";
 import "Widgets/categories_widget.dart";
 import "Widgets/packages_widget.dart";
+import "Widgets/search_widget.dart";
 import "home_screen_controller.dart";
 
 class HomeScreen extends StatefulWidget {
@@ -41,7 +46,6 @@ class _HomeScreenState extends StateMVC<HomeScreen> {
     super.initState();
   }
 
-
   int selected = 0;
   @override
   Widget build(BuildContext context) {
@@ -53,11 +57,124 @@ class _HomeScreenState extends StateMVC<HomeScreen> {
     print(token);
     return Scaffold(
       appBar: PreferredSize(
-          preferredSize: Size(double.infinity, 180.h),
-          child: const CustomAppBarWidget.secondaryAppBar(
-            title: "",
-            icon: "",
-          )),
+        preferredSize: Size(double.infinity, 180.h),
+        child: SizedBox(
+          child: Stack(
+            children: [
+              Container(
+                // height:500.h,
+                width: double.infinity,
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    colors: SharedPref.getCurrentLanguage() == "ar"
+                        ? ThemeClass.anotherBackGround
+                        : ThemeClass.backgroundGradiant,
+                    end: Alignment.centerRight,
+                    begin: Alignment.centerLeft,
+                  ),
+                  borderRadius: BorderRadius.only(
+                    bottomLeft: Radius.circular(30.r),
+                    bottomRight: Radius.circular(30.r),
+                  ),
+                ),
+              ),
+              Positioned(
+                top: 0,
+                left: 0,
+                right: 0,
+                child: Padding(
+                  padding: EdgeInsetsDirectional.only(
+                      start: 24.w, top: 60.h, end: 24.w),
+                  child: Column(children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        //const SizedBox(width: 15,),
+
+                        CustomAppBarMainTextWidget(text: Strings.hello.tr),
+                        Gap(8.w),
+                        Image.asset(
+                          Assets.imagesFaceSmile,
+                          width: 24.w,
+                        ),
+                        const Spacer(),
+                        GestureDetector(
+                          onTap: () {
+                            GoRouter.of(context)
+                                .pushNamed(LoginRewardsScreen.routeName);
+                          },
+                          child: Container(
+                              width: 32.w,
+                              height: 32.h,
+                              decoration: BoxDecoration(
+                                  color: ThemeClass.of(context).background,
+                                  borderRadius: BorderRadius.circular(30.r)),
+                              child: Padding(
+                                padding: EdgeInsetsDirectional.symmetric(
+                                    horizontal: 6.w, vertical: 6.h),
+                                child: SvgPicture.asset(
+                                  Assets.imagesRewards,
+                                ),
+                              )),
+                        ),
+                        Gap(8.w),
+                        GestureDetector(
+                          onTap: () {
+                            GoRouter.of(context)
+                                .pushNamed(CartScreen.routeName);
+                          },
+                          child: Container(
+                              width: 32.w,
+                              height: 32.h,
+                              decoration: BoxDecoration(
+                                  color: ThemeClass.of(context).background,
+                                  borderRadius: BorderRadius.circular(30.r)),
+                              child: Padding(
+                                padding: EdgeInsetsDirectional.symmetric(
+                                    horizontal: 6.w, vertical: 6.h),
+                                child: SvgPicture.asset(
+                                  Assets.imagesShop,
+                                ),
+                              )),
+                        ),
+                      ],
+                    ),
+                    Gap(30.h),
+                    SearchWidget(
+                        width: 382.w,
+                        backGroundColor: ThemeClass.of(context).background,
+                        onSearch: (String? text) {
+                          if (text != null) {
+                            setState(() {
+                              con.isSearch = true;
+                              con.onSearchReq(text);
+                            //   context.pushNamed(SearchScreen.routeName,
+                            //       extra: text);
+                            });
+                         }
+                        },
+                        isSearch: con.isSearch,
+                        controller: con.searchController,
+                        onRemove: () {
+                          setState(() {
+                            con.searchController.clear();
+                            con.isSearch = false;
+                          });
+                        },
+                        onChange: (text) {
+                          if (text != null) {
+                            setState(() {
+                              con.isSearch = true;
+                            });
+                          }
+                        }),
+                  ]),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
       bottomNavigationBar: const BottomNavBarWidget(
         selected: SelectedBottomNavBar.home,
       ),
@@ -68,7 +185,19 @@ class _HomeScreenState extends StateMVC<HomeScreen> {
         child: LoadingScreen(
           loading: con.loading,
           color: Colors.transparent,
-          child: ListView(
+          child:con.isSearch? con.isSearch
+              ? ListView.builder(
+            itemCount: con.searchModels.length,
+            itemBuilder: (context, index) {
+              final item = con.searchModels[index];
+              return ListTile(
+                title: Text(item.title??""),
+                subtitle: Text(item.price.toString()),
+              );
+            },
+          )
+              : Center(child: Text("No search results"))
+              : ListView(
             physics: const BouncingScrollPhysics(),
             children: [
               Gap(16.h),

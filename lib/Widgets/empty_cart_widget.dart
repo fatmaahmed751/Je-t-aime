@@ -1,17 +1,14 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:gap/gap.dart';
-import 'package:go_router/go_router.dart';
-import 'package:je_t_aime/core/Language/locales.dart';
+import "package:flutter/material.dart";
+import "package:flutter_screenutil/flutter_screenutil.dart";
+import "package:go_router/go_router.dart";
+import "package:je_t_aime/core/Language/locales.dart";
 import "../Modules/Home/home_screen.dart";
 import "../Modules/Register/register_screen.dart";
 import "../Utilities/shared_preferences.dart";
-import '../Utilities/strings.dart';
-import '../Utilities/text_style_helper.dart';
-import '../generated/assets.dart';
-import 'container_empty_content_widget.dart';
-import 'custom_button_widget.dart';
+import "../Utilities/strings.dart";
+import "../generated/assets.dart";
+import "container_empty_content_widget.dart";
+import "custom_button_widget.dart";
 
 class EmptyCartWidget extends StatelessWidget {
   const EmptyCartWidget({super.key});

@@ -139,7 +139,7 @@ class _SupportScreenState extends StateMVC<SupportScreen> {
                   CustomButtonWidget.primary(
                       title: Strings.send.tr,
                       onTap: () {
-                        con.displayBottomSheet(context);
+                        con.submitProblemSuccessfully(context);
                       }),
                 ],
               ),

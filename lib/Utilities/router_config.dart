@@ -347,17 +347,17 @@ class GoRouterConfig {
         name: ResetPasswordScreen.routeName,
         path: "/${ResetPasswordScreen.routeName}",
         pageBuilder: (_, GoRouterState state) {
-          final int id = int.tryParse(state.extra?.toString() ?? "") ?? 0;
+          final String email =state.extra as String;
           final loggedInUserId = SharedPref.getCurrentUser()?.user?.id;
-          print("Passed ID: $id");
-          print("Logged In User ID: $loggedInUserId");
-
-          if (loggedInUserId != id) {
-            print("ID mismatch: This is not the logged-in user's ID.");
-          }
+          // print("Passed ID: $id");
+          // print("Logged In User ID: $loggedInUserId");
+          //
+          // if (loggedInUserId != id) {
+          //   print("ID mismatch: This is not the logged-in user's ID.");
+          // }
           return getCustomTransitionPage(
             state: state,
-            child: ResetPasswordScreen(id: id),
+            child: ResetPasswordScreen(email: email),
           );
         },
         routes: const <RouteBase>[],

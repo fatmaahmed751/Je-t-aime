@@ -178,6 +178,7 @@ class NotificationsController extends ControllerMVC {
   bool loading = false, autoValidate = false;
   bool isLogin = true;
   OrderModel? orderModel;
+  NotificationModel? notificationModel;
 
   // Notification pagination
   static const notificationPageSize = 10;
@@ -208,18 +209,12 @@ class NotificationsController extends ControllerMVC {
     _initPagingControllers();
   }
 
-  void init(PagingController<int, NotificationModel> pagingController,PagingController<int, OrderModel> ordersController) {
-    //  loadCart();
+  void init(
+      PagingController<int, NotificationModel> pagingController,
+      PagingController<int, OrderModel> ordersController) {
     notificationPagingController = pagingController;
-    // notificationPagingController!.addPageRequestListener((pageKey) {
-    //   getAllNotificationsList(pageKey);
-    // });
     orderPagingController= ordersController;
-    //flow two
     _initPagingControllers();
-    // orderPagingController!.addPageRequestListener((pageKey) {
-    //   getOrdersList(pageKey);
-    // });
   }
 
   void _initPagingControllers() {
@@ -297,7 +292,9 @@ class NotificationsController extends ControllerMVC {
     );
   }
 
-  allReadNotifications({required String notificationId, required int orderId}) async {
+  allReadNotifications({required String notificationId,
+   required int orderId
+  }) async {
     setState(() {
       loading = true;
     });
@@ -311,25 +308,27 @@ class NotificationsController extends ControllerMVC {
       loading = false;
     });
   }
-
-  Future showOrderDetails({required int orderInfoId}) async {
-    print("1. Starting to fetch order details for ID: $orderInfoId");
+///TODO
+  Future showOrderDetails({
+   required int orderInfoId
+  }) async {
+    print("1. Starting to fetch order details for ID: ${notificationModel?.typeId}");
     loading = true;
     setState(() {});
 
-    // First try to find the order in our local list
-    final localOrder = orders.firstWhere(
-          (order) => order.id == orderInfoId,
-      orElse: () => OrderModel(),
-    );
-
-    if (localOrder.id != null) {
-      orderModel = localOrder;
-      currentContext_!.pushNamed(ShowOrderWidget.routeName, extra: orderModel);
-      loading = false;
-      setState(() {});
-      return;
-    }
+    // // First try to find the order in our local list
+    // final localOrder = orders.firstWhere(
+    //       (order) => order.id == orderInfoId,
+    //   orElse: () => OrderModel(),
+    // );
+    //
+    // if (localOrder.id != null) {
+    //   orderModel = localOrder;
+    //   currentContext_!.pushNamed(ShowOrderWidget.routeName, extra: orderModel);
+    //   loading = false;
+    //   setState(() {});
+    //   return;
+    // }
 
     // If not found locally, fetch from API
     final result = await ShowOrderDataHandler.showOrderDetails(orderId: orderInfoId);
